@@ -1,5 +1,7 @@
 ﻿using log4net;
 using System;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Text;
@@ -107,6 +109,7 @@ public class Log
         msg.AppendFormat("{0}\n", "".PadRight(100, '-'));
         return msg.ToString();
     }
+
     private static string DbException(DbUpdateException pDbUpdateException,
     MethodBase pMethodBase, ref string pMensaje)
     {
@@ -118,8 +121,7 @@ public class Log
         msg.AppendFormat("2- Method: {0}\n\n", pMethodBase.Name);
         if (pDbUpdateException.InnerException != null)
         {
-            UpdateException updateException =
-           (UpdateException)pDbUpdateException.InnerException;
+            UpdateException updateException =(UpdateException)pDbUpdateException.InnerException;
             if (updateException.InnerException != null)
             {
                 SqlException sqlException = (SqlException)updateException.InnerException;
@@ -192,9 +194,7 @@ https://technet.microsoft.com/en-us/library/cc645603(v=sql.105).aspx");
                 msg = "Error con comentarios.";
                 break;
             case 137:
-                msg = $"Error al declarar variables que se pasan al SQL. Mensaje de la BD
-           { pSqlExcepcion.Message}
-                ";
+                msg = $"Error al declarar variables que se pasan al SQL. Mensaje de la BD{ pSqlExcepcion.Message} ";
  break;
             case 156:
                 msg = "Error de sintaxis del SQL";
