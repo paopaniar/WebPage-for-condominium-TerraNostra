@@ -1,16 +1,19 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+/// <summary>
+/// Referencias
+/// https://www.c-sharpcorner.com/article/use-log4net-in-asp-net-mvc-application/
+/// https://logging.apache.org/log4net/
+/// </summary>
 
-namespace Infraestructure.Utils
-{
+
+
+
     public class Log
     {
         private static readonly Log _instance = new Log();
@@ -259,4 +262,4 @@ namespace Infraestructure.Utils
 
         }
     }
-}
+

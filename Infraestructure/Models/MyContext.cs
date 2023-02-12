@@ -8,5 +8,6 @@ namespace Infraestructure.Models
 {
     class MyContext
     {
+
     }
 }
