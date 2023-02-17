@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-	class IServiceResidencia
+	public interface IServiceResidencia
 	{
 
 	}
