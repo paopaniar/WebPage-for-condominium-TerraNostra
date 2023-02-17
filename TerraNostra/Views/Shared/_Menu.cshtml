@@ -1,7 +1,7 @@
 ﻿
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        @Html.ActionLink("TerraNostra", "Index", "Home", null, new { @class = "navbar-brand" })
+        @Html.ActionLink("Librería", "Index", "Home", null, new { @class = "navbar-brand" })
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,10 @@
                         @Html.ActionLink("Autores", "Index", "Autor",
                null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        @Html.ActionLink("Libro", "IndexAdmin", "Libro", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Orden", "IndexAdmin", "Orden", null, new { @class = "dropdown-item" })
+
                     </div>
                 </li>
                 @* Texto Usuario, Accion, Controlador*@
@@ -30,7 +33,7 @@
                null, new { @class = "nav-link" })
                 </li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
-                <li class="nav- item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                        href="#" role="button" aria-haspopup="true"
                        aria-expanded="false"><i class="fa-solid fa-user"></i> Perfil</a>
@@ -42,7 +45,7 @@
                             Login
                         </a>
                         <a class="dropdown-item"
-                           href="@Ur    l.Action("Logout","Login")">
+                           href="@Url.Action("Logout","Login")">
                             <i class="fa-solid fa-right-from-bracket"></i>
                             Logout
                         </a>
