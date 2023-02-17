@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="terraNostraModel.plan_cobro" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="terraNostraModel.plan_residencia" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="terraNostraModel.reservacion" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="terraNostraModel.residencia" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.residencia" Width="1.5" PointX="3.625" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="terraNostraModel.rol" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="terraNostraModel.rubro_cobro" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="terraNostraModel.usuario" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
