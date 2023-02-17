@@ -144,6 +144,7 @@
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-Flatly.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
