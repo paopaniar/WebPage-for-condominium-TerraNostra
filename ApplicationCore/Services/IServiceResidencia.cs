@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    class ServiceResidencia
-    {
+	class IServiceResidencia
+	{
 
-    }
+	}
 }
