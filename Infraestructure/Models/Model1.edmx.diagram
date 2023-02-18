@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4c6925e2013e4b55830c6413d4557725" Name="Diagram1">
+        <EntityTypeShape EntityType="terraNostraModel.areaComun" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.incidente" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.informacion" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.plan_cobro" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.plan_residencia" Width="1.5" PointX="7.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.reservacion" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.residencia" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.rol" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.rubro_cobro" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="terraNostraModel.usuario" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="terraNostraModel.FK__reservaci__areaC__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__incidente__detal__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__informaci__usuar__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__plan_cobr__rubro__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__plan_resi__planC__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__plan_resi__resid__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__reservaci__usuar__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__residenci__usuar__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="terraNostraModel.FK__usuario__rolId__276EDEB3" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

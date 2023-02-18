@@ -13,10 +13,10 @@ namespace Infraestructure.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class terraNostraEntities : DbContext
+    public partial class terraNostraEntities1 : DbContext
     {
-        public terraNostraEntities()
-            : base("name=terraNostraEntities")
+        public terraNostraEntities1()
+            : base("name=terraNostraEntities1")
         {
         }
     
@@ -26,7 +26,6 @@ namespace Infraestructure.Models
         }
     
         public virtual DbSet<areaComun> areaComun { get; set; }
-        public virtual DbSet<gestion_financiera> gestion_financiera { get; set; }
         public virtual DbSet<incidente> incidente { get; set; }
         public virtual DbSet<informacion> informacion { get; set; }
         public virtual DbSet<plan_cobro> plan_cobro { get; set; }
