@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infraestructure.Models;
+using Infraestructure.Repository;
 
 namespace ApplicationCore.Services
 {
@@ -15,5 +16,15 @@ namespace ApplicationCore.Services
             return repository.GetResidencia();
         }
 
+        public residencia GetResidenciaByID(int id)
+        {
+            IRepositoryResidencia repository = new RepositoryResidencia();
+            return repository.GetResidenciaByID(id);
+        }
+        public IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario)
+        {
+            IRepositoryResidencia repository = new RepositoryResidencia();
+            return repository.GetResidenciaByUsuario(idUsuario);
+        }
     }
 }

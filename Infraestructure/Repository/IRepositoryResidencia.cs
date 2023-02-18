@@ -12,6 +12,7 @@ namespace Infraestructure.Repository
         IEnumerable<residencia> GetResidencia();
         residencia GetResidenciaByID(int id);
         void DeleteResidencia(int id);
-       
+        IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario);
+
     }
 }
