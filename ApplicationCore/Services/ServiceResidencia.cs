@@ -14,5 +14,6 @@ namespace ApplicationCore.Services
             IRepositoryResidencia repository = new RepositoryResidencia();
             return repository.GetResidencia();
         }
+
     }
 }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Models
 {
-	class MetaData
+	internal partial class ResidenciaMetaData 
 	{
-
+		
 	}
+
 }
