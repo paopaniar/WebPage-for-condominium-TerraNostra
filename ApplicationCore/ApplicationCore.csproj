@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IServiceResidencia.cs" />
+    <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServiceResidencia.cs" />
+    <Compile Include="Services\ServiceUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />

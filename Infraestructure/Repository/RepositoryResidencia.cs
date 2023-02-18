@@ -24,7 +24,12 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<residencia> GetResidencias()
+		public IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<residencia> GetResidencias()
         {
             return null;
         }
