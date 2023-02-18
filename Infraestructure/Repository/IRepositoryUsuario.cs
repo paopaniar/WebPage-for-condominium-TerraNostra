@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Services
+namespace Infraestructure.Repository
 {
-	public interface IServiceUsuario
+	public interface IRepositoryUsuario
 	{
 		IEnumerable<usuario> GetUsuario();
 		usuario GetUsuarioByID(int id);

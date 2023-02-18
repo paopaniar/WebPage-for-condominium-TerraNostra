@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Infraestructure.Models;
+using Infraestructure.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +10,16 @@ namespace ApplicationCore.Services
 {
 	public class ServiceUsuario : IServiceUsuario
 	{
-        public Autor GetAutorByID(int id)
+        public usuario GetUsuarioByID(int id)
         {
-            IRepositoryAutor repository = new RepositoryAutor();
-            return repository.GetAutorByID(id);
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetUsuarioByID(id);
         }
 
-        public IEnumerable<Autor> GetAutors()
+        public IEnumerable<usuario> GetUsuario()
         {
-            IRepositoryAutor repository = new RepositoryAutor();
-            return repository.GetAutors();
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetUsuario();
         }
-
     }
 }
