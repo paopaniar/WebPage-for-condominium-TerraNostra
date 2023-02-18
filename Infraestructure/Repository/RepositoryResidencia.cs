@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infraestructure.Models;
+using Infraestructure.Utils;
 
 namespace Infraestructure.Repository
 {
@@ -16,7 +18,35 @@ namespace Infraestructure.Repository
 
         public IEnumerable<residencia> GetResidencia()
         {
-            throw new NotImplementedException();
+            IEnumerable<residencia> lista = null;
+            try
+            {
+
+
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos los libros incluyendo el autor
+                    lista = ctx.residencia.Include("Usuario").ToList();
+
+                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
         }
 
         public residencia GetResidenciaByID(int id)
@@ -29,9 +59,5 @@ namespace Infraestructure.Repository
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<residencia> GetResidencias()
-        {
-            return null;
-        }
     }
     }
