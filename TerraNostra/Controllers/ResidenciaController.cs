@@ -3,6 +3,7 @@ using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,11 +18,11 @@ namespace TerraNostra.Controllers
             try
             {
                 IServiceResidencia _ServiceResidencia = new ServiceResidencia();
-                lista = _ServiceResidencia.GetResidencia;
+                lista = _ServiceResidencia.GetResidencia();
                 ViewBag.title = "Residencias";
                 //Lista autores
-                IServiceResidencia _ServiceAutor = new ServiceAutor();
-                ViewBag.listaAutores = _ServiceAutor.GetAutors();
+                IServiceUsuario _ServiceAutor = new ServiceUsuario();
+                ViewBag.listaUsuarios = _ServiceAutor.GetUsuario();
                 return View(lista);
             }
             catch (Exception ex)
@@ -33,5 +34,7 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+
     }
 }
