@@ -27,9 +27,10 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los libros incluyendo el autor
-                    //lista = ctx.residencia.Include("Usuario").ToList();
+                    lista = ctx.residencia.Include("usuario").ToList();
 
-                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
+                   
+                   // lista = ctx.residencia.Include(x => x.).ToList();
 
                 }
                 return lista;

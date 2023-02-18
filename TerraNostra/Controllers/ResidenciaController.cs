@@ -21,8 +21,8 @@ namespace TerraNostra.Controllers
                 lista = _ServiceResidencia.GetResidencia();
                 ViewBag.title = "Residencias";
                 //Lista usuarios
-               // IServiceUsuario _ServiceUsuario = new ServiceUsuario();
-                //ViewBag.listaUsuarios = _ServiceUsuario.GetUsuario();
+               IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                ViewBag.listaUsuarios = _ServiceUsuario.GetUsuario();
                 return View(lista);
             }
             catch (Exception ex)
