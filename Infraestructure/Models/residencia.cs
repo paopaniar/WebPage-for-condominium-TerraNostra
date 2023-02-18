@@ -11,28 +11,30 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(ResidenciaMetaData))]
     public partial class residencia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public residencia()
         {
-            this.gestion_financiera = new HashSet<gestion_financiera>();
-            this.plan_residencia = new HashSet<plan_residencia>();
+          
         }
     
         public int id { get; set; }
-        public int usuario { get; set; }
+        public int idUsuario { get; set; }
         public int individualsNumber { get; set; }
         public string annio { get; set; }
         public int estado { get; set; }
         public string otherInfoDetails { get; set; }
         public Nullable<int> numeroCasa { get; set; }
-    
+
+       
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<gestion_financiera> gestion_financiera { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<plan_residencia> plan_residencia { get; set; }
-        public virtual usuario usuario1 { get; set; }
+        public virtual usuario usuario { get; set; }
+
+       
+        
     }
 }

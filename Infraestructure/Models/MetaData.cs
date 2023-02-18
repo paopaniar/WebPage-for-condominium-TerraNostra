@@ -10,12 +10,14 @@ namespace Infraestructure.Models
 	internal partial class ResidenciaMetaData 
 	{
         public int id { get; set; }
-        public int usuario { get; set; }
+        public int idUsuario { get; set; }
         public int individualsNumber { get; set; }
         public string annio { get; set; }
         public int estado { get; set; }
         public string otherInfoDetails { get; set; }
         public Nullable<int> numeroCasa { get; set; }
+
+
     }
 
     internal partial class UsuarioMetaData
