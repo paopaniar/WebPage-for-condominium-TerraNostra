@@ -1,7 +1,7 @@
 ﻿
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        @Html.ActionLink("Librería", "Index", "Home", null, new { @class = "navbar-brand" })
+        @Html.ActionLink("TerraNostra", "Index", "Home", null, new { @class = "navbar-brand" })
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -15,16 +15,12 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listados</a>
                     <div class="dropdown-menu">
-                        @*Enlace a la lista de autores*@
-                        @Html.ActionLink("Autores", "Index", "Autor",
-               null, new { @class = "dropdown-item" })
-                        <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Libro", "IndexAdmin", "Libro", null, new { @class = "dropdown-item" })
-                        <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Orden", "IndexAdmin", "Orden", null, new { @class = "dropdown-item" })
 
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Residencia", "Index", "residencia", null, new { @class = "dropdown-item" })
+                      
                     </div>
                 </li>
                 @* Texto Usuario, Accion, Controlador*@
