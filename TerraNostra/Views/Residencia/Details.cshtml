@@ -6,43 +6,45 @@
 
 
 
+<center>
+    <div>
+        <h4>Información detallada</h4>
+        <hr />
+        <center>
+            <div class="row row-cols-2 g-3">
+                <div class="col">
+                    <div class="card mb-3" style="max-width: 340px;">
+                        <div class="row g-0">
 
-<div>
-    <h4>Información detallada</h4>
-    <hr />
+                            <div class="col-md-8">
+                                <div class="card-body" style="background-color: aquamarine">
+                                    <i class="fa-solid fa-house"></i>
+                                    <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa):</b> @Html.DisplayFor(model => model.numeroCasa)</span>
+                                    <p class="card-text">
+                                        <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>    @Html.DisplayFor(model => model.usuario1.identificacion)
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>    @Html.DisplayFor(model => model.usuario1.nombre)
+                                    </p>
+                                    <p class="card-text" style="color: #E45641; font-weight: 500;">
+                                        <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.estado):</b>  @Html.DisplayFor(model => model.estado)
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa-solid fa-people-roof"></i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>  @Html.DisplayFor(model => model.individualsNumber)
+                                    </p>
+                                    <p class="card-text">
+                                        <i class="fa-regular fa-calendar-days"></i> <b>@Html.DisplayNameFor(model => model.annio):</b>  @Html.DisplayFor(model => model.annio)
+                                    </p>
 
-    <div class="row row-cols-2 g-3">
-        <div class="col">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa):</b> @Html.DisplayFor(model => model.numeroCasa)</span>
-                            <p class="card-text">
-                                <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>    @Html.DisplayFor(model => model.usuario1.identificacion)
-                            </p>
-                            <p class="card-text">
-                                <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>    @Html.DisplayFor(model => model.usuario1.nombre)
-                            </p>
-                            <p class="card-text" style="color: #E45641; font-weight: 500;">
-                                <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.estado):</b>  @Html.DisplayFor(model => model.estado)
-                            </p>
-                            <p class="card-text">
-                                <i class="fa-solid fa-box"> </i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>  @Html.DisplayFor(model => model.individualsNumber)
-                            </p>
-                            <p class="card-text">
-                                <i class="fa-solid fa-box"> </i> <b>@Html.DisplayNameFor(model => model.annio):</b>  @Html.DisplayFor(model => model.annio)
-                            </p>
-
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </center>
     </div>
-</div>
-
+</center>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
