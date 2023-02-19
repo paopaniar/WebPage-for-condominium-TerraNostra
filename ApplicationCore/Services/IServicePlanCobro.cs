@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
     public interface IServicePlanCobro
     {
         IEnumerable<plan_cobro> GetPlanCobro();
+    
     }
 }
