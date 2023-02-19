@@ -11,8 +11,32 @@ namespace Infraestructure.Repository
 	{
 		public IEnumerable<plan_residencia> GetPlanResidencia()
 		{
-			throw new NotImplementedException();
-		}
+            List<plan_residencia> plan = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todas las ordenes incluyendo el cliente y el usuario
+                    ordenes = ctx.Orden.Include("Cliente").Include("Usuario").ToList();
+
+                }
+                return ordenes;
+
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+        }
 
 		public plan_residencia GetPlanResidenciaByID(int id)
 		{
