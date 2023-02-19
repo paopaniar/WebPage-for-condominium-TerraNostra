@@ -36,5 +36,41 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        public ActionResult Details(int? id)
+        {
+            ServicePlanResidencia _ServicePlan = new ServicePlanResidencia();
+            plan_residencia plan = null;
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                plan = _ServicePlan.GetPlanResidenciaByID(Convert.ToInt32(id));
+                if (plan == null)
+                {
+                    TempData["Message"] = "No existe el plan solicitado";
+                    TempData["Redirect"] = "PlanResidencia";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(plan);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "PlanResidencia";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
     }
 }

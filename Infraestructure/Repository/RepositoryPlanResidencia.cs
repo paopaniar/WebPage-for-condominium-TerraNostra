@@ -53,7 +53,6 @@ namespace Infraestructure.Repository
                     oPlan = ctx.plan_residencia.
                         Where(l => l.id == id).
                         Include("residencia").
-                        Include("residencia.id").
                         FirstOrDefault();
 
                 }
