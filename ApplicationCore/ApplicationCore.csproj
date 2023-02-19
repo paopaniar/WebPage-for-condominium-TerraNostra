@@ -55,6 +55,7 @@
     <Compile Include="Services\IServiceResidencia.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServicePlanCobro.cs" />
+    <Compile Include="Services\ServicePlanResidencia.cs" />
     <Compile Include="Services\ServiceResidencia.cs" />
     <Compile Include="Services\ServiceUsuario.cs" />
   </ItemGroup>
