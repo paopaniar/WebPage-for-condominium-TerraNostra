@@ -29,7 +29,7 @@ namespace Infraestructure.Models
         public string apellido { get; set; }
         public string apellido2 { get; set; }
         public Nullable<int> estado { get; set; }
-
+        public virtual ICollection<residencia> residencia{ get; set; }
     }
 
 }

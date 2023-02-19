@@ -30,7 +30,7 @@ namespace Infraestructure.Repository
                     lista = ctx.residencia.ToList();
 
                    
-                   // lista = ctx.residencia.Include(x => x.).ToList();
+                    //lista = ctx.residencia.Include(x => x.).ToList();
 
                 }
                 return lista;
