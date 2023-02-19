@@ -1,0 +1,66 @@
+﻿@model Infraestructure.Models.plan_cobro
+
+@{
+    ViewBag.Title = "PlanDetails";
+}
+
+<h2>Detalles de Plan de Cobro</h2>
+
+<div>
+    <h4>Detalles de Plan de Cobro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.residenciaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.residenciaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rubroCobroId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rubroCobroId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datePlan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datePlan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
