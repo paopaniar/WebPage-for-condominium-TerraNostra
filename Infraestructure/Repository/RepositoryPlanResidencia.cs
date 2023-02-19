@@ -18,7 +18,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todas las ordenes incluyendo el cliente y el usuario
-                    ordenes = ctx.Orden.Include("Cliente").Include("Usuario").ToList();
+                    plan = ctx.plan_residencia.Include("usuario").Include("Usuario").ToList();
 
                 }
                 return ordenes;

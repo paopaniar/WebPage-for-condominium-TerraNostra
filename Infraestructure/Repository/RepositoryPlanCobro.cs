@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -55,7 +56,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
-                    oPlanCobro = ctx.plan_cobro.Where(l => l.id == id).Include(id).
+                    oPlanCobro = ctx.plan_cobro.Where(l => l.id == id).Include("id").
                         FirstOrDefault();
 
                 }
