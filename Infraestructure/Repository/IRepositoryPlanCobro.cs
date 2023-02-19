@@ -11,5 +11,6 @@ namespace Infraestructure.Repository
     {
         IEnumerable<plan_cobro> GetPlanCobro();
         IEnumerable<plan_cobro> GetPlanCobroByUsuario(int idUsuario);
+        plan_cobro GetPlanCobroById(int id);
     }
 }
