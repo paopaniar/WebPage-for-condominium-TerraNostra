@@ -2,6 +2,7 @@
 using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,36 @@ namespace Infraestructure.Repository
 
 		public plan_residencia GetPlanResidenciaByID(int id)
 		{
-			throw new NotImplementedException();
-		}
+            plan_residencia oPlan = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libro por ID incluyendo el autor y todas sus categorías
+                    oPlan = ctx.plan_residencia.
+                        Where(l => l.id == id).
+                        Include("residencia").
+                        Include("residencia.id").
+                        FirstOrDefault();
+
+                }
+                return oPlan;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+
 	}
 }
