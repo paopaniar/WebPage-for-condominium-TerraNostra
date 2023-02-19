@@ -10,7 +10,7 @@ namespace ApplicationCore.Services
 {
     public class ServicePlanCobro: IServicePlanCobro
     {
-        public IEnumerable<plan_cobro> GetResidencia()
+        public IEnumerable<plan_cobro> GetPlanCobro()
         {
             IRepositoryPlanCobro repository = new RepositoryPlanCobro();
             return repository.GetPlanCobro();
