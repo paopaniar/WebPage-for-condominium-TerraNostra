@@ -1,6 +1,8 @@
 ﻿using Infraestructure.Models;
+using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +23,7 @@ namespace Infraestructure.Repository
                     plan = ctx.plan_residencia.Include("usuario").Include("Usuario").ToList();
 
                 }
-                return ordenes;
+                return plan;
 
             }
             catch (DbUpdateException dbEx)
