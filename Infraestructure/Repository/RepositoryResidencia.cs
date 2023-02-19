@@ -30,7 +30,7 @@ namespace Infraestructure.Repository
                     //Obtener todos los libros incluyendo el autor
                     lista = ctx.residencia.ToList();
 
-
+                   
                     //lista = ctx.residencia.Include(x => x.).ToList();
 
                 }
@@ -62,7 +62,7 @@ namespace Infraestructure.Repository
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oLibro = ctx.residencia.
                         Where(l => l.id == id).
-                        Include("usuario").
+                        Include("usuario1").                      
                         FirstOrDefault();
 
                 }
@@ -82,10 +82,10 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario)
-        {
-            throw new NotImplementedException();
-        }
+		public IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario)
+		{
+			throw new NotImplementedException();
+		}
 
     }
-}
+    }
