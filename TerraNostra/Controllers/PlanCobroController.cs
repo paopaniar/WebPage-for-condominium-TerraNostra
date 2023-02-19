@@ -32,5 +32,40 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        public ActionResult Details(int? id)
+        {
+            ServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
+            plan_cobro planCobro = null;
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Details");
+                }
+
+                planCobro = _ServicePlanCobro.GetPlanCobroById(Convert.ToInt32(id));
+                if (planCobro == null)
+                {
+                    TempData["Message"] = "No existe el plan de cobro solicitado";
+                    TempData["Redirect"] = "Index";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(planCobro);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "PlanCobro";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+
+        }
     }
 }

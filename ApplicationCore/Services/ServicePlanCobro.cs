@@ -15,5 +15,11 @@ namespace ApplicationCore.Services
             IRepositoryPlanCobro repository = new RepositoryPlanCobro();
             return repository.GetPlanCobro();
         }
+
+        public plan_cobro GetPlanCobroById(int id)
+        {
+            IRepositoryPlanCobro repository = new RepositoryPlanCobro();
+            return repository.GetPlanCobroById(id);
+        }
     }
 }
