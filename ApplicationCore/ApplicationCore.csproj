@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IServicePlanCobro.cs" />
+    <Compile Include="Services\IServicePlanResidencia.cs" />
     <Compile Include="Services\IServiceResidencia.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServicePlanCobro.cs" />
