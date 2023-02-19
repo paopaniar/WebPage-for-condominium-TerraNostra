@@ -4,65 +4,8 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>residencia</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usuario1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.individualsNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.individualsNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.annio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.annio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.otherInfoDetails)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.otherInfoDetails)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.numeroCasa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.numeroCasa)
-        </dd>
-
-    </dl>
-</div>
 
 
-<h2>Detalle Residencia</h2>
 
 <div>
     <h4>Información detallada</h4>
@@ -75,16 +18,22 @@
 
                     <div class="col-md-8">
                         <div class="card-body">
-                            <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2">@Html.DisplayFor(model => model.numeroCasa)</span>
+                            <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa):</b> @Html.DisplayFor(model => model.numeroCasa)</span>
+                            <p class="card-text">
+                                <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>    @Html.DisplayFor(model => model.usuario1.identificacion)
+                            </p>
+                            <p class="card-text">
+                                <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>    @Html.DisplayFor(model => model.usuario1.nombre)
+                            </p>
                             <p class="card-text" style="color: #E45641; font-weight: 500;">
-                                @Html.DisplayFor(model => model.estado)
+                                <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.estado):</b>  @Html.DisplayFor(model => model.estado)
                             </p>
                             <p class="card-text">
                                 <i class="fa-solid fa-box"> </i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>  @Html.DisplayFor(model => model.individualsNumber)
                             </p>
-                            @*  <p class="card-text">
-                                    <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>    @Html.DisplayFor(model => model.usuario.)
-                                </p>*@
+                            <p class="card-text">
+                                <i class="fa-solid fa-box"> </i> <b>@Html.DisplayNameFor(model => model.annio):</b>  @Html.DisplayFor(model => model.annio)
+                            </p>
 
                         </div>
                     </div>
