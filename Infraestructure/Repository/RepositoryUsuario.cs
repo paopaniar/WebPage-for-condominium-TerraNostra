@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Repository
 {
-	public class RepositoryUsuario : IRepositoryUsuario
-	{
+    public class RepositoryUsuario : IRepositoryUsuario
+    {
         public usuario GetUsuarioByID(int id)
         {
             try
@@ -75,6 +75,6 @@ namespace Infraestructure.Repository
             }
         }
 
-		
-	}
+
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -26,10 +27,10 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                  
+                    //Obtener todos los libros incluyendo el autor
                     lista = ctx.residencia.ToList();
 
-                   
+
                     //lista = ctx.residencia.Include(x => x.).ToList();
 
                 }
@@ -52,13 +53,39 @@ namespace Infraestructure.Repository
 
         public residencia GetResidenciaByID(int id)
         {
+            residencia oLibro = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libro por ID incluyendo el autor y todas sus categorías
+                    oLibro = ctx.residencia.
+                        Where(l => l.id == id).
+                        Include("usuario").
+                        FirstOrDefault();
+
+                }
+                return oLibro;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario)
+        {
             throw new NotImplementedException();
         }
 
-		public IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario)
-		{
-			throw new NotImplementedException();
-		}
-
     }
-    }
+}
