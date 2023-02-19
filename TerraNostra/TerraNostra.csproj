@@ -138,6 +138,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlanCobroController.cs" />
+    <Compile Include="Controllers\PlanResidenciaController.cs" />
     <Compile Include="Controllers\ResidenciaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +204,7 @@
     <Content Include="Views\PlanCobro\Index.cshtml" />
     <Content Include="Views\Residencia\Details.cshtml" />
     <Content Include="Views\PlanCobro\Details.cshtml" />
+    <Content Include="Views\PlanResidencia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
