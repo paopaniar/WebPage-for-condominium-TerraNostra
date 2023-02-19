@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
 	{
 		plan_residencia GetPlanResidenciaByID(int id);
 		IEnumerable<plan_residencia> GetPlanResidencia();
-
+		plan_residencia GetEstadoCuentaById(int id);
 
 	}
 }

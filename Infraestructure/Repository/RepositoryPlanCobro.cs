@@ -1,32 +1,32 @@
-﻿using System;
+﻿using Infraestructure.Models;
+using Infraestructure.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infraestructure.Models;
-using Infraestructure.Utils;
 
 namespace Infraestructure.Repository
 {
-    public class RepositoryPlanCobro: IRepositoryPlanCobro
+    public class RepositoryPlanCobro : IRepositoryPlanCobro
     {
         public IEnumerable<plan_cobro> GetPlanCobro()
         {
-
+            List<plan_cobro> plan = null;
             try
             {
-
-                IEnumerable<plan_cobro> lista = null;
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.plan_cobro.ToList<plan_cobro>();
-                }
-                return lista;
-            }
+                    //Obtener todas las ordenes incluyendo el cliente y el usuario
+                    plan = ctx.plan_cobro.Include("rubro_cobro").ToList();
 
+                }
+                return plan;
+
+            }
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
@@ -37,29 +37,26 @@ namespace Infraestructure.Repository
             {
                 string mensaje = "";
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
+                throw new Exception(mensaje);
             }
         }
 
-        public IEnumerable<plan_cobro> GetPlanCobroByUsuario(int idUsuario)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public plan_cobro GetPlanCobroById(int id)
         {
-            plan_cobro oPlanCobro = null;
+            plan_cobro oPlan = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
-                    oPlanCobro = ctx.plan_cobro.Where(l => l.id == id).Include("rubroCobroId").FirstOrDefault();
+                    oPlan = ctx.plan_cobro.
+                        Where(l => l.id == id).
+                        Include("rubro_cobro").
+                        FirstOrDefault();
 
                 }
-                return oPlanCobro;
+                return oPlan;
             }
             catch (DbUpdateException dbEx)
             {
@@ -73,6 +70,12 @@ namespace Infraestructure.Repository
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw;
             }
+        }
+    
+
+        public IEnumerable<plan_cobro> GetPlanCobroByUsuario(int idUsuario)
+        {
+            throw new NotImplementedException();
         }
     }
 }
