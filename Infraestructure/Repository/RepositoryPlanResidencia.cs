@@ -12,7 +12,39 @@ namespace Infraestructure.Repository
 {
 	public class RepositoryPlanResidencia : IRepositoryPlanResidencia
 	{
-		public IEnumerable<plan_residencia> GetPlanResidencia()
+        public plan_residencia GetEstadoCuentaById(int id)
+        {
+            plan_residencia oPlan = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libro por ID incluyendo el autor y todas sus categorías
+                    oPlan = ctx.plan_residencia.
+                        Where(l => l.id == id).
+                        Include("residencia").  
+                        FirstOrDefault();
+
+                }
+                return oPlan;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        
+    }
+
+        public IEnumerable<plan_residencia> GetPlanResidencia()
 		{
             List<plan_residencia> plan = null;
             try

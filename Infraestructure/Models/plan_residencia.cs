@@ -22,5 +22,7 @@ namespace Infraestructure.Models
     
         public virtual plan_cobro plan_cobro { get; set; }
         public virtual residencia residencia { get; set; }
+        public virtual usuario usuario1 { get; set; }
+
     }
 }

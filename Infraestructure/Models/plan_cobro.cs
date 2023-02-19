@@ -27,8 +27,10 @@ namespace Infraestructure.Models
         public System.DateTime datePlan { get; set; }
         public int estado { get; set; }
         public decimal total { get; set; }
+   
     
         public virtual rubro_cobro rubro_cobro { get; set; }
+        public virtual residencia residencia_details { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<plan_residencia> plan_residencia { get; set; }
     }

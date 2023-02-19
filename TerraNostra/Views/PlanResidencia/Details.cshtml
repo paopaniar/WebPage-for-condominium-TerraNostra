@@ -4,10 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Estado de cuentas</h2>
 
 <div>
-    <h4>plan_residencia</h4>
+    <h4>Relación entre planes y residentes</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -32,6 +32,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.detalle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.plan_cobro.residencia_details.usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.plan_cobro.residencia_details.usuario1.nombre)
         </dd>
 
         <dt>
