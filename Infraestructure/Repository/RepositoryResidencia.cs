@@ -26,7 +26,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Obtener todos los libros incluyendo el autor
+                  
                     lista = ctx.residencia.ToList();
 
                    
