@@ -84,7 +84,7 @@ namespace Infraestructure.Repository
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oPlan = ctx.plan_residencia.
                         Where(l => l.id == id).
-                        Include("residencia").
+                        Include("residencia").Include("plan_cobro").Include("usuario1").
                         FirstOrDefault();
 
                 }
