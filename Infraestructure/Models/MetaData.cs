@@ -71,7 +71,8 @@ namespace Infraestructure.Models
         public int residenciaId { get; set; }
         [Display(Name = "Rubro")]
         public int rubroCobroId { get; set; }
-       
+        [Display(Name = "Fecha")]
+        public System.DateTime datePlan { get; set; }
 
     }
 
@@ -84,5 +85,17 @@ namespace Infraestructure.Models
         public decimal monto { get; set; }
 
     }
+    internal partial class PlanResidenciaMetaData
+    {
+
+        [Display(Name = "Numero plan cobro")]
+        public int planCobroId { get; set; }
+        [Display(Name = "Detalle")]
+        public string detalle { get; set; }
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
+
+    }
+
 
 }

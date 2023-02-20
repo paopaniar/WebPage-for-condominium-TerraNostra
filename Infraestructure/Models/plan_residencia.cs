@@ -14,7 +14,9 @@ namespace Infraestructure.Models
 
     using System.ComponentModel.DataAnnotations;
 
-    
+   
+
+    [MetadataType(typeof(PlanResidenciaMetaData))]
     public partial class plan_residencia
     {
         public int id { get; set; }
