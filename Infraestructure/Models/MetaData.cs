@@ -11,9 +11,8 @@ namespace Infraestructure.Models
 	internal partial class ResidenciaMetaData 
 	{
         public int id { get; set; }
-        [Display(Name = "Identificación de usuario")]
-        public int idUsuario { get; set; }
-        [Display(Name = "Número de individuos")]
+       
+        [Display(Name = "Cantidad de personas")]
         public int individualsNumber { get; set; }
         [Display(Name = "Año")]
         public string annio { get; set; }
@@ -21,9 +20,10 @@ namespace Infraestructure.Models
         public int estado { get; set; }
         [Display(Name = "Información adicional")]
         public string otherInfoDetails { get; set; }
-        [Display(Name = "Número de casa")]
-        public Nullable<int> numeroCasa { get; set; }
-
+        [Display(Name = "Casa")]
+        public int numeroCasa { get; set; }
+        //[Display(Name = "Identificación de usuario")]
+        //public int idUsuario { get; set; }
         public String estadoConverted()
         {
             if (this.estado==1)
@@ -42,7 +42,7 @@ namespace Infraestructure.Models
     {
         [Display(Name = "Rol")]
         public int rolId { get; set; }
-        [Display(Name = "Identificacion")]
+        [Display(Name = "Residente")]
         public int identificacion { get; set; }
         [Display(Name = "Teléfono")]
         public string telefono { get; set; }

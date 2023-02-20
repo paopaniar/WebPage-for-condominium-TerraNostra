@@ -6,30 +6,27 @@
 
 <h2>Residencias</h2>
 
-<p>
-    <a href="@Url.Action("Create", "Crear")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
-</p>
+<center>
+
+</center>
 <div class="col-lg-9">
     <div id="resultado" class="row">
         @foreach (var item in Model)
         {
-            <div class="col-sm-3">
-                <div class="card-body" style="background-color: aquamarine">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa):</b> @Html.DisplayFor(modelItem => item.numeroCasa)</span>
-               
-                   
-                    <p class="card-text" style="color: #E45641; font-weight: 500;">
-                        <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.estado):</b>  @Html.DisplayFor(modelItem => item.estado)
+            <div class="col-sm-3" >
+                <div class="card-body" style="background-color: white; border:groove; border-color:#157394">
+                    
+                   <p class="card-text">
+                       <i class="fa-solid fa-house"></i> <b>@Html.DisplayNameFor(model => model.numeroCasa):</b>  @Html.DisplayFor(modelItem => item.numeroCasa)
+                    </p>
+                    <p class="card-text">
+                        <i class="fa-solid fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>  @Html.DisplayFor(modelItem => item.usuario1.identificacion)
                     </p>
                     <p class="card-text">
                         <i class="fa-solid fa-people-roof"></i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>  @Html.DisplayFor(modelItem => item.individualsNumber)
                     </p>
-                    <p class="card-text">
-                        <i class="fa-regular fa-calendar-days"></i> <b>@Html.DisplayNameFor(model => model.annio):</b>  @Html.DisplayFor(modelItem => item.annio)
-                    </p>
-                    <a href="@Url.Action("Edit", "residencia", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-pen"></i> Editar</a>
-                    @*@Html.ActionLink("Edit", "Edit", new { id = item.IdLibro }) |*@
+
+            
                     <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i> Detalle</a>
                     @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
 
@@ -38,6 +35,7 @@
         }
     </div>
 </div>
+</center>
 
 
 
