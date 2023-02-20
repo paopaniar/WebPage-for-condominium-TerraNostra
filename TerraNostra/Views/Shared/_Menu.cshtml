@@ -1,17 +1,19 @@
 ﻿
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:80px">
     <div class="container-fluid">
-        @Html.ActionLink("TerraNostra", "Index", "Home", null, new { @class = "navbar-brand" })
 
+        <form class="d-flex" role="search">
+            <img src="~/Utils/imagenes/LogoSmartHouse-removebg-preview.png" width="150px" , height="150px" />
+        </form>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
+
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">
                         Página Principal
-                        
                     </a>
                 </li>
                 <li class="nav-item dropdown">
@@ -23,7 +25,7 @@
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Plan Cobro", "Index", "planCobro", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Estados de cuenta", "Index", "planResidencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Plan Residencia", "Index", "planResidencia", null, new { @class = "dropdown-item" })
 
                     </div>
                 </li>
@@ -33,27 +35,10 @@
                null, new { @class = "nav-link" })
                 </li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                       href="#" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fa-solid fa-user"></i> Perfil</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item"
-                           @*Accion, Controlador*@
-                           href="@Url.Action("Index","Login")">
-                            <i class="fa-solid fa-user-plus"></i>
-                            Login
-                        </a>
-                        <a class="dropdown-item"
-                           href="@Url.Action("Logout","Login")">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Logout
-                        </a>
-                    </div>
-                </li>
+
             </ul>
-            <form class="d-flex" role="search">
-                <img src=""/>
+            <form class="d-flex" role="search" style="background-color:#157394">
+                <button class="btn btn-outline-success" type="submit" style="color:#3c444c">Iniciar Sesión</button>
             </form>
         </div>
     </div>
