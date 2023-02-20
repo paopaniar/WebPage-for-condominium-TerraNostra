@@ -4,57 +4,40 @@
     ViewBag.Title = "Residencias";
 }
 
-<h2>Index</h2>
+<h2>Residencias</h2>
 
 <p>
     @Html.ActionLink("Crear nuevo", "Create")
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.numeroCasa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.usuario)
-            </th>
-
-
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody id="resultado">
+<div class="col-lg-9">
+    <div id="resultado" class="row">
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.numeroCasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usuario)
-            </td>
+            <div class="col-sm-3">
+                <div class="card-body" style="background-color: aquamarine">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa):</b> @Html.DisplayFor(modelItem => item.numeroCasa)</span>
+                    <p class="card-text">
+                        <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1):</b>    @Html.DisplayFor(modelItem => item.usuario1.identificacion)
+                    </p>
+                    <p class="card-text">
+                        <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.nombre):</b>    @Html.DisplayFor(modelItem => item.usuario1.nombre)
+                    </p>
+                    <p class="card-text" style="color: #E45641; font-weight: 500;">
+                        <i class="fa-solid fa-circle-user"></i> <b>@Html.DisplayNameFor(model => model.estado):</b>  @Html.DisplayFor(modelItem => item.estado)
+                    </p>
+                    <p class="card-text">
+                        <i class="fa-solid fa-people-roof"></i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>  @Html.DisplayFor(modelItem => item.individualsNumber)
+                    </p>
+                    <p class="card-text">
+                        <i class="fa-regular fa-calendar-days"></i> <b>@Html.DisplayNameFor(model => model.annio):</b>  @Html.DisplayFor(modelItem => item.annio)
+                    </p>
 
-
-            <td>
-                <a href="@Url.Action("Edit", "residencia", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-pen"></i> Editar</a>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.IdLibro }) |*@
-                <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i> Detalle</a>
-                @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
-            </td>
-
-
-        </tr>
+                </div>
+            </div>
         }
-    </tbody>
-
-</table>
+    </div>
+</div>
 
 
 
