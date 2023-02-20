@@ -82,9 +82,10 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
+                   
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oPlan = ctx.plan_residencia.
-                        Where(l => l.estado == 1).
+                        Where(l => l.estado ==1 && ( l.id == id)).
                         Include("residencia").Include("plan_cobro").
                         FirstOrDefault();
 
