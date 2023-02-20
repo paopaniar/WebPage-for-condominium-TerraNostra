@@ -39,6 +39,44 @@ namespace TerraNostra.Controllers
 
         public ActionResult Details(int? id)
         {
+            ServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
+            plan_residencia p_residencia = null;
+            try
+            {
+                // Si va null
+                    if (id == null)
+                {
+                    return RedirectToAction("Details");
+                }
+
+                p_residencia = _ServicePlanResidencia.GetPlanResidenciaByEnabled(Convert.ToInt32(id));
+                if (p_residencia == null)
+                {
+                    TempData["Message"] = "No existe la residencia solicitada";
+                    TempData["Redirect"] = "Index";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(p_residencia);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Residencias";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+
+        
+    }
+
+
+    /* public ActionResult Details(int? id)
+       {
             ServicePlanResidencia _ServicePlan = new ServicePlanResidencia();
             plan_residencia plan = null;
 
@@ -71,6 +109,6 @@ namespace TerraNostra.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
-        }
+        }*/
     }
 }

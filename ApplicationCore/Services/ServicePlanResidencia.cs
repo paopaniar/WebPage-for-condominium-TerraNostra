@@ -16,10 +16,17 @@ namespace ApplicationCore.Services
 			return repository.GetPlanResidencia();
 		}
 
-		public plan_residencia GetPlanResidenciaByID(int id)
+        public plan_residencia GetPlanResidenciaByEnabled(int id)
+        {
+			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+			return repository.GetPlanResidenciaByEnabled(id);
+		}
+
+        public plan_residencia GetPlanResidenciaByID(int id)
 		{
 			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
 			return repository.GetPlanResidenciaByID(id);
 		}
+
 	}
 }

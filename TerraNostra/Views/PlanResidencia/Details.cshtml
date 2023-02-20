@@ -4,12 +4,20 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Estado de cuentas</h2>
+<h2>Details</h2>
 
 <div>
-    <h4>Relación entre planes y residentes</h4>
+    <h4>plan_residencia</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.planCobroId)
         </dt>
@@ -23,7 +31,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.residencia.otherInfoDetails)
+            @Html.DisplayFor(model => model.residenciaId)
         </dd>
 
         <dt>
@@ -32,13 +40,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.detalle)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.residencia.usuario1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.residencia.usuario1.identificacion)
         </dd>
 
         <dt>
