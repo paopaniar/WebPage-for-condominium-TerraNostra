@@ -46,6 +46,7 @@
     </div>
 </center>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Edit", "Edit", new { id = Model.id })" class="btn btn-primary"><i class="fa-solid fa-pen"></i> Editar</a>
+            @Html.ActionLink("Back to List", "Index")
+
 </p>
