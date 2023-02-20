@@ -15,10 +15,14 @@
             @Html.DisplayNameFor(model => model.planCobroId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.residenciaId)
+            @Html.DisplayNameFor(model => model.usuario)
         </th>
+      
         <th>
             @Html.DisplayNameFor(model => model.detalle)
+        <th>
+            @Html.DisplayNameFor(model => model.plan_cobro.datePlan)
+        </th>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
@@ -32,10 +36,13 @@
             @Html.DisplayFor(modelItem => item.planCobroId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.residenciaId)
+            @Html.DisplayFor(modelItem => item.usuario1.identificacion)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.detalle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.plan_cobro.datePlan)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.estado)

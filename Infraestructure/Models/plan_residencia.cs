@@ -15,6 +15,7 @@ namespace Infraestructure.Models
     public partial class plan_residencia
     {
         public int id { get; set; }
+        public Nullable<int> usuario { get; set; }
         public int planCobroId { get; set; }
         public int residenciaId { get; set; }
         public string detalle { get; set; }
