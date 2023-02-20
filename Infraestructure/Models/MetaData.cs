@@ -57,4 +57,22 @@ namespace Infraestructure.Models
         public virtual ICollection<residencia> residencia { get; set; }
     }
 
+    internal partial class PlanCobroMetaData
+    {
+        [Display(Name = "Rol")]
+        public int rolId { get; set; }
+        [Display(Name = "Residente")]
+        public int identificacion { get; set; }
+        [Display(Name = "Teléfono")]
+        public string telefono { get; set; }
+        [Display(Name = "Nombre")]
+        public string nombre { get; set; }
+        [Display(Name = "Primer Apellido")]
+        public string apellido { get; set; }
+        [Display(Name = "Segundo Apellido")]
+        public string apellido2 { get; set; }
+        [Display(Name = "Estado")]
+        public Nullable<int> estado { get; set; }
+        public virtual ICollection<residencia> residencia { get; set; }
+    }
 }
