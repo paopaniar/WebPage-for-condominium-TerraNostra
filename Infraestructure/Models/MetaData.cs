@@ -24,18 +24,7 @@ namespace Infraestructure.Models
         public int numeroCasa { get; set; }
         //[Display(Name = "Identificación de usuario")]
         //public int idUsuario { get; set; }
-        public String estadoConverted()
-        {
-            if (this.estado==1)
-            {
-                return "Activo";
-            }
-            else
-            {
-                return "Inactivo";
-            }
-           
-        }
+       
     }
 
     internal partial class UsuarioMetaData
@@ -76,7 +65,7 @@ namespace Infraestructure.Models
 
     }
 
-    internal partial class RubroComborMetaData
+    internal partial class RubroCobroMetaData
     {
       
         [Display(Name = "Detalle rubro")]
@@ -88,7 +77,7 @@ namespace Infraestructure.Models
     internal partial class PlanResidenciaMetaData
     {
 
-        [Display(Name = "Numero plan cobro")]
+        [Display(Name = "Número plan cobro")]
         public int planCobroId { get; set; }
         [Display(Name = "Detalle")]
         public string detalle { get; set; }
