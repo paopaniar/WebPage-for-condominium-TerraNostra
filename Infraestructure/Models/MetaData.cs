@@ -56,8 +56,7 @@ namespace Infraestructure.Models
         public string detail { get; set; }
         [Display(Name = "Total")]
         public decimal total { get; set; }
-        [Display(Name = "Residencia")]
-        public int residenciaId { get; set; }
+        
         [Display(Name = "Rubro")]
         public int rubroCobroId { get; set; }
         [Display(Name = "Fecha")]
