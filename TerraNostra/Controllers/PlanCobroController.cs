@@ -20,7 +20,9 @@ namespace TerraNostra.Controllers
                 IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
                 lista = _ServicePlanCobro.GetPlanCobro();
                 ViewBag.title = "Lista Plan Cobro";
-             
+                IServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
+                ViewBag.listaRubroCobro = _ServiceRubroCobro.GetRubroCobro();
+
                 return View(lista);
             }
             catch (Exception ex)
