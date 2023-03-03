@@ -14,7 +14,7 @@ namespace Infraestructure.Repository
     {
         public IEnumerable<plan_cobro> GetPlanCobro()
         {
-            List<plan_cobro> plan = null;
+            IEnumerable<plan_cobro> plan = null;
             try
             {
                 using (MyContext ctx = new MyContext())
