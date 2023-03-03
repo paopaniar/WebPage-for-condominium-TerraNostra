@@ -20,7 +20,7 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
         public int estado { get; set; }
 
-        public virtual usuario usuario { get; set; }
+        
         public virtual plan_cobro plan_cobro { get; set; }
         public virtual residencia residencia { get; set; }
     }
