@@ -16,6 +16,11 @@ namespace Infraestructure.Models
     [MetadataType(typeof(PlanResidenciaMetaData))]
     public partial class plan_residencia
     {
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public plan_residencia() {
+            this.plan_cobroColection = new HashSet<plan_cobro>();
+        }
         public int id { get; set; }
         public int planCobroId { get; set; }
         public int residenciaId { get; set; }
@@ -25,5 +30,7 @@ namespace Infraestructure.Models
         
         public virtual plan_cobro plan_cobro { get; set; }
         public virtual residencia residencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<plan_cobro> plan_cobroColection { get; set; }
     }
 }

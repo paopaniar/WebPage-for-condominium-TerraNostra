@@ -62,9 +62,52 @@
             @Html.DisplayFor(model => model.estado)
         </dd>
 
+
+
+
+
+
     </dl>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.plan_cobro.total)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.plan_cobro.estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.plan_cobro.Mes)
+            </th>
+
+        </tr>
+        @foreach (var item in Model.plan_cobroColection)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mes)
+                </td>
+
+                <td>
+
+                    @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Pagados", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Pendientes", "Details", new { id = item.id })
+
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <p>
-   
+
     @Html.ActionLink("Volver a los estados de cuenta", "Index")
 </p>

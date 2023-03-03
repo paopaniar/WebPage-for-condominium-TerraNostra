@@ -46,7 +46,7 @@ namespace Infraestructure.Repository
 
         public IEnumerable<plan_residencia> GetEstadosPagados()
         {
-            int estado = 1;
+          
             List<plan_residencia> plan = null;
             try
             {
@@ -55,7 +55,7 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todas las ordenes incluyendo el cliente y el usuario
                     plan = ctx.plan_residencia.
-                       Where(l => l.estado == estado).
+                       Where(l => l.estado == 1).
                        Include("residencia").ToList();
 
                 }
