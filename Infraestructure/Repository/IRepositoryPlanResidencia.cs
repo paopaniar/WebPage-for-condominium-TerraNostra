@@ -13,6 +13,8 @@ namespace Infraestructure.Repository
 		IEnumerable<plan_residencia> GetPlanResidencia();
 		plan_residencia GetEstadoCuentaById(int id);
 		plan_residencia GetPlanResidenciaByEnabled(int id);
+		IEnumerable<plan_residencia> GetEstadosPagados();
+		IEnumerable<plan_residencia> GetEstadosPendientes();
 
 	}
 }

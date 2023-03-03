@@ -25,6 +25,8 @@ namespace TerraNostra.Controllers
                 ViewBag.listaResidencia = _ServiceResidencia.GetResidencia();
                 IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
                 ViewBag.listaPlanCobro = _ServicePlanCobro.GetPlanCobro();
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                ViewBag.listaUsuario = _ServiceUsuario.GetUsuario();
                 return View(lista);
             }
             catch (Exception ex)
