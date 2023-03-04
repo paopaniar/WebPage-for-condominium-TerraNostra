@@ -115,4 +115,26 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
     }
 
+    internal partial class informacionMetaData
+    {
+        [Display(Name = "Número de seguimiento")]
+        public int id { get; set; }
+        [Display(Name = "Usuario")]
+        public int usuario { get; set; }
+        [Display(Name = "Detalle")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public string detalle { get; set; }
+        [Display(Name = "Fecha de la información")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public Nullable<System.DateTime> fechaInformacion { get; set; }
+        [Display(Name = "Tipo")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public int tipo { get; set; }
+        [Display(Name = "Estado")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public int estado { get; set; }
+    }
+
     }
