@@ -34,5 +34,51 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        private SelectList listUsuarios(int idUsuario = 0)
+        {
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            IEnumerable<usuario> lista = _ServiceUsuario.GetUsuario();
+            return new SelectList(lista, "identificacion", "nombre", idUsuario);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            ServiceIncidente _ServiceIncidente = new ServiceIncidente();
+            incidente incidente = null;
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    //ATENCION! HACER EL INDEX byPao
+                    return RedirectToAction("Index");
+                }
+
+                incidente = _ServiceIncidente.GetIncidenteById(Convert.ToInt32(id));
+                if (incidente == null)
+                {
+                    TempData["Message"] = "No existe el incidente solicitado";
+                    TempData["Redirect"] = "Incidencia";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                //Listados
+                ViewBag.idUsuario = listUsuarios(incidente.id);
+                
+                return View(incidente);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Incidencia";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
     }
 }
