@@ -21,5 +21,11 @@ namespace ApplicationCore.Services
             IRepositoryInformacion repository = new RepositoryInformacion();
             return repository.GetInformacionById(id);
         }
+
+        public informacion Save(informacion informacion, string[] selectedUsuarios)
+        {
+            IRepositoryInformacion repository = new RepositoryInformacion();
+            return repository.Save(informacion, selectedUsuarios);
+        }
     }
 }
