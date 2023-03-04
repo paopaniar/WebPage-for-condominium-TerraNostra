@@ -11,5 +11,6 @@ namespace Infraestructure.Repository
     {
         IEnumerable<incidente> GetIncidente();
         incidente GetIncidenteoById(int id);
+        incidente Save(incidente incidente, string[] selectedUsuarios);
     }
 }

@@ -21,5 +21,6 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
     
         public virtual usuario usuario1 { get; set; }
+        public virtual ICollection<usuario> Usuarios { get; set; }
     }
 }
