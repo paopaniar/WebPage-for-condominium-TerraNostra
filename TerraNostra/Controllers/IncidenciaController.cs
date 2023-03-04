@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace TerraNostra.Controllers
 {
+    //HAY QUE HACER LOS INDEXES
     public class IncidenciaController : Controller
     {
         // GET: Incidencia
@@ -68,6 +69,52 @@ namespace TerraNostra.Controllers
                 ViewBag.idUsuario = listUsuarios(incidente.id);
                 
                 return View(incidente);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Incidencia";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        // POST: Libro/Edit/5
+        [HttpPost]
+        public ActionResult Save(incidente incidente,  string[] selectedUsuarios)
+        {
+           
+            //Servicio Libro
+            IServiceIncidente _ServiceIncidente= new ServiceIncidente();
+            try
+            {
+                
+                if (ModelState.IsValid)
+                {
+                    incidente oIncidenteI= _ServiceIncidente.Save(incidente, selectedUsuarios);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Utils.Util.ValidateErrors(this);
+                  //  ViewBag.idUsuario = listUsuarios(incidente.id);
+                    ViewBag.id = listUsuarios(incidente.usuario);
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (incidente.id> 0)
+                    {
+                        return (ActionResult)View("Edit", incidente);
+                    }
+                    else
+                    {
+                        return View("Create", incidente);
+                    }
+                }
+
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

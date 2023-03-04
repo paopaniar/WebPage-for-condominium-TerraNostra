@@ -21,5 +21,11 @@ namespace ApplicationCore.Services
             IRepositoryIncidencias repository = new RepositoryIncidente();
             return repository.GetIncidenteoById(id);
         }
+
+        public incidente Save(incidente incidente, string[] selectedUsuarios)
+        {
+            IRepositoryIncidencias repository = new RepositoryIncidente();
+            return repository.Save(incidente, selectedUsuarios);
+        }
     }
 }
