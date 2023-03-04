@@ -27,6 +27,7 @@ namespace Infraestructure.Models
         public int individualsNumber { get; set; }
         public string annio { get; set; }
         public int estado { get; set; }
+        public string estadoConverted { get; set; }
         public string otherInfoDetails { get; set; }
         public Nullable<int> numeroCasa { get; set; }
     

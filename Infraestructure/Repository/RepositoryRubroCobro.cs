@@ -66,5 +66,10 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
+
+        public rubro_cobro Save(rubro_cobro rubro, string[] selectedUsuarios)
+        {
+            throw new NotImplementedException();
+        }
     }
-}
+            }
