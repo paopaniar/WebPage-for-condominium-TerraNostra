@@ -52,6 +52,7 @@ namespace TerraNostra.Controllers
                 }
 
                 p_residencia = _ServicePlanResidencia.GetPlanResidenciaByID(Convert.ToInt32(id));
+
                 if (p_residencia == null)
                 {
                     TempData["Message"] = "No existe la residencia solicitada";

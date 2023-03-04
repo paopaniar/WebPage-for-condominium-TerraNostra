@@ -21,5 +21,11 @@ namespace ApplicationCore.Services
             IRepositoryRubroCobro repository = new RepositoryRubroCobro();
             return repository.GetRubroCobroById(id);
         }
+
+        public rubro_cobro Save(rubro_cobro rubro, string[] selectedUsuarios)
+        {
+            IRepositoryRubroCobro repository = new RepositoryRubroCobro();
+            return repository.Save(rubro, selectedUsuarios);
+        }
     }
 }

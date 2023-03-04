@@ -50,11 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceIncidente.cs" />
+    <Compile Include="Services\IServiceInformacion.cs" />
     <Compile Include="Services\IServicePlanCobro.cs" />
     <Compile Include="Services\IServicePlanResidencia.cs" />
     <Compile Include="Services\IServiceResidencia.cs" />
     <Compile Include="Services\IServiceRubroCobro.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
+    <Compile Include="Services\ServiceIncidente.cs" />
+    <Compile Include="Services\ServiceInformacion.cs" />
     <Compile Include="Services\ServicePlanCobro.cs" />
     <Compile Include="Services\ServicePlanResidencia.cs" />
     <Compile Include="Services\ServiceResidencia.cs" />
