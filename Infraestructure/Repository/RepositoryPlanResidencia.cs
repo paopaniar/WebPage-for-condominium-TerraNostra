@@ -23,7 +23,8 @@ namespace Infraestructure.Repository
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oPlan = ctx.plan_residencia.
                         Where(l => l.id == id).
-                        Include("residencia").  
+                        Include("residencia").
+                        Include("plan_cobro").
                         FirstOrDefault();
 
                 }
@@ -109,13 +110,13 @@ namespace Infraestructure.Repository
                 throw new Exception(mensaje);
             }
         }
-        
-      
-    
+
+
+
 
         public plan_residencia GetPlanResidenciaByID(int id)
 		{
-            plan_residencia oPlan = null;
+           plan_residencia oPlan = null;
             try
             {
                 using (MyContext ctx = new MyContext())
@@ -123,9 +124,9 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oPlan = ctx.plan_residencia.
-                        Where(l => l.id == id).
                         Include("residencia").Include("plan_cobro").Include("residencia.usuario1").
-                        FirstOrDefault();
+                        Where(l => l.id == id).FirstOrDefault();
+                       ;
 
                 }
                 return oPlan;
@@ -144,6 +145,6 @@ namespace Infraestructure.Repository
             }
         }
 
-
+		
 	}
 }

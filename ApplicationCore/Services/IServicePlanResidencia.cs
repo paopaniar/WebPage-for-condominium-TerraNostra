@@ -9,7 +9,7 @@ namespace ApplicationCore.Services
 {
 	public interface IServicePlanResidencia
 	{
-		plan_residencia GetPlanResidenciaByID(int id);
+		IEnumerable<plan_residencia>  GetPlanResidenciaByID(int id);
 		IEnumerable<plan_residencia> GetPlanResidencia();
 		
 	}

@@ -48,7 +48,7 @@ namespace TerraNostra.Controllers
                 // Si va null
                     if (id == null)
                 {
-                    return RedirectToAction("Details");
+                    return RedirectToAction("Index");
                 }
 
                 p_residencia = _ServicePlanResidencia.GetPlanResidenciaByID(Convert.ToInt32(id));

@@ -9,10 +9,9 @@ namespace Infraestructure.Repository
 {
 	public interface IRepositoryPlanResidencia
 	{
-		plan_residencia GetPlanResidenciaByID(int id);
+		IEnumerable<plan_residencia> GetPlanResidenciaByID(int id);
 		IEnumerable<plan_residencia> GetPlanResidencia();
-		plan_residencia GetEstadoCuentaById(int id);
-		
+		plan_residencia GetEstadoCuentaById(int id);		
 		IEnumerable<plan_residencia> GetEstadosPagados();
 		IEnumerable<plan_residencia> GetEstadosPendientes();
 
