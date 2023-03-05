@@ -126,5 +126,15 @@ namespace TerraNostra.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            //Que recursos necesito para crear un Libro
+            //Autores
+            ViewBag.idUsuario = listUsuarios();
+           
+            return View();
+        }
+
     }
 }
