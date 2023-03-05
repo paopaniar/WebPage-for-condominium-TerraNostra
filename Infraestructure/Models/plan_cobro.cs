@@ -33,5 +33,6 @@ namespace Infraestructure.Models
         public virtual rubro_cobro rubro_cobro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<plan_residencia> plan_residencia { get; set; }
+        public virtual ICollection<rubro_cobro> rubro_cobros { get; set; }
     }
 }
