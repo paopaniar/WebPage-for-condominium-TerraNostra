@@ -127,5 +127,15 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            //Que recursos necesito para crear una incidencia
+            //usuarios
+            ViewBag.idUsuario = listUsuarios();
+
+            return View();
+        }
     }
 }
