@@ -145,6 +145,9 @@ namespace Infraestructure.Repository
             }
         }
 
-		
-	}
+        IEnumerable<plan_residencia> IRepositoryPlanResidencia.GetPlanResidenciaByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

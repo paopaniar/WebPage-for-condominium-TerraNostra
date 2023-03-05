@@ -17,12 +17,15 @@ namespace ApplicationCore.Services
 		}
 
        
-
         public plan_residencia GetPlanResidenciaByID(int id)
 		{
 			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
-			return repository.GetPlanResidenciaByID(id);
+			return repository.GetEstadoCuentaById(id);
 		}
 
-	}
+        IEnumerable<plan_residencia> IServicePlanResidencia.GetPlanResidenciaByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
