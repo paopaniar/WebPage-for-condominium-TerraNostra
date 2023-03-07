@@ -1,3 +1,4 @@
+using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Web;
 
 namespace TerraNostra
 {
@@ -18,8 +20,12 @@ namespace TerraNostra
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
             log4net.Config.XmlConfigurator.Configure();
+        }
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod());
         }
     }
 }

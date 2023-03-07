@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Infraestructure.Models.plan_residencia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h3>Estados de cuenta</h3>
+<hr />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.residencia.numeroCasa)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.residencia.usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.residencia.usuario1.nombre)
+        </th>
+
+
+
+
+
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.residencia.numeroCasa)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.residencia.usuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.residencia.usuario1.nombre)
+    </td>
+
+    <td>
+
+        @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
+        @Html.ActionLink("Pagados", "Details", new { id = item.id }) |
+        @Html.ActionLink("Pendientes", "Details", new { id = item.id })
+
+    </td>
+</tr>
+}
+
+</table>

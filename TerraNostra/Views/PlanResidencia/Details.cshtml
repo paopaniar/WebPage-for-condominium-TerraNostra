@@ -1,0 +1,69 @@
+﻿@model Infraestructure.Models.plan_residencia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h4>Detalle estado de cuenta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.residencia.usuario1.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.residencia.usuario1.nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.residencia.numeroCasa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.residencia.numeroCasa)
+        </dd>
+    </dl>
+</div>
+    <div>
+        <p class="card-text">
+            <i class="fa-solid fa-bookmark"></i> <b>@Html.DisplayNameFor(model => model.plan_cobroColection):</b>
+            <ul>
+                @foreach (var item in Model.plan_cobroColection)
+                {
+
+                    <li>@item.detail</li>
+                    <li>@item.Mes</li>
+                    <li>@item.total</li>
+                    <li>@item.estado</li>
+                }
+
+
+                @foreach (var item in Model.plan_cobroColection)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.detail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.total)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estado)
+                        </td>
+                    </tr>
+                }
+            </ul>
+
+        </p>
+    </div>
+
+
+    <p>
+
+        @Html.ActionLink("Volver a los estados de cuenta", "Index")
+    </p>

@@ -1,0 +1,56 @@
+﻿@model Infraestructure.Models.plan_cobro
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <hr />
+    <h4>Información detallada de plan cobro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rubro_cobro.detalle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rubro_cobro.detalle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rubro_cobro.monto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.rubro_cobro.monto)
+        </dd>
+
+
+
+
+
+
+    </dl>
+</div>
+<p>
+   
+    @Html.ActionLink("Volver a la lista", "Index")
+</p>
