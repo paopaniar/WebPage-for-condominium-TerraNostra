@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(ResidenciaMetaData))]
+    
     public partial class residencia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +25,6 @@ namespace Infraestructure.Models
         public int individualsNumber { get; set; }
         public string annio { get; set; }
         public int estado { get; set; }
-        public string estadoConverted { get; set; }
         public string otherInfoDetails { get; set; }
         public Nullable<int> numeroCasa { get; set; }
     
