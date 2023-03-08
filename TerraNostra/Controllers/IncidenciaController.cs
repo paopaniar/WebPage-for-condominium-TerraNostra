@@ -84,7 +84,7 @@ namespace TerraNostra.Controllers
 
         // POST: Libro/Edit/5
         [HttpPost]
-        public ActionResult Save(incidente incidente,  string[] selectedUsuarios)
+        public ActionResult Save(incidente incidente)
         {
            
             //Servicio Libro
@@ -94,7 +94,7 @@ namespace TerraNostra.Controllers
                 
                 if (ModelState.IsValid)
                 {
-                    incidente oIncidenteI= _ServiceIncidente.Save(incidente, selectedUsuarios);
+                    incidente oIncidenteI= _ServiceIncidente.Save(incidente);
                 }
                 else
                 {

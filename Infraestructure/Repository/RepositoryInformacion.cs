@@ -72,71 +72,76 @@ namespace Infraestructure.Repository
             }
         }
 
-        public informacion Save(informacion informacion, string[] selectedUsuarios)
-        {
-            int retorno = 0;
-            informacion oInformacion = null;
+		public informacion Save(informacion informacion, string[] selectedUsuarios)
+		{
+			throw new NotImplementedException();
+		}
 
-            using (MyContext ctx = new MyContext())
-            {
-                ctx.Configuration.LazyLoadingEnabled = false;
-                oInformacion = GetInformacionById((int)informacion.id);
-                IRepositoryUsuario _RepositoryUsuarios = new RepositoryUsuario();
+		//public informacion Save(informacion informacion, string[] selectedUsuarios)
+		//{
+		//    int retorno = 0;
+		//    informacion oInformacion = null;
 
-                if (oInformacion == null)
-                {
+		//    using (MyContext ctx = new MyContext())
+		//    {
+		//        ctx.Configuration.LazyLoadingEnabled = false;
+		//        oInformacion = GetInformacionById((int)informacion.id);
+		//        IRepositoryUsuario _RepositoryUsuarios = new RepositoryUsuario();
 
-                    //Insertar
-                    //Logica para agregar las categorias al libro
-                    if (selectedUsuarios != null)
-                    {
+		//        if (oInformacion == null)
+		//        {
 
-                        informacion.Usuarios = new List<usuario>();
-                        foreach (var usuario in selectedUsuarios)
-                        {
-                            var usuarioToAdd = _RepositoryUsuarios.GetUsuarioByID(int.Parse(usuario));
-                            ctx.usuario.Attach(usuarioToAdd); //sin esto, EF intentará crear una categoría
-                            informacion.Usuarios.Add(usuarioToAdd);// asociar a la categoría existente con el libro
+		//            //Insertar
+		//            //Logica para agregar las categorias al libro
+		//            if (selectedUsuarios != null)
+		//            {
+
+		//                informacion.Usuarios = new List<usuario>();
+		//                foreach (var usuario in selectedUsuarios)
+		//                {
+		//                    var usuarioToAdd = _RepositoryUsuarios.GetUsuarioByID(int.Parse(usuario));
+		//                    ctx.usuario.Attach(usuarioToAdd); //sin esto, EF intentará crear una categoría
+		//                    informacion.Usuarios.Add(usuarioToAdd);// asociar a la categoría existente con el libro
 
 
-                        }
-                    }
-                    //Insertar Libro
-                    ctx.informacion.Add(informacion);
-                    //SaveChanges
-                    //guarda todos los cambios realizados en el contexto de la base de datos.
-                    retorno = ctx.SaveChanges();
-                    //retorna número de filas afectadas
-                }
-                else
-                {
-                    //Registradas: 1,2,3
-                    //Actualizar: 1,3,4
+		//                }
+		//            }
+		//            //Insertar Libro
+		//            ctx.informacion.Add(informacion);
+		//            //SaveChanges
+		//            //guarda todos los cambios realizados en el contexto de la base de datos.
+		//            retorno = ctx.SaveChanges();
+		//            //retorna número de filas afectadas
+		//        }
+		//        else
+		//        {
+		//            //Registradas: 1,2,3
+		//            //Actualizar: 1,3,4
 
-                    //Actualizar incidente
-                    ctx.informacion.Add(informacion);
-                    ctx.Entry(informacion).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
+		//            //Actualizar incidente
+		//            ctx.informacion.Add(informacion);
+		//            ctx.Entry(informacion).State = EntityState.Modified;
+		//            retorno = ctx.SaveChanges();
 
-                    //Logica para actualizar Categorias
-                    var selectedUsuariosID = new HashSet<string>(selectedUsuarios);
-                    if (selectedUsuarios != null)
-                    {
-                        ctx.Entry(informacion).Collection(p => p.Usuarios).Load();
-                        var newIncidenteForUsuario = ctx.usuario
-                         .Where(x => selectedUsuariosID.Contains(x.identificacion.ToString())).ToList();
-                        informacion.Usuarios = newIncidenteForUsuario;
+		//            //Logica para actualizar Categorias
+		//            var selectedUsuariosID = new HashSet<string>(selectedUsuarios);
+		//            if (selectedUsuarios != null)
+		//            {
+		//                ctx.Entry(informacion).Collection(p => p.Usuarios).Load();
+		//                var newIncidenteForUsuario = ctx.usuario
+		//                 .Where(x => selectedUsuariosID.Contains(x.identificacion.ToString())).ToList();
+		//                informacion.Usuarios = newIncidenteForUsuario;
 
-                        ctx.Entry(informacion).State = EntityState.Modified;
-                        retorno = ctx.SaveChanges();
-                    }
-                }
-            }
+		//                ctx.Entry(informacion).State = EntityState.Modified;
+		//                retorno = ctx.SaveChanges();
+		//            }
+		//        }
+		//    }
 
-            if (retorno >= 0)
-                oInformacion = GetInformacionById((int)informacion.id);
+		//    if (retorno >= 0)
+		//        oInformacion = GetInformacionById((int)informacion.id);
 
-            return oInformacion;
-        }
-    }
+		//    return oInformacion;
+		//}
+	}
 }

@@ -78,72 +78,77 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public plan_cobro Save(plan_cobro pc, string[] selectedRubros)
-        {
-            int retorno = 0;
-            plan_cobro oPc = null;
+		public plan_cobro Save(plan_cobro pc, string[] selectedRubros)
+		{
+			throw new NotImplementedException();
+		}
 
-            using (MyContext ctx = new MyContext())
-            {
-                ctx.Configuration.LazyLoadingEnabled = false;
-                oPc = GetPlanCobroById((int)pc.id);
-                IRepositoryRubroCobro _RepositoryRubros = new RepositoryRubroCobro();
+		//public plan_cobro Save(plan_cobro pc, string[] selectedRubros)
+		//{
+		//    int retorno = 0;
+		//    plan_cobro oPc = null;
 
-                if (oPc == null)
-                {
+		//    using (MyContext ctx = new MyContext())
+		//    {
+		//        ctx.Configuration.LazyLoadingEnabled = false;
+		//        oPc = GetPlanCobroById((int)pc.id);
+		//        IRepositoryRubroCobro _RepositoryRubros = new RepositoryRubroCobro();
 
-                    //Insertar
-                    //Logica para agregar las categorias al libro
-                    if (selectedRubros != null)
-                    {
+		//        if (oPc == null)
+		//        {
 
-                        oPc.rubro_cobros = new List<rubro_cobro>();
-                        foreach (var rubro in selectedRubros)
-                        {
-                            var rubroToAdd = _RepositoryRubros.GetRubroCobroById(int.Parse(rubro));
-                            ctx.rubro_cobro.Attach(rubroToAdd); //sin esto, EF intentará crear una categoría
-                            pc.rubro_cobros.Add(rubroToAdd);// asociar a la categoría existente con el libro
+		//            //Insertar
+		//            //Logica para agregar las categorias al libro
+		//            if (selectedRubros != null)
+		//            {
+
+		//                oPc.rubro_cobros = new List<rubro_cobro>();
+		//                foreach (var rubro in selectedRubros)
+		//                {
+		//                    var rubroToAdd = _RepositoryRubros.GetRubroCobroById(int.Parse(rubro));
+		//                    ctx.rubro_cobro.Attach(rubroToAdd); //sin esto, EF intentará crear una categoría
+		//                    pc.rubro_cobros.Add(rubroToAdd);// asociar a la categoría existente con el libro
 
 
-                        }
-                    }
-                    //Insertar Libro
-                    ctx.plan_cobro.Add(pc);
-                    //SaveChanges
-                    //guarda todos los cambios realizados en el contexto de la base de datos.
-                    retorno = ctx.SaveChanges();
-                    //retorna número de filas afectadas
-                }
-                else
-                {
-                    //Registradas: 1,2,3
-                    //Actualizar: 1,3,4
+		//                }
+		//            }
+		//            //Insertar Libro
+		//            ctx.plan_cobro.Add(pc);
+		//            //SaveChanges
+		//            //guarda todos los cambios realizados en el contexto de la base de datos.
+		//            retorno = ctx.SaveChanges();
+		//            //retorna número de filas afectadas
+		//        }
+		//        else
+		//        {
+		//            //Registradas: 1,2,3
+		//            //Actualizar: 1,3,4
 
-                    //Actualizar incidente
-                    ctx.plan_cobro.Add(pc);
-                    ctx.Entry(pc).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
+		//            //Actualizar incidente
+		//            ctx.plan_cobro.Add(pc);
+		//            ctx.Entry(pc).State = EntityState.Modified;
+		//            retorno = ctx.SaveChanges();
 
-                    //Logica para actualizar Categorias
-                    var selectedRubrosId = new HashSet<string>(selectedRubros);
-                    if (selectedRubros != null)
-                    {
-                        ctx.Entry(pc).Collection(p => p.rubro_cobros).Load();
-                        var newPlanCobroForRubro = ctx.rubro_cobro
-                         .Where(x => selectedRubrosId.Contains(x.id.ToString())).ToList();
-                        pc.rubro_cobros= newPlanCobroForRubro;
+		//            //Logica para actualizar Categorias
+		//            var selectedRubrosId = new HashSet<string>(selectedRubros);
+		//            if (selectedRubros != null)
+		//            {
+		//                ctx.Entry(pc).Collection(p => p.rubro_cobros).Load();
+		//                var newPlanCobroForRubro = ctx.rubro_cobro
+		//                 .Where(x => selectedRubrosId.Contains(x.id.ToString())).ToList();
+		//                pc.rubro_cobros= newPlanCobroForRubro;
 
-                        ctx.Entry(pc).State = EntityState.Modified;
-                        retorno = ctx.SaveChanges();
-                    }
-                }
-            }
+		//                ctx.Entry(pc).State = EntityState.Modified;
+		//                retorno = ctx.SaveChanges();
+		//            }
+		//        }
+		//    }
 
-            if (retorno >= 0)
-                oPc = GetPlanCobroById((int)pc.id);
+		//    if (retorno >= 0)
+		//        oPc = GetPlanCobroById((int)pc.id);
 
-            return oPc;
-        }
-    }
+		//    return oPc;
+		//}
+	}
    
 }
