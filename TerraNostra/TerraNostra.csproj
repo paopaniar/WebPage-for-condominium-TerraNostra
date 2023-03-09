@@ -216,6 +216,8 @@
     <Content Include="Views\PlanResidencia\Details.cshtml" />
     <Content Include="Views\Incidencia\Index.cshtml" />
     <Content Include="Views\Incidencia\Create.cshtml" />
+    <Content Include="Views\PlanCobro\Create.cshtml" />
+    <Content Include="Views\PlanCobro\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
