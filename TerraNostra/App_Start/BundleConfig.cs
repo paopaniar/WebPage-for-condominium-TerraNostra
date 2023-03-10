@@ -23,7 +23,7 @@ namespace TerraNostra
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-Superhero.min.css"
+                      "~/Content/bootstrap-Flatly.min.css"
                       //"~/Content/site.css"
                       ));
         }

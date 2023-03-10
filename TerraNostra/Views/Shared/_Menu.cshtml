@@ -1,4 +1,5 @@
 ﻿
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:80px">
     <div class="container-fluid">
 
@@ -21,19 +22,19 @@
                     <div class="dropdown-menu">
 
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Residencias", "Index", "residencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Residencia", "Index", "residencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Planes de Cobro", "Index", "planCobro", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Plan Cobro", "Index", "planCobro", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Estados de cuenta", "Index", "planResidencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Plan Residencia", "Index", "planResidencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Incidencias", "Index", "incidencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Incidencia", "Index", "incidencia", null, new { @class = "dropdown-item" })
                     </div>
                 </li>
                 @* Texto Usuario, Accion, Controlador*@
                 <li>
                     @Html.ActionLink("Acerca de", "About", "Home",
-               null, new { @class = "nav-link" })
+                    null, new { @class = "nav-link" })
                 </li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
 
