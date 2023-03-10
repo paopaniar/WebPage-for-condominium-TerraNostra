@@ -60,9 +60,8 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detail { get; set; }
         [Display(Name = "Total")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal total { get; set; }
+        public decimal monto { get; set; }
         
         [Display(Name = "Rubro")]
         public int rubroCobroId { get; set; }
