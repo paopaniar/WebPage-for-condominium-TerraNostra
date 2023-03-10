@@ -66,6 +66,47 @@ namespace Infraestructure.Repository
             }
         }
 
-       
-    }
+		public rubro_cobro Save(rubro_cobro rubro)
+		{
+            int retorno = 0;
+            rubro_cobro oRubroCobro = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oRubroCobro = GetRubroCobroById((int)rubro.id);
+                IRepositoryRubroCobro _RepositoryRubro = new RepositoryRubroCobro();
+
+                if (oRubroCobro == null)
+                {
+
+                    
+                   
+                    //Insertar 
+                    ctx.rubro_cobro.Add(rubro);
+                    //SaveChanges
+                    //guarda todos los cambios realizados en el contexto de la base de datos.
+                    retorno = ctx.SaveChanges();
+                    //retorna número de filas afectadas
+                }
+                else
+                {
+                   
+
+                    //Actualizar Libro
+                    ctx.rubro_cobro.Add(rubro);
+                    ctx.Entry(rubro).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+
+                    //Logica para actualizar Categorias
+                    
+                }
+            }
+
+            if (retorno >= 0)
+                oRubroCobro = GetRubroCobroById((int)rubro.id);
+
+            return oRubroCobro;
+        }
+	}
 }

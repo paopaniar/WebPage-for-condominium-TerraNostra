@@ -40,9 +40,91 @@ namespace TerraNostra.Controllers
             return new SelectList(lista, "id", "detalle", id);
         }
 
+        public ActionResult Edit(int? id)
+        {
+            ServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
+            rubro_cobro rubro = null;
 
-        
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    //ATENCION! HACER EL INDEX byPao
+                    return RedirectToAction("Index");
+                }
 
-       
+                rubro = _ServiceRubro.GetRubroCobroById(Convert.ToInt32(id));
+                if (rubro == null)
+                {
+                    TempData["Message"] = "No existe el incidente solicitado";
+                    TempData["Redirect"] = "RubroCobro";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                //Listados
+               
+
+                return View(rubro);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Incidencia";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Save(rubro_cobro rubro)
+        {   
+            //Servicio Libro
+            IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
+            try
+            {
+                //Insertar la imagen
+               
+                if (ModelState.IsValid)
+                {
+                    rubro_cobro oRubroCobro = _ServiceRubro.Save(rubro);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Utils.Util.ValidateErrors(this);                 
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (rubro.id > 0)
+                    {
+                        return (ActionResult)View("Edit", rubro);
+                    }
+                    else
+                    {
+                        return View("Create", rubro);
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "RubroCobro";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+
+
+
     }
 }
