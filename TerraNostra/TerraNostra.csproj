@@ -218,6 +218,8 @@
     <Content Include="Views\Incidencia\Create.cshtml" />
     <Content Include="Views\PlanCobro\Create.cshtml" />
     <Content Include="Views\PlanCobro\Edit.cshtml" />
+    <Content Include="Views\RubroCobro\Index.cshtml" />
+    <Content Include="Views\RubroCobro\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -226,7 +228,6 @@
     <Folder Include="Views\Error\" />
     <Folder Include="Views\EstadosCuenta\" />
     <Folder Include="Views\Informacion\" />
-    <Folder Include="Views\RubroCobro\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
