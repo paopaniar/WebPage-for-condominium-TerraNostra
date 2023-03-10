@@ -42,7 +42,7 @@ namespace TerraNostra.Controllers
 
 
         [HttpPost]
-        public ActionResult Save(rubro_cobro rubro, string[] selectedUsuarios)
+        public ActionResult Save(rubro_cobro rubro)
         {
   
             //Servicio Libro
@@ -51,7 +51,7 @@ namespace TerraNostra.Controllers
             {  
                 if (ModelState.IsValid)
                 {
-                    rubro_cobro oRubro = _ServiceRubroCobro.Save(rubro, selectedUsuarios);
+                    rubro_cobro oRubro = _ServiceRubroCobro.Save(rubro);
                 }
                 else
                 {
