@@ -127,12 +127,12 @@ CREATE TABLE plan_residencia (
 	FOREIGN KEY (planCobroId) REFERENCES plan_cobro(id)
 )
 
-CREATE TABLE plan_rubro(
+
+CREATE TABLE plan_rubro (
     id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 	planCobroId INT NOT NULL,
 	rubroId INT NOT NULL,
-	detalle VARCHAR(150)NOT NULL,
-    estado INT NOT NULL,
+	
     FOREIGN KEY (rubroId) REFERENCES rubro_cobro(id),
 	FOREIGN KEY (planCobroId) REFERENCES plan_cobro(id)
 )
