@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Infraestructure.Models.rubro_cobro>
+﻿@model IEnumerable<Infraestructure.Models.informacion>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,16 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.usuario)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.detalle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.monto)
+            @Html.DisplayNameFor(model => model.fechaInformacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
@@ -26,10 +32,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.usuario)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.detalle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.monto)
+            @Html.DisplayFor(modelItem => item.fechaInformacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.estado)
