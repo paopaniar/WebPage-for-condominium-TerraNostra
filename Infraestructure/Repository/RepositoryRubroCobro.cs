@@ -67,7 +67,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public rubro_cobro Save(rubro_cobro rubro, string[] selectedUsuarios)
+        public rubro_cobro Save(rubro_cobro rubro)
         {
             throw new NotImplementedException();
         }
