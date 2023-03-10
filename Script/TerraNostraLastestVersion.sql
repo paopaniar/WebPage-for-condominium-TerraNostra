@@ -105,15 +105,14 @@ CREATE TABLE rubro_cobro (
     monto DECIMAL NOT NULL,
     estado INT NOT NULL,
 )
+
 CREATE TABLE plan_cobro (
     id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
     detail VARCHAR(150) NOT NULL,
-    rubroCobroId INT NOT NULL,
 	mes VARCHAR(30),
     datePlan DATETIME2 NOT NULL, 
     estado INT NOT NULL,
-    total DECIMAL NOT NULL,
-    FOREIGN KEY (rubroCobroId) REFERENCES rubro_cobro(id)   
+    monto DECIMAL,  
 )
 
 
@@ -123,16 +122,15 @@ CREATE TABLE plan_residencia (
 	residenciaId INT NOT NULL,
 	detalle VARCHAR(150)NOT NULL,
     estado INT NOT NULL,
+	total DECIMAL,
     FOREIGN KEY (residenciaId) REFERENCES residencia(id),
 	FOREIGN KEY (planCobroId) REFERENCES plan_cobro(id)
 )
 
 
 CREATE TABLE plan_rubro (
-    id INT PRIMARY KEY IDENTITY (1,1) NOT NULL,
 	planCobroId INT NOT NULL,
-	rubroId INT NOT NULL,
-	
+	rubroId INT NOT NULL,	
     FOREIGN KEY (rubroId) REFERENCES rubro_cobro(id),
 	FOREIGN KEY (planCobroId) REFERENCES plan_cobro(id)
 )
@@ -198,27 +196,35 @@ VALUES ('Recoleccion de basura',10000.00,1);
 INSERT INTO rubro_cobro(detalle,monto,estado) 
 VALUES ('Limpieza de estructura',20000.00,1);
 
-INSERT INTO plan_cobro(detail,  rubroCobroId, mes, datePlan,estado,total) 
-VALUES ('Mantenimientos',2,'Marzo','01-03-2023',1, 800000.00);
 
-INSERT INTO plan_cobro(detail, rubroCobroId,mes, datePlan,estado,total) 
-VALUES ('Limpieza', 1,'Marzo','01-03-2023',1, 500000.00);
+Declare @Total decimal = (select SUM(monto) from rubro_cobro r
+inner join plan_rubro pr on pr.rubroId= r.id
+inner join plan_residencia prr on prr.planCobroId = pr.planCobroId
+WHERE prr.residenciaId = 1)
 
-INSERT INTO plan_cobro(detail, rubroCobroId, mes,datePlan,estado,total) 
-VALUES ('Recoleccion', 6,'Marzo','01-03-2023',1, 500000.00);
 
-INSERT INTO plan_cobro(detail, rubroCobroId,mes, datePlan,estado,total) 
-VALUES ('Mensualidad', 4,'Marzo','01-03-2023',1, 510000.00);
+
+INSERT INTO plan_cobro(detail, mes, datePlan,estado) 
+VALUES ('Mantenimientos','Marzo','01-03-2023',1 );
+
+INSERT INTO plan_cobro(detail,mes, datePlan,estado) 
+VALUES ('Limpieza','Marzo','01-03-2023',1);
+
+INSERT INTO plan_cobro(detail, mes,datePlan,estado) 
+VALUES ('Recoleccion','Marzo','01-03-2023',1);
+
+INSERT INTO plan_cobro(detail, mes, datePlan,estado) 
+VALUES ('Mensualidad','Marzo','01-03-2023',1);
 
 
 INSERT INTO plan_residencia(planCobroId,residenciaId,detalle,estado) 
-VALUES (6, 1,'Detalle de prueba',1);
+VALUES (1, 1,'Detalle de prueba',1);
 
 INSERT INTO plan_residencia(planCobroId,residenciaId,detalle,estado) 
-VALUES (5, 2,'Detalle de prueba',0);
+VALUES (2, 2,'Detalle de prueba',0);
 
 INSERT INTO plan_residencia(planCobroId,residenciaId,detalle,estado) 
-VALUES (7, 1,'Detalle de prueba',0);
+VALUES (3, 1,'Detalle de prueba',0);
 
 INSERT INTO incidente(usuario, estado, tipo, detalle)
 VALUES(207940152, 1, 3, 'Apartar piscina')
@@ -233,3 +239,9 @@ INSERT INTO informacion(usuario, detalle, fechaInformacion, tipo, estado)
 VALUES(891426789,'Nueva reglamentaciones del uso de piscina',GETDATE(),2,1)
 INSERT INTO informacion(usuario, detalle, fechaInformacion, tipo, estado)
 VALUES(891426789,'Nuevos artículos implementados en contratos I y II',GETDATE(),3,1)
+
+
+INSERT INTO plan_rubro VALUES(1,2)
+INSERT INTO plan_rubro VALUES(1,3)
+INSERT INTO plan_rubro VALUES(2,6)
+INSERT INTO plan_rubro VALUES(3,5)
