@@ -43,11 +43,10 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="detail" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="rubroCobroId" Type="int" Nullable="false" />
+          <Property Name="mes" Type="varchar" MaxLength="30" />
           <Property Name="datePlan" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="Mes" Type="varchar" MaxLength="20" />
           <Property Name="estado" Type="int" Nullable="false" />
-          <Property Name="total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="monto" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="plan_residencia">
           <Key>
@@ -58,6 +57,15 @@
           <Property Name="residenciaId" Type="int" Nullable="false" />
           <Property Name="detalle" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="plan_rubro">
+          <Key>
+            <PropertyRef Name="planCobroId" />
+            <PropertyRef Name="rubroId" />
+          </Key>
+          <Property Name="planCobroId" Type="int" Nullable="false" />
+          <Property Name="rubroId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="reservacion">
           <Key>
@@ -111,7 +119,7 @@
           <Property Name="telefono" Type="int" />
           <Property Name="estado" Type="int" />
         </EntityType>
-        <Association Name="FK__incidente__detal__2F10007B">
+        <Association Name="FK__incidente__detal__2D27B809">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="incidente" Type="Self.incidente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,7 +131,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__informaci__usuar__31EC6D26">
+        <Association Name="FK__informaci__usuar__300424B4">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="informacion" Type="Self.informacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -135,19 +143,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__plan_cobr__rubro__412EB0B6">
-          <End Role="rubro_cobro" Type="Self.rubro_cobro" Multiplicity="1" />
-          <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="rubro_cobro">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="plan_cobro">
-              <PropertyRef Name="rubroCobroId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__plan_resi__planC__44FF419A">
+        <Association Name="FK__plan_resi__planC__403A8C7D">
           <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="1" />
           <End Role="plan_residencia" Type="Self.plan_residencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -159,19 +155,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__plan_resi__resid__440B1D61">
-          <End Role="residencia" Type="Self.residencia" Multiplicity="1" />
-          <End Role="plan_residencia" Type="Self.plan_residencia" Multiplicity="*" />
+        <Association Name="FK__plan_rubr__planC__4316F928">
+          <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="1" />
+          <End Role="plan_rubro" Type="Self.plan_rubro" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="residencia">
+            <Principal Role="plan_cobro">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="plan_residencia">
-              <PropertyRef Name="residenciaId" />
+            <Dependent Role="plan_rubro">
+              <PropertyRef Name="planCobroId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservaci__areaC__37A5467C">
+        <Association Name="FK__reservaci__areaC__35BCFE0A">
           <End Role="areaComun" Type="Self.areaComun" Multiplicity="1" />
           <End Role="reservacion" Type="Self.reservacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -183,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservaci__usuar__36B12243">
+        <Association Name="FK__reservaci__usuar__34C8D9D1">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="reservacion" Type="Self.reservacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -195,7 +191,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__residenci__usuar__3A81B327">
+        <Association Name="FK__residenci__usuar__38996AB5">
           <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
           <End Role="residencia" Type="Self.residencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -207,7 +203,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__usuario__rolId__2A4B4B5E">
+        <Association Name="FK__usuario__rolId__29572725">
           <End Role="rol" Type="Self.rol" Multiplicity="1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -219,52 +215,87 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_plan_residencia_residencia">
+          <End Role="residencia" Type="Self.residencia" Multiplicity="1" />
+          <End Role="plan_residencia" Type="Self.plan_residencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="residencia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_residencia">
+              <PropertyRef Name="residenciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_plan_rubro_rubro_cobro">
+          <End Role="rubro_cobro" Type="Self.rubro_cobro" Multiplicity="1" />
+          <End Role="plan_rubro" Type="Self.plan_rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rubro_cobro">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_rubro">
+              <PropertyRef Name="rubroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="desencriptar_pass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="contrasena" Type="varbinary" Mode="In" />
+        </Function>
+        <Function Name="encripta_pass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varbinary">
+          <Parameter Name="contrasena" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="terraNostraModelStoreContainer">
           <EntitySet Name="areaComun" EntityType="Self.areaComun" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="incidente" EntityType="Self.incidente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="informacion" EntityType="Self.informacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="plan_cobro" EntityType="Self.plan_cobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="plan_residencia" EntityType="Self.plan_residencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plan_rubro" EntityType="Self.plan_rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reservacion" EntityType="Self.reservacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="residencia" EntityType="Self.residencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rubro_cobro" EntityType="Self.rubro_cobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__incidente__detal__2F10007B" Association="Self.FK__incidente__detal__2F10007B">
+          <AssociationSet Name="FK__incidente__detal__2D27B809" Association="Self.FK__incidente__detal__2D27B809">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="incidente" EntitySet="incidente" />
           </AssociationSet>
-          <AssociationSet Name="FK__informaci__usuar__31EC6D26" Association="Self.FK__informaci__usuar__31EC6D26">
+          <AssociationSet Name="FK__informaci__usuar__300424B4" Association="Self.FK__informaci__usuar__300424B4">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="informacion" EntitySet="informacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__plan_cobr__rubro__412EB0B6" Association="Self.FK__plan_cobr__rubro__412EB0B6">
-            <End Role="rubro_cobro" EntitySet="rubro_cobro" />
-            <End Role="plan_cobro" EntitySet="plan_cobro" />
-          </AssociationSet>
-          <AssociationSet Name="FK__plan_resi__planC__44FF419A" Association="Self.FK__plan_resi__planC__44FF419A">
+          <AssociationSet Name="FK__plan_resi__planC__403A8C7D" Association="Self.FK__plan_resi__planC__403A8C7D">
             <End Role="plan_cobro" EntitySet="plan_cobro" />
             <End Role="plan_residencia" EntitySet="plan_residencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__plan_resi__resid__440B1D61" Association="Self.FK__plan_resi__resid__440B1D61">
-            <End Role="residencia" EntitySet="residencia" />
-            <End Role="plan_residencia" EntitySet="plan_residencia" />
+          <AssociationSet Name="FK__plan_rubr__planC__4316F928" Association="Self.FK__plan_rubr__planC__4316F928">
+            <End Role="plan_cobro" EntitySet="plan_cobro" />
+            <End Role="plan_rubro" EntitySet="plan_rubro" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservaci__areaC__37A5467C" Association="Self.FK__reservaci__areaC__37A5467C">
+          <AssociationSet Name="FK__reservaci__areaC__35BCFE0A" Association="Self.FK__reservaci__areaC__35BCFE0A">
             <End Role="areaComun" EntitySet="areaComun" />
             <End Role="reservacion" EntitySet="reservacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservaci__usuar__36B12243" Association="Self.FK__reservaci__usuar__36B12243">
+          <AssociationSet Name="FK__reservaci__usuar__34C8D9D1" Association="Self.FK__reservaci__usuar__34C8D9D1">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="reservacion" EntitySet="reservacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__residenci__usuar__3A81B327" Association="Self.FK__residenci__usuar__3A81B327">
+          <AssociationSet Name="FK__residenci__usuar__38996AB5" Association="Self.FK__residenci__usuar__38996AB5">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="residencia" EntitySet="residencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__usuario__rolId__2A4B4B5E" Association="Self.FK__usuario__rolId__2A4B4B5E">
+          <AssociationSet Name="FK__usuario__rolId__29572725" Association="Self.FK__usuario__rolId__29572725">
             <End Role="rol" EntitySet="rol" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_plan_residencia_residencia" Association="Self.FK_plan_residencia_residencia">
+            <End Role="residencia" EntitySet="residencia" />
+            <End Role="plan_residencia" EntitySet="plan_residencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_plan_rubro_rubro_cobro" Association="Self.FK_plan_rubro_rubro_cobro">
+            <End Role="rubro_cobro" EntitySet="rubro_cobro" />
+            <End Role="plan_rubro" EntitySet="plan_rubro" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -282,7 +313,7 @@
           <Property Name="fechaDisponible" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="horaDisponible" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="reservacion" Relationship="Self.FK__reservaci__areaC__37A5467C" FromRole="areaComun" ToRole="reservacion" />
+          <NavigationProperty Name="reservacion" Relationship="Self.FK__reservaci__areaC__35BCFE0A" FromRole="areaComun" ToRole="reservacion" />
         </EntityType>
         <EntityType Name="incidente">
           <Key>
@@ -293,7 +324,7 @@
           <Property Name="estado" Type="Int32" />
           <Property Name="tipo" Type="Int32" Nullable="false" />
           <Property Name="detalle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuario1" Relationship="Self.FK__incidente__detal__2F10007B" FromRole="incidente" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK__incidente__detal__2D27B809" FromRole="incidente" ToRole="usuario" />
         </EntityType>
         <EntityType Name="informacion">
           <Key>
@@ -305,7 +336,7 @@
           <Property Name="fechaInformacion" Type="DateTime" Precision="7" />
           <Property Name="tipo" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="usuario1" Relationship="Self.FK__informaci__usuar__31EC6D26" FromRole="informacion" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK__informaci__usuar__300424B4" FromRole="informacion" ToRole="usuario" />
         </EntityType>
         <EntityType Name="plan_cobro">
           <Key>
@@ -313,13 +344,12 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="detail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rubroCobroId" Type="Int32" Nullable="false" />
+          <Property Name="mes" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="datePlan" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="Mes" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="total" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="rubro_cobro" Relationship="Self.FK__plan_cobr__rubro__412EB0B6" FromRole="plan_cobro" ToRole="rubro_cobro" />
-          <NavigationProperty Name="plan_residencia" Relationship="Self.FK__plan_resi__planC__44FF419A" FromRole="plan_cobro" ToRole="plan_residencia" />
+          <Property Name="monto" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="plan_residencia" Relationship="Self.FK__plan_resi__planC__403A8C7D" FromRole="plan_cobro" ToRole="plan_residencia" />
+          <NavigationProperty Name="rubro_cobro" Relationship="Self.plan_rubro" FromRole="plan_cobro" ToRole="rubro_cobro" />
         </EntityType>
         <EntityType Name="plan_residencia">
           <Key>
@@ -330,8 +360,9 @@
           <Property Name="residenciaId" Type="Int32" Nullable="false" />
           <Property Name="detalle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="plan_cobro" Relationship="Self.FK__plan_resi__planC__44FF419A" FromRole="plan_residencia" ToRole="plan_cobro" />
-          <NavigationProperty Name="residencia" Relationship="Self.FK__plan_resi__resid__440B1D61" FromRole="plan_residencia" ToRole="residencia" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="plan_cobro" Relationship="Self.FK__plan_resi__planC__403A8C7D" FromRole="plan_residencia" ToRole="plan_cobro" />
+          <NavigationProperty Name="residencia" Relationship="Self.FK_plan_residencia_residencia" FromRole="plan_residencia" ToRole="residencia" />
         </EntityType>
         <EntityType Name="reservacion">
           <Key>
@@ -344,8 +375,8 @@
           <Property Name="estado" Type="Int32" Nullable="false" />
           <Property Name="dateFrom" Type="DateTime" Precision="7" />
           <Property Name="dateTo" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="areaComun" Relationship="Self.FK__reservaci__areaC__37A5467C" FromRole="reservacion" ToRole="areaComun" />
-          <NavigationProperty Name="usuario1" Relationship="Self.FK__reservaci__usuar__36B12243" FromRole="reservacion" ToRole="usuario" />
+          <NavigationProperty Name="areaComun" Relationship="Self.FK__reservaci__areaC__35BCFE0A" FromRole="reservacion" ToRole="areaComun" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK__reservaci__usuar__34C8D9D1" FromRole="reservacion" ToRole="usuario" />
         </EntityType>
         <EntityType Name="residencia">
           <Key>
@@ -358,8 +389,8 @@
           <Property Name="estado" Type="Int32" Nullable="false" />
           <Property Name="otherInfoDetails" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="numeroCasa" Type="Int32" />
-          <NavigationProperty Name="plan_residencia" Relationship="Self.FK__plan_resi__resid__440B1D61" FromRole="residencia" ToRole="plan_residencia" />
-          <NavigationProperty Name="usuario1" Relationship="Self.FK__residenci__usuar__3A81B327" FromRole="residencia" ToRole="usuario" />
+          <NavigationProperty Name="plan_residencia" Relationship="Self.FK_plan_residencia_residencia" FromRole="residencia" ToRole="plan_residencia" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK__residenci__usuar__38996AB5" FromRole="residencia" ToRole="usuario" />
         </EntityType>
         <EntityType Name="rol">
           <Key>
@@ -367,7 +398,7 @@
           </Key>
           <Property Name="rolId" Type="Int32" Nullable="false" />
           <Property Name="rol1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__rolId__2A4B4B5E" FromRole="rol" ToRole="usuario" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__rolId__29572725" FromRole="rol" ToRole="usuario" />
         </EntityType>
         <EntityType Name="rubro_cobro">
           <Key>
@@ -377,7 +408,7 @@
           <Property Name="detalle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="monto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="plan_cobro" Relationship="Self.FK__plan_cobr__rubro__412EB0B6" FromRole="rubro_cobro" ToRole="plan_cobro" />
+          <NavigationProperty Name="plan_cobro" Relationship="Self.plan_rubro" FromRole="rubro_cobro" ToRole="plan_cobro" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -390,13 +421,13 @@
           <Property Name="apellido2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="Int32" />
           <Property Name="estado" Type="Int32" />
-          <NavigationProperty Name="incidente" Relationship="Self.FK__incidente__detal__2F10007B" FromRole="usuario" ToRole="incidente" />
-          <NavigationProperty Name="informacion" Relationship="Self.FK__informaci__usuar__31EC6D26" FromRole="usuario" ToRole="informacion" />
-          <NavigationProperty Name="reservacion" Relationship="Self.FK__reservaci__usuar__36B12243" FromRole="usuario" ToRole="reservacion" />
-          <NavigationProperty Name="residencia" Relationship="Self.FK__residenci__usuar__3A81B327" FromRole="usuario" ToRole="residencia" />
-          <NavigationProperty Name="rol" Relationship="Self.FK__usuario__rolId__2A4B4B5E" FromRole="usuario" ToRole="rol" />
+          <NavigationProperty Name="incidente" Relationship="Self.FK__incidente__detal__2D27B809" FromRole="usuario" ToRole="incidente" />
+          <NavigationProperty Name="informacion" Relationship="Self.FK__informaci__usuar__300424B4" FromRole="usuario" ToRole="informacion" />
+          <NavigationProperty Name="reservacion" Relationship="Self.FK__reservaci__usuar__34C8D9D1" FromRole="usuario" ToRole="reservacion" />
+          <NavigationProperty Name="residencia" Relationship="Self.FK__residenci__usuar__38996AB5" FromRole="usuario" ToRole="residencia" />
+          <NavigationProperty Name="rol" Relationship="Self.FK__usuario__rolId__29572725" FromRole="usuario" ToRole="rol" />
         </EntityType>
-        <Association Name="FK__reservaci__areaC__37A5467C">
+        <Association Name="FK__reservaci__areaC__35BCFE0A">
           <End Role="areaComun" Type="Self.areaComun" Multiplicity="1" />
           <End Role="reservacion" Type="Self.reservacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -408,7 +439,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__incidente__detal__2F10007B">
+        <Association Name="FK__incidente__detal__2D27B809">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="incidente" Type="Self.incidente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -420,7 +451,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__informaci__usuar__31EC6D26">
+        <Association Name="FK__informaci__usuar__300424B4">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="informacion" Type="Self.informacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -432,19 +463,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__plan_cobr__rubro__412EB0B6">
-          <End Role="rubro_cobro" Type="Self.rubro_cobro" Multiplicity="1" />
-          <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="rubro_cobro">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="plan_cobro">
-              <PropertyRef Name="rubroCobroId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__plan_resi__planC__44FF419A">
+        <Association Name="FK__plan_resi__planC__403A8C7D">
           <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="1" />
           <End Role="plan_residencia" Type="Self.plan_residencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -456,7 +475,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__plan_resi__resid__440B1D61">
+        <Association Name="FK_plan_residencia_residencia">
           <End Role="residencia" Type="Self.residencia" Multiplicity="1" />
           <End Role="plan_residencia" Type="Self.plan_residencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -468,7 +487,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservaci__usuar__36B12243">
+        <Association Name="FK__reservaci__usuar__34C8D9D1">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="reservacion" Type="Self.reservacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -480,7 +499,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__residenci__usuar__3A81B327">
+        <Association Name="FK__residenci__usuar__38996AB5">
           <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
           <End Role="residencia" Type="Self.residencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -492,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__usuario__rolId__2A4B4B5E">
+        <Association Name="FK__usuario__rolId__29572725">
           <End Role="rol" Type="Self.rol" Multiplicity="1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -504,7 +523,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="terraNostraEntities2" annotation:LazyLoadingEnabled="true">
+        <Association Name="plan_rubro">
+          <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="*" />
+          <End Role="rubro_cobro" Type="Self.rubro_cobro" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="terraNostraEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="areaComun" EntityType="Self.areaComun" />
           <EntitySet Name="incidente" EntityType="Self.incidente" />
           <EntitySet Name="informacion" EntityType="Self.informacion" />
@@ -515,41 +538,41 @@
           <EntitySet Name="rol" EntityType="Self.rol" />
           <EntitySet Name="rubro_cobro" EntityType="Self.rubro_cobro" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
-          <AssociationSet Name="FK__reservaci__areaC__37A5467C" Association="Self.FK__reservaci__areaC__37A5467C">
+          <AssociationSet Name="FK__reservaci__areaC__35BCFE0A" Association="Self.FK__reservaci__areaC__35BCFE0A">
             <End Role="areaComun" EntitySet="areaComun" />
             <End Role="reservacion" EntitySet="reservacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__incidente__detal__2F10007B" Association="Self.FK__incidente__detal__2F10007B">
+          <AssociationSet Name="FK__incidente__detal__2D27B809" Association="Self.FK__incidente__detal__2D27B809">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="incidente" EntitySet="incidente" />
           </AssociationSet>
-          <AssociationSet Name="FK__informaci__usuar__31EC6D26" Association="Self.FK__informaci__usuar__31EC6D26">
+          <AssociationSet Name="FK__informaci__usuar__300424B4" Association="Self.FK__informaci__usuar__300424B4">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="informacion" EntitySet="informacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__plan_cobr__rubro__412EB0B6" Association="Self.FK__plan_cobr__rubro__412EB0B6">
-            <End Role="rubro_cobro" EntitySet="rubro_cobro" />
-            <End Role="plan_cobro" EntitySet="plan_cobro" />
-          </AssociationSet>
-          <AssociationSet Name="FK__plan_resi__planC__44FF419A" Association="Self.FK__plan_resi__planC__44FF419A">
+          <AssociationSet Name="FK__plan_resi__planC__403A8C7D" Association="Self.FK__plan_resi__planC__403A8C7D">
             <End Role="plan_cobro" EntitySet="plan_cobro" />
             <End Role="plan_residencia" EntitySet="plan_residencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__plan_resi__resid__440B1D61" Association="Self.FK__plan_resi__resid__440B1D61">
+          <AssociationSet Name="FK_plan_residencia_residencia" Association="Self.FK_plan_residencia_residencia">
             <End Role="residencia" EntitySet="residencia" />
             <End Role="plan_residencia" EntitySet="plan_residencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservaci__usuar__36B12243" Association="Self.FK__reservaci__usuar__36B12243">
+          <AssociationSet Name="FK__reservaci__usuar__34C8D9D1" Association="Self.FK__reservaci__usuar__34C8D9D1">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="reservacion" EntitySet="reservacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__residenci__usuar__3A81B327" Association="Self.FK__residenci__usuar__3A81B327">
+          <AssociationSet Name="FK__residenci__usuar__38996AB5" Association="Self.FK__residenci__usuar__38996AB5">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="residencia" EntitySet="residencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__usuario__rolId__2A4B4B5E" Association="Self.FK__usuario__rolId__2A4B4B5E">
+          <AssociationSet Name="FK__usuario__rolId__29572725" Association="Self.FK__usuario__rolId__29572725">
             <End Role="rol" EntitySet="rol" />
             <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="plan_rubro" Association="Self.plan_rubro">
+            <End Role="plan_cobro" EntitySet="plan_cobro" />
+            <End Role="rubro_cobro" EntitySet="rubro_cobro" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -557,7 +580,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="terraNostraModelStoreContainer" CdmEntityContainer="terraNostraEntities2">
+        <EntityContainerMapping StorageEntityContainer="terraNostraModelStoreContainer" CdmEntityContainer="terraNostraEntities4">
           <EntitySetMapping Name="areaComun">
             <EntityTypeMapping TypeName="terraNostraModel.areaComun">
               <MappingFragment StoreEntitySet="areaComun">
@@ -598,11 +621,10 @@
               <MappingFragment StoreEntitySet="plan_cobro">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="detail" ColumnName="detail" />
-                <ScalarProperty Name="rubroCobroId" ColumnName="rubroCobroId" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="datePlan" ColumnName="datePlan" />
-                <ScalarProperty Name="Mes" ColumnName="Mes" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -614,6 +636,7 @@
                 <ScalarProperty Name="residenciaId" ColumnName="residenciaId" />
                 <ScalarProperty Name="detalle" ColumnName="detalle" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="total" ColumnName="total" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -674,6 +697,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="plan_rubro" TypeName="terraNostraModel.plan_rubro" StoreEntitySet="plan_rubro">
+            <EndProperty Name="plan_cobro">
+              <ScalarProperty Name="id" ColumnName="planCobroId" />
+            </EndProperty>
+            <EndProperty Name="rubro_cobro">
+              <ScalarProperty Name="id" ColumnName="rubroId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -691,7 +722,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
