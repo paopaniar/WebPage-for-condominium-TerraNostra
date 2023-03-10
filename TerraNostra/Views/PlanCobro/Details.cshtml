@@ -19,33 +19,25 @@
             @Html.DisplayFor(model => model.detail)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.total)
+            @Html.DisplayNameFor(model => model.monto)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.total)
+            @Html.DisplayFor(model => model.monto)
         </dd>
 
 
 
         <dt>
-            @Html.DisplayNameFor(model => model.rubro_cobro.detalle)
+            @Html.DisplayNameFor(model => model.rubro_cobro)
+            <ul>
+                @foreach (var c in Model.rubro_cobro)
+                {
+                    <li>@c.detalle</li>
+                    <li>@c.monto</li>
+                }
+            </ul>
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rubro_cobro.detalle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rubro_cobro.monto)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.rubro_cobro.monto)
-        </dd>
-
-
-
-
 
 
     </dl>

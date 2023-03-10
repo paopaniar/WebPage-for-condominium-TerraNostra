@@ -96,7 +96,7 @@ namespace TerraNostra.Controllers
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
                     //  ViewBag.idUsuario = listUsuarios(incidente.id);
-                    ViewBag.idRubros = lisRubros(plan_cobro.rubroCobroId);
+                   // ViewBag.idRubros = lisRubros(plan_cobro.rubroCobroId);
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
                     if (plan_cobro.id > 0)
