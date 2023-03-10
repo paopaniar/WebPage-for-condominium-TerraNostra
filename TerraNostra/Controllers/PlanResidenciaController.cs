@@ -39,7 +39,7 @@ namespace TerraNostra.Controllers
             }
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
             ServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
             plan_residencia p_residencia = null;
@@ -52,6 +52,9 @@ namespace TerraNostra.Controllers
                 }
 
                 p_residencia = _ServicePlanResidencia.GetPlanResidenciaByID(Convert.ToInt32(id));
+                IServicePlanResidencia _ServiceResidencia = new ServicePlanResidencia();
+                ViewBag.EstadosPagados = _ServicePlanResidencia.GetEstadosByEstado(id,1);
+                ViewBag.EstadosPendientes = _ServicePlanResidencia.GetEstadosByEstado(id,0);
 
                 if (p_residencia == null)
                 {

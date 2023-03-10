@@ -26,10 +26,57 @@
         </dd>
     </dl>
 </div>
-   
+<div>
+    <h4>Estados Pagados</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.plan_cobro.detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+        </tr>
 
 
-    <p>
+        @foreach (var c in ViewBag.EstadosPagados)
+        {
+            <tr>
+                @c.plan_cobro.detail
+                @c.estado
+            </tr>
+        }
 
-        @Html.ActionLink("Volver a los estados de cuenta", "Index")
-    </p>
+    </table>
+</div>
+
+
+<div>
+    <h4>Estados Pendientes</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.plan_cobro.detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+        </tr>
+
+
+        @foreach (var c in ViewBag.EstadosPendientes)
+        {
+            <tr>
+                @c.plan_cobro.detail
+                @c.estado
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+<p>
+
+    @Html.ActionLink("Volver a los estados de cuenta", "Index")
+</p>
