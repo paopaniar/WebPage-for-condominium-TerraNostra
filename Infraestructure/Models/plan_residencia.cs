@@ -19,7 +19,6 @@ namespace Infraestructure.Models
         public int residenciaId { get; set; }
         public string detalle { get; set; }
         public int estado { get; set; }
-        public Nullable<decimal> total { get; set; }
     
         public virtual plan_cobro plan_cobro { get; set; }
         public virtual residencia residencia { get; set; }

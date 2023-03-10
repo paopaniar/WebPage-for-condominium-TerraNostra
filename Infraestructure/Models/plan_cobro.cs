@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(PlanCobroMetaData))]
+    
     public partial class plan_cobro
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,7 +26,7 @@ namespace Infraestructure.Models
         public string mes { get; set; }
         public System.DateTime datePlan { get; set; }
         public int estado { get; set; }
-        public Nullable<decimal> monto { get; set; }
+        public Nullable<decimal> total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<plan_residencia> plan_residencia { get; set; }

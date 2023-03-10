@@ -46,7 +46,7 @@
           <Property Name="mes" Type="varchar" MaxLength="30" />
           <Property Name="datePlan" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
-          <Property Name="monto" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="total" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="plan_residencia">
           <Key>
@@ -57,7 +57,6 @@
           <Property Name="residenciaId" Type="int" Nullable="false" />
           <Property Name="detalle" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
-          <Property Name="total" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="plan_rubro">
           <Key>
@@ -239,12 +238,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="desencriptar_pass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
-          <Parameter Name="contrasena" Type="varbinary" Mode="In" />
-        </Function>
-        <Function Name="encripta_pass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varbinary">
-          <Parameter Name="contrasena" Type="varchar" Mode="In" />
-        </Function>
         <EntityContainer Name="terraNostraModelStoreContainer">
           <EntitySet Name="areaComun" EntityType="Self.areaComun" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="incidente" EntityType="Self.incidente" Schema="dbo" store:Type="Tables" />
@@ -347,7 +340,7 @@
           <Property Name="mes" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="datePlan" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="monto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="plan_residencia" Relationship="Self.FK__plan_resi__planC__403A8C7D" FromRole="plan_cobro" ToRole="plan_residencia" />
           <NavigationProperty Name="rubro_cobro" Relationship="Self.plan_rubro" FromRole="plan_cobro" ToRole="rubro_cobro" />
         </EntityType>
@@ -360,7 +353,6 @@
           <Property Name="residenciaId" Type="Int32" Nullable="false" />
           <Property Name="detalle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="plan_cobro" Relationship="Self.FK__plan_resi__planC__403A8C7D" FromRole="plan_residencia" ToRole="plan_cobro" />
           <NavigationProperty Name="residencia" Relationship="Self.FK_plan_residencia_residencia" FromRole="plan_residencia" ToRole="residencia" />
         </EntityType>
@@ -527,7 +519,7 @@
           <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="*" />
           <End Role="rubro_cobro" Type="Self.rubro_cobro" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="terraNostraEntities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="terraNostraEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="areaComun" EntityType="Self.areaComun" />
           <EntitySet Name="incidente" EntityType="Self.incidente" />
           <EntitySet Name="informacion" EntityType="Self.informacion" />
@@ -580,7 +572,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="terraNostraModelStoreContainer" CdmEntityContainer="terraNostraEntities4">
+        <EntityContainerMapping StorageEntityContainer="terraNostraModelStoreContainer" CdmEntityContainer="terraNostraEntities5">
           <EntitySetMapping Name="areaComun">
             <EntityTypeMapping TypeName="terraNostraModel.areaComun">
               <MappingFragment StoreEntitySet="areaComun">
@@ -624,7 +616,7 @@
                 <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="datePlan" ColumnName="datePlan" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="total" ColumnName="total" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -636,7 +628,6 @@
                 <ScalarProperty Name="residenciaId" ColumnName="residenciaId" />
                 <ScalarProperty Name="detalle" ColumnName="detalle" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="total" ColumnName="total" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
