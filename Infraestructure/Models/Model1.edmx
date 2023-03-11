@@ -117,6 +117,7 @@
           <Property Name="apellido2" Type="varchar" MaxLength="255" />
           <Property Name="telefono" Type="int" />
           <Property Name="estado" Type="int" />
+          <Property Name="password" Type="char" MaxLength="50" />
         </EntityType>
         <Association Name="FK__incidente__detal__2D27B809">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
@@ -413,6 +414,7 @@
           <Property Name="apellido2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="Int32" />
           <Property Name="estado" Type="Int32" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="incidente" Relationship="Self.FK__incidente__detal__2D27B809" FromRole="usuario" ToRole="incidente" />
           <NavigationProperty Name="informacion" Relationship="Self.FK__informaci__usuar__300424B4" FromRole="usuario" ToRole="informacion" />
           <NavigationProperty Name="reservacion" Relationship="Self.FK__reservaci__usuar__34C8D9D1" FromRole="usuario" ToRole="reservacion" />
@@ -685,6 +687,7 @@
                 <ScalarProperty Name="apellido2" ColumnName="apellido2" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

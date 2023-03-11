@@ -140,6 +140,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenciaController.cs" />
     <Compile Include="Controllers\InformacionController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PlanCobroController.cs" />
     <Compile Include="Controllers\PlanResidenciaController.cs" />
     <Compile Include="Controllers\ResidenciaController.cs" />
@@ -233,6 +234,7 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\EstadosCuenta\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

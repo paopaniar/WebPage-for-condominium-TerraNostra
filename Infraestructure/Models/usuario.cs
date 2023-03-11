@@ -14,6 +14,7 @@ namespace Infraestructure.Models
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(UsuarioMetaData))]
+
     public partial class usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,6 +33,7 @@ namespace Infraestructure.Models
         public string apellido2 { get; set; }
         public Nullable<int> telefono { get; set; }
         public Nullable<int> estado { get; set; }
+        public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<incidente> incidente { get; set; }
