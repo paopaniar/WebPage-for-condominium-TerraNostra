@@ -19,7 +19,8 @@ namespace TerraNostra.Controllers
             {
                 IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
                 lista = _ServicePlanCobro.GetPlanCobro();
-                
+                IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
+                ViewBag.listaRubros = _ServiceRubro.GetRubroCobro();
                 return View(lista);
             }
             catch (Exception ex)
@@ -73,6 +74,7 @@ namespace TerraNostra.Controllers
             IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
             try
             {
+
                 if (ModelState.IsValid)
                 {
                     plan_cobro oPlanCobroI = _ServicePlanCobro.Save(plan_cobro, selectedRubros);
@@ -81,7 +83,10 @@ namespace TerraNostra.Controllers
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
+                    //  ViewBag.idUsuario = listUsuarios(incidente.id);
                     ViewBag.idRubros = listaRubros(plan_cobro.rubro_cobro);
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
                     if (plan_cobro.id > 0)
                     {
                         return (ActionResult)View("Edit", plan_cobro);

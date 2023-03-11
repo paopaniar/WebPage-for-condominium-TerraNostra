@@ -223,6 +223,7 @@
     <Content Include="Views\RubroCobro\Edit.cshtml" />
     <Content Include="Views\RubroCobro\Create.cshtml" />
     <Content Include="Views\PlanCobro\Create.cshtml" />
+    <Content Include="Views\Incidencia\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
