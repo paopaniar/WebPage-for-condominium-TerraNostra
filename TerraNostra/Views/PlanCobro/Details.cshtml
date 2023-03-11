@@ -12,32 +12,30 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.detail)
+            @Html.DisplayNameFor(Model => Model.detail)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.detail)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.total)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.total)
+            @Html.DisplayFor(Model => Model.detail)
         </dd>
 
-
-
         <dt>
-            @Html.DisplayNameFor(model => model.rubro_cobro)
+            @Html.DisplayNameFor(Model => Model.rubro_cobro)
             <ul>
                 @foreach (var c in Model.rubro_cobro)
                 {
-                    <li>@c.detalle</li>
-                    <li>@c.monto</li>
+                    <li>@c.detalle <p>₡@c.monto</p></li>
+
                 }
             </ul>
         </dt>
+
+        <dt>
+            @Html.DisplayNameFor(Model => Model.total)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.total)
+        </dd>
 
 
     </dl>

@@ -53,7 +53,8 @@ namespace Infraestructure.Models
     internal partial class PlanCobroMetaData
     {
 
-        
+        [Display(Name = "Total")]
+        public decimal total { get; set; }
         [Display(Name = "Número plan cobro")]
         public int id { get; set; }
         [Display(Name = "Detalle")]
@@ -64,13 +65,16 @@ namespace Infraestructure.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public System.DateTime datePlan { get; set; }
+        [Display(Name = "Rubros")]
+        public virtual ICollection<rubro_cobro> rubro_cobro { get; set; }
+        
 
     }
 
     internal partial class RubroCobroMetaData
     {
       
-        [Display(Name = "Detalle rubro")]
+        [Display(Name = "Rubro")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
         [Display(Name = "Monto")]
@@ -90,6 +94,7 @@ namespace Infraestructure.Models
         [Display(Name = "Estado")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int estado { get; set; }
+        
 
     }
     internal partial class IncidenteMetaData
