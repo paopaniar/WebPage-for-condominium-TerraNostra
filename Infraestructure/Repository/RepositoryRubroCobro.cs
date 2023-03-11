@@ -80,8 +80,6 @@ namespace Infraestructure.Repository
 
                 oRubroCobro = GetRubroCobroById((int)rubro.id);
            
-
-
                 if (oRubroCobro == null)
                 {
 
