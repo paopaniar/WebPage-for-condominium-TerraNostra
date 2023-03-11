@@ -16,6 +16,12 @@ namespace ApplicationCore.Services
             return repository.GetInformacion();
         }
 
+        public IEnumerable<informacion> GetInformacionByTipo(int id, int tipo)
+        {
+            IRepositoryInformacion repository = new RepositoryInformacion();
+            return repository.GetInformacionByTipo(id, tipo);
+        }
+
         public informacion GetPlanInformacionById(int id)
         {
             IRepositoryInformacion repository = new RepositoryInformacion();

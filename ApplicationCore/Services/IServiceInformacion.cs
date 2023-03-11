@@ -12,5 +12,6 @@ namespace ApplicationCore.Services
         IEnumerable<informacion> GetInformacion();
         informacion GetPlanInformacionById(int id);
         informacion Save(informacion informacion);
+        IEnumerable<informacion> GetInformacionByTipo(int id, int tipo);
     }
 }

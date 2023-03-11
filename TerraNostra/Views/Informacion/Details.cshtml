@@ -1,0 +1,80 @@
+﻿@model Infraestructure.Models.informacion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<br />
+
+<div>
+    <h4>Información detallada</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInformacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInformacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo)
+        </dt>
+
+        <dd>
+            @if (Model.tipo == 1)
+            {
+                <text>Noticicas</text> }
+            else
+            {
+                if (Model.tipo == 2)
+                {
+                    <text>Actas</text>
+                }
+                else
+                {
+                    <text>Artículos</text>
+                }
+
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @if (Model.estado == 1)
+            {
+                <text>Visible</text>
+            }
+            else
+            {
+                <text>Oculta</text>
+
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

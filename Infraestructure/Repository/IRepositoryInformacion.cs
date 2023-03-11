@@ -12,5 +12,7 @@ namespace Infraestructure.Repository
         IEnumerable<informacion> GetInformacion();
         informacion GetInformacionById(int id);
         informacion Save(informacion informacion);
+
+        IEnumerable<informacion> GetInformacionByTipo(int id, int tipo);
     }
 }

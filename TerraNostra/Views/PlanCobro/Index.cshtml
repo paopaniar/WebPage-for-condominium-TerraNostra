@@ -26,28 +26,34 @@
 
 
 
+        <th>Por ver</th>
 
-        <th></th>
+        <th>Por hacer</th>
     </tr>
 
     @foreach (var item in Model) {
-    <tr class="table-secondary">
-        <td style="column-width: 5px">
-            @Html.DisplayFor(modelItem => item.id)
-        </td>
+<tr class="table-secondary">
+    <td style="column-width: 5px">
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
 
-        <td style="column-width: 5px" >
-            @Html.DisplayFor(modelItem => item.detail)
-        </td>
+    <td style="column-width: 5px">
+        @Html.DisplayFor(modelItem => item.detail)
+    </td>
 
 
 
-        <td style="column-width: 5px">
+    <td style="column-width: 5px">
 
-            @Html.ActionLink("Detalle", "Details", new { id = item.id })
+        @Html.ActionLink("Detalle", "Details", new { id = item.id })
 
-        </td>
-    </tr>
+    </td>
+    <td style="column-width: 5px">
+
+        @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
+
+    </td>
+</tr>
 }
 
 </table>

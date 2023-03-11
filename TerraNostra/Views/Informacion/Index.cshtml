@@ -3,13 +3,17 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
+<br />
+<br />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p
-<table c>lass="table">
+    <a href="@Url.Action("Create", "informacion")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
+    @*@Html.ActionLink("Crear", "Create")*@
+</p>
+<center><h2 style="font-family:Broadway">Tareas informativas</h2></center>
+
+
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.usuario)
@@ -29,29 +33,49 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.detalle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaInformacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaInformacion)
+            </td>
+            <td>
+                @if (item.tipo == 1)
+                {
+                    <text>Noticicas</text> }
+                else
+                {
+                    if (item.tipo == 2)
+                    {
+                        <text>Actas</text>
+                    }
+                    else
+                    {
+                        <text>Artículos</text>
+                    }
+
+                }
+            </td>
+            <td>
+                @if (item.estado == 1)
+                {
+                    <text>Visible</text> }
+                else
+                {
+                    <text>Oculta</text>}
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>

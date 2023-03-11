@@ -72,12 +72,40 @@ namespace Infraestructure.Repository
             }
         }
 
-		//public informacion Save(informacion informacion, string[] selectedUsuarios)
-		//{
-		//	throw new NotImplementedException();
-		//}
+        public IEnumerable<informacion> GetInformacionByTipo(int id, int tipo)
+        {
+            IEnumerable<informacion> oInformacion = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libros por Autor
+                    oInformacion = ctx.informacion.
+                        Where(p => p.id == id && p.tipo == tipo).
+                         Include("usuario1").
+                         ToList();
 
-		public informacion Save(informacion informacion)
+                }
+                return oInformacion;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+
+        public informacion Save(informacion informacion)
 		{
 			int retorno = 0;
 			informacion oInformacion = null;
