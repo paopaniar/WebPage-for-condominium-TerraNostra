@@ -130,13 +130,6 @@ namespace TerraNostra.Controllers
         }
 
 
-<<<<<<< Updated upstream
-
-
-
-
-=======
->>>>>>> Stashed changes
         [HttpPost]
         public ActionResult Guardar(rubro_cobro rubro)
         {
