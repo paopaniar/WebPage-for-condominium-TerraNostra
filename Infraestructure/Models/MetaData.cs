@@ -58,13 +58,7 @@ namespace Infraestructure.Models
         public int id { get; set; }
         [Display(Name = "Detalle")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
-        public string detail { get; set; }
-        [Display(Name = "Total")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal monto { get; set; }
-        
-        [Display(Name = "Rubro")]
-        public int rubroCobroId { get; set; }
+        public string detail { get; set; }        
         [Display(Name = "Fecha")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
