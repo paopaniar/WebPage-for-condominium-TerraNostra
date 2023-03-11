@@ -138,7 +138,6 @@ namespace TerraNostra.Controllers
         public ActionResult Create()
         {
             ViewBag.idUsuario = listUsuarios();
-
             return View();
         }
     }
