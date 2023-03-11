@@ -74,13 +74,13 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-<<<<<<< Updated upstream
+
                 oRubroCobro = GetRubroCobroById((int)rubro.id);
                 IRepositoryRubroCobro _RepositoryRubro = new RepositoryRubroCobro();
-=======
-                oRubro = GetRubroCobroById((int)rubro.id);
+
+                oRubroCobro = GetRubroCobroById((int)rubro.id);
            
->>>>>>> Stashed changes
+
 
                 if (oRubroCobro == null)
                 {

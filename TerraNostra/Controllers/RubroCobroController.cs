@@ -96,13 +96,13 @@ namespace TerraNostra.Controllers
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
-<<<<<<< Updated upstream
+
                     Utils.Util.ValidateErrors(this);                 
-=======
+
                     Utils.Util.ValidateErrors(this);
                 
                 
->>>>>>> Stashed changes
+
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
                     if (rubro.id > 0)
@@ -129,11 +129,11 @@ namespace TerraNostra.Controllers
             }
         }
 
-<<<<<<< Updated upstream
 
 
 
-=======
+
+
         [HttpPost]
         public ActionResult Guardar(rubro_cobro rubro)
         {
@@ -177,6 +177,6 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
->>>>>>> Stashed changes
+
     }
 }
