@@ -4,42 +4,32 @@
     ViewBag.Title = "Details";
 }
 
-
-
 <div>
     <hr />
     <h4>Información detallada de plan cobro</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.detail)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.detail)
-        </dd>
+    <div class="col-md-8">
+        <div class="card-body">
+            <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2">@Html.DisplayFor(model => model.detail)</span>
+            <p class="card-text" style="color: #E45641; font-weight: 500;">
+                @Html.DisplayNameFor(model => model.total)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.rubro_cobro)
-            <ul>
-                @foreach (var c in Model.rubro_cobro)
-                {
-                    <li>@c.detalle <p>@c.monto</p></li>
-               
+            <p class="card-text">
+                <i class="fa-solid fa-bookmark"></i> <b>@Html.DisplayNameFor(model => model.rubro_cobro):</b>
+                <ul>
+                    @foreach (var c in Model.rubro_cobro)
+                    {
+                        <li>@c.detalle</li>
+                    }
+                </ul>
+            </p>
 
-                }
-            </ul>
-        </dt>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.total)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.total)
-        </dd>
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-   
-    @Html.ActionLink("Volver a la lista", "Index")
-</p>
+        <p>
+
+            @Html.ActionLink("Volver a la lista", "Index")
+        </p>

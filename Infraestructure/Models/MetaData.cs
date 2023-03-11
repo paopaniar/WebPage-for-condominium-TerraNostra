@@ -81,6 +81,9 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal monto { get; set; }
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
+
 
     }
     internal partial class PlanResidenciaMetaData

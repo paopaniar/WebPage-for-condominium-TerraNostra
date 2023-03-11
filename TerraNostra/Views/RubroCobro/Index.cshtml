@@ -34,7 +34,13 @@
             @Html.DisplayFor(modelItem => item.monto)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.estado)
+               @if (item.estado == 1)
+                {
+                    <text>Este rubro se encuentra activo</text> }
+                else
+                {
+                    <text>Este rubro se encuentra desabilitado</text>}
+      
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
