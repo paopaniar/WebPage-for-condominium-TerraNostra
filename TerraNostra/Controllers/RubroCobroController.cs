@@ -96,7 +96,13 @@ namespace TerraNostra.Controllers
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
+<<<<<<< Updated upstream
                     Utils.Util.ValidateErrors(this);                 
+=======
+                    Utils.Util.ValidateErrors(this);
+                
+                
+>>>>>>> Stashed changes
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
                     if (rubro.id > 0)
@@ -123,8 +129,54 @@ namespace TerraNostra.Controllers
             }
         }
 
+<<<<<<< Updated upstream
 
 
 
+=======
+        [HttpPost]
+        public ActionResult Guardar(rubro_cobro rubro)
+        {
+
+            //Servicio Libro
+            IServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    rubro_cobro oRubro = _ServiceRubroCobro.Save(rubro);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Utils.Util.ValidateErrors(this);
+                    
+
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (rubro.id > 0)
+                    {
+                        return (ActionResult)View("Edit", rubro);
+                    }
+                    else
+                    {
+                        return View("Create", rubro);
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "RubroCobro";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+>>>>>>> Stashed changes
     }
 }

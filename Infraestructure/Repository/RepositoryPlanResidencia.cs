@@ -23,7 +23,9 @@ namespace Infraestructure.Repository
                     //Obtener libros por Autor
                     oPlanR = ctx.plan_residencia.
                         Where(p => p.residenciaId == id && p.estado == estado).
-                        Include("residencia").ToList();
+                         Include("residencia").
+                        Include("residencia.usuario1").
+                        Include("plan_cobro").ToList();
 
                 }
                 return oPlanR;

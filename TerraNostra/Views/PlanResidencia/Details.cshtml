@@ -41,10 +41,14 @@
 
         @foreach (var c in ViewBag.EstadosPagados)
         {
-            <tr>
-                @c.plan_cobro.detail
-                @c.estado
-            </tr>
+    <tr>
+        <th>
+            @c.plan_cobro.detail
+        </th>
+        <th>
+          <text>Pagado</text>
+        </th>
+    </tr>
         }
 
     </table>
@@ -66,10 +70,14 @@
 
         @foreach (var c in ViewBag.EstadosPendientes)
         {
-            <tr>
-                @c.plan_cobro.detail
-                @c.estado
-            </tr>
+    <tr>
+        <th>
+            @c.plan_cobro.detail
+        </th>
+        <th>
+            <text>Pendiente</text>
+        </th>
+    </tr>
         }
 
     </table>
