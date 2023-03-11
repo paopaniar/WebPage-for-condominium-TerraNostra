@@ -14,10 +14,10 @@
         @foreach (var item in Model)
         {
             <div class="col-sm-3" >
-                <div class="card-body" style="background-color: white; border:groove; border-color:#157394">
-                    
-                   <p class="card-text">
-                       <i class="fa-solid fa-house"></i> <b>@Html.DisplayNameFor(model => model.numeroCasa):</b>  @Html.DisplayFor(modelItem => item.numeroCasa)
+                <div class="card border-warning mb-3" style="max-width: 20rem;">
+                    <img class="card-img-top" src="~/Utils/imagenes/casasicon.jpg" alt="Card image cap">
+                    <p class="card-text">
+                        <i class="fa-solid fa-house"></i> <b>@Html.DisplayNameFor(model => model.numeroCasa):</b>  @Html.DisplayFor(modelItem => item.numeroCasa)
                     </p>
                     <p class="card-text">
                         <i class="fa-solid fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>  @Html.DisplayFor(modelItem => item.usuario1.identificacion)
@@ -26,7 +26,7 @@
                         <i class="fa-solid fa-people-roof"></i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>  @Html.DisplayFor(modelItem => item.individualsNumber)
                     </p>
 
-            
+
                     <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i> Detalle</a>
                     @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
 
