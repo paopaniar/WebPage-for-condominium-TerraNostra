@@ -21,7 +21,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todas las ordenes incluyendo el cliente y el usuario
-                    plan = ctx.plan_cobro.Include("rubro_cobro").ToList();
+                    plan = ctx.plan_cobro.ToList<plan_cobro>();
 
                 }
                 return plan;
@@ -51,9 +51,7 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oPlan = ctx.plan_cobro.
-                        Where(l => l.id == id).
-                        Include("rubro_cobro").
-                        FirstOrDefault();
+                        Where(l => l.id == id).FirstOrDefault();
 
                 }
                 return oPlan;
@@ -78,76 +76,59 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-		//public plan_cobro Save(plan_cobro pc, string[] selectedRubros)
-		//{
-		//	throw new NotImplementedException();
-		//}
+	
 
-		public plan_cobro Save(plan_cobro pc, string[] selectedRubros)
+		public plan_cobro Save(plan_cobro plan_Cobro, string[] selectedRubros)
 		{
 			int retorno = 0;
-			plan_cobro oPc = null;
+			plan_cobro oPlanCobro = null;
 
-			using (MyContext ctx = new MyContext())
+            using (MyContext ctx = new MyContext())
 			{
 				ctx.Configuration.LazyLoadingEnabled = false;
-				oPc = GetPlanCobroById((int)pc.id);
+                oPlanCobro = GetPlanCobroById((int)plan_Cobro.id);
 				IRepositoryRubroCobro _RepositoryRubros = new RepositoryRubroCobro();
 
-				if (oPc == null)
+				if (oPlanCobro == null)
 				{
-
-					//Insertar
-					//Logica para agregar las categorias al libro
 					if (selectedRubros != null)
 					{
-
-						oPc.rubro_cobro= new List<rubro_cobro>();
+                        oPlanCobro.rubro_cobro = new List<rubro_cobro>();
 						foreach (var rubro in selectedRubros)
 						{
 							var rubroToAdd = _RepositoryRubros.GetRubroCobroById(int.Parse(rubro));
 							ctx.rubro_cobro.Attach(rubroToAdd); //sin esto, EF intentará crear una categoría
-							pc.rubro_cobro.Add(rubroToAdd);// asociar a la categoría existente con el libro
-
-
+                            plan_Cobro.rubro_cobro.Add(rubroToAdd);// asociar a la categoría existente con el libro
 						}
 					}
-					//Insertar Libro
-					ctx.plan_cobro.Add(pc);
-					//SaveChanges
-					//guarda todos los cambios realizados en el contexto de la base de datos.
+                    ctx.plan_cobro.Add(plan_Cobro);
 					retorno = ctx.SaveChanges();
-					//retorna número de filas afectadas
-				}
+					}
 				else
 				{
-					//Registradas: 1,2,3
-					//Actualizar: 1,3,4
-
-					//Actualizar incidente
-					ctx.plan_cobro.Add(pc);
-					ctx.Entry(pc).State = EntityState.Modified;
+					ctx.plan_cobro.Add(plan_Cobro);
+					ctx.Entry(plan_Cobro).State = EntityState.Modified;
 					retorno = ctx.SaveChanges();
 
 					//Logica para actualizar Categorias
 					var selectedRubrosId = new HashSet<string>(selectedRubros);
 					if (selectedRubros != null)
 					{
-						ctx.Entry(pc).Collection(p => p.rubro_cobro).Load();
-						var newPlanCobroForRubro = ctx.rubro_cobro
+						ctx.Entry(plan_Cobro).Collection(p => p.rubro_cobro).Load();
+						var newRubroForPlan = ctx.rubro_cobro
 						 .Where(x => selectedRubrosId.Contains(x.id.ToString())).ToList();
-						pc.rubro_cobro = newPlanCobroForRubro;
+                        plan_Cobro.rubro_cobro = newRubroForPlan;
 
-						ctx.Entry(pc).State = EntityState.Modified;
+						ctx.Entry(plan_Cobro).State = EntityState.Modified;
 						retorno = ctx.SaveChanges();
 					}
 				}
 			}
 
 			if (retorno >= 0)
-				oPc = GetPlanCobroById((int)pc.id);
+                oPlanCobro = GetPlanCobroById((int)plan_Cobro.id);
 
-			return oPc;
+			return oPlanCobro;
 		}
 	}
    

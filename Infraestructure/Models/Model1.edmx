@@ -519,7 +519,7 @@
           <End Role="plan_cobro" Type="Self.plan_cobro" Multiplicity="*" />
           <End Role="rubro_cobro" Type="Self.rubro_cobro" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="terraNostraEntities5" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="terraNostraEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="areaComun" EntityType="Self.areaComun" />
           <EntitySet Name="incidente" EntityType="Self.incidente" />
           <EntitySet Name="informacion" EntityType="Self.informacion" />
@@ -572,7 +572,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="terraNostraModelStoreContainer" CdmEntityContainer="terraNostraEntities5">
+        <EntityContainerMapping StorageEntityContainer="terraNostraModelStoreContainer" CdmEntityContainer="terraNostraEntities">
           <EntitySetMapping Name="areaComun">
             <EntityTypeMapping TypeName="terraNostraModel.areaComun">
               <MappingFragment StoreEntitySet="areaComun">

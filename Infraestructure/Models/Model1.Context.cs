@@ -13,10 +13,10 @@ namespace Infraestructure.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class terraNostraEntities5 : DbContext
+    public partial class terraNostraEntities : DbContext
     {
-        public terraNostraEntities5()
-            : base("name=terraNostraEntities5")
+        public terraNostraEntities()
+            : base("name=terraNostraEntities")
         {
         }
     

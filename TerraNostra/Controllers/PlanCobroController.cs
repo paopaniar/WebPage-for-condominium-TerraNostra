@@ -19,10 +19,7 @@ namespace TerraNostra.Controllers
             {
                 IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
                 lista = _ServicePlanCobro.GetPlanCobro();
-                ViewBag.title = "Lista Plan Cobro";
-                IServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
-                ViewBag.listaRubroCobro = _ServiceRubroCobro.GetRubroCobro();
-
+                
                 return View(lista);
             }
             catch (Exception ex)
@@ -70,23 +67,12 @@ namespace TerraNostra.Controllers
 
         }
 
-        private SelectList lisRubros(int idRubro = 0)
-        {
-            IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
-            IEnumerable<rubro_cobro> lista = _ServiceRubro.GetRubroCobro();
-            return new SelectList(lista, "id", "detalle", idRubro);
-        }
-
-
         [HttpPost]
         public ActionResult Save(plan_cobro plan_cobro, string[] selectedRubros)
         {
-
-            //Servicio Libro
             IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     plan_cobro oPlanCobroI = _ServicePlanCobro.Save(plan_cobro, selectedRubros);
@@ -95,10 +81,7 @@ namespace TerraNostra.Controllers
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                    //  ViewBag.idUsuario = listUsuarios(incidente.id);
-                   // ViewBag.idRubros = lisRubros(plan_cobro.rubroCobroId);
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
+                    ViewBag.idRubros = listaRubros(plan_cobro.rubro_cobro);
                     if (plan_cobro.id > 0)
                     {
                         return (ActionResult)View("Edit", plan_cobro);
@@ -126,13 +109,22 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            //Que recursos necesito para crear una incidencia
-            //usuarios
-            ViewBag.idRubros = lisRubros();
-
+            ViewBag.idRubros = listaRubros();
             return View();
         }
+        private MultiSelectList listaRubros(ICollection<rubro_cobro> rubros = null)
+        {
+            IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
+            IEnumerable<rubro_cobro> lista = _ServiceRubro.GetRubroCobro();
+            //Seleccionar categorias
+            int[] listaRubrosSelect = null;
+            if (rubros != null)
+            {
+                listaRubrosSelect = rubros.Select(c => c.id).ToArray();
+            }
 
+            return new MultiSelectList(lista, "id", "detalle", listaRubrosSelect);
+        }
 
         public ActionResult Edit(int? id)
         {
@@ -144,7 +136,6 @@ namespace TerraNostra.Controllers
                 // Si va null
                 if (id == null)
                 {
-                    //ATENCION! HACER EL INDEX byPao
                     return RedirectToAction("Index");
                 }
 
@@ -158,7 +149,7 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Default", "Error");
                 }
                 //Listados
-                ViewBag.idRubros = lisRubros(plan_Cobro.id);
+                ViewBag.idRubros = listaRubros(plan_Cobro.rubro_cobro);
 
                 return View(plan_Cobro);
             }
