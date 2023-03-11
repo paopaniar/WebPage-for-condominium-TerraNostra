@@ -1,20 +1,19 @@
 ﻿
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:80px">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:80px">
     <div class="container-fluid">
-
         <form class="d-flex" role="search">
-            <img src="~/Utils/imagenes/LogoSmartHouse-removebg-preview.png" width="150px" , height="150px" />
+            <img src="~/Utils/imagenes/LogoSmartHouse-removebg-preview.png" width="160px" , height="160px" />
         </form>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarColor02">
-
+        <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">
-                        Página Principal
+                        Principal
+                        <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
@@ -22,28 +21,24 @@
                     <div class="dropdown-menu">
 
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Residencia", "Index", "residencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Residencias", "Index", "residencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Plan Cobro", "Index", "planCobro", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Planes de Cobro", "Index", "planCobro", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Plan Residencia", "Index", "planResidencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Estados de cuenta", "Index", "planResidencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Incidencia", "Index", "incidencia", null, new { @class = "dropdown-item" })
-                        <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Rubro cobro", "Index", "rubroCobro", null, new { @class = "dropdown-item" })
-
+                        @Html.ActionLink("Incidencias", "Index", "incidencia", null, new { @class = "dropdown-item" })
                     </div>
                 </li>
-                @* Texto Usuario, Accion, Controlador*@
                 <li>
                     @Html.ActionLink("Acerca de", "About", "Home",
-                    null, new { @class = "nav-link" })
+               null, new { @class = "nav-link" })
                 </li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
 
             </ul>
-            <form class="d-flex" role="search" style="background-color:#157394">
-                <button class="btn btn-outline-success" type="submit" style="color:#3c444c">Iniciar Sesión</button>
+            <form class="d-flex">
+                <button type="button" class="btn btn-warning btn-lg"><i class="fa fa-user-circle " ></i> Ingreso</button>
             </form>
         </div>
     </div>

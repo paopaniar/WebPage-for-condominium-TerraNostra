@@ -77,6 +77,13 @@ namespace Infraestructure.Repository
 
                 oRubroCobro = GetRubroCobroById((int)rubro.id);
                 IRepositoryRubroCobro _RepositoryRubro = new RepositoryRubroCobro();
+<<<<<<< Updated upstream
+=======
+
+                oRubroCobro = GetRubroCobroById((int)rubro.id);
+           
+
+>>>>>>> Stashed changes
 
                 oRubroCobro = GetRubroCobroById((int)rubro.id);
            
