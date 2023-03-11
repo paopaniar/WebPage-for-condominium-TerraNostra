@@ -13,11 +13,11 @@
 
 <table class="table table-hover">
     <tr class="table-primary">
-        <th scope="row" style="column-width: 40px">
+        <th scope="row" style="grid-auto-rows: 5px">
             @Html.DisplayNameFor(model => model.id)
         </th>
 
-        <th scope="row">
+        <th scope="row" style="grid-auto-rows: 5px">
             @Html.DisplayNameFor(model => model.detail)
         </th>
 
@@ -29,17 +29,17 @@
 
     @foreach (var item in Model) {
     <tr class="table-secondary">
-        <td >
+        <td style="column-width: 5px">
             @Html.DisplayFor(modelItem => item.id)
         </td>
 
-        <td >
+        <td style="column-width: 5px" >
             @Html.DisplayFor(modelItem => item.detail)
         </td>
 
 
 
-        <td>
+        <td style="column-width: 5px">
 
             @Html.ActionLink("Detalle", "Details", new { id = item.id })
 
