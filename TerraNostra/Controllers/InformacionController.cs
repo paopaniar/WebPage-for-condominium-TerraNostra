@@ -82,7 +82,7 @@ namespace TerraNostra.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(informacion informacion, string[] selectedUsuarios)
+        public ActionResult Save(informacion informacion)
         {
 
             //Servicio Libro
@@ -92,7 +92,7 @@ namespace TerraNostra.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    informacion oInformacionI = _ServiceInformacion.Save(informacion, selectedUsuarios);
+                    informacion oInformacionI = _ServiceInformacion.Save(informacion);
                 }
                 else
                 {

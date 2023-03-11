@@ -22,10 +22,10 @@ namespace ApplicationCore.Services
             return repository.GetInformacionById(id);
         }
 
-        public informacion Save(informacion informacion, string[] selectedUsuarios)
+        public informacion Save(informacion informacion)
         {
             IRepositoryInformacion repository = new RepositoryInformacion();
-            return repository.Save(informacion, selectedUsuarios);
+            return repository.Save(informacion);
         }
     }
 }
