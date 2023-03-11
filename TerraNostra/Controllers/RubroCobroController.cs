@@ -98,13 +98,9 @@ namespace TerraNostra.Controllers
                     // Valida Errores si Javascript está deshabilitado
 
                     Utils.Util.ValidateErrors(this);                 
-
-                    Utils.Util.ValidateErrors(this);
                 
                 
 
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
                     if (rubro.id > 0)
                     {
                         return (ActionResult)View("Edit", rubro);
