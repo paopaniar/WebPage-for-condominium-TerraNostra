@@ -71,11 +71,11 @@ namespace TerraNostra.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                //Listados
-                ViewBag.idUsuario = listUsuarios(incidente.id);
-                
                 return View(incidente);
+                //ViewBag.idUsuario = listUsuarios(incidente.id);
             }
+          
+
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
