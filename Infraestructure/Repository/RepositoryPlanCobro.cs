@@ -78,7 +78,7 @@ namespace Infraestructure.Repository
 
 
 
-        public plan_cobro Save(plan_cobro plan_Cobro, string[] selectedRubros)
+        public plan_cobro Save(plan_cobro planCobro, string[] selectedRubros)
         {
             int retorno = 0;
             plan_cobro oPlanCobro = null;
@@ -86,26 +86,26 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oPlanCobro = GetPlanCobroById((int)plan_Cobro.id);
-                IRepositoryPlanCobro _ReporitoryPlanCobro = new RepositoryPlanCobro();
+                oPlanCobro = GetPlanCobroById((int)planCobro.id);
+                
 
                 if (oPlanCobro == null)
                 {
-                    ctx.plan_cobro.Add(plan_Cobro);
+                    ctx.plan_cobro.Add(planCobro);
                    
                     retorno = ctx.SaveChanges();
                     //retorna número de filas afectadas
                 }
                 else
                 {
-                    ctx.plan_cobro.Add(plan_Cobro);
-                    ctx.Entry(plan_Cobro).State = EntityState.Modified;
+                    ctx.plan_cobro.Add(planCobro);
+                    ctx.Entry(planCobro).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
                 }
             }
 
             if (retorno >= 0)
-                oPlanCobro = GetPlanCobroById((int)plan_Cobro.id);
+                oPlanCobro = GetPlanCobroById((int)planCobro.id);
 
             return oPlanCobro;
         }

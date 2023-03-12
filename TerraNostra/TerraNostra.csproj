@@ -221,7 +221,6 @@
     <Content Include="Views\PlanResidencia\Details.cshtml" />
     <Content Include="Views\Incidencia\Index.cshtml" />
     <Content Include="Views\Incidencia\Create.cshtml" />
-    <Content Include="Views\PlanCobro\Edit.cshtml" />
     <Content Include="Views\Informacion\Index.cshtml" />
     <Content Include="Views\Informacion\Create.cshtml" />
     <Content Include="Views\RubroCobro\Index.cshtml" />
@@ -233,6 +232,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Login\UnAuthorized.cshtml" />
+    <Content Include="Views\PlanCobro\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

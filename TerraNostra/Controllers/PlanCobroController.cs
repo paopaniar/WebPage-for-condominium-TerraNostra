@@ -84,7 +84,7 @@ namespace TerraNostra.Controllers
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
                     //  ViewBag.idUsuario = listUsuarios(incidente.id);
-                    ViewBag.idRubros = listaRubros(plan_cobro.rubro_cobro);
+                    ViewBag.idRubro = listaRubros(plan_cobro.rubro_cobro);
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
                     if (plan_cobro.id > 0)
@@ -134,7 +134,7 @@ namespace TerraNostra.Controllers
         public ActionResult Edit(int? id)
         {
             ServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
-            plan_cobro plan_Cobro = null;
+            plan_cobro planCobro = null;
 
             try
             {
@@ -144,19 +144,18 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Index");
                 }
 
-                plan_Cobro = _ServicePlanCobro.GetPlanCobroById(Convert.ToInt32(id));
-                if (plan_Cobro == null)
+                planCobro = _ServicePlanCobro.GetPlanCobroById(Convert.ToInt32(id));
+                if (planCobro == null)
                 {
-                    TempData["Message"] = "No existe el plan de cobro solicitado";
-                    TempData["Redirect"] = "PlanCobro";
+                    TempData["Message"] = "No existe el libro solicitado";
+                    TempData["Redirect"] = "Libro";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                //Listados
-                ViewBag.idRubros = listaRubros(plan_Cobro.rubro_cobro);
 
-                return View(plan_Cobro);
+                ViewBag.IdRubro = listaRubros(planCobro.rubro_cobro);
+                return View(planCobro);
             }
             catch (Exception ex)
             {
