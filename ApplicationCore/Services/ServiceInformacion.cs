@@ -22,7 +22,7 @@ namespace ApplicationCore.Services
             return repository.GetInformacionByTipo(id, tipo);
         }
 
-        public informacion GetPlanInformacionById(int id)
+        public informacion GetInformacionById(int id)
         {
             IRepositoryInformacion repository = new RepositoryInformacion();
             return repository.GetInformacionById(id);

@@ -4,12 +4,16 @@
     ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm("Edit", "informacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h2>Edit</h2>
+
+
+
+@using (Html.BeginForm("Save", "informacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Actualizar</h4>
+        <h4>informacion</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)

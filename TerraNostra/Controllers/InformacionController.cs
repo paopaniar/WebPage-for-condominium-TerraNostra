@@ -55,7 +55,7 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Index");
                 }
 
-                informacion = _ServiceInformacion.GetPlanInformacionById(Convert.ToInt32(id));
+                informacion = _ServiceInformacion.GetInformacionById(Convert.ToInt32(id));
                 if (informacion == null)
                 {
                     TempData["Message"] = "No existe la información solicitada";
@@ -151,7 +151,7 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Index");
                 }
 
-                informacion = _ServiceInformacion.GetPlanInformacionById(Convert.ToInt32(id));
+                informacion = _ServiceInformacion.GetInformacionById(Convert.ToInt32(id));
               
                 ViewBag.Noticias = _ServiceInformacion.GetInformacionByTipo(informacion.id, 1);
                 ViewBag.Actas = _ServiceInformacion.GetInformacionByTipo(informacion.id, 2);

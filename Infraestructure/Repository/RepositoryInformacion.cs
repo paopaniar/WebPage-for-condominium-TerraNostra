@@ -114,35 +114,29 @@ namespace Infraestructure.Repository
 			{
 				ctx.Configuration.LazyLoadingEnabled = false;
 				oInformacion = GetInformacionById((int)informacion.id);
-				IRepositoryUsuario _RepositoryUsuarios = new RepositoryUsuario();
+				
 
 				if (oInformacion == null)
 				{
 
-					//Insertar
-					//Logica para agregar las categorias al libro
-					
-					//Insertar Libro
-					ctx.informacion.Add(informacion);
-					//SaveChanges
-					//guarda todos los cambios realizados en el contexto de la base de datos.
-					retorno = ctx.SaveChanges();
-					//retorna número de filas afectadas
-				}
-				else
-				{
-					//Registradas: 1,2,3
-					//Actualizar: 1,3,4
+                    ctx.informacion.Add(informacion);
+                    //SaveChanges
+                    //guarda todos los cambios realizados en el contexto de la base de datos.
+                    retorno = ctx.SaveChanges();
+                    //retorna número de filas afectadas
+                }
+                else
+                {
+                    //Registradas: 1,2,3
+                    //Actualizar: 1,3,4
 
-					//Actualizar incidente
-					ctx.informacion.Add(informacion);
-					ctx.Entry(informacion).State = EntityState.Modified;
-					retorno = ctx.SaveChanges();
-
-					//Logica para actualizar Categorias
-					
-				}
-			}
+                    //Actualizar Libro
+                    ctx.informacion.Add(informacion);
+                    ctx.Entry(informacion).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                  
+                }
+            }
 
 			if (retorno >= 0)
 				oInformacion = GetInformacionById((int)informacion.id);
