@@ -39,8 +39,8 @@ namespace TerraNostra.Controllers
 
             try
             {
-                ViewBag.Noticias = _ServiceInformacion.GetInformacionByTipo(informacion.id, 1);
-                ViewBag.Actas = _ServiceInformacion.GetInformacionByTipo(informacion.id, 2);
+                ViewBag.Noticias = _ServiceInformacion.GetInformacionByTipo( 1);
+                ViewBag.Actas = _ServiceInformacion.GetInformacionByTipo( 2);
 
                 if (informacion == null)
                 {
