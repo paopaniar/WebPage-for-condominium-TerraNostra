@@ -13,14 +13,15 @@
 
 <div>
     <hr />
-    <h4>Información detallada de plan cobro</h4>
+    <center> <h4 style="font-family: Broadway">Información detallada de plan cobro</h4></center>
+   
     <hr />
- 
+
     <div class="col-md-8">
         <div class="card-body">
             <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2">@Html.DisplayFor(model => model.detail)</span>
             <p class="card-text" style="color: #E45641; font-weight: 500;"
-               @totalSum;   
+               @totalSum ;
                 </p>
 
             <p class="card-text">
@@ -36,7 +37,8 @@
         </div>
     </div>
 </div>
-        <p>
+<hr />
+<p>
 
-            @Html.ActionLink("Volver a la lista", "Index")
-        </p>
+    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-secondary" })
+</p>

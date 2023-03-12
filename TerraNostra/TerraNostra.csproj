@@ -145,6 +145,7 @@
     <Compile Include="Controllers\PlanResidenciaController.cs" />
     <Compile Include="Controllers\ResidenciaController.cs" />
     <Compile Include="Controllers\RubroCobroController.cs" />
+    <Compile Include="Enum\Plan.cs" />
     <Compile Include="Enum\EnumRol.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,16 +232,11 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Login\UnAuthorized.cshtml" />
-
-
     <Content Include="Views\PlanCobro\Edit.cshtml" />
-
     <Content Include="Views\RubroCobro\Edit.cshtml" />
     <Content Include="Views\Informacion\Details.cshtml" />
-
     <Content Include="Views\RubroCobro\Edit.cshtml" />
     <Content Include="Views\Informacion\Details.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

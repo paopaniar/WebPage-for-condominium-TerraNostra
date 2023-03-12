@@ -61,6 +61,7 @@ namespace TerraNostra.Controllers
                 if (ModelState.IsValid)
                 {
                     incidente oIncidente = _ServiceIncidente.Save(incidente);
+                  
                 }
 
                else
@@ -71,8 +72,8 @@ namespace TerraNostra.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                return View(incidente);
-                //ViewBag.idUsuario = listUsuarios(incidente.id);
+
+                return View();
             }
           
 

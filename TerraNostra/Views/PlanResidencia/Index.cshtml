@@ -4,8 +4,9 @@
     ViewBag.Title = "Index";
 }
 
+<br />
+<center><h3 style="font-family: Broadway">Estados de cuenta</h3></center>
 
-<h3>Estados de cuenta</h3>
 <hr />
 
 <table class="table">
@@ -16,10 +17,8 @@
         <th>
             @Html.DisplayNameFor(model => model.residencia.usuario1.nombre)
         </th>
-
-
-
-
+        <th>Por ver</th>
+     
 
     </tr>
 
@@ -34,9 +33,7 @@
 
     <td>
 
-        @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
-        @Html.ActionLink("Pagados", "Details", new { id = item.id }) |
-        @Html.ActionLink("Pendientes", "Details", new { id = item.id })
+        @Html.ActionLink("Detalles", "Details", new { id = item.id }) 
 
     </td>
 </tr>

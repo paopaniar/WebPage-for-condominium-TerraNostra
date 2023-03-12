@@ -18,12 +18,14 @@ namespace Infraestructure.Models
         public int individualsNumber { get; set; }
         [Display(Name = "Año")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         public string annio { get; set; }
         [Display(Name = "Estado")]
         public int estado { get; set; }
         [Display(Name = "Información adicional")]
         public string otherInfoDetails { get; set; }
         [Display(Name = "Casa")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int numeroCasa { get; set; }
         //[Display(Name = "Identificación de usuario")]
@@ -38,6 +40,7 @@ namespace Infraestructure.Models
         [Display(Name = "Residente")]
         public int identificacion { get; set; }
         [Display(Name = "Teléfono")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         public string telefono { get; set; }
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
@@ -78,6 +81,7 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
         [Display(Name = "Monto")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal monto { get; set; }
