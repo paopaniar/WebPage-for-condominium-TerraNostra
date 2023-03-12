@@ -1,4 +1,4 @@
-﻿using Infraestructure.Models;
+﻿ using Infraestructure.Models;
 using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
@@ -72,71 +72,32 @@ namespace Infraestructure.Repository
             }
         }
 
-        public incidente Save(incidente incidente, string[] selectedUsuarios)
+        public incidente Save(incidente incidente)
         {
-            int retorno = 0;
             incidente oIncidente = null;
 
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oIncidente = GetIncidenteoById((int)incidente.id);
-                IRepositoryUsuario _RepositoryUsuarios = new RepositoryUsuario();
 
                 if (oIncidente == null)
                 {
-
-                    //Insertar
-                    //Logica para agregar las categorias al libro
-                    if (selectedUsuarios != null)
-                    {
-
-                        incidente.Usuarios= new List<usuario>();
-                        foreach (var usuario in selectedUsuarios)
-                        {
-                            var usuarioToAdd = _RepositoryUsuarios.GetUsuarioByID(int.Parse(usuario));
-                            ctx.usuario.Attach(usuarioToAdd); //sin esto, EF intentará crear una categoría
-                            incidente.Usuarios.Add(usuarioToAdd);// asociar a la categoría existente con el libro
-
-
-                        }
-                    }
-                    //Insertar Libro
                     ctx.incidente.Add(incidente);
-                    //SaveChanges
-                    //guarda todos los cambios realizados en el contexto de la base de datos.
-                    retorno = ctx.SaveChanges();
-                    //retorna número de filas afectadas
                 }
                 else
                 {
-                    //Registradas: 1,2,3
-                    //Actualizar: 1,3,4
-
-                    //Actualizar incidente
-                    ctx.incidente.Add(incidente);
-                    ctx.Entry(incidente).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
-
-                    //Logica para actualizar Categorias
-                    var selectedUsuariosID = new HashSet<string>(selectedUsuarios);
-                    if (selectedUsuarios != null)
-                    {
-                        ctx.Entry(incidente).Collection(p => p.Usuarios).Load();
-                        var newIncidenteForUsuario = ctx.usuario
-                         .Where(x => selectedUsuariosID.Contains(x.identificacion.ToString())).ToList();
-                        incidente.Usuarios = newIncidenteForUsuario;
-
-                        ctx.Entry(incidente).State = EntityState.Modified;
-                        retorno = ctx.SaveChanges();
-                    }
+                    oIncidente.estado = incidente.estado;
+                    ctx.Entry(oIncidente).State = EntityState.Modified;
                 }
+
+                ctx.SaveChanges();
             }
 
-            if (retorno >= 0)
-                oIncidente = GetIncidenteoById((int)incidente.id);
-
             return oIncidente;
-        } 
+        }
+
+
+
     }
 }

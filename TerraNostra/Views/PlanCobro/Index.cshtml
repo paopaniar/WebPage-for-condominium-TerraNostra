@@ -4,40 +4,53 @@
     ViewBag.Title = "Lista Plan Cobro";
 }
 
-<h4>Lista de Planes de Cobro</h4>
+
+<br />
+<p>
+    <a href="@Url.Action("Create", "planCobro")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
+</p><center>
+    <h4 style="font-family: Broadway">Lista de Planes de Cobro</h4>
+</center>
+<br />
 
 
-<table class="table">
-    <tr>
-        <th>
+<table class="table table-hover">
+    <tr class="table-primary">
+        <th scope="row" style="grid-auto-rows: 5px">
             @Html.DisplayNameFor(model => model.id)
         </th>
-       
-        <th>
+
+        <th scope="row" style="grid-auto-rows: 5px">
             @Html.DisplayNameFor(model => model.detail)
         </th>
-      
 
 
 
-        <th></th>
+        <th>Por ver</th>
+
+        <th>Por hacer</th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
+    @foreach (var item in Model) {
+<tr class="table-secondary">
+    <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.id)
     </td>
-  
-    <td>
+
+    <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.detail)
     </td>
-  
 
 
-    <td>
+
+    <td style="column-width: 5px">
 
         @Html.ActionLink("Detalle", "Details", new { id = item.id })
+
+    </td>
+    <td style="column-width: 5px">
+
+        @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
 
     </td>
 </tr>

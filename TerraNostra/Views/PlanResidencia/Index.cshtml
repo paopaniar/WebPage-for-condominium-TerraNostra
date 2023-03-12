@@ -4,26 +4,21 @@
     ViewBag.Title = "Index";
 }
 
+<br />
+<center><h3 style="font-family: Broadway">Estados de cuenta</h3></center>
 
-<h3>Estados de cuenta</h3>
 <hr />
 
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.residencia.numeroCasa)
-
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.residencia.usuario)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.residencia.usuario1.nombre)
         </th>
-
-
-
-
+        <th>Por ver</th>
+     
 
     </tr>
 
@@ -33,17 +28,12 @@
         @Html.DisplayFor(modelItem => item.residencia.numeroCasa)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.residencia.usuario)
-    </td>
-    <td>
         @Html.DisplayFor(modelItem => item.residencia.usuario1.nombre)
     </td>
 
     <td>
 
-        @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
-        @Html.ActionLink("Pagados", "Details", new { id = item.id }) |
-        @Html.ActionLink("Pendientes", "Details", new { id = item.id })
+        @Html.ActionLink("Detalles", "Details", new { id = item.id }) 
 
     </td>
 </tr>

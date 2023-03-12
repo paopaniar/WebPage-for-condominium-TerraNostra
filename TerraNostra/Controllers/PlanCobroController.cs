@@ -19,10 +19,8 @@ namespace TerraNostra.Controllers
             {
                 IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
                 lista = _ServicePlanCobro.GetPlanCobro();
-                ViewBag.title = "Lista Plan Cobro";
-                IServiceRubroCobro _ServiceRubroCobro = new ServiceRubroCobro();
-                ViewBag.listaRubroCobro = _ServiceRubroCobro.GetRubroCobro();
-
+                IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
+                ViewBag.listaRubros = _ServiceRubro.GetRubroCobro();
                 return View(lista);
             }
             catch (Exception ex)
@@ -70,19 +68,9 @@ namespace TerraNostra.Controllers
 
         }
 
-        private SelectList lisRubros(int idRubro = 0)
-        {
-            IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
-            IEnumerable<rubro_cobro> lista = _ServiceRubro.GetRubroCobro();
-            return new SelectList(lista, "id", "detalle", idRubro);
-        }
-
-
         [HttpPost]
         public ActionResult Save(plan_cobro plan_cobro, string[] selectedRubros)
         {
-
-            //Servicio Libro
             IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
             try
             {
@@ -96,7 +84,7 @@ namespace TerraNostra.Controllers
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
                     //  ViewBag.idUsuario = listUsuarios(incidente.id);
-                    ViewBag.idRubros = lisRubros(plan_cobro.rubroCobroId);
+                    ViewBag.idRubro = listaRubros(plan_cobro.rubro_cobro);
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
                     if (plan_cobro.id > 0)
@@ -126,41 +114,48 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            //Que recursos necesito para crear una incidencia
-            //usuarios
-            ViewBag.idRubros = lisRubros();
-
+            ViewBag.idRubros = listaRubros();
             return View();
         }
+        private MultiSelectList listaRubros(ICollection<rubro_cobro> rubros = null)
+        {
+            IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
+            IEnumerable<rubro_cobro> lista = _ServiceRubro.GetRubroCobro();
+            //Seleccionar categorias
+            int[] listaRubrosSelect = null;
+            if (rubros != null)
+            {
+                listaRubrosSelect = rubros.Select(c => c.id).ToArray();
+            }
 
+            return new MultiSelectList(lista, "id", "detalle", listaRubrosSelect);
+        }
 
         public ActionResult Edit(int? id)
         {
             ServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
-            plan_cobro plan_Cobro = null;
+            plan_cobro planCobro = null;
 
             try
             {
                 // Si va null
                 if (id == null)
                 {
-                    //ATENCION! HACER EL INDEX byPao
                     return RedirectToAction("Index");
                 }
 
-                plan_Cobro = _ServicePlanCobro.GetPlanCobroById(Convert.ToInt32(id));
-                if (plan_Cobro == null)
+                planCobro = _ServicePlanCobro.GetPlanCobroById(Convert.ToInt32(id));
+                if (planCobro == null)
                 {
-                    TempData["Message"] = "No existe el plan de cobro solicitado";
-                    TempData["Redirect"] = "PlanCobro";
+                    TempData["Message"] = "No existe el libro solicitado";
+                    TempData["Redirect"] = "Libro";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                //Listados
-                ViewBag.idRubros = lisRubros(plan_Cobro.id);
 
-                return View(plan_Cobro);
+                ViewBag.IdRubro = listaRubros(planCobro.rubro_cobro);
+                return View(planCobro);
             }
             catch (Exception ex)
             {

@@ -11,6 +11,8 @@ namespace ApplicationCore.Services
 	{
 		IEnumerable<plan_residencia>  GetPlanResidenciaByID(int id);
 		IEnumerable<plan_residencia> GetPlanResidencia();
-		
+
+		IEnumerable<plan_residencia> GetEstadosByEstado(int id, int estado);
+
 	}
 }

@@ -10,7 +10,13 @@ namespace ApplicationCore.Services
 {
 	public class ServicePlanResidencia : IServicePlanResidencia
 	{
-		public IEnumerable<plan_residencia> GetPlanResidencia()
+        public IEnumerable<plan_residencia> GetEstadosByEstado(int id, int estado)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetEstadoByEstado(id, estado);
+        }
+
+        public IEnumerable<plan_residencia> GetPlanResidencia()
 		{
 			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
 			return repository.GetPlanResidencia();

@@ -11,6 +11,6 @@ namespace ApplicationCore.Services
     {
         IEnumerable<incidente> GetIncidente();
        incidente GetIncidenteById(int id);
-       incidente Save(incidente incidente, string[] selectedUsuarios);
+       incidente Save(incidente incidente);
     }
 }

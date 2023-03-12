@@ -45,7 +45,6 @@ namespace TerraNostra.Controllers
         {
             ServiceInformacion _ServiceInformacion = new ServiceInformacion();
             informacion informacion = null;
-
             try
             {
                 // Si va null
@@ -55,7 +54,7 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Index");
                 }
 
-                informacion = _ServiceInformacion.GetPlanInformacionById(Convert.ToInt32(id));
+                informacion = _ServiceInformacion.GetInformacionById(Convert.ToInt32(id));
                 if (informacion == null)
                 {
                     TempData["Message"] = "No existe la información solicitada";
@@ -82,7 +81,7 @@ namespace TerraNostra.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(informacion informacion, string[] selectedUsuarios)
+        public ActionResult Save(informacion informacion)
         {
 
             //Servicio Libro
@@ -92,7 +91,7 @@ namespace TerraNostra.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    informacion oInformacionI = _ServiceInformacion.Save(informacion, selectedUsuarios);
+                    informacion oInformacionI = _ServiceInformacion.Save(informacion);
                 }
                 else
                 {
@@ -135,6 +134,51 @@ namespace TerraNostra.Controllers
            
             return View();
         }
+
+
+        public ActionResult Details(int id)
+        {
+            ServiceInformacion _ServiceInformacion = new ServiceInformacion();
+            informacion informacion= null;
+
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                informacion = _ServiceInformacion.GetInformacionById(Convert.ToInt32(id));
+              
+                ViewBag.Noticias = _ServiceInformacion.GetInformacionByTipo( 1);
+                ViewBag.Actas = _ServiceInformacion.GetInformacionByTipo( 2);
+
+                if (informacion == null)
+                {
+                    TempData["Message"] = "No existe la residencia solicitada";
+                    TempData["Redirect"] = "Index";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(informacion);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Informacion";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+
+
+        }
+
 
     }
 }

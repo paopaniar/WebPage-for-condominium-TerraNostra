@@ -140,14 +140,20 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenciaController.cs" />
     <Compile Include="Controllers\InformacionController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PlanCobroController.cs" />
     <Compile Include="Controllers\PlanResidenciaController.cs" />
     <Compile Include="Controllers\ResidenciaController.cs" />
     <Compile Include="Controllers\RubroCobroController.cs" />
+    <Compile Include="Enum\Plan.cs" />
+    <Compile Include="Enum\EnumRol.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AutorizeView.cs" />
+    <Compile Include="Security\CustomAuthenticationFilter.cs" />
+    <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
@@ -214,15 +220,29 @@
     <Content Include="Views\PlanCobro\Details.cshtml" />
     <Content Include="Views\PlanResidencia\Index.cshtml" />
     <Content Include="Views\PlanResidencia\Details.cshtml" />
+    <Content Include="Views\Incidencia\Index.cshtml" />
+    <Content Include="Views\Incidencia\Create.cshtml" />
+    <Content Include="Views\Informacion\Index.cshtml" />
+    <Content Include="Views\Informacion\Create.cshtml" />
+    <Content Include="Views\RubroCobro\Index.cshtml" />
+    <Content Include="Views\RubroCobro\Create.cshtml" />
+    <Content Include="Views\PlanCobro\Create.cshtml" />
+    <Content Include="Views\Incidencia\Edit.cshtml" />
+    <Content Include="Views\Informacion\Edit.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\Login\UnAuthorized.cshtml" />
+    <Content Include="Views\PlanCobro\Edit.cshtml" />
+    <Content Include="Views\RubroCobro\Edit.cshtml" />
+    <Content Include="Views\Informacion\Details.cshtml" />
+    <Content Include="Views\RubroCobro\Edit.cshtml" />
+    <Content Include="Views\Informacion\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\EstadosCuenta\" />
-    <Folder Include="Views\Incidencia\" />
-    <Folder Include="Views\Informacion\" />
-    <Folder Include="Views\RubroCobro\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

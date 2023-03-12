@@ -26,44 +26,65 @@
         </dd>
     </dl>
 </div>
-    <div>
-        <p class="card-text">
-            <i class="fa-solid fa-bookmark"></i> <b>@Html.DisplayNameFor(model => model.plan_cobroColection):</b>
-            <ul>
-                @foreach (var item in Model.plan_cobroColection)
-                {
-
-                    <li>@item.detail</li>
-                    <li>@item.Mes</li>
-                    <li>@item.total</li>
-                    <li>@item.estado</li>
-                }
-
-
-                @foreach (var item in Model.plan_cobroColection)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.detail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Mes)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.total)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.estado)
-                        </td>
-                    </tr>
-                }
-            </ul>
-
-        </p>
-    </div>
+<div>
+    <h4>Estados Pagados</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.plan_cobro.detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+        </tr>
 
 
-    <p>
+        @foreach (var c in ViewBag.EstadosPagados)
+        {
+    <tr>
+        <th>
+            @c.plan_cobro.detail
+        </th>
+        <th>
+          <text>Pagado</text>
+        </th>
+    </tr>
+        }
 
-        @Html.ActionLink("Volver a los estados de cuenta", "Index")
-    </p>
+    </table>
+</div>
+
+
+<div>
+    <h4>Estados Pendientes</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.plan_cobro.detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+        </tr>
+
+
+        @foreach (var c in ViewBag.EstadosPendientes)
+        {
+    <tr>
+        <th>
+            @c.plan_cobro.detail
+        </th>
+        <th>
+            <text>Pendiente</text>
+        </th>
+    </tr>
+        }
+
+    </table>
+</div>
+
+
+<p>
+
+    @Html.ActionLink("Volver a los estados de cuenta", "Index")
+</p>

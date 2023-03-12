@@ -12,6 +12,39 @@ namespace Infraestructure.Repository
 {
 	public class RepositoryPlanResidencia : IRepositoryPlanResidencia
 	{
+        public IEnumerable<plan_residencia> GetEstadoByEstado(int id, int estado)
+        {
+            IEnumerable<plan_residencia> oPlanR = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libros por Autor
+                    oPlanR = ctx.plan_residencia.
+                        Where(p => p.residenciaId == id && p.estado == estado).
+                         Include("residencia").
+                        Include("residencia.usuario1").
+                        Include("plan_cobro").ToList();
+
+                }
+                return oPlanR;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public plan_residencia GetEstadoCuentaById(int id)
         {
             plan_residencia oPlan = null;
@@ -24,6 +57,7 @@ namespace Infraestructure.Repository
                     oPlan = ctx.plan_residencia.
                         Where(l => l.id == id).
                         Include("residencia").
+                        Include("residencia.usuario1").
                         Include("plan_cobro").
                         FirstOrDefault();
 
@@ -77,10 +111,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<plan_residencia> GetEstadosPendientes()
-        {
-            throw new NotImplementedException();
-        }
+  
 
         public IEnumerable<plan_residencia> GetPlanResidencia()
 		{

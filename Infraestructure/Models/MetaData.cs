@@ -18,12 +18,14 @@ namespace Infraestructure.Models
         public int individualsNumber { get; set; }
         [Display(Name = "Año")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         public string annio { get; set; }
         [Display(Name = "Estado")]
         public int estado { get; set; }
         [Display(Name = "Información adicional")]
         public string otherInfoDetails { get; set; }
         [Display(Name = "Casa")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int numeroCasa { get; set; }
         //[Display(Name = "Identificación de usuario")]
@@ -38,6 +40,7 @@ namespace Infraestructure.Models
         [Display(Name = "Residente")]
         public int identificacion { get; set; }
         [Display(Name = "Teléfono")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         public string telefono { get; set; }
         [Display(Name = "Nombre")]
         public string nombre { get; set; }
@@ -53,37 +56,38 @@ namespace Infraestructure.Models
     internal partial class PlanCobroMetaData
     {
 
-        
+        [Display(Name = "Total")]
+        public decimal total { get; set; }
         [Display(Name = "Número plan cobro")]
         public int id { get; set; }
         [Display(Name = "Detalle")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
-        public string detail { get; set; }
-        [Display(Name = "Total")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
-        [DisplayFormat(DataFormatString = "{0:C}")]
-        public decimal total { get; set; }
-        
-        [Display(Name = "Rubro")]
-        public int rubroCobroId { get; set; }
+        public string detail { get; set; }        
         [Display(Name = "Fecha")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public System.DateTime datePlan { get; set; }
+        [Display(Name = "Rubros")]
+        public virtual ICollection<rubro_cobro> rubro_cobro { get; set; }
+        
 
     }
 
     internal partial class RubroCobroMetaData
     {
       
-        [Display(Name = "Detalle rubro")]
+        [Display(Name = "Rubro")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
         [Display(Name = "Monto")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal monto { get; set; }
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
+
 
     }
     internal partial class PlanResidenciaMetaData
@@ -97,6 +101,7 @@ namespace Infraestructure.Models
         [Display(Name = "Estado")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int estado { get; set; }
+        
 
     }
     internal partial class IncidenteMetaData

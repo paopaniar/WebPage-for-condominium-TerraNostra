@@ -72,36 +72,51 @@ namespace Infraestructure.Repository
             }
         }
 
-        public informacion Save(informacion informacion, string[] selectedUsuarios)
+        public IEnumerable<informacion> GetInformacionByTipo( int tipo)
         {
-            int retorno = 0;
-            informacion oInformacion = null;
-
-            using (MyContext ctx = new MyContext())
+            IEnumerable<informacion> oInformacion = null;
+            try
             {
-                ctx.Configuration.LazyLoadingEnabled = false;
-                oInformacion = GetInformacionById((int)informacion.id);
-                IRepositoryUsuario _RepositoryUsuarios = new RepositoryUsuario();
-
-                if (oInformacion == null)
+                using (MyContext ctx = new MyContext())
                 {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libros por Autor
+                    oInformacion = ctx.informacion.
+                        Where(p => p.tipo == tipo).ToList();
 
-                    //Insertar
-                    //Logica para agregar las categorias al libro
-                    if (selectedUsuarios != null)
-                    {
+                }
+                return oInformacion;
+            }
 
-                        informacion.Usuarios = new List<usuario>();
-                        foreach (var usuario in selectedUsuarios)
-                        {
-                            var usuarioToAdd = _RepositoryUsuarios.GetUsuarioByID(int.Parse(usuario));
-                            ctx.usuario.Attach(usuarioToAdd); //sin esto, EF intentará crear una categoría
-                            informacion.Usuarios.Add(usuarioToAdd);// asociar a la categoría existente con el libro
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
 
-                        }
-                    }
-                    //Insertar Libro
+        public informacion Save(informacion informacion)
+		{
+			int retorno = 0;
+			informacion oInformacion = null;
+
+			using (MyContext ctx = new MyContext())
+			{
+				ctx.Configuration.LazyLoadingEnabled = false;
+				oInformacion = GetInformacionById((int)informacion.id);
+				
+
+				if (oInformacion == null)
+				{
+
                     ctx.informacion.Add(informacion);
                     //SaveChanges
                     //guarda todos los cambios realizados en el contexto de la base de datos.
@@ -113,30 +128,18 @@ namespace Infraestructure.Repository
                     //Registradas: 1,2,3
                     //Actualizar: 1,3,4
 
-                    //Actualizar incidente
+                    //Actualizar Libro
                     ctx.informacion.Add(informacion);
                     ctx.Entry(informacion).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
-
-                    //Logica para actualizar Categorias
-                    var selectedUsuariosID = new HashSet<string>(selectedUsuarios);
-                    if (selectedUsuarios != null)
-                    {
-                        ctx.Entry(informacion).Collection(p => p.Usuarios).Load();
-                        var newIncidenteForUsuario = ctx.usuario
-                         .Where(x => selectedUsuariosID.Contains(x.identificacion.ToString())).ToList();
-                        informacion.Usuarios = newIncidenteForUsuario;
-
-                        ctx.Entry(informacion).State = EntityState.Modified;
-                        retorno = ctx.SaveChanges();
-                    }
+                  
                 }
             }
 
-            if (retorno >= 0)
-                oInformacion = GetInformacionById((int)informacion.id);
+			if (retorno >= 0)
+				oInformacion = GetInformacionById((int)informacion.id);
 
-            return oInformacion;
-        }
-    }
+			return oInformacion;
+		}
+	}
 }

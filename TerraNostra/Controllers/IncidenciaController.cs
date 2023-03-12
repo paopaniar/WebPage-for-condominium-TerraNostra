@@ -42,22 +42,29 @@ namespace TerraNostra.Controllers
             return new SelectList(lista, "identificacion", "nombre", idUsuario);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            ServiceIncidente _ServiceIncidente = new ServiceIncidente();
-            incidente incidente = null;
+            IServiceIncidente _ServiceIncidente = new ServiceIncidente();
+            incidente incidente = _ServiceIncidente.GetIncidenteById(id);
+            if (incidente.estado==1)
+            {
+                incidente.estado = 0;
+            }
+            else
+            {
+                incidente.estado = 1;
+            }
 
             try
             {
                 // Si va null
-                if (id == null)
+                if (ModelState.IsValid)
                 {
-                    //ATENCION! HACER EL INDEX byPao
-                    return RedirectToAction("Index");
+                    incidente oIncidente = _ServiceIncidente.Save(incidente);
+                  
                 }
 
-                incidente = _ServiceIncidente.GetIncidenteById(Convert.ToInt32(id));
-                if (incidente == null)
+               else
                 {
                     TempData["Message"] = "No existe el incidente solicitado";
                     TempData["Redirect"] = "Incidencia";
@@ -65,11 +72,11 @@ namespace TerraNostra.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                //Listados
-                ViewBag.idUsuario = listUsuarios(incidente.id);
-                
-                return View(incidente);
+
+                return View();
             }
+          
+
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
@@ -84,7 +91,7 @@ namespace TerraNostra.Controllers
 
         // POST: Libro/Edit/5
         [HttpPost]
-        public ActionResult Save(incidente incidente,  string[] selectedUsuarios)
+        public ActionResult Save(incidente incidente)
         {
            
             //Servicio Libro
@@ -94,7 +101,7 @@ namespace TerraNostra.Controllers
                 
                 if (ModelState.IsValid)
                 {
-                    incidente oIncidenteI= _ServiceIncidente.Save(incidente, selectedUsuarios);
+                    incidente oIncidenteI= _ServiceIncidente.Save(incidente);
                 }
                 else
                 {
@@ -131,10 +138,7 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            //Que recursos necesito para crear una incidencia
-            //usuarios
             ViewBag.idUsuario = listUsuarios();
-
             return View();
         }
     }

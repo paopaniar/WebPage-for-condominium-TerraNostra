@@ -2,55 +2,43 @@
 
 @{
     ViewBag.Title = "Details";
-}
 
+    var totalSum = Model.total;
+    foreach (var c in Model.rubro_cobro)
+    {
+        totalSum += c.monto;
+    }
+}
 
 
 <div>
     <hr />
-    <h4>Información detallada de plan cobro</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.detail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.detail)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.total)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.total)
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rubro_cobro.detalle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rubro_cobro.detalle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rubro_cobro.monto)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.rubro_cobro.monto)
-        </dd>
-
-
-
-
-
-
-    </dl>
-</div>
-<p>
+    <center> <h4 style="font-family: Broadway">Información detallada de plan cobro</h4></center>
    
-    @Html.ActionLink("Volver a la lista", "Index")
+    <hr />
+
+    <div class="col-md-8">
+        <div class="card-body">
+            <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2">@Html.DisplayFor(model => model.detail)</span>
+            <p class="card-text" style="color: #E45641; font-weight: 500;"
+               @totalSum ;
+                </p>
+
+            <p class="card-text">
+                <i class="fa-solid fa-bookmark"></i> <b>@Html.DisplayNameFor(model => model.rubro_cobro):</b>
+                <ul>
+                    @foreach (var c in Model.rubro_cobro)
+                    {
+                        <li>@c.detalle</li>
+                    }
+                </ul>
+            </p>
+
+        </div>
+    </div>
+</div>
+<hr />
+<p>
+
+    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-secondary" })
 </p>
