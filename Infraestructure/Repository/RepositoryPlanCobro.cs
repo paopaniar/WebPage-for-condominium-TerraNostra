@@ -51,7 +51,7 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oPlan = ctx.plan_cobro.
-                        Where(l => l.id == id).FirstOrDefault();
+                        Where(l => l.id == id).Include("rubro_cobro").FirstOrDefault();
 
                 }
                 return oPlan;
