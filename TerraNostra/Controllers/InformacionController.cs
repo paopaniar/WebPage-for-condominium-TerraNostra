@@ -45,7 +45,6 @@ namespace TerraNostra.Controllers
         {
             ServiceInformacion _ServiceInformacion = new ServiceInformacion();
             informacion informacion = null;
-
             try
             {
                 // Si va null
