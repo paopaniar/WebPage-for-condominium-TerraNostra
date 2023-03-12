@@ -1,9 +1,14 @@
+<<<<<<< Updated upstream
 ﻿
 
 
 @{
+=======
+﻿@{
+>>>>>>> Stashed changes
     ViewBag.Title = "Home Page";
 }
+
 
 <center>
     <h1>Terra Nostra</h1>
@@ -33,14 +38,17 @@
 </center>
 <hr />
 <center>
+
     <div>
-        <h1>NOTICIAS</h1>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="~/Utils/imagenes/piscina.jpg" alt="Card image cap">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
+        <h1>ACTAS</h1>
+        @foreach (var c in ViewBag.Actas)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/Utils/imagenes/piscina.jpg" alt="Card image cap">
+                <div class="card-body">
+                    @c.detalle
+                </div>
+            </div>}
     </div>
 
 

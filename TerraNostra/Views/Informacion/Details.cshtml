@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.informacion
 
-@{
-    ViewBag.Title = "Details";
-}
+@{ ViewBag.Title = "Details"; }
 
 <br />
 
@@ -41,17 +39,15 @@
         <dd>
             @if (Model.tipo == 1)
             {
-                <text>Noticicas</text> }
-            else
-            {
-                if (Model.tipo == 2)
-                {
-                    <text>Actas</text>
-                }
+<text>Noticicas</text> }
+else
+{
+if (Model.tipo == 2)
+{
+<text>Actas</text> }
                 else
                 {
-                    <text>Artículos</text>
-                }
+<text>Artículos</text>                }
 
             }
         </dd>
@@ -63,13 +59,10 @@
         <dd>
             @if (Model.estado == 1)
             {
-                <text>Visible</text>
-            }
+<text>Visible</text> }
             else
             {
-                <text>Oculta</text>
-
-            }
+<text>Oculta</text>            }
         </dd>
 
     </dl>

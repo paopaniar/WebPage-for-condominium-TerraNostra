@@ -224,7 +224,6 @@
     <Content Include="Views\Informacion\Index.cshtml" />
     <Content Include="Views\Informacion\Create.cshtml" />
     <Content Include="Views\RubroCobro\Index.cshtml" />
-    <Content Include="Views\RubroCobro\Edit.cshtml" />
     <Content Include="Views\RubroCobro\Create.cshtml" />
     <Content Include="Views\PlanCobro\Create.cshtml" />
     <Content Include="Views\Incidencia\Edit.cshtml" />
@@ -232,7 +231,12 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Login\UnAuthorized.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Views\PlanCobro\Edit.cshtml" />
+=======
+    <Content Include="Views\RubroCobro\Edit.cshtml" />
+    <Content Include="Views\Informacion\Details.cshtml" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,8 +50,7 @@ namespace TerraNostra.Controllers
         public ActionResult Edit(int? id)
         {
             ServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
-            rubro_cobro rubro = null;
-
+            rubro_cobro rubroCobro = null;
             try
             {
                 // Si va null
@@ -61,26 +60,26 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Index");
                 }
 
-                rubro = _ServiceRubro.GetRubroCobroById(Convert.ToInt32(id));
-                if (rubro == null)
+                rubroCobro = _ServiceRubro.GetRubroCobroById(Convert.ToInt32(id));
+                if (rubroCobro == null)
                 {
-                    TempData["Message"] = "No existe el incidente solicitado";
+                    TempData["Message"] = "No existe la información solicitada";
                     TempData["Redirect"] = "RubroCobro";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
                 //Listados
-               
+                
 
-                return View(rubro);
+                return View(rubroCobro);
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Incidencia";
+                TempData["Redirect"] = "Informacion";
                 TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
