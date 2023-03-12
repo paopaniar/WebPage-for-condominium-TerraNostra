@@ -19,7 +19,7 @@ namespace Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(usuario usuario)
+         public ActionResult Login(usuario usuario)
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             usuario oUsuario = null;
@@ -36,7 +36,7 @@ namespace Web.Controllers
                     oUsuario = _ServiceUsuario.GetUsuario(usuario.identificacion, usuario.password);
                     if (oUsuario != null)
                     {
-                        Session["User"] = oUsuario;
+                       Session["User"] = oUsuario;
                         Log.Info($"Inicio sesion: {usuario.identificacion}");
                         TempData["mensaje"] = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
                             "Usuario autenticado", TerraNostra.Utils.SweetAlertMessageType.success

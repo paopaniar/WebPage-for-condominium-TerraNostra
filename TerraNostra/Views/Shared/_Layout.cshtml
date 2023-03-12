@@ -31,5 +31,12 @@
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
 
     @RenderSection("scripts", required: false)
+
+    @if (ViewBag.NotificationMessage != null)
+            {
+        <script>
+            @Html.Raw(ViewBag.NotificationMessage)
+        </script>
+            }
 </body>
 </html>

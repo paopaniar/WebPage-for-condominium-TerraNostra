@@ -11,10 +11,9 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
-                        Principal
-                        <span class="visually-hidden">(current)</span>
-                    </a>
+                    @Html.ActionLink("Principal", "Index", "Home",
+               null, new { @class = "nav-link" })
+
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listados</a>
@@ -39,11 +38,56 @@
                null, new { @class = "nav-link" })
                 </li>
                 <li>@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                <li class="nav-item dropdown">
+                    @* Información usuario *@
+                    @{
+                        String nombre = "";
+                        int identificacion= 0;
+
+                        if (Session["User"] != null)
+                        {
+                            Infraestructure.Models.usuario usuario = new Infraestructure.Models.usuario();
+                            usuario = (Infraestructure.Models.usuario)Session["User"];
+                            nombre = $"{usuario.nombre} {usuario.apellido}";
+                            identificacion = usuario.identificacion;
+                        }
+                    }
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                       href="#" role="button" aria-haspopup="true"
+                       aria-expanded="false"><i class="fa-solid fa-user"></i>@identificacion</a>
+
+
+                    <div class="dropdown-menu">
+                        @if (Session["User"] != null)
+                        {
+                            <div class="dropdown-item">
+                                @* Nombre Usuario *@
+                                Usuario: @nombre
+                            </div>
+                        }
+
+                        @if (Session["User"] == null)
+                        {
+                            <a class="dropdown-item"
+                               @*Accion, Controlador*@
+                               href="@Url.Action("Index","Login")">
+                                <i class="fa-solid fa-user-plus"></i>
+                                Login
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="dropdown-item"
+                               href="@Url.Action("Logout","Login")">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
+                            </a>
+                        }
+                    </div>
+                </li>
 
             </ul>
-            <form class="d-flex">
-                <button type="button" class="btn btn-warning btn-lg"><i class="fa fa-user-circle " ></i> Ingreso</button>
-            </form>
+            
         </div>
     </div>
 </nav>
