@@ -72,7 +72,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<informacion> GetInformacionByTipo(int id, int tipo)
+        public IEnumerable<informacion> GetInformacionByTipo( int tipo)
         {
             IEnumerable<informacion> oInformacion = null;
             try
@@ -82,9 +82,7 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libros por Autor
                     oInformacion = ctx.informacion.
-                        Where(p => p.id == id && p.tipo == tipo).
-                         Include("usuario1").
-                         ToList();
+                        Where(p => p.tipo == tipo).ToList();
 
                 }
                 return oInformacion;

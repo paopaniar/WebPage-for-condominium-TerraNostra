@@ -31,7 +31,7 @@ namespace TerraNostra.Controllers
         }
 
 
-        public ActionResult Details()
+        public ActionResult Agrupar()
         {
             ServiceInformacion _ServiceInformacion = new ServiceInformacion();
             informacion informacion = null;

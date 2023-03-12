@@ -13,6 +13,6 @@ namespace Infraestructure.Repository
         informacion GetInformacionById(int id);
         informacion Save(informacion informacion);
 
-        IEnumerable<informacion> GetInformacionByTipo(int id, int tipo);
+        IEnumerable<informacion> GetInformacionByTipo( int tipo);
     }
 }
