@@ -23,6 +23,8 @@ namespace TerraNostra.Controllers
 
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
                 ViewBag.listaUsuario = _ServiceUsuario.GetUsuario();
+                ViewBag.Noticias = _ServiceInformacion.GetInformacionByTipo(1);
+                ViewBag.Actas = _ServiceInformacion.GetInformacionByTipo(2);
                 return View(lista);
             }
             catch (Exception ex)

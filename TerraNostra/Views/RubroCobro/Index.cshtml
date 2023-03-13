@@ -4,7 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
+<center>
+    <h3 style="font-family: Broadway">Rubros</h3>
+</center>
 
 <p>
     <a href="@Url.Action("Create", "rubroCobro")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
@@ -25,29 +28,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.detalle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.monto)
-        </td>
-        <td>
-               @if (item.estado == 1)
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.detalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto)
+            </td>
+            <td>
+                @if (item.estado == 1)
                 {
-                    <text>Este rubro se encuentra activo</text> }
+                    <text>Activo</text> }
                 else
                 {
-                    <text>Este rubro se encuentra desabilitado</text>}
-      
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+                    <text>Inactivo</text>}
+
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id })
+
+
+            </td>
+        </tr>
+    }
 
 </table>

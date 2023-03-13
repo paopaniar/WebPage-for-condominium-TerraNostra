@@ -1,9 +1,9 @@
-﻿
-
-
+﻿@model IEnumerable<Infraestructure.Models.informacion>
 @{
     ViewBag.Title = "Home Page";
+
 }
+
 
 <center>
     <h1>Terra Nostra</h1>
@@ -30,14 +30,60 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <hr />
+
+    <div class="row">
+
+        <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
+            <div class="card-header"><b>Noticias</b></div>
+            @foreach (var item in Model)
+            {
+                <div class="card-body">
+
+                    @if (item.tipo == 1)
+                    {
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
+                    }
+
+
+                </div>
+            }
+        </div>&nbsp;
+
+        <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
+            <div class="card-header"><b>Actas</b></div>
+            @foreach (var item in Model)
+            {
+                <div class="card-body">
+
+                    @if (item.tipo == 2)
+                    {
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
+                    }
+
+
+                </div>
+            }
+        </div>&nbsp;
+
+        <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
+            <div class="card-header"><b>Artículos</b></div>
+            @foreach (var item in Model)
+            {
+                <div class="card-body">
+
+                    @if (item.tipo == 3)
+                    {
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
+                    }
+
+
+                </div>
+            }
+        </div>
+    </div>
 </center>
 <hr />
+<br />
 <center>
-
-    
-
-
-
-</center>
-
-
+    </center>

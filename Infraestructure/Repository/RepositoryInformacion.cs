@@ -72,7 +72,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<informacion> GetInformacionByTipo( int tipo)
+        public IEnumerable<informacion> GetInformacionByTipo(int tipo)
         {
             IEnumerable<informacion> oInformacion = null;
             try

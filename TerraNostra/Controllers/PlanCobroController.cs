@@ -32,6 +32,7 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
         public ActionResult Details(int? id)
         {
             ServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
