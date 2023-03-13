@@ -87,10 +87,23 @@ namespace Infraestructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oPlanCobro = GetPlanCobroById((int)planCobro.id);
-                
+                IRepositoryRubroCobro _RepositoryRubro = new RepositoryRubroCobro();
 
                 if (oPlanCobro == null)
                 {
+                    if (selectedRubros != null)
+                    {
+
+                        planCobro.rubro_cobro = new List<rubro_cobro>();
+                        foreach (var rubro in selectedRubros)
+                        {
+                            var rubroToAdd = _RepositoryRubro.GetRubroCobroById(int.Parse(rubro));
+                            ctx.rubro_cobro.Attach(rubroToAdd); //sin esto, EF intentará crear una categoría
+                            planCobro.rubro_cobro.Add(rubroToAdd);// asociar a la categoría existente con el libro
+
+
+                        }
+                    }
                     ctx.plan_cobro.Add(planCobro);
                    
                     retorno = ctx.SaveChanges();
@@ -101,6 +114,17 @@ namespace Infraestructure.Repository
                     ctx.plan_cobro.Add(planCobro);
                     ctx.Entry(planCobro).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
+                    var selectRubroId = new HashSet<string>(selectedRubros);
+                    if (selectedRubros != null)
+                    {
+                        ctx.Entry(planCobro).Collection(p => p.rubro_cobro).Load();
+                        var newCategoriaForLibro = ctx.rubro_cobro
+                         .Where(x => selectRubroId.Contains(x.id.ToString())).ToList();
+                        planCobro.rubro_cobro = newCategoriaForLibro;
+
+                        ctx.Entry(planCobro).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+                    }
                 }
             }
 

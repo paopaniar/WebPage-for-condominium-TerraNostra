@@ -45,38 +45,37 @@ namespace TerraNostra.Controllers
         }
         public ActionResult Edit(int? id)
         {
-            ServiceInformacion _ServiceInformacion = new ServiceInformacion();
-            informacion informacion = null;
+            ServiceInformacion _ServiceLibro = new ServiceInformacion();
+            informacion libro = null;
+
             try
             {
                 // Si va null
                 if (id == null)
                 {
-                    //ATENCION! HACER EL INDEX byPao
                     return RedirectToAction("Index");
                 }
 
-                informacion = _ServiceInformacion.GetInformacionById(Convert.ToInt32(id));
-                if (informacion == null)
+                libro = _ServiceLibro.GetInformacionById(Convert.ToInt32(id));
+                if (libro == null)
                 {
-                    TempData["Message"] = "No existe la información solicitada";
+                    TempData["Message"] = "No existe el libro solicitado";
                     TempData["Redirect"] = "Informacion";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
                 //Listados
-                ViewBag.idUsuario = listUsuarios(informacion.id);
-
-                return View(informacion);
+               
+                return View(libro);
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Informacion";
-                TempData["Redirect-Action"] = "Index";
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }

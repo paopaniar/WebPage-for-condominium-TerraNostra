@@ -33,19 +33,16 @@
     <hr />
 
     <div class="row">
-
         <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
             <div class="card-header"><b>Noticias</b></div>
             @foreach (var item in Model)
             {
                 <div class="card-body">
 
-                    @if (item.tipo == 1)
+                    @if (item.tipo == 1 && item.estado == 1)
                     {
                         <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
                     }
-
-
                 </div>
             }
         </div>&nbsp;
@@ -56,7 +53,7 @@
             {
                 <div class="card-body">
 
-                    @if (item.tipo == 2)
+                    @if (item.tipo == 2 && item.estado == 1)
                     {
                         <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
                     }
@@ -72,7 +69,7 @@
             {
                 <div class="card-body">
 
-                    @if (item.tipo == 3)
+                    @if (item.tipo == 3 && item.estado == 1)
                     {
                         <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
                     }

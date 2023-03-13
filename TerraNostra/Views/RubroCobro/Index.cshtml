@@ -9,13 +9,12 @@
     <h3 style="font-family: Broadway">Rubros</h3>
 </center>
 
-<p>
-    <a href="@Url.Action("Create", "rubroCobro")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
-    @*@Html.ActionLink("Crear", "Create")*@
 
+<p>
+    <a href="@Url.Action("Create", "rubroCobro")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear rubro</a>
 </p>
 <table class="table">
-    <tr>
+    <tr class="table-dark">
         <th>
             @Html.DisplayNameFor(model => model.detalle)
         </th>
@@ -25,7 +24,7 @@
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
-        <th></th>
+        <th>Por hacer</th>
     </tr>
 
     @foreach (var item in Model)
@@ -48,7 +47,6 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.id })
-
 
             </td>
         </tr>

@@ -55,9 +55,12 @@ namespace Infraestructure.Models
 
     internal partial class PlanCobroMetaData
     {
-
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
         [Display(Name = "Total")]
         public decimal total { get; set; }
+        [Display(Name = "Mes")]
+        public string mes { get; set; }
         [Display(Name = "Número plan cobro")]
         public int id { get; set; }
         [Display(Name = "Detalle")]
@@ -68,6 +71,7 @@ namespace Infraestructure.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public System.DateTime datePlan { get; set; }
+        
         [Display(Name = "Rubros")]
         public virtual ICollection<rubro_cobro> rubro_cobro { get; set; }
         
