@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TerraNostra.Enum
 {
-    public enum Rol
+    public enum Roles
     {
         Administrador = 1, Residente = 2
     }
