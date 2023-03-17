@@ -33,6 +33,17 @@
                         @Html.ActionLink("Información", "Index", "informacion", null, new { @class = "dropdown-item" })
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Asignaciones</a>
+                    <div class="dropdown-menu">
+
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Asignar Plan a Residente", "Index", "planResidencia", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Asignar Residencia a Usuario", "Index", "planResidencia", null, new { @class = "dropdown-item" })
+
+                    </div>
+                </li>
                 <li>
                     @Html.ActionLink("Acerca de", "About", "Home",
                null, new { @class = "nav-link" })
