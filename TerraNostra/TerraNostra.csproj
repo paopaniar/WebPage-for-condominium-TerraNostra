@@ -152,6 +152,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizeView.cs" />
     <Compile Include="Security\CustomAuthenticationFilter.cs" />
+    <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
