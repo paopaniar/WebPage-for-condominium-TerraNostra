@@ -42,19 +42,21 @@
                     @* Información usuario *@
                     @{
                         String nombre = "";
-                        int identificacion= 0;
+                        String email = "Perfil";
 
                         if (Session["User"] != null)
                         {
                             Infraestructure.Models.usuario usuario = new Infraestructure.Models.usuario();
                             usuario = (Infraestructure.Models.usuario)Session["User"];
                             nombre = $"{usuario.nombre} {usuario.apellido}";
-                            identificacion = usuario.identificacion;
+                            email = usuario.Email;
                         }
                     }
+
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                        href="#" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fa-solid fa-user"></i>@identificacion</a>
+                       aria-expanded="false"><i class="fa-solid fa-user"></i>@email</a>
 
 
                     <div class="dropdown-menu">
@@ -85,7 +87,6 @@
                         }
                     </div>
                 </li>
-
             </ul>
             
         </div>
