@@ -41,7 +41,19 @@ namespace TerraNostra.Controllers
             IEnumerable<usuario> lista = _ServiceUsuario.GetUsuario();
             return new SelectList(lista, "identificacion", "nombre", idUsuario);
         }
+        private SelectList listaTipos(ICollection<incidente> incidencias = null)
+        {
+            IServiceIncidente _ServiceIncidente = new ServiceIncidente();
+            IEnumerable<incidente> lista = _ServiceIncidente.GetIncidente();
+            //Seleccionar categorias
+            int[] listaIncidencias = null;
+            if (incidencias != null)
+            {
+                listaIncidencias = incidencias.Select(c => c.tipo).ToArray();
+            }
 
+            return new SelectList(lista, "tipo", "descTipo", listaIncidencias);
+        }
         public ActionResult Edit(int id)
         {
             IServiceIncidente _ServiceIncidente = new ServiceIncidente();
@@ -138,7 +150,7 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.idUsuario = listUsuarios();
+            ViewBag.tipos = listaTipos();
             return View();
         }
     }

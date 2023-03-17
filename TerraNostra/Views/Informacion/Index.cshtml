@@ -15,11 +15,11 @@
 </p>
 <table class="table">
     <tr>
-       
+
         <th>
             @Html.DisplayNameFor(model => model.detalle)
         </th>
-      
+
         <th>
             @Html.DisplayNameFor(model => model.tipo)
         </th>
@@ -32,39 +32,37 @@
     @foreach (var item in Model)
     {
         <tr>
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.detalle)
             </td>
-       
+
             <td>
                 @if (item.tipo == 1)
                 {
-                    <text>Noticicas</text> }
-                else
-                {
-                    if (item.tipo == 2)
-                    {
-                        <text>Actas</text>
-                    }
+<text>Noticicas</text> }
+else
+{
+if (item.tipo == 2)
+{
+<text>Actas</text> }
                     else
                     {
-                        <text>Artículos</text>
-                    }
+<text>Artículos</text>                    }
 
                 }
             </td>
             <td>
-                @if (item.estado == 1)
+                @if (item.estado == 0)
                 {
-                    <text>Visible</text> }
-                else
-                {
-                    <text>Oculta</text>}
+<text>Visible</text> }
+else
+{
+<text>Oculta</text>}
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.id }) 
-                
+                @Html.ActionLink("Editar", "Edit", new { id = item.id })
+
             </td>
         </tr>
     }

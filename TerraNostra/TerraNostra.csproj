@@ -253,8 +253,8 @@
     <Content Include="Views\RubroCobro\Edit.cshtml" />
     <Content Include="Views\Informacion\Details.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
-    <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\UnAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

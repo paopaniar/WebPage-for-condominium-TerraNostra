@@ -129,14 +129,23 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            //Que recursos necesito para crear un Libro
-            //Autores
-            ViewBag.idUsuario = listUsuarios();
-           
+            ViewBag.tipos = listaTipos();
             return View();
         }
 
+        private SelectList listaTipos(ICollection<informacion> informaciones = null)
+        {
+            IServiceInformacion _ServiceInformacion = new ServiceInformacion();
+            IEnumerable<informacion> lista = _ServiceInformacion.GetInformacion();
+            //Seleccionar categorias
+            int[] listaInformacioness = null;
+            if (informaciones != null)
+            {
+                listaInformacioness = informaciones.Select(c => c.tipo).ToArray();
+            }
 
+            return new SelectList(lista, "tipo", "descTipo", listaInformacioness);
+        }
         public ActionResult Details(int id)
         {
             ServiceInformacion _ServiceInformacion = new ServiceInformacion();

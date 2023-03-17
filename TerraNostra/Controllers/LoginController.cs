@@ -68,7 +68,7 @@ namespace Web.Controllers
             if (Session["User"] != null)
             {
                 usuario usuario = Session["User"] as usuario;
-                Log.Warn($"No autorizado {usuario.identificacion}");
+                Log.Warn($"No autorizado {usuario.Email}");
             }
             return View();
         }
