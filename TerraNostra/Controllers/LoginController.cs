@@ -33,11 +33,11 @@ namespace Web.Controllers
                 //Verificar las credenciales
                 if (ModelState.IsValid)
                 {
-                    oUsuario = _ServiceUsuario.GetUsuario(usuario.identificacion, usuario.password);
+                    oUsuario = _ServiceUsuario.GetUsuario(usuario.Email, usuario.password);
                     if (oUsuario != null)
                     {
                        Session["User"] = oUsuario;
-                        Log.Info($"Inicio sesion: {usuario.identificacion}");
+                        Log.Info($"Inicio sesion: {usuario.Email}");
                         TempData["mensaje"] = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
                             "Usuario autenticado", TerraNostra.Utils.SweetAlertMessageType.success
                             );
@@ -45,7 +45,7 @@ namespace Web.Controllers
                     }
                     else
                     {
-                        Log.Warn($"Intento de inicio: {usuario.identificacion}");
+                        Log.Warn($"Intento de inicio: {usuario.Email}");
                         ViewBag.NotificationMessage = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
                             "Usuario no válido", TerraNostra.Utils.SweetAlertMessageType.error
                             );

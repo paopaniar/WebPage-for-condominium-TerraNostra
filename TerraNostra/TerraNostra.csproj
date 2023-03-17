@@ -247,14 +247,14 @@
     <Content Include="Views\PlanCobro\Create.cshtml" />
     <Content Include="Views\Incidencia\Edit.cshtml" />
     <Content Include="Views\Informacion\Edit.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
-    <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\PlanCobro\Edit.cshtml" />
     <Content Include="Views\Informacion\Details.cshtml" />
     <Content Include="Views\RubroCobro\Edit.cshtml" />
     <Content Include="Views\Informacion\Details.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\Login\UnAuthorized.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

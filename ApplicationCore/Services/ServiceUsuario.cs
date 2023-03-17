@@ -24,7 +24,7 @@ namespace ApplicationCore.Services
             return repository.GetUsuario();
         }
 
-        public usuario GetUsuario(int identificacion, string password)
+        public usuario GetUsuario(string email, string password)
         {
             usuario oUsuario = null;
             try
@@ -33,7 +33,7 @@ namespace ApplicationCore.Services
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oUsuario = ctx.usuario.
-                     Where(p => p.identificacion.Equals(identificacion) && p.password == password).
+                     Where(p => p.Email.Equals(email) && p.password == password).
                     FirstOrDefault<usuario>();
                 }
                 if (oUsuario != null)
