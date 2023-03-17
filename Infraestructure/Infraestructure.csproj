@@ -149,15 +149,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Content\bootstrap\mixins.less" />
     <None Include="Content\bootstrap\variables.less" />
     <None Include="Content\sweetalert\sweet-alert-animations.less" />
     <None Include="Content\sweetalert\sweet-alert-combine.less" />
     <None Include="Content\sweetalert\sweet-alert.less" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>

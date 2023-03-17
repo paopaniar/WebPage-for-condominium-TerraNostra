@@ -25,6 +25,7 @@
           <Property Name="estado" Type="int" />
           <Property Name="tipo" Type="int" Nullable="false" />
           <Property Name="detalle" Type="varchar" MaxLength="255" />
+          <Property Name="descTipo" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="informacion">
           <Key>
@@ -35,7 +36,8 @@
           <Property Name="detalle" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="fechaInformacion" Type="datetime2" Precision="7" />
           <Property Name="tipo" Type="int" Nullable="false" />
-          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" />
+          <Property Name="descTipo" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="plan_cobro">
           <Key>
@@ -118,8 +120,9 @@
           <Property Name="telefono" Type="int" />
           <Property Name="estado" Type="int" />
           <Property Name="password" Type="char" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__incidente__detal__2D27B809">
+        <Association Name="FK__incidente__detal__60A75C0F">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="incidente" Type="Self.incidente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,7 +134,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__informaci__usuar__300424B4">
+        <Association Name="FK__informaci__usuar__6477ECF3">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="informacion" Type="Self.informacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -251,11 +254,11 @@
           <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rubro_cobro" EntityType="Self.rubro_cobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__incidente__detal__2D27B809" Association="Self.FK__incidente__detal__2D27B809">
+          <AssociationSet Name="FK__incidente__detal__60A75C0F" Association="Self.FK__incidente__detal__60A75C0F">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="incidente" EntitySet="incidente" />
           </AssociationSet>
-          <AssociationSet Name="FK__informaci__usuar__300424B4" Association="Self.FK__informaci__usuar__300424B4">
+          <AssociationSet Name="FK__informaci__usuar__6477ECF3" Association="Self.FK__informaci__usuar__6477ECF3">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="informacion" EntitySet="informacion" />
           </AssociationSet>
@@ -318,7 +321,8 @@
           <Property Name="estado" Type="Int32" />
           <Property Name="tipo" Type="Int32" Nullable="false" />
           <Property Name="detalle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuario1" Relationship="Self.FK__incidente__detal__2D27B809" FromRole="incidente" ToRole="usuario" />
+          <Property Name="descTipo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK__incidente__detal__60A75C0F" FromRole="incidente" ToRole="usuario" />
         </EntityType>
         <EntityType Name="informacion">
           <Key>
@@ -329,8 +333,9 @@
           <Property Name="detalle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaInformacion" Type="DateTime" Precision="7" />
           <Property Name="tipo" Type="Int32" Nullable="false" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="usuario1" Relationship="Self.FK__informaci__usuar__300424B4" FromRole="informacion" ToRole="usuario" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="descTipo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario1" Relationship="Self.FK__informaci__usuar__6477ECF3" FromRole="informacion" ToRole="usuario" />
         </EntityType>
         <EntityType Name="plan_cobro">
           <Key>
@@ -415,8 +420,9 @@
           <Property Name="telefono" Type="Int32" />
           <Property Name="estado" Type="Int32" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="incidente" Relationship="Self.FK__incidente__detal__2D27B809" FromRole="usuario" ToRole="incidente" />
-          <NavigationProperty Name="informacion" Relationship="Self.FK__informaci__usuar__300424B4" FromRole="usuario" ToRole="informacion" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="incidente" Relationship="Self.FK__incidente__detal__60A75C0F" FromRole="usuario" ToRole="incidente" />
+          <NavigationProperty Name="informacion" Relationship="Self.FK__informaci__usuar__6477ECF3" FromRole="usuario" ToRole="informacion" />
           <NavigationProperty Name="reservacion" Relationship="Self.FK__reservaci__usuar__34C8D9D1" FromRole="usuario" ToRole="reservacion" />
           <NavigationProperty Name="residencia" Relationship="Self.FK__residenci__usuar__38996AB5" FromRole="usuario" ToRole="residencia" />
           <NavigationProperty Name="rol" Relationship="Self.FK__usuario__rolId__29572725" FromRole="usuario" ToRole="rol" />
@@ -433,7 +439,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__incidente__detal__2D27B809">
+        <Association Name="FK__incidente__detal__60A75C0F">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="incidente" Type="Self.incidente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -445,7 +451,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__informaci__usuar__300424B4">
+        <Association Name="FK__informaci__usuar__6477ECF3">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="informacion" Type="Self.informacion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -536,11 +542,11 @@
             <End Role="areaComun" EntitySet="areaComun" />
             <End Role="reservacion" EntitySet="reservacion" />
           </AssociationSet>
-          <AssociationSet Name="FK__incidente__detal__2D27B809" Association="Self.FK__incidente__detal__2D27B809">
+          <AssociationSet Name="FK__incidente__detal__60A75C0F" Association="Self.FK__incidente__detal__60A75C0F">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="incidente" EntitySet="incidente" />
           </AssociationSet>
-          <AssociationSet Name="FK__informaci__usuar__300424B4" Association="Self.FK__informaci__usuar__300424B4">
+          <AssociationSet Name="FK__informaci__usuar__6477ECF3" Association="Self.FK__informaci__usuar__6477ECF3">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="informacion" EntitySet="informacion" />
           </AssociationSet>
@@ -595,6 +601,7 @@
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="detalle" ColumnName="detalle" />
+                <ScalarProperty Name="descTipo" ColumnName="descTipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -607,6 +614,7 @@
                 <ScalarProperty Name="fechaInformacion" ColumnName="fechaInformacion" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="descTipo" ColumnName="descTipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -688,6 +696,7 @@
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

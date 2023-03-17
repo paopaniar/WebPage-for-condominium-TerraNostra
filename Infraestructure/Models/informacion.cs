@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(informacionMetaData))]
+    
     public partial class informacion
     {
         public int id { get; set; }
@@ -21,7 +19,8 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
         public Nullable<System.DateTime> fechaInformacion { get; set; }
         public int tipo { get; set; }
-        public int estado { get; set; }
+        public Nullable<int> estado { get; set; }
+        public string descTipo { get; set; }
     
         public virtual usuario usuario1 { get; set; }
     }

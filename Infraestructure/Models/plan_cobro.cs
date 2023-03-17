@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(PlanCobroMetaData))]
+    
     public partial class plan_cobro
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
