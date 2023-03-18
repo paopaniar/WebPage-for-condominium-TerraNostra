@@ -10,36 +10,52 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-	public class ServiceUsuario : IServiceUsuario
-	{
+    public class ServiceUsuario : IServiceUsuario
+    {
         public usuario GetUsuarioByID(int id)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
-            usuario oUsuario = repository.GetUsuarioByID(id);
-            // Desencriptar el password para presentarlo
-            oUsuario.password = Cryptography.DecrypthAES(oUsuario.password);
-            return oUsuario;
+            return repository.GetUsuarioByID(id);
         }
 
-
-        public usuario GetUser(string email, string password)
-        {
-            IRepositoryUsuario repository = new RepositoryUsuario();
-            // Encriptar el password para poder compararlo
-
-            string cryptPassword = Cryptography.EncrypthAES(password);
-
-            return repository.GetUser(email, cryptPassword);
-        }
 
         public IEnumerable<usuario> GetUsuario()
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             return repository.GetUsuario();
-
         }
 
-      
 
+        public usuario GetUsuario(string email, string password)
+        {
+            usuario oUsuario = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oUsuario = ctx.usuario.
+                     Where(p => p.Email.Equals(email) && p.password == password).
+                    FirstOrDefault<usuario>();
+                }
+                if (oUsuario != null)
+                    oUsuario = GetUsuarioByID(oUsuario.identificacion);
+                return oUsuario;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+
+
+        }
     }
 }

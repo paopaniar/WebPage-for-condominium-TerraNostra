@@ -84,7 +84,9 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-         
+            ViewBag.idResidencia = listaResidencias();
+            ViewBag.idPlanes = listaPlanes();
+
             return View();
         }
         private SelectList listaResidencias(ICollection<residencia> residencias = null)
@@ -132,7 +134,7 @@ namespace TerraNostra.Controllers
                     Utils.Util.ValidateErrors(this);
                     
                     ViewBag.idResidencia = listaResidencias();
-                    ViewBag.idPlanes = listaResidencias();
+                    ViewBag.idPlanes = listaPlanes();
                     
                     if (plan_residencia.id > 0)
                     {

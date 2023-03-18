@@ -33,7 +33,7 @@ namespace Web.Controllers
                 //Verificar las credenciales
                 if (ModelState.IsValid)
                 {
-                    oUsuario = _ServiceUsuario.GetUser(usuario.Email, usuario.password);
+                    oUsuario = _ServiceUsuario.GetUsuario(usuario.Email, usuario.password);
                     if (oUsuario != null)
                     {
                        Session["User"] = oUsuario;
