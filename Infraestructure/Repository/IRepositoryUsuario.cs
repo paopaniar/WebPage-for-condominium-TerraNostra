@@ -9,7 +9,9 @@ namespace Infraestructure.Repository
 {
 	public interface IRepositoryUsuario
 	{
-		usuario GetUsuario(string email, string password);
+		usuario GetUser(string email, string password);
 		usuario GetUsuarioByID(int id);
+		IEnumerable<usuario> GetUsuario();
+
 	}
 }

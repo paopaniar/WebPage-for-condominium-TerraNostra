@@ -22,14 +22,24 @@ namespace ApplicationCore.Services
         }
 
 
-        public usuario GetUsuario(string email, string password)
+        public usuario GetUser(string email, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             // Encriptar el password para poder compararlo
 
             string cryptPassword = Cryptography.EncrypthAES(password);
 
-            return repository.GetUsuario(email, cryptPassword);
+            return repository.GetUser(email, cryptPassword);
         }
+
+        public IEnumerable<usuario> GetUsuario()
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetUsuario();
+
+        }
+
+      
+
     }
 }

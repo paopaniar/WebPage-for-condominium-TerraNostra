@@ -47,7 +47,34 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-        public usuario GetUsuario(string email, string password)
+        public IEnumerable<usuario> GetUsuario()
+        {
+            try
+            {
+                IEnumerable<usuario> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Select * from Autor 
+                    lista = ctx.usuario.ToList<usuario>();
+                    //lista = ctx.Autor.ToList();
+                }
+                return lista;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+        public usuario GetUser(string email, string password)
         {
             usuario oUsuario = null;
             try
