@@ -29,9 +29,12 @@ namespace ApplicationCore.Services
 			return repository.GetEstadoCuentaById(id);
 		}
 
-        IEnumerable<plan_residencia> IServicePlanResidencia.GetPlanResidenciaByID(int id)
+        public plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes)
         {
-            throw new NotImplementedException();
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.Save(plan_residencia, selectedResidencias, selectedPlanes);
         }
+
+      
     }
 }
