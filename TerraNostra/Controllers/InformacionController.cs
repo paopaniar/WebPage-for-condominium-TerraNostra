@@ -66,7 +66,7 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Default", "Error");
                 }
                 //Listados
-               
+                ViewBag.tipos = listaTipos();
                 return View(libro);
             }
             catch (Exception ex)
