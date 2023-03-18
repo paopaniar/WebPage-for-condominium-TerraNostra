@@ -21,20 +21,21 @@ namespace ApplicationCore.Services
 			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
 			return repository.GetPlanResidencia();
 		}
-
-       
-        public plan_residencia GetPlanResidenciaByID(int id)
-		{
-			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
-			return repository.GetEstadoCuentaById(id);
+        public plan_residencia GetPlanResidenciaByID(int id) {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetEstadoCuentaById(id);
 		}
 
-        public plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes)
+
+    public plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes)
         {
             IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
             return repository.Save(plan_residencia, selectedResidencias, selectedPlanes);
         }
 
-      
+        IEnumerable<plan_residencia> IServicePlanResidencia.GetPlanResidenciaByID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

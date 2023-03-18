@@ -9,9 +9,9 @@ namespace ApplicationCore.Services
 {
 	public interface IServicePlanResidencia
 	{
-plan_residencia  GetPlanResidenciaByID(int id);
+	
+		IEnumerable<plan_residencia> GetPlanResidenciaByID(int id);
 		IEnumerable<plan_residencia> GetPlanResidencia();
-
 		IEnumerable<plan_residencia> GetEstadosByEstado(int id, int estado);
 		plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes);
 

@@ -193,21 +193,21 @@ namespace Infraestructure.Repository
                 {
                     if (selectedResidencias != null && selectedPlanes != null)
                     {
-                        oPlanResidencia.plan_cobro = new List<plan_cobro>();
-                        oPlanResidencia.residencia = new List<residencia>();
+                        oPlanResidencia.plancobro = new List<plan_cobro>();
+                        oPlanResidencia.residencias = new List<residencia>();
 
                         foreach (var residencia in selectedResidencias)
                         {
                             var ResidenciaToAdd = _RepositoryResidencia.GetResidenciaByID(int.Parse(residencia));
                             ctx.residencia.Attach(ResidenciaToAdd); //sin esto, EF intentará crear una categoría
-                            plan_residencia.residencia.Add(ResidenciaToAdd);// asociar a la categoría existente con el libro
+                            plan_residencia.residencias.Add(ResidenciaToAdd);// asociar a la categoría existente con el libro
 
                         }
                         foreach (var plan in selectedPlanes)
                         {
                             var PlanToAdd = _RepositoryPlanes.GetPlanCobroById(int.Parse(plan));
                             ctx.plan_cobro.Attach(PlanToAdd); //sin esto, EF intentará crear una categoría
-                            plan_residencia.plan_cobro.Add(PlanToAdd);// asociar a la categoría existente con el libro
+                            plan_residencia.plancobro.Add(PlanToAdd);// asociar a la categoría existente con el libro
 
                         }
                     }
@@ -225,15 +225,15 @@ namespace Infraestructure.Repository
                     var selectPlan = new HashSet<string>(selectedPlanes);
                     if (selectedResidencias != null && selectedPlanes != null)
                     {
-                        ctx.Entry(plan_residencia).Collection(p => p.residencia).Load();
+                        ctx.Entry(plan_residencia).Collection(p => p.residencias).Load();
                         var newPlanForResidencia = ctx.residencia
                          .Where(x => selectResidencia.Contains(x.id.ToString())).ToList();
-                        plan_residencia.residencia = newPlanForResidencia;
+                        plan_residencia.residencias = newPlanForResidencia;
 
-                        ctx.Entry(plan_residencia).Collection(p => p.plan_cobro).Load();
+                        ctx.Entry(plan_residencia).Collection(p => p.plancobro).Load();
                         var newResidenciaForPlan = ctx.plan_cobro
                          .Where(x => selectPlan.Contains(x.id.ToString())).ToList();
-                        plan_residencia.plan_cobro = newResidenciaForPlan;
+                        plan_residencia.plancobro = newResidenciaForPlan;
 
                         ctx.Entry(plan_residencia).State = EntityState.Modified;
                         retorno = ctx.SaveChanges();
@@ -247,7 +247,10 @@ namespace Infraestructure.Repository
             return oPlanResidencia;
         }
 
-      
+        IEnumerable<plan_residencia> IRepositoryPlanResidencia.GetPlanResidenciaByID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
     
 }
