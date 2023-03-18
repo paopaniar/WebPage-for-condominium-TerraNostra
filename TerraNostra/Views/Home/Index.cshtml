@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Infraestructure.Models.informacion>
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Página Principal";
 
 }
 
@@ -35,62 +35,71 @@
             </a>
         </div>
         <hr />
-
+        
         <div class="row">
-            <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
-                <div class="card-header"><b>Noticias</b></div>
-                @foreach (var item in Model)
-                {
-    <div class="card-body">
+    
+                <div class="card bg-light mb-3" style="max-width:15rem; margin-left: 80px; color:darkslategrey">
+                    <div class="card-header"><b>Noticias</b></div>
+                    <center><img src="~/Utils/imagenes/noticias.png" width="80px" , height="80px" /></center>
+                    @foreach (var item in Model)
+                    {
+                        <div class="card-body">
 
-        @if (item.tipo == 1 && item.estado == 0)
-        {
-    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
-    </div>            }
-            </div>&nbsp;
+                            @if (item.tipo == 1 && item.estado == 0)
+                            {
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
+                        </div>}
+                </div>
 
-            <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
-                <div class="card-header"><b>Actas</b></div>
-                @foreach (var item in Model)
-                {
-    <div class="card-body">
+                <div class="card bg-light mb-3" style="max-width: 15rem; color:darkslategrey; align-content: center">
+                    <div class="card-header"><b>Actas</b></div>
+                    <center><img src="~/Utils/imagenes/actas.png" width="100px" , height="100px" /></center>
+                    @foreach (var item in Model)
+                    {
+                        <div class="card-body">
 
-        @if (item.tipo == 2 && item.estado == 0)
-        {
-    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
-
-
-    </div>            }
-            </div>&nbsp;
-
-            <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
-                <div class="card-header"><b>Artículos</b></div>
-                @foreach (var item in Model)
-                {
-    <div class="card-body">
-
-        @if (item.tipo == 3 && item.estado == 0)
-        {
-    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
+                            @if (item.tipo == 2 && item.estado == 0)
+                            {
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
 
 
-    </div>            }
-            </div>
-            <div class="card bg-light mb-3" style="max-width: 20rem; color:darkslategrey">
-                <div class="card-header"><b>Archivos Documentales</b></div>
-                <img src="~/Utils/imagenes/LogoSmartHouse-removebg-preview.png" width="250px" , height="250px" />
-                @foreach (var item in Model)
-                {
-                    <div class="card-body">
+                        </div>}
+                </div>
 
-                        @if (item.tipo == 4 && item.estado == 0)
-                        {
-                            <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
+                <div class="card bg-light mb-3" style="max-width: 15rem; color:darkslategrey">
+                    <div class="card-header"><b>Artículos</b></div>
+                    <center><img src="~/Utils/imagenes/articulos.png" width="100px" , height="100px" /></center>
+                    @foreach (var item in Model)
+                    {
+                        <div class="card-body">
+
+                            @if (item.tipo == 3 && item.estado == 0)
+                            {
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
+                            }
 
 
-                    </div>  }
-            </div>&nbsp;
+                        </div>
+                    }
+                </div>
+                <div class="card bg-light mb-3" style="max-width: 15rem; color:darkslategrey">
+                    <div class="card-header"><b>Archivos Documentales</b></div>
+                    <center><img src="~/Utils/imagenes/archivos.png" width="80px" , height="80px" /></center>
+                    @foreach (var item in Model)
+                    {
+                        <div class="card-body">
+
+                            @if (item.tipo == 4 && item.estado == 0)
+                            {
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
+
+
+                        </div>}
+                </div>&nbsp;
+
         </div>
+
+
     </center>
 </form>
 <script>

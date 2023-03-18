@@ -6,12 +6,15 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using TerraNostra.Enum;
+using TerraNostra.Security;
 
 namespace TerraNostra.Controllers
 {
     public class InformacionController : Controller
     {
         // GET: Informacion
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<informacion> lista = null;
