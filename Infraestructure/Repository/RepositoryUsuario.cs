@@ -47,19 +47,21 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-        public IEnumerable<usuario> GetUsuario()
+        public usuario GetUsuario(string email, string password)
         {
+            usuario oUsuario = null;
             try
             {
-                IEnumerable<usuario> lista = null;
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Select * from Autor 
-                    lista = ctx.usuario.ToList<usuario>();
-                    //lista = ctx.Autor.ToList();
+                    oUsuario = ctx.usuario.
+                     Where(p => p.Email.Equals(email) && p.password == password).
+                    FirstOrDefault<usuario>();
                 }
-                return lista;
+                if (oUsuario != null)
+                    oUsuario = GetUsuarioByID(oUsuario.identificacion);
+                return oUsuario;
             }
             catch (DbUpdateException dbEx)
             {
@@ -74,7 +76,6 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-
 
     }
 }
