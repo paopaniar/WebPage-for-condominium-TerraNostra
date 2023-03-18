@@ -100,8 +100,23 @@ namespace TerraNostra.Controllers
 
             return new SelectList(lista, "id", "otherInfoDetails", listaResidenciasSelect);
         }
-        [HttpPost]
-        public ActionResult Save(plan_residencia plan_residencia, string[] selectedResidencia)
+
+            private SelectList listaPlanes(ICollection<plan_cobro> planes = null)
+            {
+                IServicePlanCobro _ServicePlanes = new ServicePlanCobro();
+                IEnumerable<plan_cobro> lista = _ServicePlanes.GetPlanCobro();
+                //Seleccionar categorias
+                int[] listaPlanesSelect = null;
+                if (planes != null)
+                {
+                listaPlanesSelect = planes.Select(c => c.id).ToArray();
+                }
+
+                return new SelectList(lista, "id", "detail", listaPlanesSelect);
+            }
+
+            [HttpPost]
+        public ActionResult Save(plan_residencia plan_residencia, string[] selectedResidencia, string[] selectedPlanes)
         {
             IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
             try
@@ -109,18 +124,19 @@ namespace TerraNostra.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    plan_residencia oPlanResidenciaI = _ServicePlanResidencia.Save(plan_residencia, selectedResidencia);
+                    plan_residencia oPlanResidenciaI = _ServicePlanResidencia.Save(plan_residencia, selectedResidencia, selectedPlanes);
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                    //  ViewBag.idUsuario = listUsuarios(incidente.id);
-                    ViewBag.idResidencica = listaResidencias();
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
+                    
+                    ViewBag.idResidencia = listaResidencias();
+                    ViewBag.idPlanes = listaResidencias();
+                    
                     if (plan_residencia.id > 0)
                     {
+                        //aquui no sé si poner el plan cobro porque no sé como hacerlo
                         return (ActionResult)View("Edit", plan_residencia.residencia);
                     }
                     else
@@ -136,7 +152,7 @@ namespace TerraNostra.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "PlanCobro";
+                TempData["Redirect"] = "PlanResidencia";
                 TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
