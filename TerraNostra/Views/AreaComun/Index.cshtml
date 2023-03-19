@@ -18,19 +18,19 @@
                         <i class="fa-solid fa-house"></i> <b>@Html.DisplayFor(modelItem => item.detalle)</b>
                     </p>
                     <p class="card-text">
-                      <b>@Html.DisplayNameFor(model => model.disponibilidad):</b> @Html.DisplayFor(modelItem => item.disponibilidad)
+                        <b>@Html.DisplayNameFor(model => model.disponibilidad):</b> @Html.DisplayFor(modelItem => item.disponibilidad)
                     </p>
                     <p class="card-text">
-                      <b>@Html.DisplayNameFor(model => model.fechaDisponible):</b>  @Html.DisplayFor(modelItem => item.fechaDisponible)
+                        <b>@Html.DisplayNameFor(model => model.fechaDisponible):</b>  @Html.DisplayFor(modelItem => item.fechaDisponible)
                     </p>
                     <p class="card-text">
-                     <b>@Html.DisplayNameFor(model => model.horaDisponible):</b>@Html.DisplayFor(modelItem => item.horaDisponible)
+                        <b>@Html.DisplayNameFor(model => model.horaDisponible):</b>@Html.DisplayFor(modelItem => item.horaDisponible)
                     </p>
                     <p class="card-text">
                         <b>@Html.DisplayNameFor(model => model.estado):</b>@Html.DisplayFor(modelItem => item.estado)
                     </p>
 
-
+                    <a href="@Url.Action("Details", "reservacion", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Detalles</a>
                     <a href="@Url.Action("Create", "reservacion", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Reservar</a>
                     @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
 

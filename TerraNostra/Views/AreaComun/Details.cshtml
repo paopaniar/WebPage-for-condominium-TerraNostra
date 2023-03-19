@@ -1,0 +1,58 @@
+﻿@model Infraestructure.Models.areaComun
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>areaComun</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.detalle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.disponibilidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.disponibilidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaDisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaDisponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.horaDisponible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.horaDisponible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
