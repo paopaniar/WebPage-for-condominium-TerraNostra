@@ -6,12 +6,15 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using TerraNostra.Enum;
+using TerraNostra.Security;
 
 namespace TerraNostra.Controllers
 {
     public class InformacionController : Controller
     {
         // GET: Informacion
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<informacion> lista = null;
@@ -23,6 +26,8 @@ namespace TerraNostra.Controllers
 
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
                 ViewBag.listaUsuario = _ServiceUsuario.GetUsuario();
+                ViewBag.Noticias = _ServiceInformacion.GetInformacionByTipo(1);
+                ViewBag.Actas = _ServiceInformacion.GetInformacionByTipo(2);
                 return View(lista);
             }
             catch (Exception ex)
@@ -43,38 +48,37 @@ namespace TerraNostra.Controllers
         }
         public ActionResult Edit(int? id)
         {
-            ServiceInformacion _ServiceInformacion = new ServiceInformacion();
-            informacion informacion = null;
+            ServiceInformacion _ServiceLibro = new ServiceInformacion();
+            informacion libro = null;
+
             try
             {
                 // Si va null
                 if (id == null)
                 {
-                    //ATENCION! HACER EL INDEX byPao
                     return RedirectToAction("Index");
                 }
 
-                informacion = _ServiceInformacion.GetInformacionById(Convert.ToInt32(id));
-                if (informacion == null)
+                libro = _ServiceLibro.GetInformacionById(Convert.ToInt32(id));
+                if (libro == null)
                 {
-                    TempData["Message"] = "No existe la información solicitada";
+                    TempData["Message"] = "No existe el libro solicitado";
                     TempData["Redirect"] = "Informacion";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
                 //Listados
-                ViewBag.idUsuario = listUsuarios(informacion.id);
-
-                return View(informacion);
+                ViewBag.tipos = listaTipos();
+                return View(libro);
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Informacion";
-                TempData["Redirect-Action"] = "Index";
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
@@ -97,10 +101,7 @@ namespace TerraNostra.Controllers
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                    //  ViewBag.idUsuario = listUsuarios(incidente.id);
-                    ViewBag.id = listUsuarios(informacion.usuario);
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
+                   
                     if (informacion.id > 0)
                     {
                         return (ActionResult)View("Edit", informacion);
@@ -128,13 +129,23 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            //Que recursos necesito para crear un Libro
-            //Autores
-            ViewBag.idUsuario = listUsuarios();
-           
+            ViewBag.tipos = listaTipos();
             return View();
         }
 
+        private SelectList listaTipos(ICollection<informacion> informaciones = null)
+        {
+            IServiceInformacion _ServiceInformacion = new ServiceInformacion();
+            IEnumerable<informacion> lista = _ServiceInformacion.GetInformacion();
+            //Seleccionar categorias
+            int[] listaInformacionesSelect = null;
+            if (informaciones != null)
+            {
+                listaInformacionesSelect = informaciones.Select(c => c.tipo).ToArray();
+            }
+
+            return new SelectList(lista, "tipo", "descTipo", listaInformacionesSelect);
+        }
 
         public ActionResult Details(int id)
         {

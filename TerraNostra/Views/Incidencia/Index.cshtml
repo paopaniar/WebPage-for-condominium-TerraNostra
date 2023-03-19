@@ -4,13 +4,14 @@
     ViewBag.Title = "Index";
 }
 <br />
-<br />
 
+
+
+<center><h4 style="font-family: Broadway">Incidentes</h4></center>
 <p>
-    <a href="@Url.Action("Create", "Incidencia")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
+    <a href="@Url.Action("Create", "Incidencia")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear incidente</a>
     @*@Html.ActionLink("Crear", "Create")*@
 </p>
-<center><h4 style="font-family: Broadway">Tareas de incidencias</h4></center>
 <table class="table">
     <tr>
         <th>
@@ -22,7 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
-        <th>Por ver</th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalle)
+        </th>
         <th>Por hacer</th>
     </tr>
 
@@ -44,8 +47,7 @@
     </td>
 
     <td>
-
-        @Html.ActionLink("Detalle", "Details", new { id = item.id })
+        @Html.DisplayFor(modelItem => item.detalle)
     </td>
     <td>
 

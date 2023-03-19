@@ -142,8 +142,34 @@ namespace Infraestructure.Repository
             }
         }
 
-
-
+        public plan_residencia GetPlanResidenciaBy(int id)
+        {
+            plan_residencia oPlanResidencia = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libro por ID incluyendo el autor y todas sus categorías
+                    oPlanResidencia = ctx.plan_residencia.
+                        Include("residencia").Include("plan_cobro").Include("residencia.usuario1").
+                        Where(l => l.id == id).FirstOrDefault();
+                }
+                return oPlanResidencia;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
         public plan_residencia GetPlanResidenciaByID(int id)
 		{
@@ -157,7 +183,7 @@ namespace Infraestructure.Repository
                     oPlan = ctx.plan_residencia.
                         Include("residencia").Include("plan_cobro").Include("residencia.usuario1").
                         Where(l => l.id == id).FirstOrDefault();
-                       ;
+                       
 
                 }
                 return oPlan;
@@ -176,9 +202,86 @@ namespace Infraestructure.Repository
             }
         }
 
+        public plan_residencia Guardar(plan_residencia plan_residencia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes)
+        {
+            int retorno = 0;
+            plan_residencia oPlanResidencia = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oPlanResidencia = GetPlanResidenciaByID((int)plan_residencia.id);
+                IRepositoryResidencia _RepositoryResidencia = new RepositoryResidencia();
+
+                IRepositoryPlanCobro _RepositoryPlanes = new RepositoryPlanCobro();
+
+                if (oPlanResidencia == null)
+                {
+                    if (selectedResidencias != null && selectedPlanes != null)
+                    {
+                        oPlanResidencia.plancobro = new List<plan_cobro>();
+                        oPlanResidencia.residencias = new List<residencia>();
+
+                        foreach (var residencia in selectedResidencias)
+                        {
+                            var ResidenciaToAdd = _RepositoryResidencia.GetResidenciaByID(int.Parse(residencia));
+                            ctx.residencia.Attach(ResidenciaToAdd); //sin esto, EF intentará crear una categoría
+                            plan_residencia.residencias.Add(ResidenciaToAdd);// asociar a la categoría existente con el libro
+
+                        }
+                        foreach (var plan in selectedPlanes)
+                        {
+                            var PlanToAdd = _RepositoryPlanes.GetPlanCobroById(int.Parse(plan));
+                            ctx.plan_cobro.Attach(PlanToAdd); //sin esto, EF intentará crear una categoría
+                            plan_residencia.plancobro.Add(PlanToAdd);// asociar a la categoría existente con el libro
+
+                        }
+                    }
+                    ctx.plan_residencia.Add(plan_residencia);
+      
+                    retorno = ctx.SaveChanges();
+                    //retorna número de filas afectadas
+                }
+                else
+                {
+                    ctx.plan_residencia.Add(plan_residencia);
+                    ctx.Entry(plan_residencia).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                    var selectResidencia = new HashSet<string>(selectedResidencias);
+                    var selectPlan = new HashSet<string>(selectedPlanes);
+                    if (selectedResidencias != null && selectedPlanes != null)
+                    {
+                        ctx.Entry(plan_residencia).Collection(p => p.residencias).Load();
+                        var newPlanForResidencia = ctx.residencia
+                         .Where(x => selectResidencia.Contains(x.id.ToString())).ToList();
+                        plan_residencia.residencias = newPlanForResidencia;
+
+                        ctx.Entry(plan_residencia).Collection(p => p.plancobro).Load();
+                        var newResidenciaForPlan = ctx.plan_cobro
+                         .Where(x => selectPlan.Contains(x.id.ToString())).ToList();
+                        plan_residencia.plancobro = newResidenciaForPlan;
+
+                        ctx.Entry(plan_residencia).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+                    }
+                }
+            }
+
+            if (retorno >= 0)
+                oPlanResidencia = GetPlanResidenciaByID((int)plan_residencia.id);
+
+            return oPlanResidencia;
+        }
+
         IEnumerable<plan_residencia> IRepositoryPlanResidencia.GetPlanResidenciaByID(int id)
         {
             throw new NotImplementedException();
         }
     }
+    
 }

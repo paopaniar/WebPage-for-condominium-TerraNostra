@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 	internal partial class ResidenciaMetaData 
 	{
         public int id { get; set; }
-       
+        [Display(Name = "Usuarios Registrados")]
+        public int usuario { get; set; }
+
         [Display(Name = "Cantidad de personas")]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
@@ -28,9 +30,11 @@ namespace Infraestructure.Models
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int numeroCasa { get; set; }
+        [Display(Name = "Usuarios Registrados")]
+        public virtual usuario usuario1 { get; set; }
         //[Display(Name = "Identificación de usuario")]
         //public int idUsuario { get; set; }
-       
+
     }
 
     internal partial class UsuarioMetaData
@@ -50,14 +54,23 @@ namespace Infraestructure.Models
         public string apellido2 { get; set; }
         [Display(Name = "Estado")]
         public Nullable<int> estado { get; set; }
+        [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public string password { get; set; }
+        [Display(Name = "Correo electrónico")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public string Email { get; set; }
         public virtual ICollection<residencia> residencia { get; set; }
     }
 
     internal partial class PlanCobroMetaData
     {
-
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
         [Display(Name = "Total")]
         public decimal total { get; set; }
+        [Display(Name = "Mes")]
+        public string mes { get; set; }
         [Display(Name = "Número plan cobro")]
         public int id { get; set; }
         [Display(Name = "Detalle")]
@@ -68,6 +81,7 @@ namespace Infraestructure.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public System.DateTime datePlan { get; set; }
+        
         [Display(Name = "Rubros")]
         public virtual ICollection<rubro_cobro> rubro_cobro { get; set; }
         
@@ -93,13 +107,23 @@ namespace Infraestructure.Models
     internal partial class PlanResidenciaMetaData
     {
 
-        [Display(Name = "Número plan cobro")]
+        [Display(Name = "Plan de Cobro")]
         public int planCobroId { get; set; }
         [Display(Name = "Detalle")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
+        [Display(Name = "Plan de Cobro")]
+        public virtual plan_cobro plan_cobro { get; set; }
+        [Display(Name = "Residencia")]
+        public virtual residencia residencia { get; set; }
+        [Display(Name = "Plan de Cobro")]
+        public virtual ICollection<plan_cobro> plancobro { get; set; }
+        [Display(Name = "Residencia")]
+        public virtual ICollection<residencia> residencias { get; set; }
+        [Display(Name = "Residencia")]
+        public int residenciaId { get; set; }
         [Display(Name = "Estado")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        
         public int estado { get; set; }
         
 
@@ -138,8 +162,33 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int tipo { get; set; }
         [Display(Name = "Estado")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+       
         public int estado { get; set; }
     }
 
+    public partial class ReservacionMetaData
+    {
+        public int id { get; set; }
+        [Display(Name = "Área Común")]
+        public int areaComunId { get; set; }
+        [Display(Name = "Usuario")]
+        public int usuario { get; set; }
+        [Display(Name = "Detalle")]
+        public string detalle { get; set; }
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
+        [Display(Name = "Fecha desde:")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        public Nullable<System.DateTime> dateFrom { get; set; }
+        [Display(Name = "Fecha Hasta:")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        public Nullable<System.DateTime> dateTo { get; set; }
+        [Display(Name = "Área Común")]
+        public virtual areaComun areaComun { get; set; }
+        [Display(Name = "Usuario")]
+        public virtual usuario usuario1 { get; set; }
     }
+
+}

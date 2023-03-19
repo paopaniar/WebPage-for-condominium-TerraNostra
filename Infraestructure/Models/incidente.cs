@@ -21,6 +21,7 @@ namespace Infraestructure.Models
         public Nullable<int> estado { get; set; }
         public int tipo { get; set; }
         public string detalle { get; set; }
+        public string descTipo { get; set; }
     
         public virtual usuario usuario1 { get; set; }
     }

@@ -1,44 +1,76 @@
 ﻿@model Infraestructure.Models.plan_cobro
 
-@{
-    ViewBag.Title = "Details";
+@{ ViewBag.Title = "Details";
 
-    var totalSum = Model.total;
-    foreach (var c in Model.rubro_cobro)
-    {
-        totalSum += c.monto;
-    }
+ decimal totalSum = 0;
+              
+
 }
 
-
+<br />
 <div>
-    <hr />
+
     <center> <h4 style="font-family: Broadway">Información detallada de plan cobro</h4></center>
-   
+
     <hr />
 
-    <div class="col-md-8">
-        <div class="card-body">
-            <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2">@Html.DisplayFor(model => model.detail)</span>
-            <p class="card-text" style="color: #E45641; font-weight: 500;"
-               @totalSum ;
-                </p>
 
-            <p class="card-text">
-                <i class="fa-solid fa-bookmark"></i> <b>@Html.DisplayNameFor(model => model.rubro_cobro):</b>
-                <ul>
+    <center>
+        <div>
+
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.detail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.detail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.datePlan)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.datePlan)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.total)
+                </dt>
+
+                <dd>
                     @foreach (var c in Model.rubro_cobro)
                     {
-                        <li>@c.detalle</li>
+
+                        totalSum += Convert.ToDecimal(c.monto);
+
+
                     }
-                </ul>
-            </p>
+                    <li>@string.Format("{0:C}", totalSum)</li>
+
+
+                </dd>
+
+            </dl>
+
+
+            <b>@Html.DisplayNameFor(model => model.rubro_cobro):</b>
+            <ul>
+                @foreach (var c in Model.rubro_cobro)
+                {
+    <li>@c.detalle</li>
+                }
+
+            </ul>
+
+
+
 
         </div>
-    </div>
+    </center>
 </div>
 <hr />
 <p>
 
-    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-secondary" })
+    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
 </p>

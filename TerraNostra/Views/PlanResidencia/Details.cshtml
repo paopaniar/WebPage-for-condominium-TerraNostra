@@ -7,7 +7,8 @@
 
 
 <div>
-    <h4>Detalle estado de cuenta</h4>
+    <br />
+    <h4 style="font-family: Broadway">Detalle Estado de Cuenta</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -65,6 +66,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.estado)
             </th>
+            <th>
+               Transacción
+            </th>
+
         </tr>
 
 
@@ -76,6 +81,10 @@
         </th>
         <th>
             <text>Pendiente</text>
+        </th>
+        <th>
+
+            @Html.ActionLink("Pagar mi pendiente", "Edit", new { id = c.id })
         </th>
     </tr>
         }

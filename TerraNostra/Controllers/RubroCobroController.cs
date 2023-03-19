@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using TerraNostra.Enum;
+using TerraNostra.Security;
 using TerraNostra.Utils;
 
 namespace TerraNostra.Controllers
@@ -13,6 +15,7 @@ namespace TerraNostra.Controllers
     public class RubroCobroController : Controller
     {
         // GET: RubroCobro
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<rubro_cobro> lista = null;

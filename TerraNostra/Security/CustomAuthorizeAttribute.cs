@@ -5,13 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using TerraNostra.Security;
 
-namespace Infraestructure.Security
+namespace TerraNostra.Security
 {
-    public class CustomAuthorizeAttribute: AutorizeView
+    public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-       /* private readonly int[] allowedroles;
+        private readonly int[] allowedroles;
         public CustomAuthorizeAttribute(params int[] roles)
         {
             //roles Obtiene los roles de usuario autorizados
@@ -43,6 +42,6 @@ namespace Infraestructure.Security
              { "controller", "Login" },
             { "action", "UnAuthorized" }
                         });
-        }*/
+        }
     }
 }

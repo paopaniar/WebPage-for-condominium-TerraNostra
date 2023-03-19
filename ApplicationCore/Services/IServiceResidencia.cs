@@ -11,6 +11,7 @@ namespace ApplicationCore.Services
 	{
 		IEnumerable<residencia> GetResidencia();
 		IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario);
+		residencia Save(residencia residencia);
 
 	}
 }

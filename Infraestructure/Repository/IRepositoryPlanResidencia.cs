@@ -13,7 +13,9 @@ namespace Infraestructure.Repository
 		IEnumerable<plan_residencia> GetPlanResidencia();
 		plan_residencia GetEstadoCuentaById(int id);		
 		IEnumerable<plan_residencia> GetEstadoByEstado(int id, int estado);
+		plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes);
 
-
+		plan_residencia GetPlanResidenciaBy(int id);
+		plan_residencia Guardar(plan_residencia plan_residencia);
 	}
 }

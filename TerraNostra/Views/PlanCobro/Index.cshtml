@@ -6,16 +6,16 @@
 
 
 <br />
-<p>
-    <a href="@Url.Action("Create", "planCobro")" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Crear</a>
-</p><center>
-    <h4 style="font-family: Broadway">Lista de Planes de Cobro</h4>
+<center>
+    <h4 style="font-family: Broadway">Planes de Cobro</h4>
 </center>
 <br />
-
+<p>
+    <a href="@Url.Action("Create", "planCobro")"type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear plan</a>
+</p>
 
 <table class="table table-hover">
-    <tr class="table-primary">
+    <tr class="table-dark">
         <th scope="row" style="grid-auto-rows: 5px">
             @Html.DisplayNameFor(model => model.id)
         </th>
