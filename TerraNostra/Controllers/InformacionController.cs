@@ -101,10 +101,7 @@ namespace TerraNostra.Controllers
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                    //  ViewBag.idUsuario = listUsuarios(incidente.id);
-                    ViewBag.id = listUsuarios(informacion.usuario);
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
+                   
                     if (informacion.id > 0)
                     {
                         return (ActionResult)View("Edit", informacion);
@@ -141,14 +138,15 @@ namespace TerraNostra.Controllers
             IServiceInformacion _ServiceInformacion = new ServiceInformacion();
             IEnumerable<informacion> lista = _ServiceInformacion.GetInformacion();
             //Seleccionar categorias
-            int[] listaInformacioness = null;
+            int[] listaInformacionesSelect = null;
             if (informaciones != null)
             {
-                listaInformacioness = informaciones.Select(c => c.tipo).ToArray();
+                listaInformacionesSelect = informaciones.Select(c => c.tipo).ToArray();
             }
 
-            return new SelectList(lista, "tipo", "descTipo", listaInformacioness);
+            return new SelectList(lista, "tipo", "descTipo", listaInformacionesSelect);
         }
+
         public ActionResult Details(int id)
         {
             ServiceInformacion _ServiceInformacion = new ServiceInformacion();

@@ -152,7 +152,7 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int tipo { get; set; }
         [Display(Name = "Estado")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+       
         public int estado { get; set; }
     }
 
