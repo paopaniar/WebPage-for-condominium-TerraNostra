@@ -54,6 +54,12 @@ namespace Infraestructure.Models
         public string apellido2 { get; set; }
         [Display(Name = "Estado")]
         public Nullable<int> estado { get; set; }
+        [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public string password { get; set; }
+        [Display(Name = "Correo electrónico")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public string Email { get; set; }
         public virtual ICollection<residencia> residencia { get; set; }
     }
 
