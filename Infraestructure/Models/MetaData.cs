@@ -166,7 +166,7 @@ namespace Infraestructure.Models
         public int estado { get; set; }
     }
 
-    public partial class ReservacionMetaData
+    internal partial class ReservacionMetaData
     {
         public int id { get; set; }
         [Display(Name = "Área Común")]
@@ -190,5 +190,21 @@ namespace Infraestructure.Models
         [Display(Name = "Usuario")]
         public virtual usuario usuario1 { get; set; }
     }
+    internal partial class AreaComunMetadata
+    {
+        public int id { get; set; }
+        [Display(Name = "Detalle")]
+        public string detalle { get; set; }
+        [Display(Name = "Disponibilidad")]
+        public int disponibilidad { get; set; }
+        [Display(Name = "Fecha Disponible")]
+        public string fechaDisponible { get; set; }
+        [Display(Name = "Hora Dispobible")]
+        public int horaDisponible { get; set; }
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
+        [Display(Name = "Reservación")]
 
+        public virtual ICollection<reservacion> reservacion { get; set; }
+    }
 }
