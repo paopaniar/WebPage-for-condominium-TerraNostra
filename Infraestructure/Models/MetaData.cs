@@ -97,13 +97,23 @@ namespace Infraestructure.Models
     internal partial class PlanResidenciaMetaData
     {
 
-        [Display(Name = "Número plan cobro")]
+        [Display(Name = "Plan de Cobro")]
         public int planCobroId { get; set; }
         [Display(Name = "Detalle")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
+        [Display(Name = "Plan de Cobro")]
+        public virtual plan_cobro plan_cobro { get; set; }
+        [Display(Name = "Residencia")]
+        public virtual residencia residencia { get; set; }
+        [Display(Name = "Plan de Cobro")]
+        public virtual ICollection<plan_cobro> plancobro { get; set; }
+        [Display(Name = "Residencia")]
+        public virtual ICollection<residencia> residencias { get; set; }
+        [Display(Name = "Residencia")]
+        public int residenciaId { get; set; }
         [Display(Name = "Estado")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        
         public int estado { get; set; }
         
 
