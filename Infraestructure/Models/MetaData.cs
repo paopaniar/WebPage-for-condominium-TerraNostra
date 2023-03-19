@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 	internal partial class ResidenciaMetaData 
 	{
         public int id { get; set; }
-       
+        [Display(Name = "Usuarios Registrados")]
+        public int usuario { get; set; }
+
         [Display(Name = "Cantidad de personas")]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
@@ -28,9 +30,11 @@ namespace Infraestructure.Models
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int numeroCasa { get; set; }
+        [Display(Name = "Usuarios Registrados")]
+        public virtual usuario usuario1 { get; set; }
         //[Display(Name = "Identificación de usuario")]
         //public int idUsuario { get; set; }
-       
+
     }
 
     internal partial class UsuarioMetaData

@@ -100,7 +100,7 @@ namespace TerraNostra.Controllers
                 listaResidenciasSelect = residencias.Select(c => c.id).ToArray();
             }
 
-            return new SelectList(lista, "id", "otherInfoDetails", listaResidenciasSelect);
+            return new SelectList(lista, "id", "numeroCasa", listaResidenciasSelect);
         }
 
             private SelectList listaPlanes(ICollection<plan_cobro> planes = null)
