@@ -142,8 +142,34 @@ namespace Infraestructure.Repository
             }
         }
 
-
-
+        public plan_residencia GetPlanResidenciaBy(int id)
+        {
+            plan_residencia oPlanResidencia = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libro por ID incluyendo el autor y todas sus categorías
+                    oPlanResidencia = ctx.plan_residencia.
+                        Include("residencia").Include("plan_cobro").Include("residencia.usuario1").
+                        Where(l => l.id == id).FirstOrDefault();
+                }
+                return oPlanResidencia;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
         public plan_residencia GetPlanResidenciaByID(int id)
 		{
@@ -157,7 +183,7 @@ namespace Infraestructure.Repository
                     oPlan = ctx.plan_residencia.
                         Include("residencia").Include("plan_cobro").Include("residencia.usuario1").
                         Where(l => l.id == id).FirstOrDefault();
-                       ;
+                       
 
                 }
                 return oPlan;
@@ -174,6 +200,11 @@ namespace Infraestructure.Repository
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw;
             }
+        }
+
+        public plan_residencia Guardar(plan_residencia plan_residencia)
+        {
+            throw new NotImplementedException();
         }
 
         public plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes)

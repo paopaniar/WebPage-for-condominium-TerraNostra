@@ -66,6 +66,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.estado)
             </th>
+            <th>
+               Transacción
+            </th>
+
         </tr>
 
 
@@ -77,6 +81,10 @@
         </th>
         <th>
             <text>Pendiente</text>
+        </th>
+        <th>
+
+            @Html.ActionLink("Pagar mi pendiente", "Edit", new { id = c.id })
         </th>
     </tr>
         }
