@@ -13,8 +13,6 @@ namespace Infraestructure.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using System.ComponentModel.DataAnnotations;
-
     [MetadataType(typeof(ReservacionMetaData))]
     public partial class reservacion
     {

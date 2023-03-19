@@ -12,8 +12,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="detalle" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="disponibilidad" Type="int" Nullable="false" />
-          <Property Name="fechaDisponible" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="horaDisponible" Type="int" Nullable="false" />
+          <Property Name="fechaDisponible" Type="varchar" MaxLength="100" />
+          <Property Name="horaDisponible" Type="varchar" MaxLength="100" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="incidente">
@@ -307,8 +307,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="detalle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="disponibilidad" Type="Int32" Nullable="false" />
-          <Property Name="fechaDisponible" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="horaDisponible" Type="Int32" Nullable="false" />
+          <Property Name="fechaDisponible" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="horaDisponible" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="reservacion" Relationship="Self.FK__reservaci__areaC__35BCFE0A" FromRole="areaComun" ToRole="reservacion" />
         </EntityType>
