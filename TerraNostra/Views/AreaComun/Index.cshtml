@@ -5,50 +5,37 @@
 }
 
 
+<br />
+<div class="col-lg-13">
+    <div id="resultado" class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3">
+                <div class="card border-white mb-3" style="max-width: 20rem;">
+                    <center>  <img class="card-img-top" src="~/Utils/imagenes/reservaciones.png" alt="Card image cap" height="100px" style="max-width: 100px"></center>
+                    <br />
+                    <p class="card-text">
+                        <i class="fa-solid fa-house"></i> <b>@Html.DisplayFor(modelItem => item.detalle)</b>
+                    </p>
+                    <p class="card-text">
+                      <b>@Html.DisplayNameFor(model => model.disponibilidad):</b> @Html.DisplayFor(modelItem => item.disponibilidad)
+                    </p>
+                    <p class="card-text">
+                      <b>@Html.DisplayNameFor(model => model.fechaDisponible):</b>  @Html.DisplayFor(modelItem => item.fechaDisponible)
+                    </p>
+                    <p class="card-text">
+                     <b>@Html.DisplayNameFor(model => model.horaDisponible):</b>@Html.DisplayFor(modelItem => item.horaDisponible)
+                    </p>
+                    <p class="card-text">
+                        <b>@Html.DisplayNameFor(model => model.estado):</b>@Html.DisplayFor(modelItem => item.estado)
+                    </p>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.detalle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.disponibilidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaDisponible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.horaDisponible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.detalle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.disponibilidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaDisponible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.horaDisponible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+                    <a href="@Url.Action("Create", "reservacion", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Reservar</a>
+                    @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
 
-</table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
