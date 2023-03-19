@@ -84,6 +84,7 @@ namespace TerraNostra.Controllers
 
         
     }
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpGet]
         public ActionResult Create()
         {

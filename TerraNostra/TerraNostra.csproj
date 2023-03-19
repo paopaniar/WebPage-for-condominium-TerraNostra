@@ -136,6 +136,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AreaComunController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenciaController.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PlanCobroController.cs" />
     <Compile Include="Controllers\PlanResidenciaController.cs" />
+    <Compile Include="Controllers\ReservacionController.cs" />
     <Compile Include="Controllers\ResidenciaController.cs" />
     <Compile Include="Controllers\RubroCobroController.cs" />
     <Compile Include="Enum\Enum.cs" />
@@ -260,6 +262,9 @@
     <Content Include="Views\PlanResidencia\Create.cshtml" />
     <Content Include="Views\PlanResidencia\Edit.cshtml" />
     <Content Include="Views\Residencia\Create.cshtml" />
+    <Content Include="Views\AreaComun\Index.cshtml" />
+    <Content Include="Views\Reservacion\Index.cshtml" />
+    <Content Include="Views\Reservacion\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

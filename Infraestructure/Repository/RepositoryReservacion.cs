@@ -20,7 +20,7 @@ namespace Infraestructure.Repository
 				using (MyContext ctx = new MyContext())
 				{
 					ctx.Configuration.LazyLoadingEnabled = false;
-					lista = ctx.reservacion.Include("usuario1").ToList();
+					lista = ctx.reservacion.Include("usuario1").Include("areaComun").ToList();
 					
 				}
 				return lista;
@@ -51,7 +51,7 @@ namespace Infraestructure.Repository
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
                     oReservacion = ctx.reservacion.
                         Where(l => l.id == id).
-                        Include("usuario1").
+                        Include("usuario1").Include("areaComun").
                         FirstOrDefault();
 
                 }
