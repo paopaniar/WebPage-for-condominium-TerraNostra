@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\IServiceReservacion.cs" />
+    <Compile Include="Services\ServiceReservacion.cs" />
     <Compile Include="Utils\Cryptography.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IServiceIncidente.cs" />
