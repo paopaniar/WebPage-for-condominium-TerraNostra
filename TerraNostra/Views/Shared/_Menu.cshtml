@@ -19,7 +19,7 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listados</a>
                     <div class="dropdown-menu">
 
-                        <div class="dropdown-divider"></div>
+                    
                         @Html.ActionLink("Residencias", "Index", "residencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Planes de Cobro", "Index", "planCobro", null, new { @class = "dropdown-item" })
@@ -37,8 +37,18 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Asignaciones</a>
                     <div class="dropdown-menu">
 
-                        <div class="dropdown-divider"></div>
                         @Html.ActionLink("Asignar Plan a Residente", "Create", "planResidencia", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Asignar Residencia a Usuario", "Create", "residencia", null, new { @class = "dropdown-item" })
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservaciones</a>
+                    <div class="dropdown-menu">
+
+                      
+                        @Html.ActionLink("Ir a reservaciones", "Index", "reservacion", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Asignar Residencia a Usuario", "Create", "residencia", null, new { @class = "dropdown-item" })
 
