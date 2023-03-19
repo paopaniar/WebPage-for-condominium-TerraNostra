@@ -72,6 +72,62 @@ namespace TerraNostra.Controllers
 
         }
 
+        private SelectList listUsuarios(int idUsuario = 0)
+        {
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            IEnumerable<usuario> lista = _ServiceUsuario.GetUsuario();
+            return new SelectList(lista, "identificacion", "nombre", idUsuario);
+        }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBag.id = listUsuarios();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Save(residencia residencia)
+        {
+
+            //Servicio Libro
+            IServiceResidencia _ServiceResidencia = new ServiceResidencia();
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    residencia oResidenciaI = _ServiceResidencia.Save(residencia);
+                }
+                else
+                {
+                    
+                    Utils.Util.ValidateErrors(this);
+                  
+                    ViewBag.id = listUsuarios(residencia.usuario1.identificacion);
+                    
+                    if (residencia.id > 0)
+                    {
+                        return (ActionResult)View("Edit", residencia);
+                    }
+                    else
+                    {
+                        return View("Create", residencia);
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Residencia";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
     }
 }

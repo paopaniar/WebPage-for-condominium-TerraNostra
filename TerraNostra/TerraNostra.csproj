@@ -259,6 +259,7 @@
     <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\PlanResidencia\Create.cshtml" />
     <Content Include="Views\PlanResidencia\Edit.cshtml" />
+    <Content Include="Views\Residencia\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
