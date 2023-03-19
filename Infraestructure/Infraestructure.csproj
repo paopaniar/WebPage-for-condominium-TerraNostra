@@ -132,6 +132,7 @@
     <Compile Include="Repository\IRepositoryInformacion.cs" />
     <Compile Include="Repository\IRepositoryPlanCobro.cs" />
     <Compile Include="Repository\IRepositoryPlanResidencia.cs" />
+    <Compile Include="Repository\IRepositoryReservacion.cs" />
     <Compile Include="Repository\IRepositoryResidencia.cs" />
     <Compile Include="Repository\IRepositoryRubroCobro.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Repository\RepositoryInformacion.cs" />
     <Compile Include="Repository\RepositoryPlanCobro.cs" />
     <Compile Include="Repository\RepositoryPlanResidencia.cs" />
+    <Compile Include="Repository\RepositoryReservacion.cs" />
     <Compile Include="Repository\RepositoryResidencia.cs" />
     <Compile Include="Repository\RepositoryRubroCobro.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />

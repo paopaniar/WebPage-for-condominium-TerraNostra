@@ -1,43 +1,27 @@
-﻿using System;
+﻿using Infraestructure.Models;
+using Infraestructure.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infraestructure.Models;
-using Infraestructure.Utils;
 
 namespace Infraestructure.Repository
 {
-    public class RepositoryResidencia : IRepositoryResidencia
+    public class RepositoryReservacion : IRepositoryReservacion
     {
-     
-
-        public void DeleteResidencia(int id)
+        public IEnumerable<reservacion> GetReservacion()
         {
-            throw new NotImplementedException();
-        }
-
-		//public IEnumerable<residencia> GetResidencia()
-		//{
-		//	throw new NotImplementedException();
-		//}
-
-		public IEnumerable<residencia> GetResidencia()
-		{
-			IEnumerable<residencia> lista = null;
+			IEnumerable<reservacion> lista = null;
 			try
 			{
-
-
 				using (MyContext ctx = new MyContext())
 				{
 					ctx.Configuration.LazyLoadingEnabled = false;
+					lista = ctx.reservacion.Include("usuario1").ToList();
 					
-					lista = ctx.residencia.Include("usuario1").ToList();
-					
-
 				}
 				return lista;
 			}
@@ -56,22 +40,22 @@ namespace Infraestructure.Repository
 			}
 		}
 
-		public residencia GetResidenciaByID(int id)
+        public reservacion GetReservacionById(int id)
         {
-            residencia oLibro = null;
+            reservacion oReservacion = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
-                    oLibro = ctx.residencia.
+                    oReservacion = ctx.reservacion.
                         Where(l => l.id == id).
-                        Include("usuario1").                      
+                        Include("usuario1").
                         FirstOrDefault();
 
                 }
-                return oLibro;
+                return oReservacion;
             }
             catch (DbUpdateException dbEx)
             {
@@ -87,26 +71,21 @@ namespace Infraestructure.Repository
             }
         }
 
-		public IEnumerable<residencia> GetResidenciaByUsuario(int idUsuario)
-		{
-			throw new NotImplementedException();
-		}
-
-        public residencia Save(residencia residencia)
+        public reservacion Save(reservacion reservacion)
         {
             int retorno = 0;
-            residencia oResidencia = null;
+            reservacion oReservacion = null;
 
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oResidencia = GetResidenciaByID((int)residencia.id);
+                oReservacion = GetReservacionById((int)reservacion.id);
 
 
-                if (oResidencia == null)
+                if (oReservacion == null)
                 {
 
-                    ctx.residencia.Add(residencia);
+                    ctx.reservacion.Add(reservacion);
                     //SaveChanges
                     //guarda todos los cambios realizados en el contexto de la base de datos.
                     retorno = ctx.SaveChanges();
@@ -118,18 +97,18 @@ namespace Infraestructure.Repository
                     //Actualizar: 1,3,4
 
                     //Actualizar Libro
-                    ctx.residencia.Add(residencia);
-                    ctx.Entry(residencia).State = EntityState.Modified;
+                    ctx.reservacion.Add(reservacion);
+                    ctx.Entry(reservacion).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
 
                 }
             }
 
             if (retorno >= 0)
-                oResidencia = GetResidenciaByID((int)residencia.id);
+                oReservacion = GetReservacionById((int)reservacion.id);
 
-            return oResidencia;
+            return oReservacion;
         }
     }
-    
     }
+}
