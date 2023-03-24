@@ -78,6 +78,13 @@ namespace TerraNostra.Controllers
             try
             {
 
+
+                if (plan_cobro.estado == null)
+                {
+                    plan_cobro.estado = 1;
+                }
+
+
                 if (ModelState.IsValid)
                 {
                     plan_cobro oPlanCobroI = _ServicePlanCobro.Save(plan_cobro, selectedRubros);

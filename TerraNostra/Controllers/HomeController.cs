@@ -14,9 +14,7 @@ namespace TerraNostra.Controllers
     {
         [CustomAuthenticationFilter]
         public ActionResult Index()
-        {
-
-            if (TempData.ContainsKey("mensaje"))
+        { if (TempData.ContainsKey("mensaje"))
             {
                 ViewBag.NotificationMessage = TempData["mensaje"];
             }

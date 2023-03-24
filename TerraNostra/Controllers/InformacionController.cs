@@ -49,18 +49,24 @@ namespace TerraNostra.Controllers
         public ActionResult Edit(int? id)
         {
             ServiceInformacion _ServiceLibro = new ServiceInformacion();
-            informacion libro = null;
+            informacion informacion = null;
 
             try
             {
+
+                usuario oUsuario = (usuario)Session["User"];
+                //Asignar idUsuario que se encuentra logueado
+                informacion.usuario = oUsuario.identificacion;
+            
+
                 // Si va null
                 if (id == null)
                 {
                     return RedirectToAction("Index");
                 }
 
-                libro = _ServiceLibro.GetInformacionById(Convert.ToInt32(id));
-                if (libro == null)
+                informacion = _ServiceLibro.GetInformacionById(Convert.ToInt32(id));
+                if (informacion == null)
                 {
                     TempData["Message"] = "No existe el libro solicitado";
                     TempData["Redirect"] = "Informacion";
@@ -70,7 +76,7 @@ namespace TerraNostra.Controllers
                 }
                 //Listados
                 ViewBag.tipos = listaTipos();
-                return View(libro);
+                return View(informacion);
             }
             catch (Exception ex)
             {
@@ -92,6 +98,15 @@ namespace TerraNostra.Controllers
             IServiceInformacion _ServiceInformacion = new ServiceInformacion();
             try
             {
+
+                usuario oUsuario = (usuario)Session["User"];
+                //Asignar idUsuario que se encuentra logueado
+                informacion.usuario = oUsuario.identificacion;
+                if (informacion.estado == null)
+                {
+                    informacion.estado = 0;
+                }
+               
 
                 if (ModelState.IsValid)
                 {

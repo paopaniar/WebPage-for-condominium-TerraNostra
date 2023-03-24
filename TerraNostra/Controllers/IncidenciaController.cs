@@ -110,7 +110,16 @@ namespace TerraNostra.Controllers
             IServiceIncidente _ServiceIncidente= new ServiceIncidente();
             try
             {
-                
+
+                usuario oUsuario = (usuario)Session["User"];
+                //Asignar idUsuario que se encuentra logueado
+                incidente.usuario = oUsuario.identificacion;
+                if (incidente.estado == null)
+                {
+                    incidente.estado = 1;
+                }
+
+
                 if (ModelState.IsValid)
                 {
                     incidente oIncidenteI= _ServiceIncidente.Save(incidente);
