@@ -27,11 +27,17 @@
                         <b>@Html.DisplayNameFor(model => model.horaDisponible):</b>@Html.DisplayFor(modelItem => item.horaDisponible)
                     </p>
                     <p class="card-text">
-                        <b>@Html.DisplayNameFor(model => model.estado):</b>@Html.DisplayFor(modelItem => item.estado)
+                        <b>@Html.DisplayNameFor(model => model.estado):</b>
+                        @if (item.estado == 1)
+                        {
+                            <text>Sin reservar</text>
+                        }
+                        else
+                        { <text>Reservado</text>}
                     </p>
 
-                    <a href="@Url.Action("Details", "reservacion", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Detalles</a>
-                    <a href="@Url.Action("Create", "reservacion", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Reservar</a>
+                    <a href="@Url.Action("Details", "areaComun", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Detalles</a>
+                    <a href="@Url.Action("Edit", "areaComun", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i>Reservar</a>
                     @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
 
                 </div>

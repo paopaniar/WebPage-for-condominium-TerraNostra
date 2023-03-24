@@ -77,5 +77,53 @@ namespace TerraNostra.Controllers
 
 
         }
+
+
+        public ActionResult Edit(int id)
+        {
+            IServiceAreaComun _ServiceAreaComun = new ServiceAreaComun();
+            areaComun areaComun = _ServiceAreaComun.GetAreaComunById(id);
+            if (areaComun.estado == 1)
+            {
+                areaComun.estado = 0;
+            }
+            else
+            {
+                areaComun.estado = 0;
+            }
+
+            try
+            {
+                // Si va null
+                if (ModelState.IsValid)
+                {
+                    areaComun oAreaComun = _ServiceAreaComun.Save(areaComun);
+
+                }
+
+                else
+                {
+                    TempData["Message"] = "No existe el incidente solicitado";
+                    TempData["Redirect"] = "AreaComun";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                return View();
+            }
+
+
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "AreaComun";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
     }
 }

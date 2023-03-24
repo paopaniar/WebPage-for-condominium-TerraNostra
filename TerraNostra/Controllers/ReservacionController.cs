@@ -145,5 +145,53 @@ namespace TerraNostra.Controllers
 
 
         }
+
+
+        public ActionResult Edit(int id)
+        {
+            IServiceReservacion _ServiceReservacion = new ServiceReservacion();
+            reservacion reservacion = _ServiceReservacion.GetReservacionById(id);
+            if (reservacion.estado == 1)
+            {
+                reservacion.estado = 0;
+            }
+            else
+            {
+                reservacion.estado = 0;
+            }
+
+            try
+            {
+                // Si va null
+                if (ModelState.IsValid)
+                {
+                    reservacion oReservacion = _ServiceReservacion.Save(reservacion);
+
+                }
+
+                else
+                {
+                    TempData["Message"] = "No existe el incidente solicitado";
+                    TempData["Redirect"] = "Reservacion";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                return View();
+            }
+
+
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Reservacion";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
     }
 }
