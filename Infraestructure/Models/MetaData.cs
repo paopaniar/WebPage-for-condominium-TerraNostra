@@ -142,6 +142,8 @@ namespace Infraestructure.Models
         [Display(Name = "Detalle")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
+        [Display(Name = "Tipo")]
+        public string descTipo { get; set; }
     }
 
     internal partial class informacionMetaData
