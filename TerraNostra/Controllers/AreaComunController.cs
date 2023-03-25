@@ -89,6 +89,7 @@ namespace TerraNostra.Controllers
             reservacion.areaComunId = areaComun.id;
             reservacion.usuario = oUsuario.identificacion;
             reservacion.detalle = "Prueba";
+          
 
             if (areaComun.estado == 1)
             {

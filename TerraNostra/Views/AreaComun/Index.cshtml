@@ -10,7 +10,9 @@
     <div id="resultado" class="row">
         @foreach (var item in Model)
         {
-            <div class="col-sm-3">
+        <div class="col-sm-3">
+            @if (item.estado == 1)
+            {
                 <div class="card border-white mb-3" style="max-width: 20rem;">
                     <center>  <img class="card-img-top" src="~/Utils/imagenes/reservaciones.png" alt="Card image cap" height="100px" style="max-width: 100px"></center>
                     <br />
@@ -41,7 +43,8 @@
                     @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
 
                 </div>
-            </div>
+            }
+        </div>
         }
     </div>
 </div>
