@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Lista Plan Cobro";
+    decimal totalSum = 0;
 }
 
 
@@ -11,7 +12,7 @@
 </center>
 <br />
 <p>
-    <a href="@Url.Action("Create", "planCobro")"type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear plan</a>
+    <a href="@Url.Action("Create", "planCobro")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear plan</a>
 </p>
 
 <table class="table table-hover">
@@ -24,14 +25,17 @@
             @Html.DisplayNameFor(model => model.detail)
         </th>
 
-
+        <th scope="row" style="grid-auto-rows: 5px">
+            @Html.DisplayNameFor(model => model.total)
+        </th>
 
         <th>Por ver</th>
 
         <th>Por hacer</th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
 <tr class="table-secondary">
     <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.id)
@@ -40,7 +44,9 @@
     <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.detail)
     </td>
-
+    <td style="column-width: 5px">
+        @Html.DisplayFor(modelItem => item.total)
+    </td>
 
 
     <td style="column-width: 5px">
@@ -54,6 +60,6 @@
 
     </td>
 </tr>
-}
+    }
 
 </table>
