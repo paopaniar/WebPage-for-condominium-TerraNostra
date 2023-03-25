@@ -71,6 +71,10 @@ namespace TerraNostra.Controllers
             try
             {
 
+                if (reservacion.estado == null)
+                {
+                    reservacion.estado = 0;
+                }
                 if (ModelState.IsValid)
                 {
                     reservacion oReservacionI = _ServiceReservacion.Save(reservacion);

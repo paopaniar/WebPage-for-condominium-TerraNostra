@@ -204,8 +204,28 @@ namespace Infraestructure.Repository
 
         public plan_residencia Guardar(plan_residencia plan_residencia)
         {
-            throw new NotImplementedException();
-        }
+            plan_residencia oplan = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oplan = GetPlanResidenciaByID((int)plan_residencia.id);
+
+                if (oplan == null)
+                {
+                    ctx.plan_residencia.Add(plan_residencia);
+                }
+                else
+                {
+                    oplan.estado = plan_residencia.estado;
+                    ctx.Entry(oplan).State = EntityState.Modified;
+                }
+
+                ctx.SaveChanges();
+            }
+
+            return oplan;
+    }
 
         public plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes)
         {
