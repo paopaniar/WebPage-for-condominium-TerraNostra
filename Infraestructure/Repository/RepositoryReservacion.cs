@@ -86,17 +86,11 @@ namespace Infraestructure.Repository
                 {
 
                     ctx.reservacion.Add(reservacion);
-                    //SaveChanges
-                    //guarda todos los cambios realizados en el contexto de la base de datos.
                     retorno = ctx.SaveChanges();
                     //retorna número de filas afectadas
                 }
                 else
                 {
-                    //Registradas: 1,2,3
-                    //Actualizar: 1,3,4
-
-                    //Actualizar Libro
                     ctx.reservacion.Add(reservacion);
                     ctx.Entry(reservacion).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
@@ -109,6 +103,33 @@ namespace Infraestructure.Repository
 
             return oReservacion;
         }
+
+
+        public reservacion SaveEstado(reservacion reservacion)
+        {
+            reservacion oreservacion = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oreservacion = GetReservacionById((int)reservacion.id);
+
+                if (oreservacion == null)
+                {
+                    ctx.reservacion.Add(reservacion);
+                }
+                else
+                {
+                    oreservacion.estado = reservacion.estado;
+                    ctx.Entry(oreservacion).State = EntityState.Modified;
+                }
+
+                ctx.SaveChanges();
+            }
+
+            return oreservacion;
+        }
+
     }
-    
+
 }

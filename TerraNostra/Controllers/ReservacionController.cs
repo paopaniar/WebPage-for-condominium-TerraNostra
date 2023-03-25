@@ -68,13 +68,11 @@ namespace TerraNostra.Controllers
         {
 
             IServiceReservacion _ServiceReservacion = new ServiceReservacion();
+
+            
             try
             {
-
-                if (reservacion.estado == null)
-                {
-                    reservacion.estado = 0;
-                }
+              
                 if (ModelState.IsValid)
                 {
                     reservacion oReservacionI = _ServiceReservacion.Save(reservacion);
@@ -161,7 +159,7 @@ namespace TerraNostra.Controllers
             }
             else
             {
-                reservacion.estado = 0;
+                reservacion.estado = 1;
             }
 
             try
@@ -169,7 +167,7 @@ namespace TerraNostra.Controllers
                 // Si va null
                 if (ModelState.IsValid)
                 {
-                    reservacion oReservacion = _ServiceReservacion.Save(reservacion);
+                    reservacion oReservacion = _ServiceReservacion.SaveEstado(reservacion);
 
                 }
 

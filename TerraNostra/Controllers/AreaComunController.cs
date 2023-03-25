@@ -81,8 +81,15 @@ namespace TerraNostra.Controllers
 
         public ActionResult Edit(int id)
         {
+            usuario oUsuario = (usuario)Session["User"];
             IServiceAreaComun _ServiceAreaComun = new ServiceAreaComun();
             areaComun areaComun = _ServiceAreaComun.GetAreaComunById(id);
+            ServiceReservacion reserva = new ServiceReservacion();
+            reservacion reservacion = new reservacion();
+            reservacion.areaComunId = areaComun.id;
+            reservacion.usuario = oUsuario.identificacion;
+            reservacion.detalle = "Prueba";
+
             if (areaComun.estado == 1)
             {
                 areaComun.estado = 0;
@@ -94,10 +101,10 @@ namespace TerraNostra.Controllers
 
             try
             {
-                // Si va null
                 if (ModelState.IsValid)
                 {
                     areaComun oAreaComun = _ServiceAreaComun.Save(areaComun);
+                    reservacion oReservacion = reserva.Save(reservacion);
 
                 }
 

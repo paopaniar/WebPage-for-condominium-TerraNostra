@@ -105,20 +105,15 @@ namespace TerraNostra.Controllers
         [HttpPost]
         public ActionResult Save(incidente incidente)
         {
-           
-            //Servicio Libro
             IServiceIncidente _ServiceIncidente= new ServiceIncidente();
             try
             {
-
                 usuario oUsuario = (usuario)Session["User"];
-                //Asignar idUsuario que se encuentra logueado
                 incidente.usuario = oUsuario.identificacion;
                 if (incidente.estado == null)
                 {
                     incidente.estado = 1;
                 }
-
 
                 if (ModelState.IsValid)
                 {

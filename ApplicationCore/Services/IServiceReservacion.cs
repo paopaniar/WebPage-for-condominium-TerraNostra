@@ -12,6 +12,7 @@ namespace ApplicationCore.Services
         IEnumerable<reservacion> GetReservacion();
         reservacion GetReservacionById(int id);
         reservacion Save(reservacion reservacion);
-       
+        reservacion SaveEstado(reservacion reservacion);
+
     }
 }

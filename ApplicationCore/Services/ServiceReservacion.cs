@@ -27,5 +27,12 @@ namespace ApplicationCore.Services
             IRepositoryReservacion repository = new RepositoryReservacion();
             return repository.Save(reservacion);
         }
+
+
+        public reservacion SaveEstado(reservacion reservacion)
+        {
+            IRepositoryReservacion repository = new RepositoryReservacion();
+            return repository.SaveEstado(reservacion);
+        }
     }
 }

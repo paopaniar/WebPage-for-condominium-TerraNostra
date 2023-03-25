@@ -12,50 +12,44 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.areaComunId)
+            @Html.DisplayNameFor(model => model.areaComun.detalle)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.usuario)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.detalle)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateTo)
-        </th>
+       
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.areaComunId)
+            @Html.DisplayFor(modelItem => item.areaComun.detalle)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.usuario)
         </td>
+       
+       
         <td>
-            @Html.DisplayFor(modelItem => item.detalle)
+            @if (item.estado == 1)
+            {
+                <text>Aprobado</text>
+            }
+            else
+            {
+                <text>Denegado</text>
+            }
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateFrom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateTo)
-        </td>
+       
         <td>
             @Html.ActionLink("Denegar", "Edit", new { id=item.id }) |
             @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
-            @Html.ActionLink("Aprobar", "Delete", new { id=item.id })
+            @Html.ActionLink("Aprobar", "Edit", new { id=item.id })
         </td>
     </tr>
 }

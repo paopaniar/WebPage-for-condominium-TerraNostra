@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TerraNostra.Enum;
 using TerraNostra.Security;
+using TerraNostra.Utils;
 
 namespace TerraNostra.Controllers
 {
@@ -127,7 +128,7 @@ namespace TerraNostra.Controllers
             IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
             try
             {
-               
+
                 if (ModelState.IsValid)
                 {
                     plan_residencia oPlanResidenciaI = _ServicePlanResidencia.Save(plan_residencia, selectedResidencia, selectedPlanes);
@@ -184,6 +185,7 @@ namespace TerraNostra.Controllers
                 if (ModelState.IsValid)
                 {
                     plan_residencia oPlanResidencia = _ServicePlanResidencia.Guardar(plan_residencia);
+                    TempData["mensaje"] = SweetAlertHelper.Mensaje("Éxito", "Pago realizado!!", SweetAlertMessageType.success);
 
                 }
 
