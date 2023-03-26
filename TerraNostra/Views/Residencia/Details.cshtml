@@ -11,14 +11,15 @@
         
             <h4>Información detallada de la residencia</h4>
             <hr />
-
+        <center> 
             <div class="row row-cols-2 g-3">
-                <div class="col">
+               
+                <div class="col" style="text-align: justify">
                     <div class="card border-warning mb-3" style="max-width: 20rem;">
                         <div class="row g-0">
 
                             <div class="col-md-8">
-                                <div class="card-body" style="background-color: ; text-align:justify">
+                                <div class="card-body" style="background-color: ; text-align: justify">
                                     <i class="fa-solid fa-house"></i>
                                     <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa):</b> @Html.DisplayFor(model => model.numeroCasa)</span>
                                     <p class="card-text">
@@ -48,11 +49,10 @@
                     </div>
                 </div>
             </div>
-
+        </center>
     </div>
 
-<p>
-    
-            @Html.ActionLink("Ir a la lista", "Index")
+    <p>
 
-</p>
+        @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
+    </p>

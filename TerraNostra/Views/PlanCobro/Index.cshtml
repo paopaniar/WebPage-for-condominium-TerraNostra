@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Lista Plan Cobro";
-    decimal totalSum = 0;
 }
 
 
@@ -25,10 +24,6 @@
             @Html.DisplayNameFor(model => model.detail)
         </th>
 
-        <th scope="row" style="grid-auto-rows: 5px">
-            @Html.DisplayNameFor(model => model.total)
-        </th>
-
         <th>Por ver</th>
 
         <th>Por hacer</th>
@@ -43,9 +38,6 @@
 
     <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.detail)
-    </td>
-    <td style="column-width: 5px">
-        @Html.DisplayFor(modelItem => item.total)
     </td>
 
 
