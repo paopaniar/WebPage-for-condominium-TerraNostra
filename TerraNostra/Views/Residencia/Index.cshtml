@@ -18,17 +18,19 @@
             {
                 <div class="col-sm-3">
                     <div class="card border-light mb-3" style="max-width: 20rem; ">
-                        <div class="card-header"> <b>@Html.DisplayNameFor(model => model.numeroCasa):</b>  @Html.DisplayFor(modelItem => item.numeroCasa)</div>
+                        <div class="card-header"> <b>@Html.DisplayNameFor(model => model.numeroCasa) </b>  @Html.DisplayFor(modelItem => item.numeroCasa)</div>
                        
                         <p class="card-text">
-                            <i class="fa-solid fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>  @Html.DisplayFor(modelItem => item.usuario1.identificacion)
+                            <i class="fa-solid fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion): </b>
+                            <br />
+                            @Html.DisplayFor(modelItem => item.usuario1.identificacion)
                         </p>
                         <p class="card-text">
-                            <i class="fa-solid fa-people-roof"></i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>@Html.DisplayFor(modelItem => item.individualsNumber)
+                            <i class="fa-solid fa-people-roof"></i> <b>@Html.DisplayNameFor(model => model.individualsNumber): </b>
+                            <br />
+                            @Html.DisplayFor(modelItem => item.individualsNumber)
                         </p>
-
-
-                        <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i> Detalle</a>
+                        <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-dark"><i class="fa-solid fa-circle-info"></i>Detalle</a>
                         @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
 
                     </div>

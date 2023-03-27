@@ -6,30 +6,38 @@
 
 
 
-
+<center>
     <div>
-        
-            <h4>Información detallada de la residencia</h4>
-            <hr />
-        <center> 
-            <div class="row row-cols-2 g-3">
-               
-                <div class="col" style="text-align: justify">
-                    <div class="card border-warning mb-3" style="max-width: 20rem;">
-                        <div class="row g-0">
+        <br />
+        <h4 style="font-family: Broadway">Información detallada de la residencia</h4>
+        <hr />
 
+        <div class="row row-cols-2 g-3">
+
+            <div class="col" style="text-align: justify">
+                <div class="card border-light mb-3" style="max-width: 20rem;">
+                    <div class="row g-0">
+                        <center>
                             <div class="col-md-8">
-                                <div class="card-body" style="background-color: ; text-align: justify">
+                                <div class="card-body" ; text-align: justify">
                                     <i class="fa-solid fa-house"></i>
-                                    <span class="card-title" style="font-size: 25px; font-weight: 500; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa):</b> @Html.DisplayFor(model => model.numeroCasa)</span>
+
+                                    <span class="card-header" style="font-size: 25px; font-weight: 400; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa)</b> @Html.DisplayFor(model => model.numeroCasa)</span>
+                                    <br /><br />
                                     <p class="card-text">
-                                        <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>    @Html.DisplayFor(model => model.usuario1.identificacion)
+                                        <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>
+                                        <br />
+                                        @Html.DisplayFor(model => model.usuario1.identificacion)
                                     </p>
                                     <p class="card-text">
-                                        <b>@Html.DisplayNameFor(model => model.usuario1.nombre):</b>@Html.DisplayFor(model => model.usuario1.nombre)
+                                        <b>@Html.DisplayNameFor(model => model.usuario1.nombre):</b>
+                                        <br />
+                                        @Html.DisplayFor(model => model.usuario1.nombre)
                                     </p>
                                     <p class="card-text">
-                                        <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.individualsNumber): </b>@Html.DisplayFor(model => model.individualsNumber)
+                                        <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.individualsNumber): </b>
+                                        <br />
+                                        @Html.DisplayFor(model => model.individualsNumber)
                                     </p>
 
                                     <p class="card-text" style="font-weight: 500;">
@@ -45,13 +53,14 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </center>
                     </div>
                 </div>
             </div>
-        </center>
-    </div>
+        </div>
 
+    </div>
+</center>
     <p>
 
         @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })

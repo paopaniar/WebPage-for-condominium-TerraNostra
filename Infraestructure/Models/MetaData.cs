@@ -54,11 +54,14 @@ namespace Infraestructure.Models
         public string apellido2 { get; set; }
         [Display(Name = "Estado")]
         public Nullable<int> estado { get; set; }
-        [Display(Name = "Contraseña")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name = "Contraseña")]        
+        [Required(ErrorMessage = "El campo {0} no puede quedar vacío")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene formato válido")]
         public string password { get; set; }
-        [Display(Name = "Correo electrónico")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+
+        [Display(Name = "Correo electrónico")]     
+        [Required(ErrorMessage = "El campo {0} no puede quedar vacío")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene formato válido")]
         public string Email { get; set; }
         public virtual ICollection<residencia> residencia { get; set; }
     }
@@ -74,6 +77,7 @@ namespace Infraestructure.Models
         [Display(Name = "Número plan cobro")]
         public int id { get; set; }
         [Display(Name = "Detalle")]
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detail { get; set; }        
         [Display(Name = "Fecha")]
@@ -93,11 +97,13 @@ namespace Infraestructure.Models
       
         [Display(Name = "Rubro")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [DataType(DataType.Text)]
         public string detalle { get; set; }
         [Display(Name = "Monto")]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [DisplayFormat(DataFormatString = "{0:C}")]
+        [DataType(DataType.Text)]
         public decimal monto { get; set; }
         [Display(Name = "Estado")]
         public int estado { get; set; }
@@ -140,6 +146,7 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int tipo { get; set; }
         [Display(Name = "Detalle")]
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
         [Display(Name = "Tipo")]
@@ -154,6 +161,7 @@ namespace Infraestructure.Models
         public int usuario { get; set; }
         [Display(Name = "Detalle")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [DataType(DataType.Text)]
         public string detalle { get; set; }
         [Display(Name = "Fecha de la información")]
         [DataType(DataType.Date)]
