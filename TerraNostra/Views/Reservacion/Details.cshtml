@@ -4,63 +4,51 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<br />
+<center>   <h4>Reservación detalle</h4></center>
+<hr />
 
-<div>
-    <h4>reservacion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.areaComunId)
-        </dt>
+<center>
+    <div class="card border-light mb-3" style="max-width: 20rem;">
+        <div class="card-header"><b> @Html.DisplayNameFor(model => model.id): </b> @Html.DisplayFor(model => model.id)</div>
+        <div class="card-body">
 
-        <dd>
-            @Html.DisplayFor(model => model.areaComunId)
-        </dd>
+            <p class="card-text">
+                <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario):</b>
+                <br />
+                @Html.DisplayFor(model => model.usuario)
+            </p>
+            <p class="card-text">
+                <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.detalle):</b>
+                <br />
+                @Html.DisplayFor(model => model.detalle)
+            </p>
+            <p class="card-text">
+                <b>@Html.DisplayNameFor(model => model.dateFrom):</b>
+                <br />
+                @Html.DisplayFor(model => model.dateFrom)
+            </p>
+            <p class="card-text">
+                <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.dateTo):</b>
+                <br />
+                @Html.DisplayFor(model => model.dateTo)
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.usuario)
-        </dt>
+            <p class="card-text" style="font-weight: 500;">
+                <i class="fa-solid fa-circle-user"></i>
+                <b>@Html.DisplayNameFor(model => model.estado):</b>
+                @if (Model.estado == 1)
+                {
+                    <text>Reservado</text> }
+                else
+                {
+                    <text>Sin reservar</text>}
+            </p>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.usuario)
-        </dd>
+    <p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.detalle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.detalle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dateFrom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dateFrom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dateTo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dateTo)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
+    </p>
+</center>

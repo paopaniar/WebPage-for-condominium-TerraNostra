@@ -178,6 +178,7 @@ namespace Infraestructure.Models
 
     internal partial class ReservacionMetaData
     {
+        [Display(Name = "Reservación")]
         public int id { get; set; }
         [Display(Name = "Área Común")]
         public int areaComunId { get; set; }
@@ -187,11 +188,11 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
         [Display(Name = "Estado")]
         public int estado { get; set; }
-        [Display(Name = "Fecha desde:")]
+        [Display(Name = "Fecha desde")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> dateFrom { get; set; }
-        [Display(Name = "Fecha Hasta:")]
+        [Display(Name = "Fecha Hasta")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> dateTo { get; set; }
