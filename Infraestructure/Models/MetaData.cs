@@ -203,7 +203,7 @@ namespace Infraestructure.Models
     internal partial class AreaComunMetadata
     {
         public int id { get; set; }
-        [Display(Name = "Detalle")]
+        [Display(Name = "Área")]
         public string detalle { get; set; }
         [Display(Name = "Disponibilidad")]
         public int disponibilidad { get; set; }

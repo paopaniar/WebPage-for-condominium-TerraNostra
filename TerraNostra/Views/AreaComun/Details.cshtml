@@ -4,55 +4,60 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>areaComun</h4>
+<center>
+    <br />
+    <h4>Area Común</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.detalle)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.detalle)
-        </dd>
+    <div class="row row-cols-2 g-3">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.disponibilidad)
-        </dt>
+        <div class="col" style="text-align: justify">
+            <div class="card border-light mb-3" style="max-width: 20rem;">
+                <div class="row g-0">
+                    <center>
+                        <div class="col-md-8">
+                            <div class="card-body" ; text-align: justify">
+                                <i class="fa-solid fa-house"></i>
 
-        <dd>
-            @Html.DisplayFor(model => model.disponibilidad)
-        </dd>
+                                <span class="card-header" style="font-size: 25px; font-weight: 400; line-height: 1.2"><b> @Html.DisplayNameFor(model => model.detalle): </b> @Html.DisplayFor(model => model.detalle)</span>
+                                <br /><br />
+                                <p class="card-text">
+                                    <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.disponibilidad):</b>
+                                    <br />
+                                    @Html.DisplayFor(model => model.disponibilidad)
+                                </p>
+                                <p class="card-text">
+                                    <b>@Html.DisplayNameFor(model => model.fechaDisponible):</b>
+                                    <br />
+                                    @Html.DisplayFor(model => model.fechaDisponible)
+                                </p>
+                                <p class="card-text">
+                                    <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.horaDisponible): </b>
+                                    <br />
+                                    @Html.DisplayFor(model => model.horaDisponible)
+                                </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaDisponible)
-        </dt>
+                                <p class="card-text" style="font-weight: 500;">
+                                    <i class="fa-solid fa-circle-user"></i>
+                                    <b>@Html.DisplayNameFor(model => model.estado):</b>
+                                    @if (Model.estado == 1)
+                                    {
+                                        <text>Reservado</text> }
+                                    else
+                                    {
+                                        <text>Sin reservado</text>}
+                                </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaDisponible)
-        </dd>
+                            </div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.horaDisponible)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.horaDisponible)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
-</div>
 <p>
 
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
 </p>
