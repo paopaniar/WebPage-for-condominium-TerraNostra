@@ -8,63 +8,49 @@
 
 
 
-    <br />
-    <center>
-        <h4 style="font-family: Broadway">Información detallada de la residencia</h4>
-    </center>
-    <hr />
-    <br />
-    <center>
-        <div class="row row-cols-2 g-3">
+<br />
+<center>
+    <h4 style="font-family: Broadway">Información detallada de la residencia</h4>
+</center>
+<hr />
+<br />
 
-            <div class="col" style="text-align: justify">
-                <div class="card border-light mb-3" style="max-width: 20rem;">
-                    <div class="row g-0">
-                        <center>
-                            <div class="col-md-8">
-                                <div class="card-body" ; text-align: justify">
-                                    <i class="fa-solid fa-house"></i>
+<center>
+    <div class="card border-light mb-3" style="max-width: 20rem;">
+        <div class="card-header"><b>@Html.DisplayNameFor(model => model.numeroCasa)</b> @Html.DisplayFor(model => model.numeroCasa)</div>
+        <div class="card-body">
+            <p class="card-text">
+                <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>
+                <br />
+                @Html.DisplayFor(model => model.usuario1.identificacion)
+            </p>
+            <p class="card-text">
+                <b>@Html.DisplayNameFor(model => model.usuario1.nombre):</b>
+                <br />
+                @Html.DisplayFor(model => model.usuario1.nombre)
+            </p>
+            <p class="card-text">
+                <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.individualsNumber): </b>
+                <br />
+                @Html.DisplayFor(model => model.individualsNumber)
+            </p>
 
-                                    <span class="card-header" style="font-size: 25px; font-weight: 400; line-height: 1.2"><b>@Html.DisplayNameFor(model => model.numeroCasa)</b> @Html.DisplayFor(model => model.numeroCasa)</span>
-                                    <br /><br />
-                                    <p class="card-text">
-                                        <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>
-                                        <br />
-                                        @Html.DisplayFor(model => model.usuario1.identificacion)
-                                    </p>
-                                    <p class="card-text">
-                                        <b>@Html.DisplayNameFor(model => model.usuario1.nombre):</b>
-                                        <br />
-                                        @Html.DisplayFor(model => model.usuario1.nombre)
-                                    </p>
-                                    <p class="card-text">
-                                        <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.individualsNumber): </b>
-                                        <br />
-                                        @Html.DisplayFor(model => model.individualsNumber)
-                                    </p>
-
-                                    <p class="card-text" style="font-weight: 500;">
-                                        <i class="fa-solid fa-circle-user"></i>
-                                        <b>@Html.DisplayNameFor(model => model.estado):</b>
-                                        @if (Model.estado == 1)
-                                        {
-                                            <text>Habitada</text> }
-                                        else
-                                        {
-                                            <text>Sin habitar</text>}
-                                    </p>
-
-                                </div>
-                            </div>
-                        </center>
-                    </div>
-                </div>
-            </div>
+            <p class="card-text" style="font-weight: 500;">
+                <i class="fa-solid fa-circle-user"></i>
+                <b>@Html.DisplayNameFor(model => model.estado):</b>
+                @if (Model.estado == 1)
+                {
+                    <text>Habitada</text> }
+                else
+                {
+                    <text>Sin habitar</text>}
+            </p>
         </div>
-    </center>
+    </div>
 
 
     <p>
 
         @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
     </p>
+</center>
