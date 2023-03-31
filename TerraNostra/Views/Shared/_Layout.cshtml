@@ -18,7 +18,7 @@
         @RenderBody()
 
         <hr />
-       
+
         <footer>
             <p>&copy; @DateTime.Now.Year - SMARTHOUSE</p>
         </footer>
@@ -26,6 +26,7 @@
 
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/sweetalert")
     @*@Scripts.Render("~/bundles/bootstrap")*@
 
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
@@ -33,10 +34,10 @@
     @RenderSection("scripts", required: false)
 
     @if (ViewBag.NotificationMessage != null)
-            {
+    {
         <script>
             @Html.Raw(ViewBag.NotificationMessage)
         </script>
-            }
+    }
 </body>
 </html>
