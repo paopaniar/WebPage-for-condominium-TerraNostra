@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(PlanResidenciaMetaData))]
+    
     public partial class plan_residencia
     {
         public int id { get; set; }
@@ -21,6 +19,7 @@ namespace Infraestructure.Models
         public int residenciaId { get; set; }
         public string detalle { get; set; }
         public int estado { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
     
         public virtual plan_cobro plan_cobro { get; set; }
         public virtual residencia residencia { get; set; }

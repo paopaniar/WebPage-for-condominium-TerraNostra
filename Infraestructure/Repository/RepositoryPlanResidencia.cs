@@ -211,6 +211,7 @@ namespace Infraestructure.Repository
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oplan = GetPlanResidenciaByID((int)plan_residencia.id);
 
+
                 if (oplan == null)
                 {
                     ctx.plan_residencia.Add(plan_residencia);
