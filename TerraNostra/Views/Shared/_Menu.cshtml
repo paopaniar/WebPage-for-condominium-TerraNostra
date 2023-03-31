@@ -69,6 +69,15 @@
 
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                    <div class="dropdown-menu">
+
+                        @Html.ActionLink("Mi historial de reservas", "Index", "reservacion", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Historial de reservas", "Index", "reservacion", null, new { @class = "dropdown-item" })
+
+                    </div>
+                </li>
                 <li>
                     @Html.ActionLink("Acerca de", "About", "Home",
                null, new { @class = "nav-link" })
