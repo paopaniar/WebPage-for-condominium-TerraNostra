@@ -24,7 +24,5 @@ namespace Infraestructure.Models
     
         public virtual plan_cobro plan_cobro { get; set; }
         public virtual residencia residencia { get; set; }
-        public virtual ICollection<plan_cobro> plancobro { get; set; }
-        public virtual ICollection<residencia> residencias { get; set; }
     }
 }
