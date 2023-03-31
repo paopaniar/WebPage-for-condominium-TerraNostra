@@ -59,7 +59,7 @@
           <Property Name="residenciaId" Type="int" Nullable="false" />
           <Property Name="detalle" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
-          <Property Name="fecha" Type="datetime" />
+          <Property Name="fecha" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="plan_rubro">
           <Key>
@@ -360,7 +360,7 @@
           <Property Name="residenciaId" Type="Int32" Nullable="false" />
           <Property Name="detalle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="fecha" Type="DateTime" Precision="7" />
           <NavigationProperty Name="plan_cobro" Relationship="Self.FK__plan_resi__planC__403A8C7D" FromRole="plan_residencia" ToRole="plan_cobro" />
           <NavigationProperty Name="residencia" Relationship="Self.FK_plan_residencia_residencia" FromRole="plan_residencia" ToRole="residencia" />
         </EntityType>

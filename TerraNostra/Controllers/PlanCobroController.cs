@@ -77,7 +77,7 @@ namespace TerraNostra.Controllers
             IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
             try
             {
-
+              
 
                 if (plan_cobro.estado == null)
                 {

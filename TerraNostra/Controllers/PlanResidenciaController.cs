@@ -129,8 +129,6 @@ namespace TerraNostra.Controllers
             try
             {
 
-               
-
                 if (ModelState.IsValid)
                 {
                     plan_residencia oPlanResidenciaI = _ServicePlanResidencia.Save(plan_residencia, selectedResidencia, selectedPlanes);
