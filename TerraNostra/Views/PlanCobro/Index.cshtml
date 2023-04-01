@@ -54,18 +54,16 @@
     <td style="column-width: 5px;">
         @foreach (var c in item.rubro_cobro)
         {
-
-            
-                totalSum += Convert.ToDecimal(c.monto);
-            
-
-
+            if (totalSum != 0)
+            {
+                totalSum = 0;
+            }
+            totalSum += Convert.ToDecimal(c.monto);
 
         }
         @string.Format("{0:C}", totalSum)
     </td>
     
-
 
 
 
