@@ -2,6 +2,9 @@
 
 @{
     ViewBag.Title = "Lista Plan Cobro";
+    decimal totalSum = 0;
+    
+
 }
 
 
@@ -21,8 +24,13 @@
         </th>
 
         <th scope="row" style="grid-auto-rows: 5px">
+         
             @Html.DisplayNameFor(model => model.detail)
         </th>
+        <th scope="row" style="grid-auto-rows: 5px">
+            @Html.DisplayNameFor(model => model.total)
+        </th>
+      
 
         <th>Por ver</th>
 
@@ -31,6 +39,8 @@
 
     @foreach (var item in Model)
     {
+        
+        
 <tr class="table-secondary">
     <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.id)
@@ -39,6 +49,21 @@
     <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.detail)
     </td>
+
+      
+    <td style="column-width: 5px;">
+        @foreach (var c in item.rubro_cobro)
+        {
+
+        totalSum += Convert.ToDecimal(c.monto);
+
+
+        }
+        @string.Format("{0:C}", totalSum)
+    </td>
+    
+
+
 
 
     <td style="column-width: 5px">
