@@ -2,8 +2,6 @@
 
 @{
     ViewBag.Title = "Lista Plan Cobro";
-    decimal totalSum = 0;
-    
 
 }
 
@@ -39,8 +37,8 @@
 
     @foreach (var item in Model)
     {
-        
-        
+        decimal totalSum = 0;
+
 <tr class="table-secondary">
     <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.id)
@@ -50,20 +48,15 @@
         @Html.DisplayFor(modelItem => item.detail)
     </td>
 
-      
-    <td style="column-width: 5px;">
-        @foreach (var c in item.rubro_cobro)
-        {
-            if (totalSum != 0)
-            {
-                totalSum = 0;
-            }
-            totalSum += Convert.ToDecimal(c.monto);
 
+    <td style="column-width: 5px;">
+        @if (item.rubro_cobro != null && item.rubro_cobro.Any())
+        {
+            totalSum = item.rubro_cobro.Sum(c => Convert.ToDecimal(c.monto));
         }
         @string.Format("{0:C}", totalSum)
     </td>
-    
+
 
 
 
