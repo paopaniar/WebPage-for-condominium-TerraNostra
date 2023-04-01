@@ -134,7 +134,7 @@ namespace TerraNostra.Controllers
 
                     if (existingPlanResidencia.Count > 0)
                     {
-                        ModelState.AddModelError("", "Ya existe un registro para el mes y año ingresados.");
+                        ModelState.AddModelError("", "Ya existe un plan de cobro para el mes y año ingresados.");
                         ViewBag.idResidencia = listaResidencias();
                         ViewBag.idPlanes = listaPlanes();
 
