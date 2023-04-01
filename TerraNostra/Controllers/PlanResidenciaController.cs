@@ -134,7 +134,7 @@ namespace TerraNostra.Controllers
 
                     if (existingPlanResidencia.Count > 0)
                     {
-                        ModelState.AddModelError("", "Ya existe un plan de cobro para el mes y año ingresados.");
+                        ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Error", "Ya existe un plan de cobro para el mes y año ingresados.", SweetAlertMessageType.error);
                         ViewBag.idResidencia = listaResidencias();
                         ViewBag.idPlanes = listaPlanes();
 
