@@ -122,25 +122,45 @@ namespace TerraNostra.Controllers
                 return new SelectList(lista, "id", "detail", listaPlanesSelect);
             }
 
-            [HttpPost]
+        [HttpPost]
         public ActionResult Save(plan_residencia plan_residencia, string[] selectedResidencia, string[] selectedPlanes)
         {
             IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
             try
             {
-
                 if (ModelState.IsValid)
                 {
-                    plan_residencia oPlanResidenciaI = _ServicePlanResidencia.Save(plan_residencia, selectedResidencia, selectedPlanes);
+                    var existingPlanResidencia = _ServicePlanResidencia.GetPlanResidenciaByMonthAndYear(plan_residencia.residenciaId,plan_residencia.fecha.Month, plan_residencia.fecha.Year);
+
+                    if (existingPlanResidencia.Count > 0)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro para el mes y año ingresados.");
+                        ViewBag.idResidencia = listaResidencias();
+                        ViewBag.idPlanes = listaPlanes();
+
+                        if (plan_residencia.id > 0)
+                        {
+                            //aquui no sé si poner el plan cobro porque no sé como hacerlo
+                            return (ActionResult)View("Edit", plan_residencia.residencia);
+                        }
+                        else
+                        {
+                            return View("Create", plan_residencia);
+                        }
+                    }
+                    else
+                    {
+                        plan_residencia oPlanResidenciaI = _ServicePlanResidencia.Save(plan_residencia, selectedResidencia, selectedPlanes);
+                    }
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                    
+
                     ViewBag.idResidencia = listaResidencias();
                     ViewBag.idPlanes = listaPlanes();
-                    
+
                     if (plan_residencia.id > 0)
                     {
                         //aquui no sé si poner el plan cobro porque no sé como hacerlo
@@ -165,6 +185,7 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
 
         public ActionResult Edit(int id)
         {

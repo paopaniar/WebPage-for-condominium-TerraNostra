@@ -33,6 +33,12 @@ namespace ApplicationCore.Services
             return repository.GetEstadoCuentaById(id);
 		}
 
+        public List<plan_residencia> GetPlanResidenciaByMonthAndYear(int id, int mes, int year)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetPlanResidenciaByMonthAndYear(id, mes, year);
+        }
+
         public plan_residencia Guardar(plan_residencia plan_residencia)
         {
             IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();

@@ -43,6 +43,25 @@
                     @Html.ValidationMessageFor(model => model.detalle, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="form-group-date">
+                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+
+                    @Html.EditorFor(model => model.fecha,
+                    new
+                         {
+                             htmlAttributes = new
+                    {
+                                 @readyonly = "true",
+                                 Value = DateTime.Now.ToString("yyyy-MM-dd"),
+                        @class = "form-control datepicker",
+                                 @id = "fecha1"
+                             }
+                         })
+                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
 
             <br />
 
@@ -60,3 +79,4 @@
     </div>
 
 }
+@Scripts.Render("~/bundles/sweetalert")

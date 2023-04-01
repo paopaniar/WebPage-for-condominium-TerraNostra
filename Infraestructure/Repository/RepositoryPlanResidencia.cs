@@ -202,6 +202,16 @@ namespace Infraestructure.Repository
             }
         }
 
+        public List<plan_residencia> GetPlanResidenciaByMonthAndYear(int id, int mes, int year)
+        {
+            using (var context = new MyContext())
+            {
+                return context.plan_residencia
+                    .Where(pr => pr.fecha.Month == mes && pr.fecha.Year == year && pr.residenciaId == id)
+                    .ToList();
+            }
+        }
+
         public plan_residencia Guardar(plan_residencia plan_residencia)
         {
             plan_residencia oplan = null;
