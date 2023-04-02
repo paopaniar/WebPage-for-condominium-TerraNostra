@@ -1,0 +1,87 @@
+﻿@model Infraestructure.Models.plan_residencia
+
+@{
+    var estadoCuenta = new List<Infraestructure.Models.plan_residencia>();
+    estadoCuenta = ViewBag.lista;
+    ViewBag.Title = "IndexEstadosxMesxUsuario";
+    var estadoCuentaUsuario = new List<Infraestructure.Models.plan_residencia>();
+}
+
+@{
+    int iduser = 0;
+
+    if (Session["User"] != null)
+    {
+        Infraestructure.Models.usuario usuario = new Infraestructure.Models.usuario();
+        usuario = (Infraestructure.Models.usuario)Session["User"];
+
+        iduser = usuario.identificacion;
+        foreach (var item in estadoCuenta.ToList())
+        {
+            if (item.residencia.usuario == iduser)
+            {
+                estadoCuentaUsuario.Add(item);
+            }
+        }
+
+    }
+}
+
+
+
+<br />
+
+<center><h4 style="font-family: Broadway">Mis estados de cuenta</h4></center>
+<br />
+<div class="text-center row">
+
+    <div class="col-lg-2 col-md-2 col-sm-6">
+        @Html.DropDownListFor(model => model.fecha.Month,
+           (SelectList)ViewBag.listaMes,
+           "Todos",
+           htmlAttributes: new { @class = "form-control", @id = "idMes" })
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <button class="btn btn-primary" onclick="Filtrar(@iduser)"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+    </div>
+
+</div>
+
+<br />
+<div>
+
+    <span class="glyphicons glyphicons-hand-left"></span>
+    <div id="tablaReservas">
+
+        @Html.Partial("_PartialViewListaEstadosUser", estadoCuentaUsuario)
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        function Filtrar(idUsuarioAjax) {
+
+
+            var idUsuario = idUsuarioAjax;
+            var idMes = $("#idMes").val();
+            $.ajax({
+                url: '@Url.Action("obtenerFiltroEstadosxUsuario", "PlanResidencia")',
+                type: 'POST',
+                data: {
+                    user: idUsuario,
+                    mes: idMes,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}

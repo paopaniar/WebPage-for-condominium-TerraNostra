@@ -318,6 +318,8 @@
     <Content Include="Views\Reservacion\_PartialViewListaReservas.cshtml" />
     <Content Include="Views\PlanResidencia\_PartialViewListaEstados.cshtml" />
     <Content Include="Views\PlanResidencia\IndexEstadosxMes.cshtml" />
+    <Content Include="Views\PlanResidencia\IndexEstadosxMesxUsuario.cshtml" />
+    <Content Include="Views\PlanResidencia\_PartialViewListaEstadosUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
