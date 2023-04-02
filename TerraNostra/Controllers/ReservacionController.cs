@@ -54,9 +54,10 @@ namespace TerraNostra.Controllers
                 IServiceReservacion _ServiceReservacion = new ServiceReservacion();
                 lista = _ServiceReservacion.GetReservacion();
                 ViewBag.title = "Reservación";
-               
+                IServiceAreaComun _ServiceArea = new ServiceAreaComun();
+                ViewBag.listaAreas = _ServiceArea.GetAreaComun();
 
-             
+
                 ViewBag.listaReservaciones = _ServiceReservacion.GetReservacion();
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
                 ViewBag.listaUsuarios = listUsuarios();
@@ -105,8 +106,8 @@ namespace TerraNostra.Controllers
         private SelectList listEstados(int estado=0)
         {
             List<SelectListItem> lista = new List<SelectListItem>();
-            lista.Add(new SelectListItem { Text = "Activo", Value = "1" });
-            lista.Add(new SelectListItem { Text = "Inactivo", Value = "0" });
+            lista.Add(new SelectListItem { Text = "Aprobadas", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Denegadas", Value = "0" });
             return new SelectList(lista, "Value", "Text", estado);
         }
 

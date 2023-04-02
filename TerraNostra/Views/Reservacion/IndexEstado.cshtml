@@ -7,7 +7,7 @@
     var reservacionUsuario = new List<Infraestructure.Models.reservacion>();
 }
 
-@{ 
+@{
     int iduser = 0;
 
     if (Session["User"] != null)
@@ -25,39 +25,28 @@
         }
 
     }
- }
-
-
+}
+<br />
+<center><h4 style="font-family: Broadway">Historial de mis Reservas</h4></center>
 <br />
 <div class="text-center row">
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.DropDownListFor(model => model.usuario1,
-               (SelectList)ViewBag.listaUsuarios,
-               "Seleccione un usuario",
-               htmlAttributes: new { @class = "form-control", @id = "idUsuarios" })
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 col-sm-12">
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.DropDownListFor(model => model.estado,
-               (SelectList)ViewBag.listaValueEstado,
-               "Seleccione un estado",
-               htmlAttributes: new { @class = "form-control", @id = "idEstado" })
-            </div>
-        </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-6">
+        @Html.DropDownListFor(model => model.estado,
+           (SelectList)ViewBag.listaValueEstado,
+           "Todos",
+           htmlAttributes: new { @class = "form-control", @id = "idEstado" })
     </div>
 
-    <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="col-lg-2 col-md-4 col-sm-6">
         <button class="btn btn-primary" onclick="Filtrar('@iduser')"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
     </div>
+
 </div>
 
+<br />
 <div>
-    <h3 class="text-center">Historial de reservas</h3>
+
     <span class="glyphicons glyphicons-hand-left"></span>
     <div id="tablaReservas">
 

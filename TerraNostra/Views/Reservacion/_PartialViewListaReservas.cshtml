@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Infraestructure.Models.reservacion>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -11,47 +9,56 @@
         <th>
             @Html.DisplayNameFor(model => model.usuario)
         </th>
+      
         <th>
-            @Html.DisplayNameFor(model => model.detalle)
+            @Html.DisplayNameFor(model => model.areaComun.detalle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.areaComun.fechaDisponible)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateFrom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateTo)
-        </th>
-        <th></th>
+
+
+    
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.areaComunId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.detalle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateFrom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateTo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.areaComunId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.usuario)
+    </td>
+    
+    <td>
+        @Html.DisplayFor(modelItem => item.areaComun.detalle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.areaComun.fechaDisponible)
+    </td>
+    <td>
+        @if (item.estado == 0)
+        {
+            <text>Denegado</text>
+        }
+        else
+        {
+            if (item.estado == 1)
+            {
+                <text>Aprobado</text>
+            }
+            else
+            {
+                <text>Sin resolver</text>
+            }
+        }
+
+    </td>
+
+</tr>
 }
 
 </table>

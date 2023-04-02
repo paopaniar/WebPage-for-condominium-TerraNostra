@@ -82,12 +82,12 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     if (estado!=null)
                     {
-                        lista = ctx.reservacion.Include("usuario1").
+                        lista = ctx.reservacion.Include("usuario1").Include("areaComun").
                          Where(l => l.usuario1.identificacion == user && l.estado == estado).ToList();
                     }
                     else
                     {
-                        lista = ctx.reservacion.Include("usuario1").
+                        lista = ctx.reservacion.Include("usuario1").Include("areaComun").
                                                  Where(l => l.usuario1.identificacion == user).ToList();
                     }
                     
