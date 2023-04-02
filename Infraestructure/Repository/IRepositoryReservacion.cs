@@ -12,6 +12,7 @@ namespace Infraestructure.Repository
         IEnumerable<reservacion> GetReservacion();
         reservacion GetReservacionById(int id);
         reservacion Save(reservacion residencia);
+        IEnumerable<reservacion> GetReservacionesxUsuarioxEstado( int user, int? estado);
         reservacion SaveEstado(reservacion residencia);
     }
 }

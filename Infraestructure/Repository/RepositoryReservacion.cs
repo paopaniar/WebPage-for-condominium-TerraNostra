@@ -12,6 +12,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryReservacion : IRepositoryReservacion
     {
+        IEnumerable<reservacion> lista = null;
         public IEnumerable<reservacion> GetReservacion()
         {
 			IEnumerable<reservacion> lista = null;
@@ -57,6 +58,44 @@ namespace Infraestructure.Repository
                 }
                 return oReservacion;
             }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<reservacion> GetReservacionesxUsuarioxEstado( int user, int? estado)
+        {
+            
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    if (estado!=null)
+                    {
+                        lista = ctx.reservacion.Include("usuario1").
+                         Where(l => l.usuario1.identificacion == user && l.estado == estado).ToList();
+                    }
+                    else
+                    {
+                        lista = ctx.reservacion.Include("usuario1").
+                                                 Where(l => l.usuario1.identificacion == user).ToList();
+                    }
+                    
+
+                }
+                return lista;
+            }
+
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";

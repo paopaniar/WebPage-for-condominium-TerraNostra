@@ -25,10 +25,44 @@ namespace TerraNostra.Controllers
 
                 IServiceAreaComun _ServiceArea = new ServiceAreaComun();
                 ViewBag.listaAreas = _ServiceArea.GetAreaComun();
+                ViewBag.listaReservaciones = _ServiceReservacion.GetReservacion();
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
-                ViewBag.listaUsuarios = _ServiceUsuario.GetUsuario();
+                ViewBag.listaUsuarios = listUsuarios();
 
                 return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        public ActionResult _PartialViewListaReservas()
+        {
+            return PartialView("_PartialViewListaReservas");
+        }
+
+        public ActionResult IndexEstado()
+        {
+            IEnumerable<reservacion> lista = null;
+            try
+            {
+                IServiceReservacion _ServiceReservacion = new ServiceReservacion();
+                lista = _ServiceReservacion.GetReservacion();
+                ViewBag.title = "Reservación";
+               
+
+             
+                ViewBag.listaReservaciones = _ServiceReservacion.GetReservacion();
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                ViewBag.listaUsuarios = listUsuarios();
+                ViewBag.lista = lista;
+                ViewBag.listaValueEstado = listEstados();
+                return View();
             }
             catch (Exception ex)
             {
@@ -61,7 +95,20 @@ namespace TerraNostra.Controllers
             return View();
         }
 
+        private SelectList listUsuarios(int idUsuario = 0)
+        {
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            IEnumerable<usuario> lista = _ServiceUsuario.GetUsuario();
+            return new SelectList(lista, "identificacion", "nombre", idUsuario);
+        }
 
+        private SelectList listEstados(int estado=0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Activo", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Inactivo", Value = "0" });
+            return new SelectList(lista, "Value", "Text", estado);
+        }
 
         [HttpPost]
         public ActionResult Save(reservacion reservacion)
@@ -195,5 +242,22 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        public ActionResult reservacionesxUsuarioxEstado()
+        {
+            return PartialView("_PartialViewListaReservas");
+        }
+
+        public ActionResult obtenerFiltro(int user, int? estado)
+        {
+
+            IEnumerable<reservacion> lista = null;
+            IServiceReservacion _ServiceReservacion = new ServiceReservacion();
+            lista = _ServiceReservacion.GetReservacionesxUsuarioxEstado(user, estado);
+            return PartialView("_PartialViewListaReservas", lista);
+        }
+
+
+
     }
 }

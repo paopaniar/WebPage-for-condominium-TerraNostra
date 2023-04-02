@@ -1,0 +1,93 @@
+﻿@model Infraestructure.Models.reservacion
+
+@{
+    var reservacion = new List<Infraestructure.Models.reservacion>();
+    reservacion = ViewBag.lista;
+    ViewBag.Title = "IndexEstado";
+    var reservacionUsuario = new List<Infraestructure.Models.reservacion>();
+}
+
+@{ 
+    int iduser = 0;
+
+    if (Session["User"] != null)
+    {
+        Infraestructure.Models.usuario usuario = new Infraestructure.Models.usuario();
+        usuario = (Infraestructure.Models.usuario)Session["User"];
+
+        iduser = usuario.identificacion;
+        foreach (var item in reservacion.ToList())
+        {
+            if (item.usuario1.identificacion == iduser)
+            {
+                reservacionUsuario.Add(item);
+            }
+        }
+
+    }
+ }
+
+
+<br />
+<div class="text-center row">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.usuario1,
+               (SelectList)ViewBag.listaUsuarios,
+               "Seleccione un usuario",
+               htmlAttributes: new { @class = "form-control", @id = "idUsuarios" })
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.estado,
+               (SelectList)ViewBag.listaValueEstado,
+               "Seleccione un estado",
+               htmlAttributes: new { @class = "form-control", @id = "idEstado" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <button class="btn btn-primary" onclick="Filtrar('@iduser')"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+    </div>
+</div>
+
+<div>
+    <h3 class="text-center">Historial de reservas</h3>
+    <span class="glyphicons glyphicons-hand-left"></span>
+    <div id="tablaReservas">
+
+        @Html.Partial("_PartialViewListaReservas", reservacionUsuario)
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function Filtrar(idUsuarioAjax) {
+
+
+            var idUsuario = idUsuarioAjax;
+            var idEstado = $("#idEstado").val();
+            $.ajax({
+                url: '@Url.Action("obtenerFiltro", "Reservacion")', // especificar la acción del controlador que manejará la solicitud
+                type: 'POST',
+                data: {
+                    user: idUsuario,
+                    estado: idEstado,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}

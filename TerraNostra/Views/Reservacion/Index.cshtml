@@ -17,41 +17,58 @@
         <th>
             @Html.DisplayNameFor(model => model.usuario)
         </th>
-       
+
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
-       
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.areaComun.detalle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.usuario)
-        </td>
-       
-       
-        <td>
-            @if (item.estado == 1)
-            {
-                <text>Aprobado</text>
-            }
-            else
-            {
-                <text>Denegado</text>
-            }
-        </td>
-       
-        <td>
-            @Html.ActionLink("Denegar", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
-            @Html.ActionLink("Aprobar", "Edit", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComun.detalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
 
-</table>
+
+            <td>
+                @if (item.estado == 1)
+                {
+                    <text>Aprobado</text>
+                }
+                else
+                {
+                    <text>Denegado</text>
+                }
+            </td>
+
+            <td>
+                @Html.ActionLink("Denegar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
+                @Html.ActionLink("Aprobar", "Edit", new { id = item.id })
+            </td>
+        </tr>
+    }
+    @section Scripts{
+        <script type="text/javascript">
+            function getReservacion(id) {
+                $.ajax({
+                    method: 'GET',
+                    url: '/Reservacion/reservacionesxUsuarioxEstado',
+                    data: { 'id': idAutor },
+                    success: function (response) {
+                        $('#resultado').html('');
+                        $('#resultado').html(response);
+                    }, error: function (xhr, status, error) {
+                        console.log('Error' + error + ',No Error' + xhr.status);
+                    }
+                });
+            }
+        </script>
+                }
+    </table>
