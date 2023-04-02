@@ -17,5 +17,6 @@ namespace Infraestructure.Repository
 		List<plan_residencia> GetPlanResidenciaByMonthAndYear(int id, int mes, int year);
 		plan_residencia GetPlanResidenciaBy(int id);
 		plan_residencia Guardar(plan_residencia plan_residencia);
+		IEnumerable<plan_residencia> GetEstadosMes(int? mes);
 	}
 }

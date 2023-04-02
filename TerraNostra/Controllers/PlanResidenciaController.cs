@@ -172,7 +172,7 @@ namespace TerraNostra.Controllers
                     }
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexEstadosxMes");
             }
             catch (Exception ex)
             {
@@ -206,7 +206,7 @@ namespace TerraNostra.Controllers
                 if (ModelState.IsValid)
                 {
                     plan_residencia oPlanResidencia = _ServicePlanResidencia.Guardar(plan_residencia);
-                    TempData["mensaje"] = SweetAlertHelper.Mensaje("Éxito", "Pago realizado!!", SweetAlertMessageType.success);
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se realizó el pago exitosamente!.", SweetAlertMessageType.success);
 
                 }
 
@@ -235,6 +235,69 @@ namespace TerraNostra.Controllers
             }
         }
 
+        public ActionResult _PartialViewListaEstados()
+        {
+            return PartialView("_PartialViewListaEstados");
+        }
+
+        public ActionResult estadosxMes()
+        {
+            return PartialView("_PartialViewListaEstados");
+        }
+        public ActionResult obtenerFiltro(int? mes)
+        {
+            IEnumerable<plan_residencia> lista = null;
+            IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
+            lista = _ServicePlanResidencia.GetEstadosMes(mes);
+            return PartialView("_PartialViewListaEstados", lista);
+        }
+        public ActionResult IndexEstadosxMes()
+        {   
+            IEnumerable<plan_residencia> lista = null;
+            try
+            {
+                IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
+                lista = _ServicePlanResidencia.GetPlanResidencia();
+                ViewBag.title = "Estados Por Mes";
+                IServiceResidencia _ServiceResidencia = new ServiceResidencia();
+                ViewBag.listaResidencia = _ServiceResidencia.GetResidencia();
+                IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
+                ViewBag.listaPlanCobro = _ServicePlanCobro.GetPlanCobro();
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                ViewBag.listaUsuario = _ServiceUsuario.GetUsuario();
+                ViewBag.listaMes = listMeses();
+                ViewBag.lista = lista;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+
+        private SelectList listMeses(int mes = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Enero", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Febrero", Value = "2" });
+            lista.Add(new SelectListItem { Text = "Marzo", Value = "3" });
+            lista.Add(new SelectListItem { Text = "Abril", Value = "4" });
+            lista.Add(new SelectListItem { Text = "Mayo", Value = "5" });
+            lista.Add(new SelectListItem { Text = "Junio", Value = "6" });
+            lista.Add(new SelectListItem { Text = "Julio", Value = "7" });
+            lista.Add(new SelectListItem { Text = "Agosto", Value = "8" });
+            lista.Add(new SelectListItem { Text = "Septiembre", Value = "9" });
+            lista.Add(new SelectListItem { Text = "Octubre", Value = "10" });
+            lista.Add(new SelectListItem { Text = "Noviembre", Value = "11" });
+            lista.Add(new SelectListItem { Text = "Diciembre", Value = "13" });
+
+            return new SelectList(lista, "Value", "Text", mes);
+        }
 
     }
 }

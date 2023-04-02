@@ -316,6 +316,8 @@
     <Content Include="Views\Reservacion\Edit.cshtml" />
     <Content Include="Views\Reservacion\IndexEstado.cshtml" />
     <Content Include="Views\Reservacion\_PartialViewListaReservas.cshtml" />
+    <Content Include="Views\PlanResidencia\_PartialViewListaEstados.cshtml" />
+    <Content Include="Views\PlanResidencia\IndexEstadosxMes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

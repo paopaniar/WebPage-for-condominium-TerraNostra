@@ -4,18 +4,3 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Pagado eficientemente!!!!</h2>
-
-@using (Html.BeginForm("Save", "PlanResidencia", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-       
-        <hr />
-        </div>
-}
-
-<div>
-    @Html.ActionLink("Volver", "Index")
-</div>
