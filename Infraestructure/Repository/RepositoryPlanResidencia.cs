@@ -90,12 +90,12 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     if (mes != null)
                     {
-                        lista = ctx.plan_residencia.Include("residencia").Include("plan_cobro").
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
                          Where(l => l.fecha.Month == mes).ToList();
                     }
                     else
                     {
-                        lista = ctx.plan_residencia.Include("residencia").Include("plan_cobro").ToList();
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").ToList();
                     }
 
 
