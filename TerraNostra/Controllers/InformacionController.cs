@@ -49,17 +49,13 @@ namespace TerraNostra.Controllers
         public ActionResult Edit(int? id)
         {
             ServiceInformacion _ServiceLibro = new ServiceInformacion();
-            informacion informacion = null;
+            informacion informacion = new informacion();
+            usuario oUsuario = (usuario)Session["User"];
+            informacion.usuario = oUsuario.identificacion;
 
             try
             {
 
-                usuario oUsuario = (usuario)Session["User"];
-                //Asignar idUsuario que se encuentra logueado
-                informacion.usuario = oUsuario.identificacion;
-            
-
-                // Si va null
                 if (id == null)
                 {
                     return RedirectToAction("Index");
