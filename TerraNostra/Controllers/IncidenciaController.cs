@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using TerraNostra.Enum;
+using TerraNostra.Security;
 
 namespace TerraNostra.Controllers
 {
@@ -156,6 +158,70 @@ namespace TerraNostra.Controllers
         {
             ViewBag.tipos = listaTipos();
             return View();
+        }
+
+
+        public ActionResult _PartialViewLista()
+        {
+            return PartialView("_PartialViewLista");
+        }
+        public ActionResult incidenciaxEstado()
+        {
+            return PartialView("_PartialViewLista");
+        }
+        public ActionResult obtenerFiltro(int? estado)
+        {
+            IEnumerable<incidente> lista = null;
+            IServiceIncidente _ServicePlanResidencia = new ServiceIncidente();
+            lista = _ServicePlanResidencia.GetIncidentexEstado(estado);
+            return PartialView("_PartialViewLista", lista);
+        }
+
+        private SelectList listTipos(int tipo = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Apartados", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Mantenimiento", Value = "2" });
+            lista.Add(new SelectListItem { Text = "Mensaje", Value = "3" });
+            lista.Add(new SelectListItem { Text = "Requerimiento", Value = "4" });
+          
+          
+
+            return new SelectList(lista, "Value", "Text", tipo);
+        }
+        private SelectList listEstados(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Pendientes", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Resueltas", Value = "0" });
+            return new SelectList(lista, "Value", "Text", estado);
+        }
+
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult IndexIncidenciasxEstado()
+        {
+            IEnumerable<incidente> lista = null;
+            try
+            {
+                IServiceIncidente _ServiceIncidente = new ServiceIncidente();
+                lista = _ServiceIncidente.GetIncidente();
+                ViewBag.title = "Incidentes Por Estado";
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                ViewBag.listaUsuario = _ServiceUsuario.GetUsuario();
+                ViewBag.lista = lista;
+                ViewBag.listaValueEstado = listEstados();
+                ViewBag.listaTipo = listTipos();
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
     }
 }

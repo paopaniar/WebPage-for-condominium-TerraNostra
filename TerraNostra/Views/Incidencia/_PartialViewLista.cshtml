@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Infraestructure.Models.incidente>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+
+
+
+
+<p>
+    <a href="@Url.Action("Create", "Incidencia")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear incidente</a>
+    @*@Html.ActionLink("Crear", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.descTipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario1.identificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalle)
+        </th>
+        <th>Por hacer</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descTipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario1.identificacion)
+            </td>
+            <td>
+                @if (item.estado == 1)
+                {
+                    <text>Pendiente</text> }
+                else
+                {
+                    <text>Resuelta</text>}
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.detalle)
+            </td>
+            <td>
+
+                @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
