@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Services;
 using Infraestructure.Models;
 using iText.IO.Font.Constants;
+using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
@@ -29,11 +30,11 @@ namespace TerraNostra.Controllers
 
         public ActionResult ReporteDeudas()
         {
+            IServicePlanResidencia _ServiceLibro = new ServicePlanResidencia();
             IEnumerable<plan_residencia> lista = null;
+            ViewBag.EstadosPendientes = _ServiceLibro.GetReporteByEstado(0);
             try
             {
-
-                IServicePlanResidencia _ServiceLibro = new ServicePlanResidencia();
                 lista = _ServiceLibro.GetPlanResidencia();
                 return View(lista);
             }
@@ -68,32 +69,30 @@ namespace TerraNostra.Controllers
                 PdfDocument pdfDoc = new PdfDocument(writer);
                 Document doc = new Document(pdfDoc);
 
-                Paragraph header = new Paragraph("Reporte de deudas")
+                Paragraph header = new Paragraph("Reporte de Deudas")
                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                                    .SetFontSize(14)
                                    .SetFontColor(ColorConstants.BLUE);
                 doc.Add(header);
 
-
+               
                 // Crear tabla con 5 columnas 
                 Table table = new Table(5, true);
 
 
                 // los Encabezados
-                table.AddHeaderCell("fecha");
-                table.AddHeaderCell("residencia");
-                table.AddHeaderCell("total");
-             
+                table.AddHeaderCell("Casa");
+                table.AddHeaderCell("Detalle");
+                table.AddHeaderCell("Estado");
+                table.AddHeaderCell("Total");
+
                 foreach (var item in lista)
                 {
-
-                    // Agregar datos a las celdas
-                    table.AddCell(new Paragraph(item.fecha.ToString()));
                     table.AddCell(new Paragraph(item.residencia.numeroCasa.ToString()));
+                    table.AddCell(new Paragraph(item.detalle));
+                    table.AddCell(new Paragraph(item.estado.ToString()));
                     table.AddCell(new Paragraph(item.plan_cobro.total.ToString()));
-                  
 
-                   
                 }
                 doc.Add(table);
 

@@ -20,6 +20,7 @@ namespace ApplicationCore.Services
 		plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes);
 		IEnumerable<plan_residencia> GetEstadosMes(int? mes);
 		IEnumerable<plan_residencia> GetEstadosCuentaxUsuarioxMes(int user, int? mes);
+		IEnumerable<plan_residencia> GetReporteByEstado(int estado);
 	}
 
 }

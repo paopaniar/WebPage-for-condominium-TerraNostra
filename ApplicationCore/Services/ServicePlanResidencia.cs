@@ -30,7 +30,7 @@ namespace ApplicationCore.Services
 
         public IEnumerable<plan_residencia> GetPlanResidencia()
 		{
-			    IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
 			return repository.GetPlanResidencia();
 		}
 
@@ -49,6 +49,12 @@ namespace ApplicationCore.Services
         {
             IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
             return repository.GetPlanResidenciaByMonthAndYear(id, mes, year);
+        }
+
+        public IEnumerable<plan_residencia> GetReporteByEstado(int estado)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetReporteByEstado(estado);
         }
 
         public plan_residencia Guardar(plan_residencia plan_residencia)
