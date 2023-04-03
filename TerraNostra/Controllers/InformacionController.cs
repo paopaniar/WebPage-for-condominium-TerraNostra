@@ -52,7 +52,8 @@ namespace TerraNostra.Controllers
             informacion informacion = new informacion();
             usuario oUsuario = (usuario)Session["User"];
             informacion.usuario = oUsuario.identificacion;
-
+            ViewBag.tipo = listTipos();
+            ViewBag.estados = estado();
             try
             {
 
@@ -140,7 +141,8 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.tipos = listaTipos();
+            ViewBag.estado = estado();
+            ViewBag.tipos = listTipos();
             return View();
         }
 
@@ -200,7 +202,22 @@ namespace TerraNostra.Controllers
 
 
         }
+        private SelectList listTipos(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Noticias", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Actas", Value = "2" });
+            lista.Add(new SelectListItem { Text = "Artículos", Value = "3" });
+            return new SelectList(lista, "Value", "Text", estado);
+        }
+        private SelectList estado(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Visible", Value = "0" });
+            lista.Add(new SelectListItem { Text = "Oculta", Value = "1" });
 
+            return new SelectList(lista, "Value", "Text", estado);
+        }
 
     }
 }
