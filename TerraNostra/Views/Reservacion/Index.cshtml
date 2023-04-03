@@ -1,82 +1,57 @@
-﻿@model IEnumerable<Infraestructure.Models.reservacion>
+﻿@model Infraestructure.Models.reservacion
 
 @{
-    ViewBag.Title = "Reservación";
+    var reservacion = new List<Infraestructure.Models.reservacion>();
+    reservacion = ViewBag.lista;
+    ViewBag.Title = "Index";
+    var reservacionFiltrada = new List<Infraestructure.Models.reservacion>();
 }
 
+<br />
+<center><h4 style="font-family: Broadway">Historial de Reservas</h4></center>
+<br />
+<div class="text-center row">
+
+    <div class="col-lg-2 col-md-2 col-sm-6">
+        @Html.DropDownListFor(model => model.estado,
+           (SelectList)ViewBag.listaValueEstado,
+           "Todos",
+           htmlAttributes: new { @class = "form-control", @id = "idestado" })
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <button class="btn btn-primary" onclick="Filtrar()"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+    </div>
+
+</div>
 
 <br />
-<center><h4 style="font-family: Broadway">Lista de reservaciones</h4></center>
+<div>
 
-<hr />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.areaComun.detalle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.usuario)
-        </th>
+    <span class="glyphicons glyphicons-hand-left"></span>
+    <div id="tablaReservas">
+        @Html.Partial("_PartialViewListaReservas", reservacion)
+    </div>
+</div>
 
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.areaComun.detalle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usuario)
-            </td>
-
-
-            <td>
-                @if (item.estado == 1)
-                {
-                    <text>Aprobado</text>
+@section Scripts{
+    <script type="text/javascript">
+        function Filtrar() {
+            var idEstado = $("#idestado").val();
+            $.ajax({
+                url: '@Url.Action("obtenerFiltro1", "Reservacion")',
+                type: 'POST',
+                data: {
+                    estado: idEstado,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
                 }
-                else
-                {
-                    if (item.estado == 0)
-                    {
-                        <text>Denegado</text>
-                    }
-                    else
-                    {
-                        <text>Sin resolver</text>
-                    }
-
-                }
-            </td>
-
-            <td>
-                @Html.ActionLink("Denegar", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
-                @Html.ActionLink("Aprobar", "Edit", new { id = item.id })
-            </td>
-        </tr>
-    }
-    @section Scripts{
-        <script type="text/javascript">
-            function getReservacion(id) {
-                $.ajax({
-                    method: 'GET',
-                    url: '/Reservacion/reservacionesxUsuarioxEstado',
-                    data: { 'id': idAutor },
-                    success: function (response) {
-                        $('#resultado').html('');
-                        $('#resultado').html(response);
-                    }, error: function (xhr, status, error) {
-                        console.log('Error' + error + ',No Error' + xhr.status);
-                    }
-                });
-            }
-        </script>
-                }
-    </table>
+            });
+        }
+    </script>
+} 

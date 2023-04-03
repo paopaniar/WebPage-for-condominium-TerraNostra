@@ -14,6 +14,7 @@ namespace ApplicationCore.Services
         reservacion Save(reservacion reservacion);
         reservacion SaveEstado(reservacion reservacion);
         IEnumerable<reservacion> GetReservacionesxUsuarioxEstado( int user, int? estado);
+        IEnumerable<reservacion> GetReservacionesxEstado(int? estado);
 
     }
 }

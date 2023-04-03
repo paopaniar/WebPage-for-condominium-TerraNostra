@@ -22,14 +22,12 @@ namespace TerraNostra.Controllers
                 IServiceReservacion _ServiceReservacion = new ServiceReservacion();
                 lista = _ServiceReservacion.GetReservacion();
                 ViewBag.title = "Reservación";
-
                 IServiceAreaComun _ServiceArea = new ServiceAreaComun();
                 ViewBag.listaAreas = _ServiceArea.GetAreaComun();
-                ViewBag.listaReservaciones = _ServiceReservacion.GetReservacion();
-                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
-                ViewBag.listaUsuarios = listUsuarios();
-
-                return View(lista);
+                ViewBag.listaReservaciones = _ServiceReservacion.GetReservacion();             
+                ViewBag.lista = lista;
+                ViewBag.listaValueEstado = listEstados();
+                return View();
             }
             catch (Exception ex)
             {
@@ -44,6 +42,25 @@ namespace TerraNostra.Controllers
         public ActionResult _PartialViewListaReservas()
         {
             return PartialView("_PartialViewListaReservas");
+        }
+
+
+        public PartialViewResult reservasxEstado(int? estado)
+        {
+            IEnumerable<reservacion> lista = null;
+            IServiceReservacion _ServiceReservacion = new ServiceReservacion();
+            if (estado != null)
+            {
+                if (estado == 0)
+                {
+                    lista = _ServiceReservacion.GetReservacion();
+                }
+                else
+                {
+                    lista = _ServiceReservacion.GetReservacionesxEstado((int)estado);
+                }
+            }
+            return PartialView("", lista);
         }
 
         public ActionResult IndexEstado()
@@ -115,9 +132,7 @@ namespace TerraNostra.Controllers
         public ActionResult Save(reservacion reservacion)
         {
 
-            IServiceReservacion _ServiceReservacion = new ServiceReservacion();
-
-            
+            IServiceReservacion _ServiceReservacion = new ServiceReservacion();         
             try
             {
               
@@ -255,6 +270,14 @@ namespace TerraNostra.Controllers
             IEnumerable<reservacion> lista = null;
             IServiceReservacion _ServiceReservacion = new ServiceReservacion();
             lista = _ServiceReservacion.GetReservacionesxUsuarioxEstado(user, estado);
+            return PartialView("_PartialViewListaReservas", lista);
+        }
+
+        public ActionResult obtenerFiltro1(int? estado)
+        {
+            IEnumerable<reservacion> lista = null;
+            IServiceReservacion _ServiceReservacion = new ServiceReservacion();
+            lista = _ServiceReservacion.GetReservacionesxEstado(estado);
             return PartialView("_PartialViewListaReservas", lista);
         }
 

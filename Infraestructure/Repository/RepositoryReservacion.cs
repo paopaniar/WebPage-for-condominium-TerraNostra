@@ -72,7 +72,41 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<reservacion> GetReservacionesxUsuarioxEstado( int user, int? estado)
+        public IEnumerable<reservacion> GetReservacionesxEstado(int? estado)
+        {
+           
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener reservas por estado
+                    if (estado!=null) 
+                    {
+                        lista = ctx.reservacion.Include("usuario1").Include("areaComun").Where(l => l.estado==estado).ToList();
+                    }
+					else
+					{
+                        lista = ctx.reservacion.Include("usuario1").Include("areaComun").ToList();
+                    }
+
+                }
+                return lista;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+		public IEnumerable<reservacion> GetReservacionesxUsuarioxEstado( int user, int? estado)
         {
             
             try

@@ -83,6 +83,7 @@ namespace TerraNostra.Controllers
                 // los Encabezados
                 table.AddHeaderCell("Casa");
                 table.AddHeaderCell("Detalle");
+                table.AddHeaderCell("Mes");
                 table.AddHeaderCell("Estado");
                 table.AddHeaderCell("Total");
 
@@ -90,6 +91,7 @@ namespace TerraNostra.Controllers
                 {
                     table.AddCell(new Paragraph(item.residencia.numeroCasa.ToString()));
                     table.AddCell(new Paragraph(item.detalle));
+                    table.AddCell(new Paragraph(item.fecha.Month.ToString()));
                     table.AddCell(new Paragraph(item.estado.ToString()));
                     table.AddCell(new Paragraph(item.plan_cobro.total.ToString()));
 

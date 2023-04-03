@@ -22,7 +22,13 @@ namespace ApplicationCore.Services
             return repository.GetReservacionById(id);
         }
 
-        public IEnumerable<reservacion> GetReservacionesxUsuarioxEstado(int user, int? estado)
+		public IEnumerable<reservacion> GetReservacionesxEstado(int? estado)
+		{
+            IRepositoryReservacion repository = new RepositoryReservacion();
+            return repository.GetReservacionesxEstado(estado);
+        }
+
+		public IEnumerable<reservacion> GetReservacionesxUsuarioxEstado(int user, int? estado)
         {
             IRepositoryReservacion repository = new RepositoryReservacion();
             return repository.GetReservacionesxUsuarioxEstado(user, estado);
