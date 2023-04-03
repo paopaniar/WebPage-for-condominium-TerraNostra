@@ -80,10 +80,9 @@ namespace Infraestructure.Models
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detail { get; set; }        
-        [Display(Name = "Fecha")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [Display(Name = "Fecha")]    
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [UIHint("Date")]
         public System.DateTime datePlan { get; set; }
         
         [Display(Name = "Rubros")]
