@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TerraNostra.Enum;
 using TerraNostra.Security;
+using TerraNostra.Utils;
 
 namespace TerraNostra.Controllers
 {
@@ -75,7 +76,7 @@ namespace TerraNostra.Controllers
                 if (ModelState.IsValid)
                 {
                     incidente oIncidente = _ServiceIncidente.Save(incidente);
-                  
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se creó la incidencia!.", SweetAlertMessageType.success);
                 }
 
                else
@@ -107,7 +108,7 @@ namespace TerraNostra.Controllers
         [HttpPost]
         public ActionResult Save(incidente incidente)
         {
-            IServiceIncidente _ServiceIncidente= new ServiceIncidente();
+            IServiceIncidente _ServiceIncidente = new ServiceIncidente();
             try
             {
                 usuario oUsuario = (usuario)Session["User"];
@@ -119,17 +120,18 @@ namespace TerraNostra.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    incidente oIncidenteI= _ServiceIncidente.Save(incidente);
+                   
+                    incidente oIncidenteI = _ServiceIncidente.Save(incidente);
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                  //  ViewBag.idUsuario = listUsuarios(incidente.id);
+                    //  ViewBag.idUsuario = listUsuarios(incidente.id);
                     ViewBag.id = listUsuarios(incidente.usuario);
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
-                    if (incidente.id> 0)
+                    if (incidente.id > 0)
                     {
                         return (ActionResult)View("Edit", incidente);
                     }
@@ -138,9 +140,10 @@ namespace TerraNostra.Controllers
                         return View("Create", incidente);
                     }
                 }
-
-                return RedirectToAction("Index");
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se creó la incidencia!.", SweetAlertMessageType.success);
+                return RedirectToAction("Index", incidente);
             }
+
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
@@ -153,10 +156,11 @@ namespace TerraNostra.Controllers
             }
         }
 
+
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.tipos = listaTipos();
+            ViewBag.tipos = listTiposVal();
             return View();
         }
 
@@ -177,7 +181,7 @@ namespace TerraNostra.Controllers
             return PartialView("_PartialViewLista", lista);
         }
 
-        private SelectList listTipos(int tipo = 0)
+        private SelectList listTiposVal(int tipo = 0)
         {
             List<SelectListItem> lista = new List<SelectListItem>();
             lista.Add(new SelectListItem { Text = "Apartados", Value = "1" });
@@ -210,7 +214,7 @@ namespace TerraNostra.Controllers
                 ViewBag.listaUsuario = _ServiceUsuario.GetUsuario();
                 ViewBag.lista = lista;
                 ViewBag.listaValueEstado = listEstados();
-                ViewBag.listaTipo = listTipos();
+                
 
                 return View();
             }
