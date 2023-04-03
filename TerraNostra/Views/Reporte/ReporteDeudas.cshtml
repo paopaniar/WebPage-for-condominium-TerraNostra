@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Infraestructure.Models.plan_residencia>
+
+@{
+    ViewBag.Title = "ReporteDeudas";
+}
+
+<h2>ReporteDeudas</h2>
+
+<p>
+    @Html.ActionLink("Reporte PDF", "CreatePdfLibroCatalogo", "Reporte")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.planCobroId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.residenciaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.detalle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.planCobroId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.residenciaId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.detalle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        
+    </tr>
+}
+
+</table>
