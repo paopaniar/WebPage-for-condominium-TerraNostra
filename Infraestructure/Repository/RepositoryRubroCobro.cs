@@ -81,10 +81,9 @@ namespace Infraestructure.Repository
                 {
 
                     ctx.rubro_cobro.Add(rubro);
-                    //SaveChanges
-                    //guarda todos los cambios realizados en el contexto de la base de datos.
+        
                     retorno = ctx.SaveChanges();
-                    //retorna número de filas afectadas
+                   
                 }
                 else
                 {
