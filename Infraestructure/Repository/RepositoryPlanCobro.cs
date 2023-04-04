@@ -93,21 +93,24 @@ namespace Infraestructure.Repository
                 {
                     if (selectedRubros != null)
                     {
-
                         planCobro.rubro_cobro = new List<rubro_cobro>();
+                        decimal totalSum = 0;
                         foreach (var rubro in selectedRubros)
                         {
                             var rubroToAdd = _RepositoryRubro.GetRubroCobroById(int.Parse(rubro));
-                            ctx.rubro_cobro.Attach(rubroToAdd); //sin esto, EF intentará crear una categoría
-                            planCobro.rubro_cobro.Add(rubroToAdd);// asociar a la categoría existente con el libro
-
-
+                            ctx.rubro_cobro.Attach(rubroToAdd);
+                            planCobro.rubro_cobro.Add(rubroToAdd);
+                            totalSum += Convert.ToDecimal(rubroToAdd.monto);
                         }
+                        planCobro.total = totalSum;
                     }
+                    else if (oPlanCobro != null)
+                    {
+                        planCobro.total = oPlanCobro.total;
+                    }
+
                     ctx.plan_cobro.Add(planCobro);
-                   
                     retorno = ctx.SaveChanges();
-                    //retorna número de filas afectadas
                 }
                 else
                 {
@@ -122,6 +125,13 @@ namespace Infraestructure.Repository
                          .Where(x => selectRubroId.Contains(x.id.ToString())).ToList();
                         planCobro.rubro_cobro = newCategoriaForLibro;
 
+                        decimal totalSum = 0;
+                        foreach (var rubro in newCategoriaForLibro)
+                        {
+                            totalSum += Convert.ToDecimal(rubro.monto);
+                        }
+                        planCobro.total = totalSum;
+
                         ctx.Entry(planCobro).State = EntityState.Modified;
                         retorno = ctx.SaveChanges();
                     }
@@ -130,9 +140,10 @@ namespace Infraestructure.Repository
 
             if (retorno >= 0)
                 oPlanCobro = GetPlanCobroById((int)planCobro.id);
-
+            oPlanCobro.total = planCobro.total;
             return oPlanCobro;
         }
+
     }
-   
+
 }

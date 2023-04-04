@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Infraestructure.Models.plan_residencia>
 
 @{
-    decimal totalSum = 0;
+   
     ViewBag.Title = "ReporteDeudas";
 }
 <br />
@@ -30,6 +30,7 @@
 
     @foreach (var item in Model)
     {
+       
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.residencia.numeroCasa)
@@ -87,11 +88,8 @@
             </td>
 
             <td style="column-width: 5px;">
-                @if (item.plan_cobro.rubro_cobro != null && item.plan_cobro.rubro_cobro.Any())
-                {
-                    totalSum = item.plan_cobro.rubro_cobro.Sum(c => Convert.ToDecimal(c.monto));
-                }
-                @string.Format("{0:C}", totalSum)
+
+                @Html.DisplayFor(modelItem => item.plan_cobro.total)
             </td>
 
         </tr>

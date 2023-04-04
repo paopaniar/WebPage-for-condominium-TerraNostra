@@ -147,11 +147,8 @@ namespace TerraNostra.Controllers
                         table.AddCell(new Paragraph("Sin pagar"));
                     }
 
-                    if (item.plan_cobro.rubro_cobro != null && item.plan_cobro.rubro_cobro.Any())
-                    {
-                        totalSum = item.plan_cobro.rubro_cobro.Sum(c => Convert.ToDecimal(c.monto));
-                    }
-                    table.AddCell(new Paragraph(totalSum.ToString()));
+
+                    table.AddCell(new Paragraph(item.plan_cobro.total.ToString()));
 
                 }
                 doc.Add(table);
