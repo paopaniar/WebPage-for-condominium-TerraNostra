@@ -57,6 +57,12 @@ namespace ApplicationCore.Services
             return repository.GetReporteByEstado(estado);
         }
 
+        public IEnumerable<plan_residencia> GetReporteByResidenteByMes(int? mes, int? residente, int? estado)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetReporteByResidenteByMes(mes, residente, 0);
+        }
+
         public plan_residencia Guardar(plan_residencia plan_residencia)
         {
             IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();

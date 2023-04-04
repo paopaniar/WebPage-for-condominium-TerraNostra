@@ -20,6 +20,8 @@ namespace Infraestructure.Repository
 		IEnumerable<plan_residencia> GetEstadosMes(int? mes);
 		IEnumerable<plan_residencia> GetEstadosCuentaxUsuarioxMes(int user, int? mes);
 		IEnumerable<plan_residencia> GetReporteByEstado(int estado);
+		IEnumerable<plan_residencia> GetReporteByResidenteByMes(int? mes, int? residente, int? estado);
+
 	}
 
 }

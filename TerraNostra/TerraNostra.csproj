@@ -397,9 +397,10 @@
     <Content Include="Views\PlanResidencia\IndexEstadosxMes.cshtml" />
     <Content Include="Views\PlanResidencia\IndexEstadosxMesxUsuario.cshtml" />
     <Content Include="Views\PlanResidencia\_PartialViewListaEstadosUser.cshtml" />
-    <Content Include="Views\Reporte\ReporteDeudas.cshtml" />
     <Content Include="Views\Incidencia\_PartialViewLista.cshtml" />
     <Content Include="Views\Incidencia\IndexIncidenciasxEstado.cshtml" />
+    <Content Include="Views\Reporte\_PartialViewReporte.cshtml" />
+    <Content Include="Views\Reporte\ReporteDeudas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

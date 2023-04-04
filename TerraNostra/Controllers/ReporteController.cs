@@ -22,21 +22,26 @@ namespace TerraNostra.Controllers
 {
     public class ReporteController : Controller
     {
-        // GET: Reporte
+        decimal totalSum = 0;
+        IEnumerable<plan_residencia> lista = null;
         public ActionResult Index()
         {
-            return View("ReporteDeudas");
+
+            return View("_PartialViewReporte");
         }
 
         public ActionResult ReporteDeudas()
         {
             IServicePlanResidencia _ServiceLibro = new ServicePlanResidencia();
-            IEnumerable<plan_residencia> lista = null;
-            ViewBag.EstadosPendientes = _ServiceLibro.GetReporteByEstado(0);
+          
+            ViewBag.listaMes = listMeses();
+            ViewBag.lista = lista;
+            ViewBag.idResidencia = listaResidencias();
             try
             {
-                lista = _ServiceLibro.GetPlanResidencia();
-                return View(lista);
+                ViewBag.EstadosPendientes = _ServiceLibro.GetReporteByEstado(0);
+                lista = _ServiceLibro.GetReporteByEstado(0);
+                return View();
             }
             catch (Exception ex)
             {
@@ -58,7 +63,7 @@ namespace TerraNostra.Controllers
             {
                 // Extraer informacion
                 IServicePlanResidencia _ServiceLibro = new ServicePlanResidencia();
-                lista = _ServiceLibro.GetPlanResidencia();
+                lista = _ServiceLibro.GetReporteByEstado(0);
 
                 // Crear stream para almacenar en memoria el reporte 
                 MemoryStream ms = new MemoryStream();
@@ -91,9 +96,60 @@ namespace TerraNostra.Controllers
                 {
                     table.AddCell(new Paragraph(item.residencia.numeroCasa.ToString()));
                     table.AddCell(new Paragraph(item.detalle));
-                    table.AddCell(new Paragraph(item.fecha.Month.ToString()));
-                    table.AddCell(new Paragraph(item.estado.ToString()));
-                    table.AddCell(new Paragraph(item.plan_cobro.total.ToString()));
+
+                    switch (item.fecha.Month)
+                    {
+                        case 1:
+                            table.AddCell(new Paragraph("Enero"));
+                            break;
+                        case 2:
+                            table.AddCell(new Paragraph("Febrero"));
+                            break;
+                        case 3:
+                            table.AddCell(new Paragraph("Marzo"));
+                            break;
+                        case 4:
+                            table.AddCell(new Paragraph("Abril"));
+                            break;
+                        case 5:
+                            table.AddCell(new Paragraph("Mayo"));
+                            break;
+                        case 6:
+                            table.AddCell(new Paragraph("Junio"));
+                            break;
+                        case 7:
+                            table.AddCell(new Paragraph("Julio"));
+                            break;
+                        case 8:
+                            table.AddCell(new Paragraph("Agosto"));
+                            break;
+                        case 9:
+                            table.AddCell(new Paragraph("Septiembre"));
+                            break;
+                        case 10:
+                            table.AddCell(new Paragraph("Octubre"));
+                            break;
+                        case 11:
+                            table.AddCell(new Paragraph("Noviembre"));
+                            break;
+                        case 12:
+                            table.AddCell(new Paragraph("Diciembre"));
+                            break;
+                        default:
+                            table.AddCell(new Paragraph("No válido"));
+                            break;
+                    }
+                  
+                    if (item.estado ==0)
+                    {
+                        table.AddCell(new Paragraph("Sin pagar"));
+                    }
+
+                    if (item.plan_cobro.rubro_cobro != null && item.plan_cobro.rubro_cobro.Any())
+                    {
+                        totalSum = item.plan_cobro.rubro_cobro.Sum(c => Convert.ToDecimal(c.monto));
+                    }
+                    table.AddCell(new Paragraph(totalSum.ToString()));
 
                 }
                 doc.Add(table);
@@ -127,6 +183,51 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
 
+        }
+
+        public ActionResult _PartialViewReporte()
+        {
+            return PartialView("_PartialViewReporte");
+        }
+        public ActionResult obtenerFiltro(int? mes, int? residente, int? estado)
+        {
+            IEnumerable<plan_residencia> lista = null;
+            IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
+            lista = _ServicePlanResidencia.GetReporteByResidenteByMes(mes, residente, 0);
+            return PartialView("_PartialViewReporte", lista);
+        }
+
+        private SelectList listaResidencias(ICollection<residencia> residencias = null)
+        {
+            IServiceResidencia _ServiceResidencia = new ServiceResidencia();
+            IEnumerable<residencia> lista = _ServiceResidencia.GetResidencia();
+            //Seleccionar categorias
+            int[] listaResidenciasSelect = null;
+            if (residencias != null)
+            {
+                listaResidenciasSelect = residencias.Select(c => c.id).ToArray();
+            }
+
+            return new SelectList(lista, "id", "numeroCasa", listaResidenciasSelect);
+        }
+
+        private SelectList listMeses(int mes = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Enero", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Febrero", Value = "2" });
+            lista.Add(new SelectListItem { Text = "Marzo", Value = "3" });
+            lista.Add(new SelectListItem { Text = "Abril", Value = "4" });
+            lista.Add(new SelectListItem { Text = "Mayo", Value = "5" });
+            lista.Add(new SelectListItem { Text = "Junio", Value = "6" });
+            lista.Add(new SelectListItem { Text = "Julio", Value = "7" });
+            lista.Add(new SelectListItem { Text = "Agosto", Value = "8" });
+            lista.Add(new SelectListItem { Text = "Septiembre", Value = "9" });
+            lista.Add(new SelectListItem { Text = "Octubre", Value = "10" });
+            lista.Add(new SelectListItem { Text = "Noviembre", Value = "11" });
+            lista.Add(new SelectListItem { Text = "Diciembre", Value = "13" });
+
+            return new SelectList(lista, "Value", "Text", mes);
         }
 
     }

@@ -321,6 +321,61 @@ namespace Infraestructure.Repository
             }
         }
 
+        public IEnumerable<plan_residencia> GetReporteByResidenteByMes(int? mes, int? residente, int? estado)
+        {
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    if (mes != null && residente != null)
+                    {
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                         Where(l => l.residencia.numeroCasa == residente && l.fecha.Month == mes && l.estado == 0).ToList();
+                    }
+                    else
+                    {
+                        if (mes != null)
+                        {
+                            lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                         Where(l => l.fecha.Month == mes && l.estado == 0).ToList();
+                        }
+                        else
+                        {
+                            if (residente != null)
+                            {
+                                lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                                                        Where(l => l.residencia.numeroCasa == residente && l.estado == 0).ToList();
+                            }
+                            else
+                            {
+                                lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                                                        Where(l => l.estado == 0).ToList();
+                            }
+                        }
+                           
+                       
+                    }
+
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public plan_residencia Guardar(plan_residencia plan_residencia)
         {
             plan_residencia oplan = null;
