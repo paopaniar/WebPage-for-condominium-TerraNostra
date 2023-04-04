@@ -24,12 +24,13 @@ namespace TerraNostra.Controllers
     {
         decimal totalSum = 0;
         IEnumerable<plan_residencia> lista = null;
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
 
             return View("_PartialViewReporte");
         }
-
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult ReporteDeudas()
         {
             IServicePlanResidencia _ServiceLibro = new ServicePlanResidencia();
