@@ -35,12 +35,13 @@ namespace TerraNostra.Controllers
             IServicePlanResidencia _ServiceLibro = new ServicePlanResidencia();
           
             ViewBag.listaMes = listMeses();
-            ViewBag.lista = lista;
+          
             ViewBag.idResidencia = listaResidencias();
             try
             {
                 ViewBag.EstadosPendientes = _ServiceLibro.GetReporteByEstado(0);
                 lista = _ServiceLibro.GetReporteByEstado(0);
+                ViewBag.lista = lista;
                 return View();
             }
             catch (Exception ex)
@@ -208,7 +209,7 @@ namespace TerraNostra.Controllers
                 listaResidenciasSelect = residencias.Select(c => c.id).ToArray();
             }
 
-            return new SelectList(lista, "id", "numeroCasa", listaResidenciasSelect);
+            return new SelectList(lista, "numeroCasa", "numeroCasa", listaResidenciasSelect);
         }
 
         private SelectList listMeses(int mes = 0)

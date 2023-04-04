@@ -8,16 +8,12 @@
     var estadoCuentaUsuario = new List<Infraestructure.Models.plan_residencia>();
 }
 @{ 
-    int estados = 0;
-    if (estadoCuentaUsuario != null)
+    int estado = 0;
+    foreach (var item in estadoCuenta.ToList())
     {
-
-       foreach (var item in estadoCuentaUsuario.ToList())
+        if (item.estado == 0)
         {
-            if (item.estado== estados)
-            {
-                estadoCuentaUsuario.Add(item);
-            }
+            estadoCuentaUsuario.Add(item);
         }
     }
 
@@ -42,7 +38,7 @@
     </div>
 
     <div class="col-lg-2 col-md-4 col-sm-6">
-        <button class="btn btn-primary" onclick="Filtrar(@estados)"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+        <button class="btn btn-primary" onclick="Filtrar(@estado)"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
     </div>
 
 </div>
@@ -63,16 +59,16 @@
     <script type="text/javascript">
         function Filtrar(estadoAjax) {
 
-            var idUsuario = estadoAjax;
+            var idestado = estadoAjax;
             var idResidencia = $("#idResidencia").val();
             var idMes = $("#idMes").val();
             $.ajax({
-                url: '@Url.Action("obtenerFiltro", "PlanResidencia")',
+                url: '@Url.Action("obtenerFiltro", "Reporte")',
                 type: 'POST',
                 data: {
                     residente: idResidencia,
                     mes: idMes,
-                    estado: idUsuario,
+                    estado: idestado,
                 },
                 success: function (result) {
                     $('#tablaReservas').html('');

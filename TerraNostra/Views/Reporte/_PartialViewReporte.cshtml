@@ -28,18 +28,18 @@
 
     </tr>
 
-    @foreach (var c in ViewBag.EstadosPendientes)
+    @foreach (var item in Model)
     {
         <tr>
             <td>
-                @c.residencia.numeroCasa
+                @Html.DisplayFor(modelItem => item.residencia.numeroCasa)
             </td>
 
             <th>
-                @c.detalle
+                @Html.DisplayFor(modelItem => item.detalle)
             </th>
             <th>
-                @switch (@c.fecha.Month)
+                @switch (item.fecha.Month)
                 {
                     case 1:
                         <text>Enero</text>
@@ -87,15 +87,9 @@
             </td>
 
             <td style="column-width: 5px;">
-                @{
-
-                    if (c.plan_cobro.rubro_cobro != null)
-                    {
-                        foreach (var item in c.plan_cobro.rubro_cobro)
-                        {
-                            totalSum += Convert.ToDecimal(item.monto);
-                        }
-                    }
+                @if (item.plan_cobro.rubro_cobro != null && item.plan_cobro.rubro_cobro.Any())
+                {
+                    totalSum = item.plan_cobro.rubro_cobro.Sum(c => Convert.ToDecimal(c.monto));
                 }
                 @string.Format("{0:C}", totalSum)
             </td>
