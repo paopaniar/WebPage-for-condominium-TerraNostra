@@ -71,6 +71,7 @@ namespace Infraestructure.Models
         [Display(Name = "Estado")]
         public int estado { get; set; }
         [Display(Name = "Total")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = false)]
         public decimal total { get; set; }
         [Display(Name = "Mes")]
         public string mes { get; set; }
