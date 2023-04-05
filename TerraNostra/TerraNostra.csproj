@@ -235,6 +235,8 @@
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="ViewModel\ViewModelGraficoController.cs" />
+    <Compile Include="ViewModel\ViewModelIngreso.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-Flatly.min.css" />
@@ -401,12 +403,14 @@
     <Content Include="Views\Incidencia\IndexIncidenciasxEstado.cshtml" />
     <Content Include="Views\Reporte\_PartialViewReporte.cshtml" />
     <Content Include="Views\Reporte\ReporteDeudas.cshtml" />
+    <Content Include="Views\PlanCobro\graficoOrden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\EstadosCuenta\" />
+    <Folder Include="Views\ViewModelGrafico\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

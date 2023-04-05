@@ -12,6 +12,47 @@ namespace Infraestructure.Repository
 {
     public class RepositoryPlanCobro : IRepositoryPlanCobro
     {
+        public void GetGrafico(out string etiquetas, out string valores)
+        {
+            String varEtiquetas = "";
+            String varValores = "";
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    var resultado = ctx.plan_cobro.GroupBy(x => x.total).
+                               Select(o => new {
+                                   Count = o.Count(),
+                                   id = o.Key
+                               });
+                    foreach (var item in resultado)
+                    {
+                        varEtiquetas += ( item.id) + ",";
+                        varValores += item.Count + ",";
+                    }
+                }
+                //Ultima coma
+                varEtiquetas = varEtiquetas.Substring(0, varEtiquetas.Length - 1); // ultima coma
+                varValores = varValores.Substring(0, varValores.Length - 1);
+                //Asignar valores de salida
+                etiquetas = varEtiquetas;
+                valores = varValores;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+        }
+
         public IEnumerable<plan_cobro> GetPlanCobro()
         {
             IEnumerable<plan_cobro> plan = null;
