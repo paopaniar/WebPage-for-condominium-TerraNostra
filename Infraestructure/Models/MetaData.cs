@@ -122,9 +122,9 @@ namespace Infraestructure.Models
         public virtual plan_cobro plan_cobro { get; set; }
         [Display(Name = "Residencia")]
         public virtual residencia residencia { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         [Display(Name = "Fecha")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [UIHint("Date")]
         public System.DateTime fecha { get; set; }
         [Display(Name = "Plan de Cobro")]
         public virtual ICollection<plan_cobro> plancobro { get; set; }
