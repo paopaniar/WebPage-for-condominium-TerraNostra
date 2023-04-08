@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Infraestructure.Models.usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<d
+<center><h4 style="font-family:Broadway">Usuarios</h4></center>
+
+<p>
+    <a href="@Url.Action("Create", "usuario")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.rolId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.identificacion)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+
+        <th>Por hacer</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    <td>
+        @if (item.rolId == 1)
+        {
+            <text>Administrador</text>
+        }
+        else
+        {
+            <text>Residente</text>
+
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.identificacion)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.telefono)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.identificacion})
+    </td>
+</tr>
+    }
+
+</table>

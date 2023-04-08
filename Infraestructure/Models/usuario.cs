@@ -33,8 +33,7 @@ namespace Infraestructure.Models
         public Nullable<int> telefono { get; set; }
         public Nullable<int> estado { get; set; }
         public string password { get; set; }
-        public string Email { get; set; }
-    
+        public string Email { get; set; }  
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<incidente> incidente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,5 +43,6 @@ namespace Infraestructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<residencia> residencia { get; set; }
         public virtual rol rol { get; set; }
+
     }
 }

@@ -41,7 +41,7 @@ namespace Infraestructure.Models
     {
         [Display(Name = "Rol")]
         public int rolId { get; set; }
-        [Display(Name = "Residente")]
+        [Display(Name = "Identificación")]
         public int identificacion { get; set; }
         [Display(Name = "Teléfono")]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
@@ -54,9 +54,8 @@ namespace Infraestructure.Models
         public string apellido2 { get; set; }
         [Display(Name = "Estado")]
         public Nullable<int> estado { get; set; }
-        [Display(Name = "Contraseña")]        
-        [Required(ErrorMessage = "El campo {0} no puede quedar vacío")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene formato válido")]
+        [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "El campo {0} no puede quedar vacío")]   
         public string password { get; set; }
 
         [Display(Name = "Correo electrónico")]     

@@ -2,6 +2,7 @@
 using Infraestructure.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -56,7 +57,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Select * from Autor 
-                    lista = ctx.usuario.ToList<usuario>();
+                    lista = ctx.usuario.Include("rol").OrderByDescending(u => u.identificacion).ToList<usuario>().Where(u => u.estado == 1);
                     //lista = ctx.Autor.ToList();
                 }
                 return lista;
@@ -74,7 +75,40 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-       
+
+        public usuario Save(usuario usuario)
+        {
+            int retorno = 0;
+            usuario oUsuario = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oUsuario = GetUsuarioByID((int)usuario.identificacion);
+
+                if (oUsuario == null)
+                {
+                    ctx.usuario.Add(usuario);
+                    //SaveChanges
+                    //guarda todos los cambios realizados en el contexto de la base de datos.
+                    retorno = ctx.SaveChanges();
+                    //retorna número de filas afectadas
+                }
+                else
+                {
+                    //Registradas: 1,2,3
+                    //Actualizar: 1,3,4
+                    //Actualizar Libro
+                    ctx.usuario.Add(usuario);
+                    ctx.Entry(usuario).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                }
+            }
+            if (retorno >= 0)
+                oUsuario = GetUsuarioByID((int)usuario.identificacion);
+            return oUsuario;
+        }
+
 
     }
 }
