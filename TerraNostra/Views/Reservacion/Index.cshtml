@@ -39,14 +39,14 @@
     <script type="text/javascript">
         function Filtrar() {
             var idEstado = $("#idestado").val();
-           
+
 
             $.ajax({
                 url: '@Url.Action("obtenerFiltro1", "Reservacion")',
                 type: 'POST',
                 data: {
                     estado: idEstado,
-                  
+
                 },
                 success: function (result) {
                     $('#tablaReservas').html('');
@@ -58,4 +58,5 @@
             });
         }
     </script>
+   
 } 

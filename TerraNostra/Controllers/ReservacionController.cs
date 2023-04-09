@@ -282,7 +282,25 @@ namespace TerraNostra.Controllers
             return PartialView("_PartialViewListaReservasEstado", lista);
         }
 
+        [HttpPost]
+        public ActionResult SetStatus(int id, int estado)
+        {
+            // Fetch the record from the database based on the id
+            IServiceReservacion _ServiceReservacion = new ServiceReservacion();
+            reservacion reservacion = _ServiceReservacion.GetReservacionById(id);
 
-
+            if (reservacion != null)
+            {
+                reservacion.estado = 0;
+                reservacion = _ServiceReservacion.Save(reservacion);
+                return Json(new { success = true, message = "Estado updated successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Item not found." });
+            }
+       
     }
+
+}
 }

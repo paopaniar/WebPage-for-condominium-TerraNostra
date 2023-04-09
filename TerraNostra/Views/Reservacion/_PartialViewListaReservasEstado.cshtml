@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Infraestructure.Models.reservacion>
 
+
 <table class="table">
-    <tr>
+    <tr class="table-dark">
+
         <th>
             @Html.DisplayNameFor(model => model.areaComunId)
         </th>
@@ -19,53 +21,63 @@
             @Html.DisplayNameFor(model => model.estado)
         </th>
         <th>
-
+            Acciones y detalles
         </th>
-     
+
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.areaComunId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.usuario)
-            </td>
+<tr class="table-secondary">
+    <td>
+        @Html.DisplayFor(modelItem => item.areaComunId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.usuario)
+    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.areaComun.detalle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.areaComun.fechaDisponible)
-            </td>
-            <td>
-                @if (item.estado == 0)
-                {
-                    <text>Denegado</text>
-                }
-                else
-                {
-                    if (item.estado == 1)
-                    {
-                        <text>Aprobado</text>
-                    }
-                    else
-                    {
-                        <text>Sin resolver</text>
-                    }
-                }
+    <td>
+        @Html.DisplayFor(modelItem => item.areaComun.detalle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.areaComun.fechaDisponible)
+    </td>
+    <td>
+        @if (item.estado == 0)
+        {
+            <text>Denegado</text>
+        }
+        else
+        {
+            if (item.estado == 1)
+            {
+                <text>Aprobado</text>
+            }
+            else
+            {
+                <text>Sin resolver</text>
+            }
+        }
 
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-danger">Denegar</a> 
-                <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-light">Detalles</a> 
-                <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-success">Aprobar</a>
+    </td>
+    <td>
+        @if (item.estado == 0 || item.estado == 1)
+        {
+            <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-danger disabled"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+            <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-light"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
+            <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-success disabled"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+        }
+        else
+        {
+            <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Tooltip on left" onclick="setStatus('@item.id', 0)"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+            <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Tooltip on left">Detalles</a>
+            <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-original-title="Tooltip on left" onclick="setStatus('@item.id', 1)"><i class="fa fa-check-square" aria-hidden="true" style="color: green;"></i> <span style="color: white; background-color: green; padding: 5px; border-radius: 4px;">Aprobado</span></a>
+        
+        }
 
-            </td>
-           
-        </tr>
+    </td>
+
+</tr>
     }
 
 </table>

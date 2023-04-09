@@ -5,7 +5,7 @@
 }
 
 <br />
-<center>   <h4>Reservación detalle</h4></center>
+<center>   <h4 style="font-family: Broadway">Reservación detalle</h4></center>
 <hr />
 
 <center>
@@ -24,14 +24,14 @@
                 @Html.DisplayFor(model => model.detalle)
             </p>
             <p class="card-text">
-                <b>@Html.DisplayNameFor(model => model.dateFrom):</b>
+                <b>@Html.DisplayNameFor(model => model.areaComun.fechaDisponible):</b>
                 <br />
-                @Html.DisplayFor(model => model.dateFrom)
+                @Html.DisplayFor(model => model.areaComun.fechaDisponible)
             </p>
             <p class="card-text">
-                <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.dateTo):</b>
+                <b>@Html.DisplayNameFor(model => model.areaComun.horaDisponible):</b>
                 <br />
-                @Html.DisplayFor(model => model.dateTo)
+                @Html.DisplayFor(model => model.areaComun.horaDisponible)
             </p>
 
             <p class="card-text" style="font-weight: 500;">
