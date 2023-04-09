@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TerraNostra.Enum;
 using TerraNostra.Security;
+using TerraNostra.Utils;
 
 namespace TerraNostra.Controllers
 {
@@ -92,5 +93,49 @@ namespace TerraNostra.Controllers
            
             return View();
         }
+
+        public ActionResult Edit(int id)
+        {
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            usuario usuario = _ServiceUsuario.GetUsuarioByID(id);
+            if (usuario.estado == 1)
+            {
+                usuario.estado = 0;
+            }
+         
+            try
+            {
+                // Si va null
+                if (ModelState.IsValid)
+                {
+                    usuario oUsuario = _ServiceUsuario.Save(usuario);
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se ha eliminado el usuario.", SweetAlertMessageType.success);
+                }
+
+                else
+                {
+                    TempData["Message"] = "No existe el usuario solicitado";
+                    TempData["Redirect"] = "Usuario";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                return View();
+            }
+
+
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Usuario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+      
     }
 }

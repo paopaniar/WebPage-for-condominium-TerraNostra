@@ -411,6 +411,7 @@
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Reservacion\_PartialViewListaReservasEstado.cshtml" />
     <Content Include="Views\Reservacion\Denegar.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
