@@ -30,9 +30,9 @@
         </th>
       
 
-        <th>Por ver</th>
+        <th>Detalles</th>
 
-        <th>Por hacer</th>
+        <th>Cambios</th>
     </tr>
 
     @foreach (var item in Model)
@@ -60,15 +60,11 @@
 
 
 
-    <td style="column-width: 10px">
-
-        @Html.ActionLink("Detalle", "Details", new { id = item.id })
-
+    <td>
+        <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
     </td>
-    <td style="column-width: 5px">
-
-        @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
-
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
     </td>
 </tr>
     }
