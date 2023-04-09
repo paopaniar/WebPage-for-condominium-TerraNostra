@@ -47,13 +47,7 @@ namespace TerraNostra.Controllers
             {
 
                 usuario oUsuario = (usuario)Session["User"];
-                //Asignar idUsuario que se encuentra logueado
-               // usuario.identificacion = oUsuario.identificacion;
-                if (usuario.estado == null)
-                {
-                    usuario.estado = 0;
-                }
-
+                
                 if (ModelState.IsValid)
                 {
                     usuario oUsuario1 = _ServiceUsuario.Save(usuario);
@@ -90,7 +84,8 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-           
+            ViewBag.estado = estdo();
+            ViewBag.rol = rol();
             return View();
         }
 
@@ -136,6 +131,21 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-      
+
+        private SelectList estdo(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Activo", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Inactivo", Value = "0" });
+            return new SelectList(lista, "Value", "Text", estado);
+        }
+
+        private SelectList rol(int rol = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Administrador", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Residente", Value = "2" });
+            return new SelectList(lista, "Value", "Text", rol);
+        }
     }
 }
