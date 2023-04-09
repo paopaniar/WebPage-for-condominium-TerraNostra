@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<Infraestructure.Models.usuario>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Usuarios Activos";
 }
 
-<d
+<br />
 <center><h4 style="font-family:Broadway">Usuarios</h4></center>
-
+<hr />
 <p>
     <a href="@Url.Action("Create", "usuario")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear</a>
 </p>
 <table class="table">
-    <tr>
+    <tr class="table-dark">
         <th>
             @Html.DisplayNameFor(model => model.rolId)
         </th>
@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.telefono)
         </th>
 
-        <th>Por hacer</th>
+        <th>Eliminar</th>
     </tr>
 
     @foreach (var item in Model)
@@ -54,10 +54,10 @@
         @Html.DisplayFor(modelItem => item.telefono)
     </td>
     <td>
-
-        @Html.ActionLink("Actualizar", "Edit", new { id = item.identificacion })
+     <a href="@Url.Action("Edit", new { id = item.identificacion })" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
     </td>
 </tr>
     }
 
 </table>
+
