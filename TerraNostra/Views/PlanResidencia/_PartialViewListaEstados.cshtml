@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Infraestructure.Models.plan_residencia>
 
 
-<table class="table">
-    <tr>
+<table class="table table-hover">
+    <tr class="table-dark">
         <th>
             @Html.DisplayNameFor(model => model.residencia.numeroCasa)
         </th>
@@ -10,7 +10,7 @@
             @Html.DisplayNameFor(model => model.residencia.usuario1.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fecha.Month)
+            @Html.DisplayNameFor(model => model.fecha)
         </th>
         <th>Por ver</th>
 
@@ -19,61 +19,64 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.residencia.numeroCasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.residencia.usuario1.nombre)
-            </td>
-            <td>
-                @switch (item.fecha.Month)
-                {
-                    case 1:
-                        <text>Enero</text>
-                        break;
-                    case 2:
-                        <text>Febrero</text>
-                        break;
-                    case 3:
-                        <text>Marzo</text>
-                        break;
-                    case 4:
-                        <text>Abril</text>
-                        break;
-                    case 5:
-                        <text>Mayo</text>
-                        break;
-                    case 6:
-                        <text>Junio</text>
-                        break;
-                    case 7:
-                        <text>Julio</text>
-                        break;
-                    case 8:
-                        <text>Agosto</text>
-                        break;
-                    case 9:
-                        <text>Septiembre</text>
-                        break;
-                    case 10:
-                        <text>Octubre</text>
-                        break;
-                    case 11:
-                        <text>Noviembre</text>
-                        break;
-                    case 12:
-                        <text>Diciembre</text>
-                        break;
-                    default:
-                        <text>Mes no válido</text>
-                        break;
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Detalles", "Details", new { id = item.id })
-            </td>
-        </tr>
+<tr class="table-secondary">
+    <td>
+        @Html.DisplayFor(modelItem => item.residencia.numeroCasa)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.residencia.usuario1.nombre)
+    </td>
+    <td>
+        @switch (item.fecha.Month)
+        {
+            case 1:
+                <text>Enero</text>
+                break;
+            case 2:
+                <text>Febrero</text>
+                break;
+            case 3:
+                <text>Marzo</text>
+                break;
+            case 4:
+                <text>Abril</text>
+                break;
+            case 5:
+                <text>Mayo</text>
+                break;
+            case 6:
+                <text>Junio</text>
+                break;
+            case 7:
+                <text>Julio</text>
+                break;
+            case 8:
+                <text>Agosto</text>
+                break;
+            case 9:
+                <text>Septiembre</text>
+                break;
+            case 10:
+                <text>Octubre</text>
+                break;
+            case 11:
+                <text>Noviembre</text>
+                break;
+            case 12:
+                <text>Diciembre</text>
+                break;
+            default:
+                <text>Mes no válido</text>
+                break;
+        }
+    </td>
+    <td>
+
+        <i class="fas fa-circle-info"></i>
+        <a href="@Url.Action("Details", new { id = item.id })" class="badge rounded-pill bg-info" style="color:black">Detalles</a>
+
+    </td>
+</tr>
     }
 
 </table>
