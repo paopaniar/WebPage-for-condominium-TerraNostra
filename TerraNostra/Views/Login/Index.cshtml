@@ -5,43 +5,51 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
-
 @using (Html.BeginForm("Login", "Login"))
 {
     @Html.AntiForgeryToken()
     <br />
 
-    <center>
-        <div class="card bg-light mb-10" style="max-width:30rem;  color:darkslategrey">
-            <div class="form-horizontal">
+
+    <div class="vh-100 row justify-content-center align-items-center">
+        <div class="card bg-light mb-10" style="max-width:30rem; height:30rem;  color:darkslategrey">
+
+
+            <div class="d-flex justify-content-center p-1">
                 <img src="~/Utils/imagenes/LogoSmartHouse-removebg-preview.png" width="300px" , height="250px" />
-                <h4 style="font-family: Broadway">Ingreso de usuarios</h4>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                 <div class="form-group mb-3">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group mb-3">
-                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
-                        @Html.PasswordFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <div class="form-group mb-3">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        Ingresar
-                    </button>
-                </div>
             </div>
-        </div>
-    </center>
-}
-<br />
+            <center>
+                <div class="form-group mb-3">
+                    <div class="col-md-10">
 
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa fa-inbox" aria-hidden="true"></i></span>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Correo electrónico" } })
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </center>
+            <center>
+                <div class="form-group mb-3">
+                    <div class="col-md-10">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fa fa-key" aria-hidden="true"></i></span>
+                            @Html.PasswordFor(model => model.password, new { @class = "form-control", placeholder = "Contraseña" })
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                </div>
+            </center>
+                <div class="mb-2 d-flex justify-content-center align-items-center">
+                    <div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Ingresar
+                        </button>
+                    </div>
+                </div>
+        </div>
+
+        </div>
+        }
