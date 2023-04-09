@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Infraestructure.Models.informacion>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Información";
 }
 <br />
 <br />
@@ -13,9 +13,8 @@
     <a href="@Url.Action("Create", "informacion")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear</a>
 </p>
 <table class="table">
-    <tr>
-
-        <th>
+    <tr class="table-dark">
+ <th>
             @Html.DisplayNameFor(model => model.detalle)
         </th>
 
@@ -30,44 +29,44 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+<tr class="table-secondary">
 
-            <td>
-                @Html.DisplayFor(modelItem => item.detalle)
-            </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.detalle)
+    </td>
 
-            <td>
-                @if (item.tipo == 1)
-                {
-                <text>Noticicas</text> 
-                }
-                    else
-                    {
-                        if (item.tipo == 2)
-                        {
-                        <text>Actas</text> 
-                        }
-                            else
-                            {
-                            <text>Artículos</text>
-                            }
-                    }
-            </td>
-            <td>
-             @if (item.estado == 0)
-             {
-                <text>Visible</text> 
-             }
-                else
-                {
-                <text>Oculta</text>
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.id })
+    <td>
+        @if (item.tipo == 1)
+        {
+            <text>Noticicas</text>
+        }
+        else
+        {
+            if (item.tipo == 2)
+            {
+                <text>Actas</text>
+            }
+            else
+            {
+                <text>Artículos</text>
+            }
+        }
+    </td>
+    <td>
+        @if (item.estado == 0)
+        {
+            <text>Visible</text>
+        }
+        else
+        {
+            <text>Oculta</text>
+        }
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.id })" class="badge rounded-pill bg-warning" style="color:black">Actualizar</a>
 
-            </td>
-        </tr>
+    </td>
+</tr>
     }
 
 </table>
