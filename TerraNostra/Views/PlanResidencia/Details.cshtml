@@ -7,93 +7,195 @@
 
 
 <div>
+
+
     <br />
-    <h4 style="font-family: Broadway">Detalle Estado de Cuenta</h4>
+    <center> <h4 style="font-family: Broadway">Detalle Estado de Cuenta</h4></center>
+   
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.residencia.usuario1.nombre)
-        </dt>
+    <center>
+        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+            <div class="card-header">Casa: @Html.DisplayFor(model => model.residencia.numeroCasa)</div>
+            <div class="card-body">
+                Nombre:
+                @Html.DisplayFor(model => model.residencia.usuario1.nombre)
+                @Html.DisplayFor(model => model.residencia.usuario1.apellido)
+                @Html.DisplayFor(model => model.residencia.usuario1.apellido2)
+                <br />
+                Identificación:
+                @Html.DisplayFor(model => model.residencia.usuario1.identificacion)
+                <br />
+                Correo:
+                @Html.DisplayFor(model => model.residencia.usuario1.Email)
 
-        <dd>
-            @Html.DisplayFor(model => model.residencia.usuario1.nombre)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.residencia.numeroCasa)
-        </dt>
+            </div>
+        </div>
+    </center>
 
-        <dd>
-            @Html.DisplayFor(model => model.residencia.numeroCasa)
-        </dd>
-    </dl>
 </div>
-<div>
-    <h4>Estados Pagados</h4>
-    <table class="table">
+    <div>
+        <h4>Estados Pagados</h4>
+        <table class="table">
+            <tr class="table-success">
+                <th>
+                    @Html.DisplayNameFor(model => model.plan_cobro.detail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estado)
+                </th>
+            </tr>
+
+
+            @foreach (var c in ViewBag.EstadosPagados)
+            {
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.plan_cobro.detail)
+                @c.plan_cobro.detail
             </th>
+            <td>
+                @switch (@c.fecha.Month)
+                {
+                    case 1:
+                        <text>Enero</text>
+                        break;
+                    case 2:
+                        <text>Febrero</text>
+                        break;
+                    case 3:
+                        <text>Marzo</text>
+                        break;
+                    case 4:
+                        <text>Abril</text>
+                        break;
+                    case 5:
+                        <text>Mayo</text>
+                        break;
+                    case 6:
+                        <text>Junio</text>
+                        break;
+                    case 7:
+                        <text>Julio</text>
+                        break;
+                    case 8:
+                        <text>Agosto</text>
+                        break;
+                    case 9:
+                        <text>Septiembre</text>
+                        break;
+                    case 10:
+                        <text>Octubre</text>
+                        break;
+                    case 11:
+                        <text>Noviembre</text>
+                        break;
+                    case 12:
+                        <text>Diciembre</text>
+                        break;
+                    default:
+                        <text>Mes no válido</text>
+                        break;
+                }
+            </td>
             <th>
-                @Html.DisplayNameFor(model => model.estado)
+                <text>Pagado</text>
             </th>
         </tr>
+            }
+
+        </table>
+    </div>
 
 
-        @foreach (var c in ViewBag.EstadosPagados)
-        {
-    <tr>
-        <th>
-            @c.plan_cobro.detail
-        </th>
-        <th>
-          <text>Pagado</text>
-        </th>
-    </tr>
-        }
+    <div>
+        <h4>Estados Pendientes</h4>
+        <table class="table">
+            <tr class="table-warning">
+                <th>
+                    @Html.DisplayNameFor(model => model.plan_cobro.detail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.estado)
+                </th>
+                <th>
+                    <i class="fa fa-address-card" aria-hidden="true"> </i>
+                    Transacción
+                </th>
 
-    </table>
-</div>
+            </tr>
 
 
-<div>
-    <h4>Estados Pendientes</h4>
-    <table class="table">
+            @foreach (var c in ViewBag.EstadosPendientes)
+            {
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.plan_cobro.detail)
+                @c.plan_cobro.detail
+            </th>
+            <td>
+                @switch (@c.fecha.Month)
+                {
+                    case 1:
+                        <text>Enero</text>
+                        break;
+                    case 2:
+                        <text>Febrero</text>
+                        break;
+                    case 3:
+                        <text>Marzo</text>
+                        break;
+                    case 4:
+                        <text>Abril</text>
+                        break;
+                    case 5:
+                        <text>Mayo</text>
+                        break;
+                    case 6:
+                        <text>Junio</text>
+                        break;
+                    case 7:
+                        <text>Julio</text>
+                        break;
+                    case 8:
+                        <text>Agosto</text>
+                        break;
+                    case 9:
+                        <text>Septiembre</text>
+                        break;
+                    case 10:
+                        <text>Octubre</text>
+                        break;
+                    case 11:
+                        <text>Noviembre</text>
+                        break;
+                    case 12:
+                        <text>Diciembre</text>
+                        break;
+                    default:
+                        <text>Mes no válido</text>
+                        break;
+                }
+            </td>
+            <th>
+                <text>Pendiente</text>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.estado)
-            </th>
-            <th>
-               Transacción
-            </th>
 
+                <a href="@Url.Action("Edit", new { id = c.id })" class="badge rounded-pill bg-success" style="color:black">Pagar mi pendiente</a>
+            </th>
         </tr>
+            }
+
+        </table>
+    </div>
 
 
-        @foreach (var c in ViewBag.EstadosPendientes)
-        {
-    <tr>
-        <th>
-            @c.plan_cobro.detail
-        </th>
-        <th>
-            <text>Pendiente</text>
-        </th>
-        <th>
-
-            @Html.ActionLink("Pagar mi pendiente", "Edit", new { id = c.id })
-        </th>
-    </tr>
-        }
-
-    </table>
-</div>
+    <p>
+        <a href="@Url.Action("IndexEstadosxMes")" class="btn btn-info" style="color:black">Volver</a>
 
 
-<p>
-
-    @Html.ActionLink("Volver a los estados de cuenta", "IndexEstadosxMes")
-</p>
+    </p>
