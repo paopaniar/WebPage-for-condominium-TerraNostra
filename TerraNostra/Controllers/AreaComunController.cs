@@ -6,6 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using TerraNostra.Enum;
+using TerraNostra.Security;
+using TerraNostra.Utils;
 
 namespace TerraNostra.Controllers
 {
@@ -169,5 +172,55 @@ namespace TerraNostra.Controllers
             IEnumerable<areaComun> lista = _ServiceReservacion.GetAreaComun();
             return new SelectList(lista, "id", "detalle", tipo);
         }
+
+
+        [HttpPost]
+        public ActionResult Save(areaComun area)
+        {
+            IServiceAreaComun _ServiceRubro = new ServiceAreaComun();
+            
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    area.estado = 1;
+                    area.disponibilidad = 1;
+                    area.horaDisponible = "Todo el día.";
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Realizado correctamente!", SweetAlertMessageType.success);
+                    areaComun oRubroCobro = _ServiceRubro.Save(area);
+                }
+                else
+                {
+                    Utils.Util.ValidateErrors(this);
+
+                    if (area.id > 0)
+                    {
+                        return (ActionResult)View("Edit", area);
+                    }
+                    else
+                    {
+                        return View("Create", area);
+                    }
+                }
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Realizado correctamente!", SweetAlertMessageType.success);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "RubroCobro";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
     }
 }
