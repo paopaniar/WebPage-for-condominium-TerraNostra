@@ -19,8 +19,7 @@
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
-        <th></th>
-
+      
     
     </tr>
 
@@ -57,11 +56,7 @@
         }
 
     </td>
-    <td>
-        @Html.ActionLink("Denegar", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
-        @Html.ActionLink("Aprobar", "Edit", new { id = item.id })
-    </td>
+    
 
 </tr>
 }

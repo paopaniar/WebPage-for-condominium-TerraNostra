@@ -7,6 +7,7 @@
     var reservacionFiltrada = new List<Infraestructure.Models.reservacion>();
 }
 
+
 <br />
 <center><h4 style="font-family: Broadway">Historial de Reservas</h4></center>
 <br />
@@ -30,7 +31,7 @@
 
     <span class="glyphicons glyphicons-hand-left"></span>
     <div id="tablaReservas">
-        @Html.Partial("_PartialViewListaReservas", reservacion)
+        @Html.Partial("_PartialViewListaReservasEstado", reservacion)
     </div>
 </div>
 
@@ -38,11 +39,14 @@
     <script type="text/javascript">
         function Filtrar() {
             var idEstado = $("#idestado").val();
+           
+
             $.ajax({
                 url: '@Url.Action("obtenerFiltro1", "Reservacion")',
                 type: 'POST',
                 data: {
                     estado: idEstado,
+                  
                 },
                 success: function (result) {
                     $('#tablaReservas').html('');

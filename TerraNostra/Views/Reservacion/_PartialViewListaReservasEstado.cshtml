@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Infraestructure.Models.reservacion>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.areaComunId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.usuario)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.areaComun.detalle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.areaComun.fechaDisponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+
+        </th>
+     
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComunId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComun.detalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComun.fechaDisponible)
+            </td>
+            <td>
+                @if (item.estado == 0)
+                {
+                    <text>Denegado</text>
+                }
+                else
+                {
+                    if (item.estado == 1)
+                    {
+                        <text>Aprobado</text>
+                    }
+                    else
+                    {
+                        <text>Sin resolver</text>
+                    }
+                }
+
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-danger">Denegar</a> 
+                <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-light">Detalles</a> 
+                <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-success">Aprobar</a>
+
+            </td>
+           
+        </tr>
+    }
+
+</table>
+
+
+
+
+

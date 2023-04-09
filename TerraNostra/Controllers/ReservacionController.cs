@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TerraNostra.Enum;
 using TerraNostra.Security;
+using TerraNostra.Utils;
 
 namespace TerraNostra.Controllers
 {
@@ -60,7 +61,7 @@ namespace TerraNostra.Controllers
                     lista = _ServiceReservacion.GetReservacionesxEstado((int)estado);
                 }
             }
-            return PartialView("", lista);
+            return PartialView("_PartialViewListaReservasEstado", lista);
         }
 
         public ActionResult IndexEstado()
@@ -230,6 +231,7 @@ namespace TerraNostra.Controllers
                 // Si va null
                 if (ModelState.IsValid)
                 {
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("ÉXITO!", "Se modificó correctamente", SweetAlertMessageType.success);
                     reservacion oReservacion = _ServiceReservacion.SaveEstado(reservacion);
 
                 }
@@ -242,7 +244,6 @@ namespace TerraNostra.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-
                 return View();
             }
 
@@ -278,7 +279,7 @@ namespace TerraNostra.Controllers
             IEnumerable<reservacion> lista = null;
             IServiceReservacion _ServiceReservacion = new ServiceReservacion();
             lista = _ServiceReservacion.GetReservacionesxEstado(estado);
-            return PartialView("_PartialViewListaReservas", lista);
+            return PartialView("_PartialViewListaReservasEstado", lista);
         }
 
 
