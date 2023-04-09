@@ -23,8 +23,9 @@ namespace TerraNostra.Controllers
 
                 IServiceReservacion _ServiceReservacion = new ServiceReservacion();
                 ViewBag.listaReservas = _ServiceReservacion.GetReservacion();
-
-                return View(lista);
+                ViewBag.lista = lista;
+                ViewBag.listTipos = listTipos();
+                return View();
             }
             catch (Exception ex)
             {
@@ -133,6 +134,40 @@ namespace TerraNostra.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+        }
+
+
+        public PartialViewResult _PartialViewByTipo(int? tipo)
+        {
+            IEnumerable<areaComun> lista = null;
+            IServiceAreaComun _ServiceReservacion = new ServiceAreaComun();
+            if (tipo != null)
+            {
+                if (tipo == 0)
+                {
+                    lista = _ServiceReservacion.GetAreaComun();
+                }
+                else
+                {
+                    lista = _ServiceReservacion.GetAreasByTipo((int)tipo);
+                }
+            }
+            return PartialView("_PartialViewByTipo", lista);
+        }
+
+        public ActionResult obtenerFiltro(int? tipo)
+        {
+            IEnumerable<areaComun> lista = null;
+            IServiceAreaComun _ServiceReservacion = new ServiceAreaComun();
+            lista = _ServiceReservacion.GetAreasByTipo(tipo);
+            return PartialView("_PartialViewByTipo", lista);
+        }
+
+        private SelectList listTipos(int tipo = 0)
+        {
+            IServiceAreaComun _ServiceReservacion = new ServiceAreaComun();
+            IEnumerable<areaComun> lista = _ServiceReservacion.GetAreaComun();
+            return new SelectList(lista, "id", "detalle", tipo);
         }
     }
 }

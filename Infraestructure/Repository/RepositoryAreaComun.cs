@@ -12,6 +12,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryAreaComun : IRepositoryAreaComun
     {
+        IEnumerable<areaComun> lista = null;
         public IEnumerable<areaComun> GetAreaComun()
         {
 			IEnumerable<areaComun> lista = null;
@@ -56,6 +57,40 @@ namespace Infraestructure.Repository
 
                 }
                 return oAreaComun;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<areaComun> GetAreasByTipo(int? tipo)
+        {
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener reservas por estado
+                    if (tipo != null)
+                    {
+                        lista = ctx.areaComun.Include("reservacion").Where(l => l.id == tipo).ToList();
+                    }
+                    else
+                    {
+                        lista = ctx.areaComun.Include("reservacion").ToList();
+                    }
+
+                }
+                return lista;
             }
             catch (DbUpdateException dbEx)
             {

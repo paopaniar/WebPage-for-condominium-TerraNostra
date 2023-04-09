@@ -22,6 +22,12 @@ namespace ApplicationCore.Services
             return repository.GetAreaComunById(id);
         }
 
+        public IEnumerable<areaComun> GetAreasByTipo(int? tipo)
+        {
+            IRepositoryAreaComun repository = new RepositoryAreaComun();
+            return repository.GetAreasByTipo(tipo);
+        }
+
         public areaComun Save(areaComun areaComun)
         {
             IRepositoryAreaComun repository = new RepositoryAreaComun();

@@ -12,5 +12,6 @@ namespace Infraestructure.Repository
         IEnumerable<areaComun> GetAreaComun();
         areaComun GetAreaComunById(int id);
         areaComun Save(areaComun areaComun);
+        IEnumerable<areaComun> GetAreasByTipo(int? tipo);
     }
 }
