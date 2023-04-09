@@ -5,9 +5,9 @@
 }
 <br />
 
-<table class="table">
-    <tr>
-       
+<table class="table table-hover">
+    <tr class="table-dark">
+
         <th>
             @Html.DisplayNameFor(model => model.usuario1.identificacion)
         </th>
@@ -22,28 +22,27 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-          
-            <td>
-                @Html.DisplayFor(modelItem => item.usuario1.identificacion)
-            </td>
-            <td>
-                @if (item.estado == 1)
-                {
-                    <text>Pendiente</text> }
-                else
-                {
-                    <text>Resuelta</text>}
-            </td>
+<tr class="table-secondary">
+    <td>
+        @Html.DisplayFor(modelItem => item.usuario1.identificacion)
+    </td>
+    <td>
+        @if (item.estado == 1)
+        {
+            <text>Pendiente</text> }
+        else
+        {
+            <text>Resuelta</text>}
+    </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.detalle)
-            </td>
-            <td>
+    <td>
+        @Html.DisplayFor(modelItem => item.detalle)
+    </td>
+    <td>
 
-                @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
-            </td>
-        </tr>
+        @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
+    </td>
+</tr>
     }
 
 </table>

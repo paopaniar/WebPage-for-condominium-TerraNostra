@@ -29,27 +29,28 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.detalle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.monto)
-            </td>
-            <td>
-                @if (item.estado == 1)
-                {
-                    <text>Activo</text> }
-                else
-                {
-                    <text>Inactivo</text>}
+<tr class="table-secondary">
+    <td>
+        @Html.DisplayFor(modelItem => item.detalle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.monto)
+    </td>
+    <td>
+        @if (item.estado == 1)
+        {
+            <text>Activo</text> }
+        else
+        {
+            <text>Inactivo</text>}
 
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.id })
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.id })" class="badge rounded-pill bg-warning" style="color:black">Actualizar</a>
+       
 
-            </td>
-        </tr>
+    </td>
+</tr>
     }
 
 </table>
