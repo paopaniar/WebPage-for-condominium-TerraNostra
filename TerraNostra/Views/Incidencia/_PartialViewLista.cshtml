@@ -8,25 +8,25 @@
 <table class="table table-hover">
     <tr class="table-dark">
 
-        <th>
+        <td style="max-width: 5px">
             @Html.DisplayNameFor(model => model.usuario1.identificacion)
-        </th>
-        <th>
+            </th>
+        <td style="max-width: 3px">
             @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
+            </th>
+        <td style="max-width: 5px">
             @Html.DisplayNameFor(model => model.detalle)
-        </th>
-        <th>Por hacer</th>
+            </th>
+        <td style="max-width: 5px">Resolver</th>
     </tr>
 
     @foreach (var item in Model)
     {
 <tr class="table-secondary">
-    <td>
+    <td style="max-width: 5px">
         @Html.DisplayFor(modelItem => item.usuario1.identificacion)
     </td>
-    <td>
+    <td style="max-width: 3px">
         @if (item.estado == 1)
         {
             <text>Pendiente</text> }
@@ -35,12 +35,11 @@
             <text>Resuelta</text>}
     </td>
 
-    <td>
+    <td style="max-width: 5px">
         @Html.DisplayFor(modelItem => item.detalle)
     </td>
-    <td>
-
-        @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
+    <td style="max-width: 5px">
+        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
     </td>
 </tr>
     }
