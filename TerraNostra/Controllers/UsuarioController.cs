@@ -139,13 +139,6 @@ namespace TerraNostra.Controllers
             lista.Add(new SelectListItem { Text = "Inactivo", Value = "0" });
             return new SelectList(lista, "Value", "Text", estado);
         }
-
-        private SelectList rol(int rol = 0)
-        {
-            List<SelectListItem> lista = new List<SelectListItem>();
-            lista.Add(new SelectListItem { Text = "Administrador", Value = "1" });
-            lista.Add(new SelectListItem { Text = "Residente", Value = "2" });
-            return new SelectList(lista, "Value", "Text", rol);
-        }
+      
     }
 }
