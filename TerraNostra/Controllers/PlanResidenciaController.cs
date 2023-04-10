@@ -256,7 +256,15 @@ namespace TerraNostra.Controllers
         {
             IEnumerable<plan_residencia> lista = null;
             IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
-            lista = _ServicePlanResidencia.GetEstadosMes(mes);
+            if (mes!=null)
+            {
+                lista = _ServicePlanResidencia.GetEstadosMes(mes);  
+            }
+            else
+            {
+                lista = _ServicePlanResidencia.GetPlanResidencia();
+            }
+           
             return PartialView("_PartialViewListaEstados", lista);
         }
 

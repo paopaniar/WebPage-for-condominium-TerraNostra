@@ -1,16 +1,9 @@
 ﻿@model Infraestructure.Models.plan_residencia
 
 @{
-    ViewBag.Title = "IndexEstadosxMes";
-}
-
-
-
-
-@{
+    ViewBag.Title = "Estados de Cuenta Por Mes";
     var estadoCuenta = new List<Infraestructure.Models.plan_residencia>();
     estadoCuenta = ViewBag.lista;
-    ViewBag.Title = "IndexEstadosxMes";
     var estadoMes = new List<Infraestructure.Models.plan_residencia>();
 }
 <br />
@@ -38,7 +31,7 @@
     <span class="glyphicons glyphicons-hand-left"></span>
     <div id="tablaReservas">
 
-        @Html.Partial("_PartialViewListaEstados", estadoMes)
+        @Html.Partial("_PartialViewListaEstados", estadoCuenta)
 
     </div>
 </div>
