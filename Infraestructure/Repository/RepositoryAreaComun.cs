@@ -72,7 +72,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<areaComun> GetAreasByTipo(int? tipo)
+        public IEnumerable<areaComun> GetAreasByTipo(string tipo)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace Infraestructure.Repository
                     //Obtener reservas por estado
                     if (tipo != null)
                     {
-                        lista = ctx.areaComun.Include("reservacion").Where(l => l.id == tipo).ToList();
+                        lista = ctx.areaComun.Include("reservacion").Where(l => l.detalle.Equals(tipo)).ToList();
                     }
                     else
                     {

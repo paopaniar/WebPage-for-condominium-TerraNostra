@@ -411,6 +411,8 @@
     <Content Include="Views\Reservacion\Denegar.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\AreaComun\Create.cshtml" />
+    <Content Include="Views\AreaComun\_PartialViewByTipo.cshtml" />
+    <Content Include="Views\AreaComun\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

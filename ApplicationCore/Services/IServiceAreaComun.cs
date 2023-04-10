@@ -12,6 +12,6 @@ namespace ApplicationCore.Services
         IEnumerable<areaComun> GetAreaComun();
         areaComun GetAreaComunById(int id);
         areaComun Save(areaComun areaComun);
-        IEnumerable<areaComun> GetAreasByTipo(int? tipo);
+        IEnumerable<areaComun> GetAreasByTipo(string tipo);
     }
 }

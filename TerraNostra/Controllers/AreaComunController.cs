@@ -140,25 +140,25 @@ namespace TerraNostra.Controllers
         }
 
 
-        public PartialViewResult _PartialViewByTipo(int? tipo)
+        public PartialViewResult _PartialViewByTipo(string tipo)
         {
             IEnumerable<areaComun> lista = null;
             IServiceAreaComun _ServiceReservacion = new ServiceAreaComun();
             if (tipo != null)
             {
-                if (tipo == 0)
+                if (tipo == null)
                 {
                     lista = _ServiceReservacion.GetAreaComun();
                 }
                 else
                 {
-                    lista = _ServiceReservacion.GetAreasByTipo((int)tipo);
+                    lista = _ServiceReservacion.GetAreasByTipo(tipo);
                 }
             }
             return PartialView("_PartialViewByTipo", lista);
         }
 
-        public ActionResult obtenerFiltro(int? tipo)
+        public ActionResult obtenerFiltro(string tipo)
         {
             IEnumerable<areaComun> lista = null;
             IServiceAreaComun _ServiceReservacion = new ServiceAreaComun();
@@ -170,7 +170,7 @@ namespace TerraNostra.Controllers
         {
             IServiceAreaComun _ServiceReservacion = new ServiceAreaComun();
             IEnumerable<areaComun> lista = _ServiceReservacion.GetAreaComun();
-            return new SelectList(lista, "id", "detalle", tipo);
+            return new SelectList(lista, "detalle", "detalle", tipo);
         }
 
 

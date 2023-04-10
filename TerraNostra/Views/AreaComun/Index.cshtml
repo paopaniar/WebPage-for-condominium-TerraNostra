@@ -35,14 +35,13 @@
     <span class="glyphicons glyphicons-hand-left"></span>
     <div id="tablaReservas">
 
-        @Html.Partial("_PartialViewByTipo", estadoMes)
+        @Html.Partial("_PartialViewByTipo", estadoCuenta)
 
     </div>
 </div>
 
 @section Scripts{
     <script type="text/javascript">
-
         function Filtrar() {
             var valestado = $("#idTipo").val();
             $.ajax({
@@ -62,4 +61,3 @@
         }
     </script>
 }
-
