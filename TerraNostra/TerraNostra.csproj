@@ -409,6 +409,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Reservacion\_PartialViewListaReservasEstado.cshtml" />
     <Content Include="Views\Reservacion\Denegar.cshtml" />
+    <Content Include="Views\Usuario\cambiarContraseña.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

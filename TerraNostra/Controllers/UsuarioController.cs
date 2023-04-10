@@ -132,6 +132,7 @@ namespace TerraNostra.Controllers
             }
         }
 
+<<<<<<< Updated upstream
         private SelectList estdo(int estado = 0)
         {
             List<SelectListItem> lista = new List<SelectListItem>();
@@ -140,5 +141,45 @@ namespace TerraNostra.Controllers
             return new SelectList(lista, "Value", "Text", estado);
         }
       
+=======
+        public ActionResult cambiarContraseña(int? id)
+        {
+            ServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            usuario usuario = null;
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                usuario = _ServiceUsuario.GetUsuarioByID(Convert.ToInt32(id));
+                if (usuario == null)
+                {
+                    TempData["Message"] = "No existe el usuario solicitado";
+                    TempData["Redirect"] = "Usuario";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Usuario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+>>>>>>> Stashed changes
     }
 }
