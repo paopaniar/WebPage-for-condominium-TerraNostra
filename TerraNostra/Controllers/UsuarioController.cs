@@ -132,7 +132,7 @@ namespace TerraNostra.Controllers
             }
         }
 
-<<<<<<< Updated upstream
+
         private SelectList estdo(int estado = 0)
         {
             List<SelectListItem> lista = new List<SelectListItem>();
@@ -140,8 +140,14 @@ namespace TerraNostra.Controllers
             lista.Add(new SelectListItem { Text = "Inactivo", Value = "0" });
             return new SelectList(lista, "Value", "Text", estado);
         }
-      
-=======
+        private SelectList rol(int rol = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Administrador", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Residente", Value = "2" });
+            return new SelectList(lista, "Value", "Text", rol);
+        }
+
         public ActionResult cambiarContraseña(int? id)
         {
             ServiceUsuario _ServiceUsuario = new ServiceUsuario();
@@ -180,6 +186,6 @@ namespace TerraNostra.Controllers
             }
         }
 
->>>>>>> Stashed changes
+
     }
 }
