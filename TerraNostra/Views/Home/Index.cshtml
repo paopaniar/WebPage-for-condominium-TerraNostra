@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<Infraestructure.Models.informacion>
 @{
     ViewBag.Title = "Página Principal";
-
 }
 
 <head>
@@ -11,103 +10,172 @@
     <script>
         AOS.init();
     </script>
+    <style>
+        /* Custom styles for carousel */
+        .carousel-item img {
+            height: 300px;
+            object-fit: cover;
+        }
+        .custom-card-header {
+            color: #333; /* Replace with the desired text color */
+        }
+        /* Custom styles for cards */
+        .card {
+            border: none;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+            .card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: none;
+            font-weight: bold;
+            padding: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-text {
+            color: #6c757d;
+        }
+
+        .card-img-top {
+            height: 150px;
+            object-fit: cover;
+        }
+
+        /* Different colors for different card types */
+        .card-news {
+            background-color: #ffd700; /* Yellow */
+        }
+
+        .card-actas {
+            background-color: #32cd32; /* Green */
+        }
+
+        .card-articulos {
+            background-color: #4169e1; /* Blue */
+        }
+
+        .card-archivos {
+            background-color: #ff6347; /* Red */
+        }
+    </style>
 </head>
 <form>
     <br />
     <center>
         <h1 style="font-family: Broadway">Terra Nostra</h1>
-        <h4 style="font-family: 'Comic Sans MS'">Un lugar para tú hogar</h4>
+        <h4 style="font-family: 'Comic Sans MS'">Un lugar para tu hogar</h4>
         <div data-aos="fade-down"
              data-aos-easing="linear"
              data-aos-duration="1500">
-
-
-            <div >
+            <div>
                 <br />
                 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-50" src="~/Utils/imagenes/casa.jpg">
+                            <img class="d-block w-100" src="~/Utils/imagenes/casa.jpg">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-50" src="~/Utils/imagenes/condo.jpg">
+                            <img class="d-block w-100" src="~/Utils/imagenes/condo.jpg">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-50" src="~/Utils/imagenes/piscina.jpg">
+                            <img class="d-block w-100" src="~/Utils/imagenes/piscina.jpg">
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-50" src="~/Utils/imagenes/condo2.jpg">
+                            <img class="d-block w-100" src="~/Utils/imagenes/condo2.jpg">
                         </div>
                     </div>
-                 
+                    <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
                 </div>
                 <hr />
 
                 <div class="row">
-
-                    <div class="card bg-light mb-3" style="max-width:15rem; margin-left: 80px; color:darkslategrey">
-                        <div class="card-header"><b>Noticias</b></div>
-                        <center><img src="~/Utils/imagenes/noticias.png" width="80px" , height="80px" /></center>
-                        @foreach (var item in Model)
-                        {
-                            <div class="card-body">
-
-                                @if (item.tipo == 1 && item.estado == 0)
-                                {
-                                    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
-                            </div>}
-                    </div>
-
-                    <div class="card bg-light mb-3" style="max-width: 15rem; color:darkslategrey; align-content: center">
-                        <div class="card-header"><b>Actas</b></div>
-                        <center><img src="~/Utils/imagenes/actas.png" width="100px" , height="100px" /></center>
-                        @foreach (var item in Model)
-                        {
-                            <div class="card-body">
-
-                                @if (item.tipo == 2 && item.estado == 0)
-                                {
-                                    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
-
-
-                            </div>}
-                    </div>
-
-                    <div class="card bg-light mb-3" style="max-width: 15rem; color:darkslategrey">
-                        <div class="card-header"><b>Artículos</b></div>
-                        <center><img src="~/Utils/imagenes/articulos.png" width="100px" , height="100px" /></center>
-                        @foreach (var item in Model)
-                        {
-                            <div class="card-body">
-
-                                @if (item.tipo == 3 && item.estado == 0)
+                    <div class="card bg-light text-white mb-3" style="max-width:15rem; margin-left: 80px;">
+                        <div class="card-header custom-card-header"><b>Noticias</b></div>
+                        <center><img src="~/Utils/imagenes/noticias.png" width="80px" height="80px" /></center>
+                        <div class="card-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.tipo == 1 && item.estado == 0)
                                 {
                                     <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
                                 }
-
-
-                            </div>
-                        }
+                            }
+                        </div>
+                        
                     </div>
-                    <div class="card bg-light mb-3" style="max-width: 15rem; color:darkslategrey">
-                        <div class="card-header"><b>Archivos Documentales</b></div>
-                        <center><img src="~/Utils/imagenes/archivos.png" width="80px" , height="80px" /></center>
-                        @foreach (var item in Model)
-                        {
-                            <div class="card-body">
 
-                                @if (item.tipo == 4 && item.estado == 0)
+                    <div class="card bg-light  text-white mb-3" style="max-width: 15rem;">
+                        <div class="card-header custom-card-header"><b>Actas</b></div>
+                        <center><img src="~/Utils/imagenes/actas.png" width="100px" height="100px" /></center>
+                        <div class="card-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.tipo == 2 && item.estado == 0)
                                 {
-                                    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>}
+                                    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
+                                }
+                            }
+                        </div>
+                     
+                    </div>
 
+                    <div class="card bg-light  text-white mb-3" style="max-width: 15rem;">
+                        <div class="card-header custom-card-header"><b>Artículos</b></div>
+                        <center><img src="~/Utils/imagenes/articulos.png" width="100px" height="100px" /></center>
+                        <div class="card-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.tipo == 3 && item.estado == 0)
+                                {
+                                    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
+                                }
+                            }
+                        </div>
+                      
+                    </div>
 
-                            </div>}
-                    </div>&nbsp;
+                    <div class="card bg-light  text-white mb-3" style="max-width: 15rem;">
+                        <div class="card-header custom-card-header"><b>Archivos Documentales</b></div>
+                        <center><img src="~/Utils/imagenes/archivos.png" width="80px" height="80px" /></center>
+                        <div class="card-body">
+                            @foreach (var item in Model)
+                            {
+                                if (item.tipo == 4 && item.estado == 0)
+                                {
+                                    <p class="card-text">@Html.DisplayFor(modelItem => item.detalle)</p>
+                                }
+                            }
+                        </div>
+                       
+                    </div>
                 </div>
-                </div>
+
             </div>
+        </div>
 
-</center>
+    </center>
 </form>
 <script>
     $('.carousel').carousel({

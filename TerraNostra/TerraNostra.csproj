@@ -410,6 +410,8 @@
     <Content Include="Views\Reservacion\_PartialViewListaReservasEstado.cshtml" />
     <Content Include="Views\Reservacion\Denegar.cshtml" />
     <Content Include="Views\Usuario\cambiarContraseña.cshtml" />
+    <Content Include="Views\AreaComun\Index.cshtml" />
+    <Content Include="Views\AreaComun\_PartialViewByTipo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
