@@ -5,48 +5,49 @@
 }
 
 
-
-
 @using (Html.BeginForm("Save", "rubroCobro", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    <center>
+        <div class="form-horizontal">
+            <br />
+            <h4 style="font-family: Broadway">Crear rubro</h4>
+            <hr />
+            <div class="card text-white bg-dark border-primary mb-3" style="max-width: 30rem;">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.detalle, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.detalle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.detalle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-horizontal">
-        <br />
-        <h4 style="font-family: Broadway">Crear rubro</h4>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+               
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">Guardar</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        </center>
+        }
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.detalle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.detalle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.detalle, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <p>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
+        </p>
 
-       
-        <br />
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-outline-primary btn-sm">Guardar</button>
-            </div>
-        </div>
-    </div>
-}
-<hr />
-<p>
-
-    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
-</p>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
