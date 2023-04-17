@@ -12,7 +12,8 @@
                 <div class="card mb-3">
                     <img src="~/Utils/imagenes/reservaciones.png" alt="Card image cap" class="card-img-top" style="height:100px; max-width: 100px;">
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.detalle)</h5>
+                        <h4 class="card-title" style="background-color: forestgreen;">@Html.DisplayFor(modelItem => item.detalle)</h4>
+
                         <p class="card-text"><b>Disponibilidad:</b> @Html.DisplayFor(modelItem => item.disponibilidad)</p>
                         <p class="card-text"><b>Fecha Disponible:</b> @Html.DisplayFor(modelItem => item.fechaDisponible)</p>
                         <p class="card-text"><b>Hora Disponible:</b> @Html.DisplayFor(modelItem => item.horaDisponible)</p>
@@ -29,14 +30,14 @@
                 <div class="card mb-3">
                     <img src="~/Utils/imagenes/reservaciones.png" alt="Card image cap" class="card-img-top" style="height:100px; max-width: 100px;">
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.detalle)</h5>
+                        <h4 class="card-title" style="background-color: indianred;">@Html.DisplayFor(modelItem => item.detalle)</h4>
                         <p class="card-text"><b>Disponibilidad:</b> @Html.DisplayFor(modelItem => item.disponibilidad)</p>
                         <p class="card-text"><b>Fecha Disponible:</b> @Html.DisplayFor(modelItem => item.fechaDisponible)</p>
                         <p class="card-text"><b>Hora Disponible:</b> @Html.DisplayFor(modelItem => item.horaDisponible)</p>
                         <p class="card-text"><b>Estado:</b> @if (item.estado == 1) {  <span class="badge badge-success">Sin reservar</span>} else {  <span class="badge badge-danger">Reservado</span> }</p>
                         <div class="text-center">
-                            <a href="@Url.Action(" Details", "areaComun" , new { id=item.id })" class="btn btn-dark disabled mr-2"><i class="fas fa-info-circle"></i> Detalles</a>
-                            <a href="@Url.Action(" Edit", "areaComun" , new { id=item.id })" class="btn btn-danger disabled"><i class="fas fa-pencil-alt"></i>Reservado</a>
+                            <a href="@Url.Action("Details", "areaComun" , new { id=item.id })" class="btn btn-dark disabled mr-2"><i class="fas fa-info-circle"></i> Detalles</a>
+                            <a href="@Url.Action("Edit", "areaComun" , new { id=item.id })" class="btn btn-danger disabled"><i class="fas fa-pencil-alt"></i>Reservado</a>
                         </div>
                     </div>
                 </div>
