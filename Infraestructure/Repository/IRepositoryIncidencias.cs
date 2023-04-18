@@ -12,5 +12,6 @@ namespace Infraestructure.Repository
         IEnumerable<incidente> GetIncidente();
         incidente GetIncidenteoById(int id);
         incidente Save(incidente incidente);
+        IEnumerable<incidente> GetIncidentexEstado(int? estado);
     }
 }

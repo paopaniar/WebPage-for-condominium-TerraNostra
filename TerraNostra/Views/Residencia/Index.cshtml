@@ -4,38 +4,83 @@
     ViewBag.Title = "Residencias";
 }
 
+<style>
+    .card {
+     
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            outline: 2px solid lightblue;
+        }   
+
+    .card-header {
+        background-color: #007bff;
+        color: #FFF;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px;
+    }
+
+    .card-text {
+        font-size: 14px;
+        margin-top: 10px;
+        padding: 15px;
+       
+    }
+
+    .btn-dark {
+        background-color: #343a40;
+        color: #FFF;
+        border: none;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+        padding: 15px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-dark:hover {
+            background-color: #23272b;
+        }
+</style>
 
 <br />
 <center>
     <h3 style="font-family: Broadway">Residencias</h3>
 </center>
 <br />
-<div class="col-lg-9">
-    <div id="resultado" class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-sm-3">
-                <div class="card border-warning mb-3" style="max-width: 20rem;">
-                    <img class="card-img-top" src="~/Utils/imagenes/casasicon.jpg" alt="Card image cap">
-                    <p class="card-text">
-                        <i class="fa-solid fa-house"></i> <b>@Html.DisplayNameFor(model => model.numeroCasa):</b>  @Html.DisplayFor(modelItem => item.numeroCasa)
-                    </p>
-                    <p class="card-text">
-                        <i class="fa-solid fa-user"></i> <b>@Html.DisplayNameFor(model => model.usuario1.identificacion):</b>  @Html.DisplayFor(modelItem => item.usuario1.identificacion)
-                    </p>
-                    <p class="card-text">
-                        <i class="fa-solid fa-people-roof"></i> <b>@Html.DisplayNameFor(model => model.individualsNumber):</b>@Html.DisplayFor(modelItem => item.individualsNumber)
-                    </p>
+<center>
+    <div class="col-lg-9">
 
+        <div id="resultado" class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <div class="card border-light mb-3">
+                        <div class="card-header bg-primary text-white"><b>@Html.DisplayNameFor(model => model.numeroCasa) </b>  @Html.DisplayFor(modelItem => item.numeroCasa)</div>
 
-                    <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i> Detalle</a>
-                    @*@Html.ActionLink("Details", "Details", new { id = item.IdLibro }) |*@
+                        <div class="card-text">
+                            Identificación:
+                            @Html.DisplayFor(modelItem => item.usuario1.identificacion)
+                        </div>
+                        <div class="card-text">
+                            Cantidad de personas:
+                            @Html.DisplayFor(modelItem => item.individualsNumber)
+                        </div>
+                        <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-outline-info">Leer más...</a>
+                    
 
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
+
     </div>
-</div>
 </center>
-
-

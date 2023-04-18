@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Services;
 using Infraestructure.Models;
+using Infraestructure.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,13 @@ namespace TerraNostra.Controllers
 {
     public class HomeController : Controller
     {
+        [CustomAuthenticationFilter]
         public ActionResult Index()
-        {
+        { if (TempData.ContainsKey("mensaje"))
+            {
+                ViewBag.NotificationMessage = TempData["mensaje"];
+            }
+            Log.Info("Inicio");
             IServiceInformacion _ServiceInformacion = new ServiceInformacion();
             var model = _ServiceInformacion.GetInformacion();           
             return View("~/Views/Home/Index.cshtml", model);

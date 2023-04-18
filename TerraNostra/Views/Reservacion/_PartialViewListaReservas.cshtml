@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Infraestructure.Models.reservacion>
+
+
+<table class="table">
+    <tr class="table-dark">
+      
+        <th>
+            @Html.DisplayNameFor(model => model.usuario)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.areaComun.detalle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.areaComun.fechaDisponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+         
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComun.detalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComun.fechaDisponible)
+            </td>
+            <td>
+                @if (item.estado == 0)
+                {
+
+                    <div style="background-color: darkred; padding: 3px; border-radius: 4px;">
+                        <i class="fa fa-window-close" aria-hidden="true" style="color: white;"></i> <span style="color: white;">Denegado</span>
+                    </div>
+
+                }
+                else
+                {
+                    if (item.estado == 1)
+                    {
+
+                        <div style="background-color: green; padding: 3px; border-radius: 4px;">
+                            <i class="fa fa-check-square" aria-hidden="true" style="color: white;"></i> <span style="color: white;">Aprobado</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="background-color: orange; padding: 3px; border-radius: 4px;">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="color: white;"></i> <span style="color: white;">Sin resolver</span>
+                        </div>
+                    }
+                }
+
+            </td>
+
+
+        </tr>
+    }
+
+</table>

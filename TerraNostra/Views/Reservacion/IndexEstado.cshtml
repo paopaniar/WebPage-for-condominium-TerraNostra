@@ -1,0 +1,82 @@
+﻿@model Infraestructure.Models.reservacion
+
+@{
+    var reservacion = new List<Infraestructure.Models.reservacion>();
+    reservacion = ViewBag.lista;
+    ViewBag.Title = "IndexEstado";
+    var reservacionUsuario = new List<Infraestructure.Models.reservacion>();
+}
+
+@{
+    int iduser = 0;
+
+    if (Session["User"] != null)
+    {
+        Infraestructure.Models.usuario usuario = new Infraestructure.Models.usuario();
+        usuario = (Infraestructure.Models.usuario)Session["User"];
+
+        iduser = usuario.identificacion;
+        foreach (var item in reservacion.ToList())
+        {
+            if (item.usuario1.identificacion == iduser)
+            {
+                reservacionUsuario.Add(item);
+            }
+        }
+
+    }
+}
+<br />
+<center><h4 style="font-family: Broadway">Historial de mis Reservas</h4></center>
+<br />
+<div class="text-center row">
+
+    <div class="col-lg-2 col-md-2 col-sm-6">
+        @Html.DropDownListFor(model => model.estado,
+           (SelectList)ViewBag.listaValueEstado,
+           "Todos",
+           htmlAttributes: new { @class = "form-control", @id = "idEstado" })
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6">
+        <button class="btn btn-primary" onclick="Filtrar('@iduser')"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+    </div>
+
+</div>
+
+<br />
+<div>
+
+    <span class="glyphicons glyphicons-hand-left"></span>
+    <div id="tablaReservas">
+
+        @Html.Partial("_PartialViewListaReservas", reservacionUsuario)
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function Filtrar(idUsuarioAjax) {
+
+
+            var idUsuario = idUsuarioAjax;
+            var idEstado = $("#idEstado").val();
+            $.ajax({
+                url: '@Url.Action("obtenerFiltro", "Reservacion")', // especificar la acción del controlador que manejará la solicitud
+                type: 'POST',
+                data: {
+                    user: idUsuario,
+                    estado: idEstado,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}

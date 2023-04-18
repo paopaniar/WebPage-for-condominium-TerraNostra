@@ -15,7 +15,14 @@ namespace ApplicationCore.Services
 		plan_residencia Guardar(plan_residencia plan_residencia);
 		IEnumerable<plan_residencia> GetPlanResidencia();
 		IEnumerable<plan_residencia> GetEstadosByEstado(int id, int estado);
+
+		List<plan_residencia> GetPlanResidenciaByMonthAndYear(int id, int mes, int year);
 		plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes);
+		IEnumerable<plan_residencia> GetEstadosMes(int? mes);
+		IEnumerable<plan_residencia> GetEstadosCuentaxUsuarioxMes(int user, int? mes);
+		IEnumerable<plan_residencia> GetReporteByEstado(int estado);
+		IEnumerable<plan_residencia> GetReporteByResidenteByMes(int? mes, int? residente, int? estado);
 
 	}
+
 }

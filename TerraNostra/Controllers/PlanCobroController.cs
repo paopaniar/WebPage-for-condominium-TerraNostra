@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TerraNostra.Enum;
 using TerraNostra.Security;
+using TerraNostra.ViewModel;
 
 namespace TerraNostra.Controllers
 {
@@ -77,6 +78,13 @@ namespace TerraNostra.Controllers
             IServicePlanCobro _ServicePlanCobro = new ServicePlanCobro();
             try
             {
+              
+
+                if (plan_cobro.estado == null)
+                {
+                    plan_cobro.estado = 1;
+                }
+
 
                 if (ModelState.IsValid)
                 {
@@ -170,6 +178,25 @@ namespace TerraNostra.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+        }
+
+
+        public ActionResult graficoOrden()
+        {
+            //Documentación chartjs https://www.chartjs.org/docs/latest/
+            IServicePlanCobro _ServiceOrden = new ServicePlanCobro();
+            ViewModelGraficoController grafico = new ViewModelGraficoController();
+            _ServiceOrden.GetGrafico(out string etiquetas, out string valores);
+            grafico.Etiquetas = etiquetas;
+            grafico.Valores = valores;
+            int cantidadValores = valores.Split(',').Length;
+            grafico.Colores = string.Join(",", grafico.GenerateColors(cantidadValores));
+            grafico.titulo = "Ordenes por fecha";
+            grafico.tituloEtiquetas = "Cantidad de Ordenes";
+            //Tipos: bar , bubble , doughnut , pie , line , polarArea 
+            grafico.tipo = "doughnut";
+            ViewBag.grafico = grafico;
+            return View();
         }
     }
 }

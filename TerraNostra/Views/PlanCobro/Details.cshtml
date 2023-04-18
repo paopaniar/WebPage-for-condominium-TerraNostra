@@ -2,75 +2,53 @@
 
 @{ ViewBag.Title = "Details";
 
- decimal totalSum = 0;
-              
+    decimal totalSum = 0;
 
 }
 
 <br />
-<div>
 
-    <center> <h4 style="font-family: Broadway">Información detallada de plan cobro</h4></center>
+<br />
+<center>   <h4 style="font-family:Broadway">Información detallada del plan de cobro</h4></center>
+<hr />
 
-    <hr />
-
-
-    <center>
-        <div>
-
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.detail)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.detail)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.datePlan)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.datePlan)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.total)
-                </dt>
-
-                <dd>
-                    @foreach (var c in Model.rubro_cobro)
-                    {
-
-                        totalSum += Convert.ToDecimal(c.monto);
-
-
-                    }
-                    <li>@string.Format("{0:C}", totalSum)</li>
-
-
-                </dd>
-
-            </dl>
-
-
-            <b>@Html.DisplayNameFor(model => model.rubro_cobro):</b>
-            <ul>
+<center>
+    <div class="card border-light mb-3" style="max-width: 20rem;">
+        <div class="card-header"><b> @Html.DisplayNameFor(model => model.detail): </b> @Html.DisplayFor(model => model.detail)</div>
+        <div class="card-body">
+            <p class="card-text">
+                <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.datePlan):</b>
+                <br />
+                @Html.DisplayFor(model => model.datePlan)
+            </p>
+            <p class="card-text">
+                <b>@Html.DisplayNameFor(model => model.total):</b>
+                <br />
                 @foreach (var c in Model.rubro_cobro)
                 {
-    <li>@c.detalle</li>
+
+                    totalSum += Convert.ToDecimal(c.monto);
+
+
                 }
+                @string.Format("{0:C}", totalSum)
+            </p>
+            <p class="card-text">
+                <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.rubro_cobro): </b>
+                <br />
+                <ul>
+                    @foreach (var c in Model.rubro_cobro)
+                    {
+                        <li>@c.detalle</li>
+                    }
 
-            </ul>
-
-
-
+                </ul>
+            </p>
 
         </div>
-    </center>
-</div>
-<hr />
-<p>
+    </div>
+    <p>
 
-    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
-</p>
+        @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
+    </p>
+</center>

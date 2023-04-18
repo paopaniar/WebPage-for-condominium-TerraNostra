@@ -41,7 +41,7 @@ namespace Infraestructure.Models
     {
         [Display(Name = "Rol")]
         public int rolId { get; set; }
-        [Display(Name = "Residente")]
+        [Display(Name = "Identificación")]
         public int identificacion { get; set; }
         [Display(Name = "Teléfono")]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
@@ -55,10 +55,12 @@ namespace Infraestructure.Models
         [Display(Name = "Estado")]
         public Nullable<int> estado { get; set; }
         [Display(Name = "Contraseña")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(ErrorMessage = "El campo {0} no puede quedar vacío")]   
         public string password { get; set; }
-        [Display(Name = "Correo electrónico")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+
+        [Display(Name = "Correo electrónico")]     
+        [Required(ErrorMessage = "El campo {0} no puede quedar vacío")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "El {0} no tiene formato válido")]
         public string Email { get; set; }
         public virtual ICollection<residencia> residencia { get; set; }
     }
@@ -68,18 +70,19 @@ namespace Infraestructure.Models
         [Display(Name = "Estado")]
         public int estado { get; set; }
         [Display(Name = "Total")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = false)]
         public decimal total { get; set; }
         [Display(Name = "Mes")]
         public string mes { get; set; }
         [Display(Name = "Número plan cobro")]
         public int id { get; set; }
         [Display(Name = "Detalle")]
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detail { get; set; }        
-        [Display(Name = "Fecha")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [Display(Name = "Fecha")]    
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [UIHint("Date")]
         public System.DateTime datePlan { get; set; }
         
         [Display(Name = "Rubros")]
@@ -93,11 +96,13 @@ namespace Infraestructure.Models
       
         [Display(Name = "Rubro")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [DataType(DataType.Text)]
         public string detalle { get; set; }
         [Display(Name = "Monto")]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [DisplayFormat(DataFormatString = "{0:C}")]
+        [DataType(DataType.Text)]
         public decimal monto { get; set; }
         [Display(Name = "Estado")]
         public int estado { get; set; }
@@ -116,6 +121,9 @@ namespace Infraestructure.Models
         public virtual plan_cobro plan_cobro { get; set; }
         [Display(Name = "Residencia")]
         public virtual residencia residencia { get; set; }
+        [Display(Name = "Fecha")]
+     
+        public System.DateTime fecha { get; set; }
         [Display(Name = "Plan de Cobro")]
         public virtual ICollection<plan_cobro> plancobro { get; set; }
         [Display(Name = "Residencia")]
@@ -140,8 +148,11 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int tipo { get; set; }
         [Display(Name = "Detalle")]
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string detalle { get; set; }
+        [Display(Name = "Tipo")]
+        public string descTipo { get; set; }
     }
 
     internal partial class informacionMetaData
@@ -152,6 +163,7 @@ namespace Infraestructure.Models
         public int usuario { get; set; }
         [Display(Name = "Detalle")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
+        [DataType(DataType.Text)]
         public string detalle { get; set; }
         [Display(Name = "Fecha de la información")]
         [DataType(DataType.Date)]
@@ -166,8 +178,9 @@ namespace Infraestructure.Models
         public int estado { get; set; }
     }
 
-    public partial class ReservacionMetaData
+    internal partial class ReservacionMetaData
     {
+        [Display(Name = "Reservación")]
         public int id { get; set; }
         [Display(Name = "Área Común")]
         public int areaComunId { get; set; }
@@ -177,11 +190,11 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
         [Display(Name = "Estado")]
         public int estado { get; set; }
-        [Display(Name = "Fecha desde:")]
+        [Display(Name = "Fecha desde")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> dateFrom { get; set; }
-        [Display(Name = "Fecha Hasta:")]
+        [Display(Name = "Fecha Hasta")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> dateTo { get; set; }
@@ -190,5 +203,21 @@ namespace Infraestructure.Models
         [Display(Name = "Usuario")]
         public virtual usuario usuario1 { get; set; }
     }
+    internal partial class AreaComunMetadata
+    {
+        public int id { get; set; }
+        [Display(Name = "Área")]
+        public string detalle { get; set; }
+        [Display(Name = "Disponibilidad")]
+        public int disponibilidad { get; set; }
+        [Display(Name = "Fecha Disponible")]
+        public string fechaDisponible { get; set; }
+        [Display(Name = "Hora Dispobible")]
+        public int horaDisponible { get; set; }
+        [Display(Name = "Estado")]
+        public int estado { get; set; }
+        [Display(Name = "Reservación")]
 
+        public virtual ICollection<reservacion> reservacion { get; set; }
+    }
 }

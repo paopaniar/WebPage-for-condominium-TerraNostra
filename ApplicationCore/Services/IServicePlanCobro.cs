@@ -12,6 +12,7 @@ namespace ApplicationCore.Services
         IEnumerable<plan_cobro> GetPlanCobro();
         plan_cobro GetPlanCobroById(int id);
         plan_cobro Save(plan_cobro plan_Cobro, string[] selectedRubros);
+        void GetGrafico(out string etiquetas, out string valores);
 
     }
 }

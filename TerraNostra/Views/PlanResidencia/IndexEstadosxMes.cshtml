@@ -1,0 +1,63 @@
+﻿@model Infraestructure.Models.plan_residencia
+
+@{
+    ViewBag.Title = "Estados de Cuenta Por Mes";
+    var estadoCuenta = new List<Infraestructure.Models.plan_residencia>();
+    estadoCuenta = ViewBag.lista;
+    var estadoMes = new List<Infraestructure.Models.plan_residencia>();
+}
+<br />
+
+<center><h4 style="font-family: Broadway">Listado de Planes Asignados por Mes</h4></center>
+<br />
+<div class="text-center row">
+
+    <div class="col-lg-2 col-md-2 col-sm-6">
+        @Html.DropDownListFor(model => model.fecha.Month,
+           (SelectList)ViewBag.listaMes,
+           "Todos",
+           htmlAttributes: new { @class = "form-control", @id = "idMes" })
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-4">
+        <button class="btn btn-primary" onclick="Filtrar()"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+    </div>
+
+</div>
+
+<br />
+<div>
+
+    <span class="glyphicons glyphicons-hand-left"></span>
+    <div id="tablaReservas">
+
+        @Html.Partial("_PartialViewListaEstados", estadoCuenta)
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        function Filtrar() {
+
+
+           
+            var idMes = $("#idMes").val();
+            $.ajax({
+                url: '@Url.Action("obtenerFiltro", "PlanResidencia")', 
+                type: 'POST',
+                data: {
+                    mes: idMes,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}

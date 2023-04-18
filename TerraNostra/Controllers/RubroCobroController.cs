@@ -47,19 +47,21 @@ namespace TerraNostra.Controllers
         public ActionResult Create()
         {
             ViewBag.idRubros = listRubros();
+            ViewBag.estado = listEstados();
             return View();
         }
 
         public ActionResult Edit(int? id)
         {
+            ViewBag.estado = listEstados();
+
             ServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
             rubro_cobro rubroCobro = null;
             try
             {
-                // Si va null
                 if (id == null)
                 {
-                    //ATENCION! HACER EL INDEX byPao
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se guardó correctamente!", SweetAlertMessageType.success);
                     return RedirectToAction("Index");
                 }
 
@@ -92,24 +94,18 @@ namespace TerraNostra.Controllers
         [HttpPost]
         public ActionResult Save(rubro_cobro rubro)
         {   
-            //Servicio Libro
             IServiceRubroCobro _ServiceRubro = new ServiceRubroCobro();
             try
             {
-                //Insertar la imagen
-               
                 if (ModelState.IsValid)
                 {
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Realizado correctamente!", SweetAlertMessageType.success);
                     rubro_cobro oRubroCobro = _ServiceRubro.Save(rubro);
                 }
                 else
                 {
-                    // Valida Errores si Javascript está deshabilitado
-
                     Utils.Util.ValidateErrors(this);                 
                 
-                
-
                     if (rubro.id > 0)
                     {
                         return (ActionResult)View("Edit", rubro);
@@ -119,12 +115,11 @@ namespace TerraNostra.Controllers
                         return View("Create", rubro);
                     }
                 }
-
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Realizado correctamente!", SweetAlertMessageType.success);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData["Redirect"] = "RubroCobro";
@@ -134,7 +129,13 @@ namespace TerraNostra.Controllers
             }
         }
 
-
+        private SelectList listEstados(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Activo", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Inactivo", Value = "0" });
+            return new SelectList(lista, "Value", "Text", estado);
+        }
 
     }
 }

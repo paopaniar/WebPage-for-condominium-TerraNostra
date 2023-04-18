@@ -4,70 +4,63 @@
     ViewBag.Title = "Plan";
 }
 
+<!-- Incluir a biblioteca do jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Incluir a biblioteca do jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 
 @using (Html.BeginForm("Save", "PlanCobro", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-  
 
-    <div class="form-horizontal">
-        <br />
-        <h4 style="font-family: Broadway">Crear plan</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(Model => Model.rubro_cobro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.DropDownList("selectedRubros",
-               (MultiSelectList)ViewBag.idRubros,
-               htmlAttributes: new { @class = "form-control", multiple = "multiple" })
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.mes, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.mes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mes, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.datePlan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.datePlan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.datePlan, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
-               
-                </div>
-            </div>
-
-      <br />
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-6">
-                <button type="submit" class="btn btn-outline-primary btn-sm">Guardar</button>
-            </div>
+<div class="form-horizontal">
+    <br />
+    <h4 style="font-family: Broadway">Crear plan</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.detail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.detail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.detail, "", new { @class = "text-danger" })
         </div>
     </div>
-      
+
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.rubro_cobro, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.DropDownList("selectedRubros",
+           (MultiSelectList)ViewBag.idRubros,
+           htmlAttributes: new { @class = "form-control", multiple = "multiple" })
+
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.datePlan, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.datePlan, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+            @Html.ValidationMessageFor(model => model.datePlan, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <button type="submit" class="btn btn-outline-primary btn-sm">Guardar</button>
+        </div>
+    </div>
+</div>
+
 }
 
 <hr />
@@ -79,4 +72,17 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+   <script>
+
+       var myDateTimePicker = document.getElementById("datepicker");
+       myDateTimePicker.addEventListener("focus", function () {
+           this.type = "datetime-local";
+       });
+       myDateTimePicker.addEventListener("blur", function () {
+           this.type = "text";
+       });
+       myDateTimePicker.style.color = "green"; 
+
+    </script>
+
 }

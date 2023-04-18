@@ -19,18 +19,22 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listados</a>
                     <div class="dropdown-menu">
 
-                    
+
                         @Html.ActionLink("Residencias", "Index", "residencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Planes de Cobro", "Index", "planCobro", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Estados de cuenta", "Index", "planResidencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Estados de cuenta", "IndexEstadosxMes", "planResidencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Incidencias", "Index", "incidencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Incidencias", "IndexIncidenciasxEstado", "incidencia", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Rubros", "Index", "rubroCobro", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Información", "Index", "informacion", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Usuario", "Index", "usuario", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Área Común", "Create", "areaComun", null, new { @class = "dropdown-item" })
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -43,22 +47,43 @@
 
                     </div>
                 </li>
+               
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservaciones</a>
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Crear Incidencia</a>
                     <div class="dropdown-menu">
 
-                      
-                        @Html.ActionLink("Ir a reservaciones", "Index", "reservacion", null, new { @class = "dropdown-item" })
-                        <div class="dropdown-divider"></div>
-                        @Html.ActionLink("Asignar Residencia a Usuario", "Create", "residencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Ir a crear", "Create", "incidencia", null, new { @class = "dropdown-item" })
 
                     </div>
                 </li>
-                <li>
-                    @Html.ActionLink("Acerca de", "About", "Home",
-               null, new { @class = "nav-link" })
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Áreas</a>
+                    <div class="dropdown-menu">
+
+                        @Html.ActionLink("Ver Áreas Comunes", "Index", "areaComun", null, new { @class = "dropdown-item" })
+
+                    </div>
                 </li>
-                <li>@Html.ActionLink("Contacto", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Historiales</a>
+                    <div class="dropdown-menu">
+
+                        @Html.ActionLink("Historial de Reservas", "Index", "reservacion", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Mi Historial de Reservas", "IndexEstado", "reservacion", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Mis Estados de Cuenta", "IndexEstadosxMesxUsuario", "planresidencia", null, new { @class = "dropdown-item" })
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                    <div class="dropdown-menu">
+
+                        @Html.ActionLink("Reporte Deudas", "ReporteDeudas", "Reporte", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Reporte Gráfico", "graficoOrden", "PlanCobro", null, new { @class = "dropdown-item" })
+
+                    </div>
+                </li>
+               
                 <li class="nav-item dropdown">
                     @* Información usuario *@
                     @{

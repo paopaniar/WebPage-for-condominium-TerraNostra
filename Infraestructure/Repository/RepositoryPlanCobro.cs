@@ -12,6 +12,47 @@ namespace Infraestructure.Repository
 {
     public class RepositoryPlanCobro : IRepositoryPlanCobro
     {
+        public void GetGrafico(out string etiquetas, out string valores)
+        {
+            String varEtiquetas = "";
+            String varValores = "";
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    var resultado = ctx.plan_cobro.GroupBy(x => x.total).
+                               Select(o => new {
+                                   Count = o.Count(),
+                                   id = o.Key
+                               });
+                    foreach (var item in resultado)
+                    {
+                        varEtiquetas += ( item.id) + ",";
+                        varValores += item.Count + ",";
+                    }
+                }
+                //Ultima coma
+                varEtiquetas = varEtiquetas.Substring(0, varEtiquetas.Length - 1); // ultima coma
+                varValores = varValores.Substring(0, varValores.Length - 1);
+                //Asignar valores de salida
+                etiquetas = varEtiquetas;
+                valores = varValores;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+        }
+
         public IEnumerable<plan_cobro> GetPlanCobro()
         {
             IEnumerable<plan_cobro> plan = null;
@@ -93,21 +134,24 @@ namespace Infraestructure.Repository
                 {
                     if (selectedRubros != null)
                     {
-
                         planCobro.rubro_cobro = new List<rubro_cobro>();
+                        decimal totalSum = 0;
                         foreach (var rubro in selectedRubros)
                         {
                             var rubroToAdd = _RepositoryRubro.GetRubroCobroById(int.Parse(rubro));
-                            ctx.rubro_cobro.Attach(rubroToAdd); //sin esto, EF intentará crear una categoría
-                            planCobro.rubro_cobro.Add(rubroToAdd);// asociar a la categoría existente con el libro
-
-
+                            ctx.rubro_cobro.Attach(rubroToAdd);
+                            planCobro.rubro_cobro.Add(rubroToAdd);
+                            totalSum += Convert.ToDecimal(rubroToAdd.monto);
                         }
+                        planCobro.total = totalSum;
                     }
+                    else if (oPlanCobro != null)
+                    {
+                        planCobro.total = oPlanCobro.total;
+                    }
+
                     ctx.plan_cobro.Add(planCobro);
-                   
                     retorno = ctx.SaveChanges();
-                    //retorna número de filas afectadas
                 }
                 else
                 {
@@ -122,6 +166,13 @@ namespace Infraestructure.Repository
                          .Where(x => selectRubroId.Contains(x.id.ToString())).ToList();
                         planCobro.rubro_cobro = newCategoriaForLibro;
 
+                        decimal totalSum = 0;
+                        foreach (var rubro in newCategoriaForLibro)
+                        {
+                            totalSum += Convert.ToDecimal(rubro.monto);
+                        }
+                        planCobro.total = totalSum;
+
                         ctx.Entry(planCobro).State = EntityState.Modified;
                         retorno = ctx.SaveChanges();
                     }
@@ -130,9 +181,10 @@ namespace Infraestructure.Repository
 
             if (retorno >= 0)
                 oPlanCobro = GetPlanCobroById((int)planCobro.id);
-
+            oPlanCobro.total = planCobro.total;
             return oPlanCobro;
         }
+
     }
-   
+
 }

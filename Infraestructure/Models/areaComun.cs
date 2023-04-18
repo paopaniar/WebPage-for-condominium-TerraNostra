@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(AreaComunMetadata))]
     public partial class areaComun
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,7 +26,7 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
         public int disponibilidad { get; set; }
         public string fechaDisponible { get; set; }
-        public int horaDisponible { get; set; }
+        public string horaDisponible { get; set; }
         public int estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

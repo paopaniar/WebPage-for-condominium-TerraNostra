@@ -1,0 +1,29 @@
+﻿@model Infraestructure.Models.usuario
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm("Save", "usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="form-horizontal">
+        <center><h4 style="color:red">Estado Modificado Correctamente!</h4></center>
+
+
+
+    </div>
+}
+<br />
+<hr />
+<div class="form-group">
+    <div class="btn-group" role="group">
+        @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -49,18 +49,21 @@ namespace TerraNostra.Controllers
         public ActionResult Edit(int? id)
         {
             ServiceInformacion _ServiceLibro = new ServiceInformacion();
-            informacion libro = null;
-
+            informacion informacion = new informacion();
+            usuario oUsuario = (usuario)Session["User"];
+            informacion.usuario = oUsuario.identificacion;
+            ViewBag.tipo = listTipos();
+            ViewBag.estados = estado();
             try
             {
-                // Si va null
+
                 if (id == null)
                 {
                     return RedirectToAction("Index");
                 }
 
-                libro = _ServiceLibro.GetInformacionById(Convert.ToInt32(id));
-                if (libro == null)
+                informacion = _ServiceLibro.GetInformacionById(Convert.ToInt32(id));
+                if (informacion == null)
                 {
                     TempData["Message"] = "No existe el libro solicitado";
                     TempData["Redirect"] = "Informacion";
@@ -70,7 +73,7 @@ namespace TerraNostra.Controllers
                 }
                 //Listados
                 ViewBag.tipos = listaTipos();
-                return View(libro);
+                return View(informacion);
             }
             catch (Exception ex)
             {
@@ -92,6 +95,15 @@ namespace TerraNostra.Controllers
             IServiceInformacion _ServiceInformacion = new ServiceInformacion();
             try
             {
+
+                usuario oUsuario = (usuario)Session["User"];
+                //Asignar idUsuario que se encuentra logueado
+                informacion.usuario = oUsuario.identificacion;
+                if (informacion.estado == null)
+                {
+                    informacion.estado = 0;
+                }
+               
 
                 if (ModelState.IsValid)
                 {
@@ -129,7 +141,8 @@ namespace TerraNostra.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.tipos = listaTipos();
+            ViewBag.estado = estado();
+            ViewBag.tipos = listTipos();
             return View();
         }
 
@@ -189,7 +202,22 @@ namespace TerraNostra.Controllers
 
 
         }
+        private SelectList listTipos(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Noticias", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Actas", Value = "2" });
+            lista.Add(new SelectListItem { Text = "Artículos", Value = "3" });
+            return new SelectList(lista, "Value", "Text", estado);
+        }
+        private SelectList estado(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Visible", Value = "0" });
+            lista.Add(new SelectListItem { Text = "Oculta", Value = "1" });
 
+            return new SelectList(lista, "Value", "Text", estado);
+        }
 
     }
 }

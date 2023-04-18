@@ -1,0 +1,25 @@
+﻿@model Infraestructure.Models.areaComun
+
+@{
+    ViewBag.Title = "Edit";
+    Infraestructure.Models.reservacion reservacion = new Infraestructure.Models.reservacion();
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Save", "reservacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center><h4 style="color:red">Reservado Correctamente!</h4></center>
+
+
+
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

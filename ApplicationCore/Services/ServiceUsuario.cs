@@ -12,6 +12,11 @@ namespace ApplicationCore.Services
 {
     public class ServiceUsuario : IServiceUsuario
     {
+        public usuario Save(usuario usuario)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.Save(usuario);
+        }
         public usuario GetUsuarioByID(int id)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();

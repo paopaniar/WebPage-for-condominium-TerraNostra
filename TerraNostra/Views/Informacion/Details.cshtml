@@ -39,17 +39,20 @@
         <dd>
             @if (Model.tipo == 1)
             {
-<text>Noticicas</text> }
-else
-{
-if (Model.tipo == 2)
-{
-<text>Actas</text> }
+            <text>Noticicas</text> 
+            }
                 else
                 {
-<text>Artículos</text>                }
+                    if (Model.tipo == 2)
+                    {
+                    <text>Actas</text> 
+                    }
+                    else
+                    {
+                    <text>Artículos</text> 
+                    }
 
-            }
+                }
         </dd>
 
         <dt>

@@ -22,6 +22,12 @@ namespace ApplicationCore.Services
             return repository.GetIncidenteoById(id);
         }
 
+        public IEnumerable<incidente> GetIncidentexEstado(int? estado)
+        {
+            IRepositoryIncidencias repository = new RepositoryIncidente();
+            return repository.GetIncidentexEstado(estado);
+        }
+
         public incidente Save(incidente incidente)
         {
             IRepositoryIncidencias repository = new RepositoryIncidente();

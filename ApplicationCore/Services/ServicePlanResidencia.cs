@@ -16,9 +16,21 @@ namespace ApplicationCore.Services
             return repository.GetEstadoByEstado(id, estado);
         }
 
+        public IEnumerable<plan_residencia> GetEstadosCuentaxUsuarioxMes(int user, int? mes)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetEstadosCuentaxUsuarioxMes(user, mes);
+        }
+
+        public IEnumerable<plan_residencia> GetEstadosMes(int? mes)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetEstadosMes(mes);
+        }
+
         public IEnumerable<plan_residencia> GetPlanResidencia()
 		{
-			    IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+			IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
 			return repository.GetPlanResidencia();
 		}
 
@@ -32,6 +44,24 @@ namespace ApplicationCore.Services
             IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
             return repository.GetEstadoCuentaById(id);
 		}
+
+        public List<plan_residencia> GetPlanResidenciaByMonthAndYear(int id, int mes, int year)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetPlanResidenciaByMonthAndYear(id, mes, year);
+        }
+
+        public IEnumerable<plan_residencia> GetReporteByEstado(int estado)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetReporteByEstado(estado);
+        }
+
+        public IEnumerable<plan_residencia> GetReporteByResidenteByMes(int? mes, int? residente, int? estado)
+        {
+            IRepositoryPlanResidencia repository = new RepositoryPlanResidencia();
+            return repository.GetReporteByResidenteByMes(mes, residente, 0);
+        }
 
         public plan_residencia Guardar(plan_residencia plan_residencia)
         {

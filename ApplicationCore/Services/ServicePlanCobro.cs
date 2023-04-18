@@ -10,6 +10,14 @@ namespace ApplicationCore.Services
 {
     public class ServicePlanCobro: IServicePlanCobro
     {
+        public void GetGrafico(out string etiquetas1, out string valores1)
+        {
+            IRepositoryPlanCobro repository = new RepositoryPlanCobro();
+            repository.GetGrafico(out string etiquetas, out string valores);
+            etiquetas1 = etiquetas;
+            valores1 = valores;
+        }
+
         public IEnumerable<plan_cobro> GetPlanCobro()
         {
             IRepositoryPlanCobro repository = new RepositoryPlanCobro();

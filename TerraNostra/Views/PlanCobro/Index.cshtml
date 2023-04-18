@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Lista Plan Cobro";
+
 }
 
 
@@ -11,7 +12,7 @@
 </center>
 <br />
 <p>
-    <a href="@Url.Action("Create", "planCobro")"type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear plan</a>
+    <a href="@Url.Action("Create", "planCobro")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear plan</a>
 </p>
 
 <table class="table table-hover">
@@ -21,39 +22,51 @@
         </th>
 
         <th scope="row" style="grid-auto-rows: 5px">
+         
             @Html.DisplayNameFor(model => model.detail)
         </th>
+        <th scope="row" style="grid-auto-rows: 5px">
+            @Html.DisplayNameFor(model => model.total)
+        </th>
+      
 
+        <th>Detalles</th>
 
-
-        <th>Por ver</th>
-
-        <th>Por hacer</th>
+        <th>Cambios</th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
+        decimal totalSum = 0;
+
 <tr class="table-secondary">
     <td style="column-width: 5px">
         @Html.DisplayFor(modelItem => item.id)
     </td>
 
-    <td style="column-width: 5px">
+    <td>
         @Html.DisplayFor(modelItem => item.detail)
     </td>
 
 
-
-    <td style="column-width: 5px">
-
-        @Html.ActionLink("Detalle", "Details", new { id = item.id })
-
+    <td style="column-width: 5px;">
+        @if (item.rubro_cobro != null && item.rubro_cobro.Any())
+        {
+            totalSum = item.rubro_cobro.Sum(c => Convert.ToDecimal(c.monto));
+        }
+        @string.Format("{0:C}", totalSum)
     </td>
-    <td style="column-width: 5px">
 
-        @Html.ActionLink("Actualizar", "Edit", new { id = item.id })
 
+
+
+    <td>
+        <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
     </td>
 </tr>
-}
+    }
 
 </table>

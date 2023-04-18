@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Infraestructure.Models.incidente>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+
+<table class="table table-hover">
+    <tr class="table-dark">
+
+        <td style="max-width: 5px">
+            @Html.DisplayNameFor(model => model.usuario1.identificacion)
+            </th>
+        <td style="max-width: 3px">
+            @Html.DisplayNameFor(model => model.estado)
+            </th>
+        <td style="max-width: 5px">
+            @Html.DisplayNameFor(model => model.detalle)
+            </th>
+        <td style="max-width: 5px">Resolver</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr class="table-secondary">
+    <td style="max-width: 5px">
+        @Html.DisplayFor(modelItem => item.usuario1.identificacion)
+    </td>
+    <td style="max-width: 3px">
+        @if (item.estado == 1)
+        {
+            <text>Pendiente</text> }
+        else
+        {
+            <text>Resuelta</text>}
+    </td>
+
+    <td style="max-width: 5px">
+        @Html.DisplayFor(modelItem => item.detalle)
+    </td>
+    <td style="max-width: 5px">
+        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+    </td>
+</tr>
+    }
+
+</table>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Infraestructure.Models.rubro_cobro>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Rubros de Cobro";
 }
 
 <br />
@@ -24,32 +24,31 @@
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
-        <th>Por hacer</th>
+        <th>Actualizar</th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.detalle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.monto)
-            </td>
-            <td>
-                @if (item.estado == 1)
-                {
-                    <text>Activo</text> }
-                else
-                {
-                    <text>Inactivo</text>}
+<tr class="table-secondary">
+    <td>
+        @Html.DisplayFor(modelItem => item.detalle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.monto)
+    </td>
+    <td>
+        @if (item.estado == 1)
+        {
+            <text>Activo</text> }
+        else
+        {
+            <text>Inactivo</text>}
 
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.id })
-
-            </td>
-        </tr>
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
+    </td>
+</tr>
     }
 
 </table>

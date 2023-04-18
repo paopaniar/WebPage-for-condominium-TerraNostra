@@ -78,7 +78,7 @@ namespace TerraNostra.Controllers
             IEnumerable<usuario> lista = _ServiceUsuario.GetUsuario();
             return new SelectList(lista, "identificacion", "nombre", idUsuario);
         }
-
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpGet]
         public ActionResult Create()
         {

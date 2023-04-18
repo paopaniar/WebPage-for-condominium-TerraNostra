@@ -12,6 +12,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryIncidente : IRepositoryIncidencias
     {
+        IEnumerable<incidente> lista = null;
         public IEnumerable<incidente> GetIncidente()
         {
             IEnumerable<incidente> incidente = null;
@@ -58,6 +59,42 @@ namespace Infraestructure.Repository
                 }
                 return oIncidente;
             }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<incidente> GetIncidentexEstado(int? estado)
+        {
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    if (estado != null)
+                    {
+                        lista = ctx.incidente.Include("usuario1").
+                         Where(l => l.estado == estado).ToList();
+                    }
+                    else
+                    {
+                        lista = ctx.incidente.Include("usuario1").ToList();
+                    }
+
+
+                }
+                return lista;
+            }
+
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";

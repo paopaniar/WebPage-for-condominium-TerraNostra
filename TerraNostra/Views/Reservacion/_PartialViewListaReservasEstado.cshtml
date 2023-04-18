@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Infraestructure.Models.reservacion>
+
+
+<table class="table">
+    <tr class="table-dark">
+
+       
+        <th>
+            @Html.DisplayNameFor(model => model.usuario)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.areaComun.detalle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.areaComun.fechaDisponible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            Acciones y detalles
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComun.detalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.areaComun.fechaDisponible)
+            </td>
+            <td>
+                @if (item.estado == 0)
+                {
+                    <text>Denegado</text>
+                }
+                else
+                {
+                    if (item.estado == 1)
+                    {
+                        <text>Aprobado</text>
+                    }
+                    else
+                    {
+                        <text>Sin resolver</text>
+                    }
+                }
+
+            </td>
+            <td>
+                @if (item.estado == 0 || item.estado == 1)
+                {
+                    <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-danger disabled"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-light"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-success disabled"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Denegar", new { id = item.id })" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-light"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
+                    <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+
+                }
+
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+
+
+

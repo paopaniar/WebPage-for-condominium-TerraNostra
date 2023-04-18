@@ -1,0 +1,73 @@
+﻿@model Infraestructure.Models.incidente
+
+@{
+    ViewBag.Title = "IndexIncidenciasxEstado";
+}
+
+@{
+    var estadoCuenta = new List<Infraestructure.Models.incidente>();
+    estadoCuenta = ViewBag.lista;
+    ViewBag.Title = "IndexIncidenciasxEstado";
+    var estadoMes = new List<Infraestructure.Models.incidente>();
+}
+<br />
+<br />
+
+<div class="row">
+    <center><h4 style="font-family: Broadway">Incidentes</h4></center>
+    <p>
+        <a href="@Url.Action("Create", "Incidencia")" type="button" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Crear incidente</a>
+        @*@Html.ActionLink("Crear", "Create")*@
+    </p>
+
+        <div class="col-lg-2 col-md-2 col-sm-6">
+            @Html.DropDownListFor(model => model.estado,
+               (SelectList)ViewBag.listaValueEstado,
+               "Todos",
+               htmlAttributes: new { @class = "form-control", @id = "idEstado" })
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <button class="btn btn-primary" onclick="Filtrar()"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+
+        </div>
+
+
+</div>
+
+<div>
+
+    <span class="glyphicons glyphicons-hand-left"></span>
+    <div id="tablaReservas">
+
+        @Html.Partial("_PartialViewLista", estadoCuenta)
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function Filtrar() {
+
+
+
+            var valestado = $("#idEstado").val();
+            $.ajax({
+                url: '@Url.Action("obtenerFiltro", "Incidencia")',
+                type: 'POST',
+                data: {
+                    estado: valestado,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}
+

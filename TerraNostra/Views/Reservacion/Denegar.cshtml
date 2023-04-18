@@ -1,0 +1,23 @@
+﻿@model Infraestructure.Models.reservacion
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Se ha actualizado correctamente</h2>
+
+@using (Html.BeginForm("Save", "reservacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+    </div>
+
+}
+
+<div>
+
+    @Html.ActionLink("Regresar al listado", "Index", null, new { @class = "btn btn-outline-primary" })
+</div>

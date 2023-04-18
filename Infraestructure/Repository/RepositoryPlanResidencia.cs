@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace Infraestructure.Repository
 {
 	public class RepositoryPlanResidencia : IRepositoryPlanResidencia
-	{
+    {
+        IEnumerable<plan_residencia> lista = null;
         public IEnumerable<plan_residencia> GetEstadoByEstado(int id, int estado)
         {
             IEnumerable<plan_residencia> oPlanR = null;
@@ -78,6 +79,81 @@ namespace Infraestructure.Repository
             }
         
     }
+
+        public IEnumerable<plan_residencia> GetEstadosCuentaxUsuarioxMes(int user, int? mes)
+        {
+
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    if (mes != null)
+                    {
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                         Where(l => l.residencia.usuario1.identificacion== user && l.fecha.Month == mes).ToList();
+                    }
+                    else
+                    {
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                                                 Where(l => l.residencia.usuario1.identificacion == user).ToList();
+                    }
+
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<plan_residencia> GetEstadosMes(int? mes)
+        {
+
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    if (mes != null)
+                    {
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                         Where(l => l.fecha.Month == mes).ToList();
+                    }
+                    else
+                    {
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").ToList();
+                    }
+
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
         public IEnumerable<plan_residencia> GetEstadosPagados()
         {
@@ -202,10 +278,129 @@ namespace Infraestructure.Repository
             }
         }
 
+        public List<plan_residencia> GetPlanResidenciaByMonthAndYear(int id, int mes, int year)
+        {
+            using (var context = new MyContext())
+            {
+                return context.plan_residencia
+                    .Where(pr => pr.fecha.Month == mes && pr.fecha.Year == year && pr.residenciaId == id)
+                    .ToList();
+            }
+        }
+
+        public IEnumerable<plan_residencia> GetReporteByEstado(int estado)
+        {
+            IEnumerable<plan_residencia> oPlanR = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libros por Autor
+                    oPlanR = ctx.plan_residencia.
+                        Where(p => p.estado == estado).
+                         Include("residencia").
+                        Include("residencia.usuario1").
+                        Include("plan_cobro").ToList();
+
+                }
+                return oPlanR;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<plan_residencia> GetReporteByResidenteByMes(int? mes, int? residente, int? estado)
+        {
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    if (mes != null && residente != null)
+                    {
+                        lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                         Where(l => l.residencia.numeroCasa == residente && l.fecha.Month == mes && l.estado == 0).ToList();
+                    }
+                    else
+                    {
+                        if (mes != null)
+                        {
+                            lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                         Where(l => l.fecha.Month == mes && l.estado == 0).ToList();
+                        }
+                        else
+                        {
+                            if (residente != null)
+                            {
+                                lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                                                        Where(l => l.residencia.numeroCasa == residente && l.estado == 0).ToList();
+                            }
+                            else
+                            {
+                                lista = ctx.plan_residencia.Include("residencia").Include("residencia.usuario1").Include("plan_cobro").
+                                                        Where(l => l.estado == 0).ToList();
+                            }
+                        }
+                           
+                       
+                    }
+
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public plan_residencia Guardar(plan_residencia plan_residencia)
         {
-            throw new NotImplementedException();
-        }
+            plan_residencia oplan = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oplan = GetPlanResidenciaByID((int)plan_residencia.id);
+
+
+                if (oplan == null)
+                {
+                    ctx.plan_residencia.Add(plan_residencia);
+                }
+                else
+                {
+                    oplan.estado = plan_residencia.estado;
+                    ctx.Entry(oplan).State = EntityState.Modified;
+                }
+
+                ctx.SaveChanges();
+            }
+
+            return oplan;
+    }
 
         public plan_residencia Save(plan_residencia plan_residencia, string[] selectedResidencias, string[] selectedPlanes)
         {
