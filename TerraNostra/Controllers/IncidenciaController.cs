@@ -75,8 +75,10 @@ namespace TerraNostra.Controllers
                 // Si va null
                 if (ModelState.IsValid)
                 {
+                    IEnumerable<incidente> lista1 = _ServiceIncidente.GetIncidente();
                     incidente oIncidente = _ServiceIncidente.Save(incidente);
-                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se creó la incidencia!.", SweetAlertMessageType.success);
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se actualizó la incidencia!.", SweetAlertMessageType.success);
+                    return PartialView("_PartialViewLista", lista1);
                 }
 
                else
@@ -88,7 +90,6 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                return View();
             }
           
 

@@ -11,7 +11,7 @@
 
     <br />
     <center> <h4 style="font-family: Broadway">Detalle Estado de Cuenta</h4></center>
-   
+
     <hr />
     <center>
         <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
@@ -33,169 +33,176 @@
     </center>
 
 </div>
-    <div>
-        <h4>Estados Pagados</h4>
-        <table class="table">
-            <tr class="table-success">
-                <th>
-                    @Html.DisplayNameFor(model => model.plan_cobro.detail)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.fecha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.estado)
-                </th>
-            </tr>
-
-
-            @foreach (var c in ViewBag.EstadosPagados)
-            {
-        <tr>
+<div>
+    <h4>Estados Pagados</h4>
+    <table class="table">
+        <tr class="table-success">
             <th>
-                @c.plan_cobro.detail
+                @Html.DisplayNameFor(model => model.plan_cobro.detail)
             </th>
-            <td>
-                @switch (@c.fecha.Month)
-                {
-                    case 1:
-                        <text>Enero</text>
-                        break;
-                    case 2:
-                        <text>Febrero</text>
-                        break;
-                    case 3:
-                        <text>Marzo</text>
-                        break;
-                    case 4:
-                        <text>Abril</text>
-                        break;
-                    case 5:
-                        <text>Mayo</text>
-                        break;
-                    case 6:
-                        <text>Junio</text>
-                        break;
-                    case 7:
-                        <text>Julio</text>
-                        break;
-                    case 8:
-                        <text>Agosto</text>
-                        break;
-                    case 9:
-                        <text>Septiembre</text>
-                        break;
-                    case 10:
-                        <text>Octubre</text>
-                        break;
-                    case 11:
-                        <text>Noviembre</text>
-                        break;
-                    case 12:
-                        <text>Diciembre</text>
-                        break;
-                    default:
-                        <text>Mes no válido</text>
-                        break;
-                }
-            </td>
             <th>
-                <text>Pagado</text>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
             </th>
         </tr>
-            }
-
-        </table>
-    </div>
 
 
-    <div>
-        <h4>Estados Pendientes</h4>
-        <table class="table">
-            <tr class="table-warning">
+        @foreach (var c in ViewBag.EstadosPagados)
+        {
+            <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.plan_cobro.detail)
+                    @c.plan_cobro.detail
                 </th>
+                <td>
+                    @switch (@c.fecha.Month)
+                    {
+                        case 1:
+                            <text>Enero</text>
+                            break;
+                        case 2:
+                            <text>Febrero</text>
+                            break;
+                        case 3:
+                            <text>Marzo</text>
+                            break;
+                        case 4:
+                            <text>Abril</text>
+                            break;
+                        case 5:
+                            <text>Mayo</text>
+                            break;
+                        case 6:
+                            <text>Junio</text>
+                            break;
+                        case 7:
+                            <text>Julio</text>
+                            break;
+                        case 8:
+                            <text>Agosto</text>
+                            break;
+                        case 9:
+                            <text>Septiembre</text>
+                            break;
+                        case 10:
+                            <text>Octubre</text>
+                            break;
+                        case 11:
+                            <text>Noviembre</text>
+                            break;
+                        case 12:
+                            <text>Diciembre</text>
+                            break;
+                        default:
+                            <text>Mes no válido</text>
+                            break;
+                    }
+                </td>
                 <th>
-                    @Html.DisplayNameFor(model => model.fecha)
+                    <text>Pagado</text>
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.estado)
-                </th>
-                <th>
-                    <i class="fa fa-address-card" aria-hidden="true"> </i>
-                    Transacción
-                </th>
-
             </tr>
+        }
+
+    </table>
+</div>
 
 
-            @foreach (var c in ViewBag.EstadosPendientes)
-            {
-        <tr>
+<div>
+    <h4>Estados Pendientes</h4>
+    <table class="table">
+        <tr class="table-warning">
             <th>
-                @c.plan_cobro.detail
-            </th>
-            <td>
-                @switch (@c.fecha.Month)
-                {
-                    case 1:
-                        <text>Enero</text>
-                        break;
-                    case 2:
-                        <text>Febrero</text>
-                        break;
-                    case 3:
-                        <text>Marzo</text>
-                        break;
-                    case 4:
-                        <text>Abril</text>
-                        break;
-                    case 5:
-                        <text>Mayo</text>
-                        break;
-                    case 6:
-                        <text>Junio</text>
-                        break;
-                    case 7:
-                        <text>Julio</text>
-                        break;
-                    case 8:
-                        <text>Agosto</text>
-                        break;
-                    case 9:
-                        <text>Septiembre</text>
-                        break;
-                    case 10:
-                        <text>Octubre</text>
-                        break;
-                    case 11:
-                        <text>Noviembre</text>
-                        break;
-                    case 12:
-                        <text>Diciembre</text>
-                        break;
-                    default:
-                        <text>Mes no válido</text>
-                        break;
-                }
-            </td>
-            <th>
-                <text>Pendiente</text>
+                @Html.DisplayNameFor(model => model.plan_cobro.detail)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                <i class="fa fa-address-card" aria-hidden="true"> </i>
+                Transacción
+            </th>
 
-                <a href="@Url.Action("Edit", new { id = c.id })" class="badge rounded-pill bg-success" style="color:black">Pagar mi pendiente</a>
-            </th>
         </tr>
-            }
-
-        </table>
-    </div>
 
 
-    <p>
-        <a href="@Url.Action("IndexEstadosxMes")" class="btn btn-info" style="color:black">Volver</a>
+        @foreach (var c in ViewBag.EstadosPendientes)
+        {
+            <tr>
+                <th>
+                    @c.plan_cobro.detail
+                </th>
+                <td>
+                    @switch (@c.fecha.Month)
+                    {
+                        case 1:
+                            <text>Enero</text>
+                            break;
+                        case 2:
+                            <text>Febrero</text>
+                            break;
+                        case 3:
+                            <text>Marzo</text>
+                            break;
+                        case 4:
+                            <text>Abril</text>
+                            break;
+                        case 5:
+                            <text>Mayo</text>
+                            break;
+                        case 6:
+                            <text>Junio</text>
+                            break;
+                        case 7:
+                            <text>Julio</text>
+                            break;
+                        case 8:
+                            <text>Agosto</text>
+                            break;
+                        case 9:
+                            <text>Septiembre</text>
+                            break;
+                        case 10:
+                            <text>Octubre</text>
+                            break;
+                        case 11:
+                            <text>Noviembre</text>
+                            break;
+                        case 12:
+                            <text>Diciembre</text>
+                            break;
+                        default:
+                            <text>Mes no válido</text>
+                            break;
+                    }
+                </td>
+                <th>
+                    <text>Pendiente</text>
+                </th>
+                <th>
+
+                    <a href="@Url.Action("Edit", new { id = c.id })" class="badge rounded-pill bg-success" style="color:black">Pagar mi pendiente</a>
+                </th>
+            </tr>
+        }
+
+    </table>
+</div>
 
 
-    </p>
+<p>
+    <a href="@Url.Action("IndexEstadosxMes")" class="btn btn-info" style="color:black">Volver</a>
+
+
+</p>
+
+@if (ViewBag.NotificationMessage != null)
+{
+    <script>
+            @Html.Raw(ViewBag.NotificationMessage)
+    </script>
+}

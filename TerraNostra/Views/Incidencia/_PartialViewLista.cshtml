@@ -22,26 +22,32 @@
 
     @foreach (var item in Model)
     {
-<tr class="table-secondary">
-    <td style="max-width: 5px">
-        @Html.DisplayFor(modelItem => item.usuario1.identificacion)
-    </td>
-    <td style="max-width: 3px">
-        @if (item.estado == 1)
-        {
-            <text>Pendiente</text> }
-        else
-        {
-            <text>Resuelta</text>}
-    </td>
+        <tr class="table-secondary">
+            <td style="max-width: 5px">
+                @Html.DisplayFor(modelItem => item.usuario1.identificacion)
+            </td>
+            <td style="max-width: 3px">
+                @if (item.estado == 1)
+                {
+                    <text>Pendiente</text> }
+                else
+                {
+                    <text>Resuelta</text>}
+            </td>
 
-    <td style="max-width: 5px">
-        @Html.DisplayFor(modelItem => item.detalle)
-    </td>
-    <td style="max-width: 5px">
-        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-    </td>
-</tr>
+            <td style="max-width: 5px">
+                @Html.DisplayFor(modelItem => item.detalle)
+            </td>
+            <td style="max-width: 5px">
+                <button class="btn btn-warning" onclick="Resolver('@item.id')"><i class="fa fa-pencil-square" aria-hidden="true"></i></button>
+            </td>
+        </tr>
     }
 
 </table>
+@if (ViewBag.NotificationMessage != null)
+{
+    <script>
+            @Html.Raw(ViewBag.NotificationMessage)
+    </script>
+}
