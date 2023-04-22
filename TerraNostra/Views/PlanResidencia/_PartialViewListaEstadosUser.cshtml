@@ -1,80 +1,38 @@
 ﻿@model IEnumerable<Infraestructure.Models.plan_residencia>
+@using System.Globalization
 
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.residencia.numeroCasa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.residencia.usuario1.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha.Month)
-        </th>
-        <th>Por ver</th>
-
-
-    </tr>
-
+<div class="row">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.residencia.numeroCasa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.residencia.usuario1.nombre)
-            </td>
-            <td>
-                @switch (item.fecha.Month)
-                {
-                    case 1:
-                        <text>Enero</text>
-                        break;
-                    case 2:
-                        <text>Febrero</text>
-                        break;
-                    case 3:
-                        <text>Marzo</text>
-                        break;
-                    case 4:
-                        <text>Abril</text>
-                        break;
-                    case 5:
-                        <text>Mayo</text>
-                        break;
-                    case 6:
-                        <text>Junio</text>
-                        break;
-                    case 7:
-                        <text>Julio</text>
-                        break;
-                    case 8:
-                        <text>Agosto</text>
-                        break;
-                    case 9:
-                        <text>Septiembre</text>
-                        break;
-                    case 10:
-                        <text>Octubre</text>
-                        break;
-                    case 11:
-                        <text>Noviembre</text>
-                        break;
-                    case 12:
-                        <text>Diciembre</text>
-                        break;
-                    default:
-                        <text>Mes no válido</text>
-                        break;
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Detalles", "Details", new { id = item.id })
-            </td>
-        </tr>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-lg mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Casa @Html.DisplayFor(modelItem => item.residencia.numeroCasa)</h5>
+                    <p class="card-text mb-2">Propietario: @Html.DisplayFor(modelItem => item.residencia.usuario1.nombre) @Html.DisplayFor(modelItem => item.residencia.usuario1.apellido) @Html.DisplayFor(modelItem => item.residencia.usuario1.apellido2)</p>
+                    <p class="card-text mb-4">Fecha: @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.fecha.Month)</p>
+                    <p class="card-text mb-2 estado @if (item.estado == 0) { <text>text-danger</text> } else { <text>text-success</text> }">
+                        @if (item.estado == 0)
+                        {
+                            <text>Sin pagar </text>
+                        }
+                        else
+                        {
+                            <text>  Pagado</text>
+                        }
+                    </p>
+                    <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-outline-info"><i class="fas fa-info-circle mr-2"></i>Detalles</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<style>
+    .estado.text-danger {
+        color: red;
     }
 
-</table>
+    .estado.text-success {
+        color: green;
+    }
+</style>
 
