@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,21 +22,25 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    var resultado = ctx.plan_cobro
-                         .GroupBy(x => x.datePlan.Month)
-                         .Select(o => new
-                         {
-                             Count = o.Count(),
-                             Month = o.Key
-                         });
-                       
+                    var resultado = ctx.plan_residencia
+                        .Where(x => x.estado == 1)
+                        .GroupBy(x => x.fecha.Month)
+                        .Select(o => new
+                        {
+                            Total = o.Sum(x => x.plan_cobro.total),
+                            Month = o.Key
+                        });
+
 
                     foreach (var item in resultado)
                     {
-                        varEtiquetas += item.Month + ",";
-                        varValores += item.Count + ",";
+                        varEtiquetas += new DateTime(2023, item.Month, 1) // create a DateTime object with the given month number
+                            .ToString("MMMM", new CultureInfo("es-ES")) + ","; // format the date as the full month name in Spanish and append to varEtiquetas
+                        varValores += item.Total + ",";
+                   
                     }
-    
+
+
                 }
                 //Ultima coma
                 varEtiquetas = varEtiquetas.Substring(0, varEtiquetas.Length - 1); // ultima coma

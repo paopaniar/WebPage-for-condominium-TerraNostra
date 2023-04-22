@@ -5,11 +5,13 @@ using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -70,11 +72,19 @@ namespace TerraNostra.Controllers
                 PdfDocument pdfDoc = new PdfDocument(writer);
                 Document doc = new Document(pdfDoc);
 
-                Paragraph header = new Paragraph("Reporte de Deudas")
-                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                                   .SetFontSize(14)
-                                   .SetFontColor(ColorConstants.BLUE);
-                doc.Add(header);
+
+                Image logo = new Image(ImageDataFactory.Create("https://img.lovepik.com/free-png/20211213/lovepik-arrow-performance-form-png-image_401548554_wh1200.png"))
+                .ScaleToFit(150, 50);
+                doc.Add(logo);
+
+
+                Paragraph title = new Paragraph("Reporte de Deudas")
+                 .SetFont(PdfFontFactory.CreateFont(StandardFonts.COURIER_BOLD))
+                 .SetFontSize(14)
+                 .SetFontColor(ColorConstants.BLUE);
+
+                doc.Add(title);
+           
                 Table table = new Table(5, true);
                 table.AddHeaderCell("Casa");
                 table.AddHeaderCell("Detalle");
@@ -136,13 +146,19 @@ namespace TerraNostra.Controllers
                     }
 
 
-                    table.AddCell(new Paragraph(item.plan_cobro.total.ToString()));
+                    // create a NumberFormatInfo object with the currency symbol
+                    NumberFormatInfo nfi = new CultureInfo("es-CR", false).NumberFormat;
+                    nfi.CurrencySymbol = "₡";
 
+                    // create the table cell with the formatted value
+                    table.AddCell(new Paragraph($"{item.plan_cobro.total:N2} CRC"));
                 }
                 doc.Add(table);
 
 
-
+                // Add line separating table from footer
+                LineSeparator line = new LineSeparator(new SolidLine());
+                doc.Add(line);
                 // Colocar número de páginas
                 int numberOfPages = pdfDoc.GetNumberOfPages();
                 for (int i = 1; i <= numberOfPages; i++)

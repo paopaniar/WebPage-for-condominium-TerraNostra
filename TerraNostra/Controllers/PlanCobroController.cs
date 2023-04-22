@@ -191,9 +191,9 @@ namespace TerraNostra.Controllers
             grafico.Valores = valores;
             int cantidadValores = valores.Split(',').Length;
             grafico.Colores = string.Join(",", grafico.GenerateColors(cantidadValores));
-            grafico.titulo = "Ingresos por Mes";
+            grafico.titulo = "Total";
             grafico.tituloEtiquetas = "Ingresos por Mes";
-            grafico.tipo = "doughnut";
+            grafico.tipo = "bar";
             ViewBag.grafico = grafico;
             return View();
         }
