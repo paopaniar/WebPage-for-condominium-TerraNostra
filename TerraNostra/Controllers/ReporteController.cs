@@ -57,22 +57,16 @@ namespace TerraNostra.Controllers
         }
 
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult CreatePdfLibroCatalogo()
+        public ActionResult CreatePdfLibroCatalogo(int? idMes, int? idResidencia)
         {
             //Ejemplos IText7 https://kb.itextpdf.com/home/it7kb/examples
             IEnumerable<plan_residencia> lista = null;
             try
             {
-                // Extraer informacion
-                IServicePlanResidencia _ServiceLibro = new ServicePlanResidencia();
-                lista = _ServiceLibro.GetReporteByEstado(0);
-
-                // Crear stream para almacenar en memoria el reporte 
+                IServicePlanResidencia _ServicePlanResidencia = new ServicePlanResidencia();
+                lista = _ServicePlanResidencia.GetReporteByResidenteByMes(idMes, idResidencia, 0);
                 MemoryStream ms = new MemoryStream();
-                //Initialize writer
                 PdfWriter writer = new PdfWriter(ms);
-
-                //Initialize document
                 PdfDocument pdfDoc = new PdfDocument(writer);
                 Document doc = new Document(pdfDoc);
 
@@ -81,13 +75,7 @@ namespace TerraNostra.Controllers
                                    .SetFontSize(14)
                                    .SetFontColor(ColorConstants.BLUE);
                 doc.Add(header);
-
-               
-                // Crear tabla con 5 columnas 
                 Table table = new Table(5, true);
-
-
-                // los Encabezados
                 table.AddHeaderCell("Casa");
                 table.AddHeaderCell("Detalle");
                 table.AddHeaderCell("Mes");
@@ -165,20 +153,15 @@ namespace TerraNostra.Controllers
                             559, 826, i, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
                 }
 
-
-                //Close document
                 doc.Close();
-                // Retorna un File
                 return File(ms.ToArray(), "application/pdf", "reporte.pdf");
 
             }
             catch (Exception ex)
             {
-                // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
-                // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
 

@@ -21,16 +21,21 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    var resultado = ctx.plan_cobro.GroupBy(x => x.total).
-                               Select(o => new {
-                                   Count = o.Count(),
-                                   id = o.Key
-                               });
+                    var resultado = ctx.plan_cobro
+                         .GroupBy(x => x.datePlan.Month)
+                         .Select(o => new
+                         {
+                             Count = o.Count(),
+                             Month = o.Key
+                         });
+                       
+
                     foreach (var item in resultado)
                     {
-                        varEtiquetas += ( item.id) + ",";
+                        varEtiquetas += item.Month + ",";
                         varValores += item.Count + ",";
                     }
+    
                 }
                 //Ultima coma
                 varEtiquetas = varEtiquetas.Substring(0, varEtiquetas.Length - 1); // ultima coma

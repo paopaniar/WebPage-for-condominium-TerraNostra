@@ -14,6 +14,7 @@ namespace TerraNostra.Controllers
 {
     public class AreaComunController : Controller
     {
+       
         // GET: AreaComun
         public ActionResult Index()
         {
@@ -82,9 +83,9 @@ namespace TerraNostra.Controllers
 
         }
 
-
         public ActionResult Edit(int id)
         {
+           
             usuario oUsuario = (usuario)Session["User"];
             IServiceAreaComun _ServiceAreaComun = new ServiceAreaComun();
             areaComun areaComun = _ServiceAreaComun.GetAreaComunById(id);
@@ -94,26 +95,21 @@ namespace TerraNostra.Controllers
             reservacion.usuario = oUsuario.identificacion;
             reservacion.detalle = "Prueba";
             reservacion.estado = 2;
-            
-
-            if (areaComun.estado == 1)
-            {
-                areaComun.estado = 0;
-            }
-            else
-            {
-                areaComun.estado = 0;
-            }
+            ViewBag.listTipos = listTipos();
 
             try
             {
                 if (ModelState.IsValid)
                 {
+                    // Update the areaComun estado property
+                    areaComun.estado = areaComun.estado == 1 ? 0 : 1;
                     areaComun oAreaComun = _ServiceAreaComun.Save(areaComun);
+                    IEnumerable<areaComun> lista1 = _ServiceAreaComun.GetAreaComun();
+
                     reservacion oReservacion = reserva.Save(reservacion);
-
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("ÉXITO!", "Se reservó correctamente", SweetAlertMessageType.success);
+                    return PartialView("_PartialViewByTipo", lista1);
                 }
-
                 else
                 {
                     TempData["Message"] = "No existe el incidente solicitado";
@@ -122,11 +118,7 @@ namespace TerraNostra.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-
-                return View();
             }
-
-
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
@@ -196,7 +188,7 @@ namespace TerraNostra.Controllers
 
                     if (area.id > 0)
                     {
-                        return (ActionResult)View("Edit", area);
+                        return (ActionResult)View("_PartialViewByTipo", area);
                     }
                     else
                     {

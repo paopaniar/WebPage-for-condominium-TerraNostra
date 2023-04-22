@@ -79,5 +79,14 @@
                 }
             });
         }
+
+        function Descargar() {
+            event.preventDefault();
+            var idResidencia = $("#idResidencia").val() || null;
+            var idMes = $("#idMes").val() || null;
+            var url = '@Url.Action("CreatePdfLibroCatalogo", "Reporte")?' + $.param({idResidencia: idResidencia, idMes: idMes }); // crea la URL para el enlace
+            window.location.href = url;
+           
+        }
     </script>
 }

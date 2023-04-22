@@ -126,6 +126,7 @@ namespace TerraNostra.Controllers
             List<SelectListItem> lista = new List<SelectListItem>();
             lista.Add(new SelectListItem { Text = "Aprobadas", Value = "1" });
             lista.Add(new SelectListItem { Text = "Denegadas", Value = "0" });
+            lista.Add(new SelectListItem { Text = "Sin resolver", Value = "2" });
             return new SelectList(lista, "Value", "Text", estado);
         }
 
