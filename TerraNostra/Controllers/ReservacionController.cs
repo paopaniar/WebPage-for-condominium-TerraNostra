@@ -234,7 +234,8 @@ namespace TerraNostra.Controllers
                 {
                     ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("ÉXITO!", "Se modificó correctamente", SweetAlertMessageType.success);
                     reservacion oReservacion = _ServiceReservacion.SaveEstado(reservacion);
-
+                    IEnumerable<reservacion> lista1 = _ServiceReservacion.GetReservacion();
+                    return PartialView("_PartialViewListaReservasEstado", lista1);
                 }
 
                 else
@@ -244,8 +245,7 @@ namespace TerraNostra.Controllers
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
-                }
-                return View();
+                } 
             }
 
 
@@ -282,6 +282,8 @@ namespace TerraNostra.Controllers
                 {
                     ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("ÉXITO!", "Se modificó correctamente", SweetAlertMessageType.success);
                     reservacion oReservacion = _ServiceReservacion.SaveEstado(reservacion);
+                    IEnumerable<reservacion> lista1 = _ServiceReservacion.GetReservacion();
+                    return PartialView("_PartialViewListaReservasEstado", lista1);
 
                 }
 
@@ -293,7 +295,6 @@ namespace TerraNostra.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                return View();
             }
 
 

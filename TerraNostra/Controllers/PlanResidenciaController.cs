@@ -199,15 +199,18 @@ namespace TerraNostra.Controllers
             {
                 plan_residencia.estado = 1;
             }
+            ServicePlanResidencia _ServicePlanResidencia1 = new ServicePlanResidencia();
+            plan_residencia p_residencia = null;
 
             try
             {
-                // Si va null
+               
                 if (ModelState.IsValid)
                 {
+                    p_residencia = _ServicePlanResidencia1.GetPlanResidenciaByID(Convert.ToInt32(id));
                     plan_residencia oPlanResidencia = _ServicePlanResidencia.Guardar(plan_residencia);
                     ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se realizó el pago exitosamente!.", SweetAlertMessageType.success);
-
+                    return RedirectToAction("Details", p_residencia);
                 }
 
                 else
@@ -219,7 +222,7 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                return View();
+            
             }
 
 

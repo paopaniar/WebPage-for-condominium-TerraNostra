@@ -4,7 +4,7 @@
 <table class="table">
     <tr class="table-dark">
 
-       
+
         <th>
             @Html.DisplayNameFor(model => model.usuario)
         </th>
@@ -27,7 +27,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.usuario)
             </td>
@@ -65,9 +65,9 @@
                 }
                 else
                 {
-                    <a href="@Url.Action("Denegar", new { id = item.id })" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                    <button class="btn btn-danger" onclick="Denegar('@item.id')"><i class="fa fa-window-close" aria-hidden="true"></i></button>
                     <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-light"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
-                    <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-success"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+                    <button class="btn btn-success" onclick="Guardar('@item.id')"><i class="fa fa-check-square" aria-hidden="true"></i></button>
 
                 }
 
@@ -79,6 +79,11 @@
 </table>
 
 
-
+@if (ViewBag.NotificationMessage != null)
+{
+    <script>
+            @Html.Raw(ViewBag.NotificationMessage)
+    </script>
+}
 
 

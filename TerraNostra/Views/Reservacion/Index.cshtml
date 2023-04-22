@@ -57,6 +57,42 @@
                 }
             });
         }
+
+         function Guardar(idReserva) {
+            var id = idReserva;
+            $.ajax({
+                url: '@Url.Action("Edit", "Reservacion")',
+                type: 'POST',
+                data: {
+                    'id': id,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
+            function Denegar(idReserva) {
+            var id = idReserva;
+            $.ajax({
+                url: '@Url.Action("Denegar", "Reservacion")',
+                type: 'POST',
+                data: {
+                    'id': id,
+                },
+                success: function (result) {
+                    $('#tablaReservas').html('');
+                    $('#tablaReservas').html(result);
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
     </script>
    
 } 
