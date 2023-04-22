@@ -34,23 +34,43 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
                     oUsuario = _ServiceUsuario.GetUsuario(usuario.Email, usuario.password);
-                    if (oUsuario != null)
+                    if (oUsuario != null && oUsuario.estado == 1)
                     {
-                       Session["User"] = oUsuario;
+                        Session["User"] = oUsuario;
                         Log.Info($"Inicio sesion: {usuario.Email}");
                         TempData["mensaje"] = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
                             "Usuario autenticado", TerraNostra.Utils.SweetAlertMessageType.success
                             );
                         return RedirectToAction("Index", "Home");
+
+
                     }
                     else
                     {
-                        Log.Warn($"Intento de inicio: {usuario.Email}");
-                        ViewBag.NotificationMessage = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
-                            "Usuario no válido", TerraNostra.Utils.SweetAlertMessageType.error
+                        if (oUsuario != null && oUsuario.estado == 0)
+                        {
+                            Log.Warn($"Intento de inicio: {usuario.Email}");
+                            ViewBag.NotificationMessage = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
+                                "Usuario inactivo", TerraNostra.Utils.SweetAlertMessageType.error
                             );
+                        }
+                        else
+                        {
+                            Log.Warn($"Intento de inicio: {usuario.Email}");
+                            ViewBag.NotificationMessage = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
+                                "Usuario no válido", TerraNostra.Utils.SweetAlertMessageType.error
+                            );
+                        }
                     }
                 }
+                else
+                {
+                    Log.Warn($"Intento de inicio: {usuario.Email}");
+                    ViewBag.NotificationMessage = TerraNostra.Utils.SweetAlertHelper.Mensaje("Login",
+                        "Usuario no válido", TerraNostra.Utils.SweetAlertMessageType.error
+                    );
+                }
+
             }
             catch (Exception ex)
             {
