@@ -13,26 +13,77 @@
                     <p class="card-text mb-2 estado @if (item.estado == 0) { <text>text-danger</text> } else { <text>text-success</text> }">
                         @if (item.estado == 0)
                         {
-                            <text>Sin pagar </text>
+                            <div class="estado-pago">
+                                <span class="icon"><i class="fas fa-times"></i></span>
+                                <span class="text">Sin pagar</span>
+                            </div>
                         }
                         else
                         {
-                            <text>  Pagado</text>
+                            <div class="estado-pago">
+                                <span class="iconP"><i class="fas fa-check"></i></span>
+                                <span class="text">Pagado</span>
+                            </div>
                         }
                     </p>
-                    <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-outline-info"><i class="fas fa-info-circle mr-2"></i>Detalles</a>
+                    <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-info"><i class="fas fa-info-circle mr-2"></i></a>
                 </div>
             </div>
         </div>
     }
 </div>
 <style>
-    .estado.text-danger {
-        color: red;
+    .estado-pago {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #F5F5F5;
     }
 
-    .estado.text-success {
-        color: green;
+        .estado-pago .icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+            color: #FFFFFF;
+            background-color: #C62828;
+            border-radius: 50%;
+        }
+
+        .estado-pago .iconP {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+            color: #FFFFFF;
+            background-color: green;
+            border-radius: 50%;
+        }
+            .estado-pago .icon i {
+                font-size: 14px;
+            }
+
+        .estado-pago .text {
+            font-size: 14px;
+            color: #000000;
+        }
+
+    .card-body {
+        position: relative;
     }
+
+    .btn-info {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px;
+    }
+
+
 </style>
 
