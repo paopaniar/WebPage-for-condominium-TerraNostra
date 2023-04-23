@@ -27,3 +27,10 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+
+@if (ViewBag.NotificationMessage != null)
+{
+    <script>
+            @Html.Raw(ViewBag.NotificationMessage)
+    </script>
+}

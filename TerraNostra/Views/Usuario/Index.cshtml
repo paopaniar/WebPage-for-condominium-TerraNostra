@@ -31,33 +31,39 @@
 
     @foreach (var item in Model)
     {
-<tr>
+        <tr>
 
-    <td>
-        @if (item.rolId == 1)
-        {
-            <text>Administrador</text>
-        }
-        else
-        {
-            <text>Residente</text>
+            <td>
+                @if (item.rolId == 1)
+                {
+                    <text>Administrador</text>
+                }
+                else
+                {
+                    <text>Residente</text>
 
-        }
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.identificacion)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.nombre)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.telefono)
-    </td>
-    <td>
-     <a href="@Url.Action("Edit", new { id = item.identificacion })" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-    </td>
-</tr>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.identificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.identificacion })" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </td>
+        </tr>
     }
 
 </table>
 
+@if (ViewBag.NotificationMessage != null)
+{
+    <script>
+        swal('@ViewBag.NotificationMessage.Title', '@ViewBag.NotificationMessage.Message', '@ViewBag.NotificationMessage.Type');
+    </script>
+}

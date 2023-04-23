@@ -121,17 +121,18 @@ namespace TerraNostra.Controllers
 
                 if (ModelState.IsValid)
                 {
-                   
+                    IEnumerable<incidente> lista1 = _ServiceIncidente.GetIncidente();
                     incidente oIncidenteI = _ServiceIncidente.Save(incidente);
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("ÉXITO!", "Se guardó correctamente", SweetAlertMessageType.success);
+                    return RedirectToAction("Create", incidente);
+
                 }
                 else
                 {
-                    // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-                    //  ViewBag.idUsuario = listUsuarios(incidente.id);
+                   
                     ViewBag.id = listUsuarios(incidente.usuario);
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
+                  
                     if (incidente.id > 0)
                     {
                         return (ActionResult)View("Edit", incidente);
@@ -141,8 +142,7 @@ namespace TerraNostra.Controllers
                         return View("Create", incidente);
                     }
                 }
-                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se creó la incidencia!.", SweetAlertMessageType.success);
-                return RedirectToAction("Index", incidente);
+             
             }
 
             catch (Exception ex)

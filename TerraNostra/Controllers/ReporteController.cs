@@ -81,7 +81,7 @@ namespace TerraNostra.Controllers
                 Paragraph title = new Paragraph("Reporte de Deudas")
                  .SetFont(PdfFontFactory.CreateFont(StandardFonts.COURIER_BOLD))
                  .SetFontSize(14)
-                 .SetFontColor(ColorConstants.BLUE);
+                 .SetFontColor(ColorConstants.BLACK);
 
                 doc.Add(title);
            

@@ -50,11 +50,12 @@ namespace TerraNostra.Controllers
                 
                 if (ModelState.IsValid)
                 {
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se ha guardado el usuario.", SweetAlertMessageType.success);
                     usuario oUsuario1 = _ServiceUsuario.Save(usuario);
                 }
                 else
                 {
-                    // Valida Errores si Javascript está deshabilitado
+                    
                     Utils.Util.ValidateErrors(this);
 
                     if (usuario.identificacion > 0)
@@ -66,7 +67,9 @@ namespace TerraNostra.Controllers
                         return View("Create", usuario);
                     }
                 }
-
+               
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se ha guardado el usuario.", SweetAlertMessageType.success);
+           
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -105,6 +108,7 @@ namespace TerraNostra.Controllers
                 {
                     usuario oUsuario = _ServiceUsuario.Save(usuario);
                     ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se ha eliminado el usuario.", SweetAlertMessageType.success);
+                    return RedirectToAction("Index", "Usuario");
                 }
 
                 else
@@ -116,7 +120,6 @@ namespace TerraNostra.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                return View();
             }
 
 

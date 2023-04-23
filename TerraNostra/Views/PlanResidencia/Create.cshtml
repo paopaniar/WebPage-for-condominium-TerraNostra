@@ -4,93 +4,83 @@
     ViewBag.Title = "Asignaciones";
 }
 
-
-
 @using (Html.BeginForm("Save", "PlanResidencia", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <br />
-   
-        <div class="form-horizontal">
-            <center>
-                <h4 style="font-family: Broadway">Asignar plan a residencia</h4>
-                <hr />
-                <br />
-                <div class="card text-white bg-dark border-primary mb-3" style="max-width: 40rem;">
-
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <br />
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.plan_cobro, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-6">
-                            @Html.DropDownListFor(model => model.planCobroId,
-                                (SelectList)ViewBag.idPlanes,
-                                "Seleccione un plan de cobro",
-                                htmlAttributes: new { @class = "form-control" })
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="card bg-dark">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Asignar plan a residencia</h4>
+                    </div>
+                    <div class="card-body">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.plan_cobro, htmlAttributes: new { @class = "col-md-3 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.planCobroId,
+                                    (SelectList)ViewBag.idPlanes,
+                                    "Seleccione un plan de cobro",
+                                    htmlAttributes: new { @class = "form-control editor-outline" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.residencia, htmlAttributes: new { @class = "col-md-3 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.residenciaId,
+                                    (SelectList)ViewBag.idResidencia,
+                                    "Seleccione una residencia",
+                                    htmlAttributes: new { @class = "form-control editor-outline" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "col-md-3 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control datepicker editor-outline" } })
+                                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.detalle, htmlAttributes: new { @class = "col-md-3 col-form-label text-md-right" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.detalle, new { htmlAttributes = new { @class = "form-control editor-outline" } })
+                                @Html.ValidationMessageFor(model => model.detalle, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.residencia, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-6">
-                            @Html.DropDownListFor(model => model.residenciaId,
-                                (SelectList)ViewBag.idResidencia,
-                                "Seleccione una residencia",
-                                htmlAttributes: new { @class = "form-control" })
-                        </div>
-
-                    </div>
-                    <center>
-                        <div class="form-group col-6">
-                            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-
-                        </div>
-                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-                    </center>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.detalle, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-6">
-                            @Html.EditorFor(model => model.detalle, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.detalle, "", new { @class = "text-danger" })
+                    <div class="card-footer">
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-3">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                @Html.ActionLink("Regresar", "IndexEstadosxMes", null, new { @class = "btn btn-outline-primary" })
+                            </div>
                         </div>
                     </div>
-
-                    <br />
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button type="submit" class="btn btn-info btn-sm">Guardar</button>
-
-                        </div>
-
-
-                    </div>
-                    <br />
                 </div>
-            </center>
-            @Html.ActionLink("Regresar", "IndexEstadosxMes", null, new { @class = "btn btn-outline-primary" })
+            </div>
         </div>
+    </div>
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-3:+3",
+            });
+        });
+    </script>
 
 
-        }
-        @Scripts.Render("~/bundles/sweetalert")
+}
+<style>
+    .editor-outline {
+        outline: 2px solid #0094ff; /* change to your desired color */
+    }
 
-        @section scripts{
-
-            <script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
-            <script>
-                $(function () {
-                    $(".datepicker").datepicker({
-                        dateFormat: "dd/mm/yy",
-                        changeMonth: true,
-                        changeYear: true,
-                        yearRange: "-3:+3",
-                    });
-                });
-            </script>
-
-
-        }
+</style>
