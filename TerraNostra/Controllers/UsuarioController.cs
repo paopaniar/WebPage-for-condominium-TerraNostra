@@ -52,6 +52,7 @@ namespace TerraNostra.Controllers
                 {
                     ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se ha guardado el usuario.", SweetAlertMessageType.success);
                     usuario oUsuario1 = _ServiceUsuario.Save(usuario);
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Realizado correctamente!", SweetAlertMessageType.success);
                 }
                 else
                 {
@@ -107,8 +108,12 @@ namespace TerraNostra.Controllers
                 if (ModelState.IsValid)
                 {
                     usuario oUsuario = _ServiceUsuario.Save(usuario);
+<<<<<<< Updated upstream
                     ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se ha eliminado el usuario.", SweetAlertMessageType.success);
                     return RedirectToAction("Index", "Usuario");
+=======
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("ÉXITO!", "Se eliminó correctamente", SweetAlertMessageType.success);
+>>>>>>> Stashed changes
                 }
 
                 else

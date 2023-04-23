@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TerraNostra.Enum;
 using TerraNostra.Security;
+using TerraNostra.Utils;
 using TerraNostra.ViewModel;
 
 namespace TerraNostra.Controllers
@@ -89,6 +90,7 @@ namespace TerraNostra.Controllers
                 if (ModelState.IsValid)
                 {
                     plan_cobro oPlanCobroI = _ServicePlanCobro.Save(plan_cobro, selectedRubros);
+                    
                 }
                 else
                 {
@@ -107,7 +109,7 @@ namespace TerraNostra.Controllers
                         return View("Create", plan_cobro);
                     }
                 }
-
+                
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -156,6 +158,7 @@ namespace TerraNostra.Controllers
                 }
 
                 planCobro = _ServicePlanCobro.GetPlanCobroById(Convert.ToInt32(id));
+             
                 if (planCobro == null)
                 {
                     TempData["Message"] = "No existe el libro solicitado";
