@@ -12,7 +12,31 @@
 
 </head>
 <body>
-    @Html.Partial("_Menu")
+
+
+    @{
+        int iduser = 0;
+
+        if (Session["User"] != null)
+        {
+            Infraestructure.Models.usuario usuario = new Infraestructure.Models.usuario();
+            usuario = (Infraestructure.Models.usuario)Session["User"];
+
+            iduser = usuario.identificacion;
+            if (usuario.rolId == 1)
+            {
+
+                @Html.Partial("_Menu")
+            }
+            else
+            {
+                @Html.Partial("_MenuResidente")
+            }
+
+        }
+    }
+
+
 
     <div class="container body-content" style="background-color: ">
         @RenderBody()

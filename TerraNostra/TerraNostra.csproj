@@ -415,6 +415,7 @@
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Residencia\Edit.cshtml" />
+    <Content Include="Views\Shared\_menuResidente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
