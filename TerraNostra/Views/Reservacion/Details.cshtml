@@ -19,7 +19,7 @@
                 @Html.DisplayFor(model => model.usuario)
             </p>
             <p class="card-text">
-                <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.detalle):</b>
+              <b>@Html.DisplayNameFor(model => model.detalle):</b>
                 <br />
                 @Html.DisplayFor(model => model.detalle)
             </p>
@@ -35,7 +35,7 @@
             </p>
 
             <p class="card-text" style="font-weight: 500;">
-                <i class="fa-solid fa-circle-user"></i>
+                
                 <b>@Html.DisplayNameFor(model => model.estado):</b>
                 @if (Model.estado == 1)
                 {
