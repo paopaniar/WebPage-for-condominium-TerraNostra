@@ -210,7 +210,7 @@ namespace Infraestructure.Models
         public string detalle { get; set; }
         [Display(Name = "Disponibilidad")]
         public int disponibilidad { get; set; }
-        [Display(Name = "Fecha Disponible")]
+        [Display(Name = "Fecha disponible")]
         public string fechaDisponible { get; set; }
         [Display(Name = "Hora Dispobible")]
         public int horaDisponible { get; set; }
