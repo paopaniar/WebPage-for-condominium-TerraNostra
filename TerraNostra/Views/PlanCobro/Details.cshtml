@@ -17,7 +17,7 @@
         <div class="card-header"><b> @Html.DisplayNameFor(model => model.detail): </b> @Html.DisplayFor(model => model.detail)</div>
         <div class="card-body">
             <p class="card-text">
-                <i class="fa-regular fa-user"></i> <b>@Html.DisplayNameFor(model => model.datePlan):</b>
+                <b>@Html.DisplayNameFor(model => model.datePlan):</b>
                 <br />
                 @Html.DisplayFor(model => model.datePlan)
             </p>
@@ -34,7 +34,7 @@
                 @string.Format("{0:C}", totalSum)
             </p>
             <p class="card-text">
-                <i class="fa-solid fa-people-roof"></i><b>@Html.DisplayNameFor(model => model.rubro_cobro): </b>
+                <b>@Html.DisplayNameFor(model => model.rubro_cobro): </b>
                 <br />
                 <ul>
                     @foreach (var c in Model.rubro_cobro)
