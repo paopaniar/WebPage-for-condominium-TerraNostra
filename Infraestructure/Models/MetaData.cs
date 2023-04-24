@@ -22,6 +22,8 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [RegularExpression(@"^\d+$", ErrorMessage = "{0} solo acepta números")]
         public string annio { get; set; }
+
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name = "Estado")]
         public int estado { get; set; }
         [Display(Name = "Información adicional")]

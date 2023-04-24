@@ -146,12 +146,11 @@ namespace TerraNostra.Controllers
                     }
 
 
-                    // create a NumberFormatInfo object with the currency symbol
                     NumberFormatInfo nfi = new CultureInfo("es-CR", false).NumberFormat;
                     nfi.CurrencySymbol = "₡";
 
                     // create the table cell with the formatted value
-                    table.AddCell(new Paragraph($"{item.plan_cobro.total:N2} CRC"));
+                    table.AddCell(new Paragraph($"₡{item.plan_cobro.total:N2} CRC"));
                 }
                 doc.Add(table);
 
