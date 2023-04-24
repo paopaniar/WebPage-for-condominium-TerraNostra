@@ -75,7 +75,8 @@
                             @Html.DisplayFor(modelItem => item.individualsNumber)
                         </div>
                         <a href="@Url.Action("Details", "residencia", new { id = item.id })" class="btn btn-outline-info">Leer más...</a>
-                    
+                        <a href="@Url.Action("Edit", "residencia", new { id = item.id })" class="btn btn-outline-warning">Modificar Datos</a>
+
 
                     </div>
                 </div>

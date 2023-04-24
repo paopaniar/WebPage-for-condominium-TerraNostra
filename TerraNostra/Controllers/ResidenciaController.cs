@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TerraNostra.Enum;
 using TerraNostra.Security;
+using TerraNostra.Utils;
 
 namespace TerraNostra.Controllers
 {
@@ -129,5 +130,48 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        [CustomAuthorize((int)Roles.Administrador)]
+
+        public ActionResult Edit(int? id)
+        {
+        
+
+            ServiceResidencia _serviceResidencia = new ServiceResidencia();
+            residencia residencia = null;
+            try
+            {
+                if (id == null)
+                {
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Éxito", "Se guardó correctamente!", SweetAlertMessageType.success);
+                    return RedirectToAction("Index");
+                }
+
+                residencia = _serviceResidencia.GetResidenciaByID(Convert.ToInt32(id));
+                if (residencia == null)
+                {
+                    TempData["Message"] = "No existe la información solicitada";
+                    TempData["Redirect"] = "RubroCobro";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                //Listados
+
+
+                return View(residencia);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Informacion";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
     }
 }
