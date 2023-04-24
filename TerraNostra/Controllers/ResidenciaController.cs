@@ -135,8 +135,8 @@ namespace TerraNostra.Controllers
 
         public ActionResult Edit(int? id)
         {
-        
 
+            ViewBag.estado = listEstados();
             ServiceResidencia _serviceResidencia = new ServiceResidencia();
             residencia residencia = null;
             try
@@ -172,6 +172,15 @@ namespace TerraNostra.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        private SelectList listEstados(int estado = 0)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            lista.Add(new SelectListItem { Text = "Habitada", Value = "1" });
+            lista.Add(new SelectListItem { Text = "Sin Habitar", Value = "0" });
+            return new SelectList(lista, "Value", "Text", estado);
+        }
+
 
     }
 }
